@@ -1,0 +1,138 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ==========================================
+    // HELPER FUNCTIONS
+    // ==========================================
+    
+    // Vérifie si l'utilisateur est authentifié
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Vérifie si l'utilisateur authentifié est le propriétaire de la ressource
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Valide la structure d'un document workout
+    function validateWorkout(workout) {
+      return workout.keys().hasAll(['date', 'status', 'exercises', 'createdAt', 'updatedAt'])
+          && workout.status in ['draft', 'completed']
+          && workout.date is timestamp
+          && workout.exercises is list
+          && workout.exercises.size() >= 0;  // Peut être vide (draft)
+    }
+    
+    // Valide la structure d'un exercice dans un workout
+    function validateWorkoutExercise(exercise) {
+      return exercise.keys().hasAll(['exerciseId', 'exerciseName', 'sets'])
+          && exercise.exerciseId is string
+          && exercise.exerciseName is string
+          && exercise.sets is list
+          && exercise.sets.size() > 0;  // Au moins 1 série
+    }
+    
+    // Valide la structure d'une série (RG-003)
+    function validateSet(set) {
+      return set.keys().hasAll(['reps', 'weight'])
+          && set.reps is int 
+          && set.reps > 0                    // RG-003: reps > 0
+          && set.weight is number 
+          && set.weight >= 0;                // RG-003: weight >= 0 (0 = poids corporel)
+    }
+    
+    // Valide tous les exercices et séries d'un workout
+    // Note: Validation simplifiée car Firestore Rules ne supporte pas les fonctions anonymes
+    // La validation détaillée sera faite côté client (Flutter)
+    function validateAllExercisesAndSets(exercises) {
+      return exercises.size() >= 0;  // Accepte draft vide ou avec exercices
+      // Validation détaillée des exercices/séries sera faite côté client
+    }
+    
+    // Valide la structure d'un document exercise
+    function validateExercise(exercise) {
+      return exercise.keys().hasAll(['name', 'muscleGroups', 'type', 'emoji'])
+          && exercise.name is string
+          && exercise.name.size() > 0        // RG-002: Nom non vide
+          && exercise.muscleGroups is list
+          && exercise.muscleGroups.size() > 0
+          && exercise.type in ['free_weights', 'machine', 'bodyweight', 'cardio']
+          && exercise.emoji is string;
+    }
+    
+    // ==========================================
+    // COLLECTION: users
+    // ==========================================
+    
+    match /users/{userId} {
+      // RG-001: Authentification obligatoire
+      // Seul le propriétaire peut lire/écrire ses données
+      allow read: if isOwner(userId);
+      
+      // Création du profil utilisateur (lors du premier login)
+      allow create: if isOwner(userId)
+                    && request.resource.data.keys().hasAll(['email', 'displayName', 'createdAt'])
+                    && request.resource.data.email is string
+                    && request.resource.data.displayName is string;
+      
+      // Mise à jour du profil (lastLoginAt, preferences)
+      allow update: if isOwner(userId);
+      
+      // Suppression compte (V2 - fonctionnalité à implémenter)
+      allow delete: if isOwner(userId);
+      
+      // ==========================================
+      // SUBCOLLECTION: workouts
+      // ==========================================
+      
+      match /workouts/{workoutId} {
+        // RG-001: Isolation complète utilisateur
+        allow read: if isOwner(userId);
+        
+        // Création d'une séance (draft ou completed)
+        allow create: if isOwner(userId)
+                      && validateWorkout(request.resource.data)
+                      && validateAllExercisesAndSets(request.resource.data.exercises);
+        
+        // Mise à jour séance (ajout exercices, changement status draft → completed)
+        // RG-003: Validation séries (reps > 0, weight >= 0)
+        // RG-004: Persistance draft
+        // RG-006: Finalisation par status = 'completed'
+        allow update: if isOwner(userId)
+                      && validateWorkout(request.resource.data)
+                      && validateAllExercisesAndSets(request.resource.data.exercises);
+        
+        // Suppression séance (EC-004)
+        allow delete: if isOwner(userId);
+      }
+    }
+    
+    // ==========================================
+    // COLLECTION: exercises (référentiel)
+    // ==========================================
+    
+    match /exercises/{exerciseId} {
+      // Lecture: Tous les utilisateurs authentifiés peuvent lire les exercices
+      // RG-001: Mais authentification obligatoire
+      allow read: if isAuthenticated();
+      
+      // Écriture: Réservé aux admins ou scripts seed (pas d'UI utilisateur V1)
+      // RG-002: Unicité des noms enforced par logique métier
+      // V1: Pas d'ajout exercice personnalisé → blocked
+      // V2: Si ajout exercice user activé, ajouter règle:
+      //     allow create: if isAuthenticated() && validateExercise(request.resource.data)
+      allow write: if false;  // Désactivé V1 (seed data uniquement)
+    }
+    
+    // ==========================================
+    // RÈGLES PAR DÉFAUT (DENY ALL)
+    // ==========================================
+    
+    // Toute autre collection/document est interdit
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

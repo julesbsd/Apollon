@@ -1,0 +1,12 @@
+{
+  "name": "apollon-firebase-scripts",
+  "version": "1.0.0",
+  "description": "Scripts Firebase Admin pour Apollon",
+  "type": "module",
+  "scripts": {
+    "seed": "node seed_exercises_node.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

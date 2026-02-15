@@ -1,0 +1,31 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "apollon-fitness-app",
+          "appId": "1:182776342499:android:7a3e59bc8261a1e85922d6",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "apollon-fitness-app",
+          "configurations": {
+            "android": "1:182776342499:android:7a3e59bc8261a1e85922d6",
+            "ios": "1:182776342499:ios:6998d20d1073127b5922d6",
+            "macos": "1:182776342499:ios:6998d20d1073127b5922d6",
+            "web": "1:182776342499:web:4f05b0d0779552bc5922d6",
+            "windows": "1:182776342499:web:15da98b4ee7f47e45922d6"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "database": "(default)",
+    "location": "europe-west9",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

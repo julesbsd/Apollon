@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Développé couché barre",
+    "muscleGroups": ["pectoraux", "triceps", "epaules"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Exercice de base pour les pectoraux avec barre"
+  },
+  {
+    "name": "Développé couché haltères",
+    "muscleGroups": ["pectoraux", "triceps", "epaules"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Développé couché avec haltères pour plus d'amplitude"
+  },
+  {
+    "name": "Développé incliné barre",
+    "muscleGroups": ["pectoraux", "triceps", "epaules"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Cible le haut des pectoraux"
+  },
+  {
+    "name": "Développé décliné barre",
+    "muscleGroups": ["pectoraux", "triceps"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Cible le bas des pectoraux"
+  },
+  {
+    "name": "Écarté haltères",
+    "muscleGroups": ["pectoraux"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Isolation des pectoraux"
+  },
+  {
+    "name": "Pec deck (Butterfly)",
+    "muscleGroups": ["pectoraux"],
+    "type": "machine",
+    "emoji": "💪",
+    "description": "Machine d'isolation pour les pectoraux"
+  },
+  {
+    "name": "Pompes",
+    "muscleGroups": ["pectoraux", "triceps", "epaules"],
+    "type": "bodyweight",
+    "emoji": "💪",
+    "description": "Exercice au poids de corps classique"
+  },
+  {
+    "name": "Dips pectoraux",
+    "muscleGroups": ["pectoraux", "triceps"],
+    "type": "bodyweight",
+    "emoji": "💪",
+    "description": "Dips avec buste penché vers l'avant"
+  },
+  {
+    "name": "Tractions",
+    "muscleGroups": ["dorsaux", "biceps"],
+    "type": "bodyweight",
+    "emoji": "🦍",
+    "description": "Exercice de base pour le dos au poids de corps"
+  },
+  {
+    "name": "Rowing barre",
+    "muscleGroups": ["dorsaux", "biceps"],
+    "type": "free_weights",
+    "emoji": "🦍",
+    "description": "Tirage horizontal avec barre pour l'épaisseur du dos"
+  },
+  {
+    "name": "Rowing haltère (unilatéral)",
+    "muscleGroups": ["dorsaux", "biceps"],
+    "type": "free_weights",
+    "emoji": "🦍",
+    "description": "Rowing avec un haltère, un bras à la fois"
+  },
+  {
+    "name": "Tirage poitrine poulie haute",
+    "muscleGroups": ["dorsaux", "biceps"],
+    "type": "machine",
+    "emoji": "🦍",
+    "description": "Tirage vertical pour la largeur du dos"
+  },
+  {
+    "name": "Tirage horizontal poulie basse",
+    "muscleGroups": ["dorsaux", "biceps"],
+    "type": "machine",
+    "emoji": "🦍",
+    "description": "Tirage assis pour l'épaisseur du dos"
+  },
+  {
+    "name": "Soulevé de terre",
+    "muscleGroups": ["dorsaux", "lombaires", "fessiers", "ischio_jambiers"],
+    "type": "free_weights",
+    "emoji": "🦍",
+    "description": "Exercice polyarticulaire majeur"
+  },
+  {
+    "name": "Développé militaire barre",
+    "muscleGroups": ["epaules", "triceps"],
+    "type": "free_weights",
+    "emoji": "🏋️",
+    "description": "Développé épaules debout avec barre"
+  },
+  {
+    "name": "Développé épaules haltères",
+    "muscleGroups": ["epaules", "triceps"],
+    "type": "free_weights",
+    "emoji": "🏋️",
+    "description": "Développé assis ou debout avec haltères"
+  },
+  {
+    "name": "Élévations latérales",
+    "muscleGroups": ["epaules"],
+    "type": "free_weights",
+    "emoji": "🏋️",
+    "description": "Isolation du deltoïde latéral"
+  },
+  {
+    "name": "Élévations frontales",
+    "muscleGroups": ["epaules"],
+    "type": "free_weights",
+    "emoji": "🏋️",
+    "description": "Isolation du deltoïde antérieur"
+  },
+  {
+    "name": "Oiseau haltères",
+    "muscleGroups": ["epaules", "dorsaux"],
+    "type": "free_weights",
+    "emoji": "🏋️",
+    "description": "Isolation de l'arrière d'épaule"
+  },
+  {
+    "name": "Curl barre",
+    "muscleGroups": ["biceps"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Exercice de base pour les biceps"
+  },
+  {
+    "name": "Curl haltères",
+    "muscleGroups": ["biceps"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Curl avec haltères, alterné ou simultané"
+  },
+  {
+    "name": "Curl marteau",
+    "muscleGroups": ["biceps", "avant_bras"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Curl avec prise neutre (marteau)"
+  },
+  {
+    "name": "Curl pupitre (Larry Scott)",
+    "muscleGroups": ["biceps"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Isolation des biceps sur pupitre"
+  },
+  {
+    "name": "Dips triceps",
+    "muscleGroups": ["triceps"],
+    "type": "bodyweight",
+    "emoji": "💪",
+    "description": "Dips avec buste vertical pour les triceps"
+  },
+  {
+    "name": "Extension triceps poulie haute",
+    "muscleGroups": ["triceps"],
+    "type": "machine",
+    "emoji": "💪",
+    "description": "Extension triceps à la poulie"
+  },
+  {
+    "name": "Extension nuque haltère",
+    "muscleGroups": ["triceps"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Extension derrière la nuque avec haltère"
+  },
+  {
+    "name": "Barre au front",
+    "muscleGroups": ["triceps"],
+    "type": "free_weights",
+    "emoji": "💪",
+    "description": "Extension triceps allongé avec barre"
+  },
+  {
+    "name": "Squat barre",
+    "muscleGroups": ["quadriceps", "fessiers", "ischio_jambiers"],
+    "type": "free_weights",
+    "emoji": "🦵",
+    "description": "Roi des exercices pour les jambes"
+  },
+  {
+    "name": "Squat avant",
+    "muscleGroups": ["quadriceps", "fessiers"],
+    "type": "free_weights",
+    "emoji": "🦵",
+    "description": "Squat avec barre devant, cible davantage les quadriceps"
+  },
+  {
+    "name": "Presse à cuisses",
+    "muscleGroups": ["quadriceps", "fessiers"],
+    "type": "machine",
+    "emoji": "🦵",
+    "description": "Machine guidée pour les jambes"
+  },
+  {
+    "name": "Hack squat",
+    "muscleGroups": ["quadriceps", "fessiers"],
+    "type": "machine",
+    "emoji": "🦵",
+    "description": "Squat sur machine inclinée"
+  },
+  {
+    "name": "Fentes avant",
+    "muscleGroups": ["quadriceps", "fessiers"],
+    "type": "free_weights",
+    "emoji": "🦵",
+    "description": "Fentes avec barre ou haltères"
+  },
+  {
+    "name": "Leg extension",
+    "muscleGroups": ["quadriceps"],
+    "type": "machine",
+    "emoji": "🦵",
+    "description": "Isolation des quadriceps"
+  },
+  {
+    "name": "Leg curl",
+    "muscleGroups": ["ischio_jambiers"],
+    "type": "machine",
+    "emoji": "🦵",
+    "description": "Isolation des ischio-jambiers"
+  },
+  {
+    "name": "Soulevé de terre jambes tendues",
+    "muscleGroups": ["ischio_jambiers", "fessiers", "lombaires"],
+    "type": "free_weights",
+    "emoji": "🦵",
+    "description": "Cible les ischio-jambiers et fessiers"
+  },
+  {
+    "name": "Hip thrust",
+    "muscleGroups": ["fessiers", "ischio_jambiers"],
+    "type": "free_weights",
+    "emoji": "🍑",
+    "description": "Exercice d'isolation des fessiers"
+  },
+  {
+    "name": "Mollets debout",
+    "muscleGroups": ["mollets"],
+    "type": "machine",
+    "emoji": "🦵",
+    "description": "Extension mollets debout"
+  },
+  {
+    "name": "Mollets assis",
+    "muscleGroups": ["mollets"],
+    "type": "machine",
+    "emoji": "🦵",
+    "description": "Extension mollets assis (cible soléaire)"
+  },
+  {
+    "name": "Crunch",
+    "muscleGroups": ["abdominaux"],
+    "type": "bodyweight",
+    "emoji": "💥",
+    "description": "Exercice de base pour les abdominaux"
+  },
+  {
+    "name": "Relevé de jambes",
+    "muscleGroups": ["abdominaux"],
+    "type": "bodyweight",
+    "emoji": "💥",
+    "description": "Cible le bas des abdominaux"
+  },
+  {
+    "name": "Planche (gainage)",
+    "muscleGroups": ["abdominaux", "lombaires"],
+    "type": "bodyweight",
+    "emoji": "💥",
+    "description": "Gainage statique"
+  },
+  {
+    "name": "Russian twist",
+    "muscleGroups": ["abdominaux", "obliques"],
+    "type": "bodyweight",
+    "emoji": "💥",
+    "description": "Rotation du buste pour les obliques"
+  },
+  {
+    "name": "Mountain climbers",
+    "muscleGroups": ["abdominaux", "cardio"],
+    "type": "bodyweight",
+    "emoji": "💥",
+    "description": "Exercice dynamique abdos + cardio"
+  },
+  {
+    "name": "Extensions lombaires",
+    "muscleGroups": ["lombaires"],
+    "type": "bodyweight",
+    "emoji": "🦍",
+    "description": "Renforcement du bas du dos"
+  },
+  {
+    "name": "Tapis de course",
+    "muscleGroups": ["cardio"],
+    "type": "cardio",
+    "emoji": "🏃",
+    "description": "Course à pied sur tapis"
+  },
+  {
+    "name": "Vélo elliptique",
+    "muscleGroups": ["cardio"],
+    "type": "cardio",
+    "emoji": "🚴",
+    "description": "Cardio à faible impact"
+  },
+  {
+    "name": "Vélo stationnaire",
+    "muscleGroups": ["cardio"],
+    "type": "cardio",
+    "emoji": "🚴",
+    "description": "Vélo d'appartement"
+  },
+  {
+    "name": "Rameur",
+    "muscleGroups": ["cardio", "dorsaux"],
+    "type": "cardio",
+    "emoji": "🚣",
+    "description": "Machine de cardio complet (aviron)"
+  },
+  {
+    "name": "Burpees",
+    "muscleGroups": ["cardio"],
+    "type": "bodyweight",
+    "emoji": "💥",
+    "description": "Exercice cardio intense au poids de corps"
+  },
+  {
+    "name": "Corde à sauter",
+    "muscleGroups": ["cardio", "mollets"],
+    "type": "cardio",
+    "emoji": "🏃",
+    "description": "Cardio classique avec corde"
+  }
+]
