@@ -62,16 +62,21 @@ class HomePage extends StatelessWidget {
       body: MeshGradientBackground(
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(24, 48, 24, 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeroSection(context),
-                const SizedBox(height: 24),
-                _buildMainActionButton(context),
-                // const SizedBox(height: 5),
-                _buildComingSoonCards(context),
-              ],
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 24),
+                  _buildHeroSection(context),
+                  const SizedBox(height: 20),
+                  _buildMainActionButton(context),
+                  const SizedBox(height: 12),
+                  _buildComingSoonCards(context),
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ),
@@ -231,38 +236,42 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /// Cards "Coming Soon" avec design glassmorphism premium + parallax
+  /// Cards "Coming Soon" avec design glassmorphism premium
   Widget _buildComingSoonCards(BuildContext context) {
     return GridView.count(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
-      mainAxisSpacing: 20,
-      crossAxisSpacing: 20,
-      childAspectRatio: 1.0,
+      mainAxisSpacing: 16,
+      crossAxisSpacing: 16,
+      childAspectRatio: 0.95,
       children: [
-        ParallaxCard(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(24),
           child: _buildPremiumFeatureCard(
             context,
             'Historique',
             Icons.article_outlined,
           ),
         ),
-        ParallaxCard(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(24),
           child: _buildPremiumFeatureCard(
             context,
             'Statistiques',
             Icons.analytics_outlined,
           ),
         ),
-        ParallaxCard(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(24),
           child: _buildPremiumFeatureCard(
             context,
             'Calendrier',
             Icons.calendar_today_outlined,
           ),
         ),
-        ParallaxCard(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(24),
           child: _buildPremiumFeatureCard(
             context,
             'Profil',
@@ -294,7 +303,7 @@ class HomePage extends StatelessWidget {
         // Autres features: TODO
       },
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

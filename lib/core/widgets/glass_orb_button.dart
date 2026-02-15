@@ -210,7 +210,7 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 32,
-                                      vertical: 24,
+                                      vertical: 16,
                                     ),
                                     child: Row(
                                       children: [

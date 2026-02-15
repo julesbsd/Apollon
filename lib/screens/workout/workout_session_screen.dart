@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../core/models/exercise.dart';
 import '../../core/models/workout_set.dart';
@@ -265,7 +266,7 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
     );
   }
   
-  /// Section séries actuelles
+  /// Section séries actuelles avec formulaire inline
   Widget _buildCurrentSetsSection(
     BuildContext context,
     ColorScheme colorScheme,
@@ -298,16 +299,18 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
           
           const SizedBox(height: 16),
           
+          // Formulaire d'ajout inline
+          _InlineAddSetForm(
+            setNumber: sets.length + 1,
+            exerciseId: widget.exercise.id,
+            exerciseName: widget.exercise.name,
+          ),
+          
           // Liste des séries
-          if (sets.isEmpty)
-            Text(
-              'Aucune série enregistrée',
-              style: TextStyle(
-                fontSize: 14,
-                color: colorScheme.onSurface.withOpacity(0.6),
-              ),
-            )
-          else
+          if (sets.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 8),
             ...sets.asMap().entries.map((entry) {
               final index = entry.key;
               final set = entry.value;
@@ -319,17 +322,7 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
                 set,
               );
             }).toList(),
-          
-          const SizedBox(height: 16),
-          
-          // Bouton ajouter série
-          AppButton(
-            text: 'Ajouter série',
-            icon: Icons.add,
-            variant: AppButtonVariant.outlined,
-            onPressed: () => _showAddSetDialog(context, workoutProvider),
-            width: double.infinity,
-          ),
+          ],
         ],
       ),
     );
@@ -368,7 +361,7 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
           const SizedBox(width: 8),
           
           IconButton(
-            icon: Icon(Icons.close, size: 20),
+            icon: const Icon(Icons.close, size: 20),
             onPressed: () {
               workoutProvider.removeSet(widget.exercise.id, index);
             },
@@ -377,97 +370,6 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
             constraints: const BoxConstraints(),
           ),
         ],
-      ),
-    );
-  }
-  
-  /// Dialog pour ajouter une série avec validation RG-003
-  void _showAddSetDialog(
-    BuildContext context,
-    WorkoutProvider workoutProvider,
-  ) {
-    final repsController = TextEditingController();
-    final weightController = TextEditingController();
-    String? repsError;
-    String? weightError;
-    
-    showDialog(
-      context: context,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setState) {
-          return AlertDialog(
-            title: const Text('Ajouter une série'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                AppNumberField(
-                  controller: repsController,
-                  labelText: 'Répétitions',
-                  hintText: 'Ex: 12',
-                  errorText: repsError,
-                ),
-                
-                const SizedBox(height: 16),
-                
-                AppNumberField(
-                  controller: weightController,
-                  labelText: 'Poids (kg)',
-                  hintText: '0 pour poids de corps',
-                  errorText: weightError,
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Annuler'),
-              ),
-              AppButton(
-                text: 'Ajouter',
-                variant: AppButtonVariant.primary,
-                onPressed: () {
-                  // Validation RG-003
-                  setState(() {
-                    repsError = null;
-                    weightError = null;
-                  });
-                  
-                  final reps = int.tryParse(repsController.text);
-                  final weight = double.tryParse(weightController.text) ?? 0;
-                  
-                  if (reps == null || reps <= 0) {
-                    setState(() {
-                      repsError = 'Les répétitions doivent être > 0';
-                    });
-                    return;
-                  }
-                  
-                  if (weight < 0) {
-                    setState(() {
-                      weightError = 'Le poids doit être ≥ 0';
-                    });
-                    return;
-                  }
-                  
-                  // Ajouter la série (l'exercice sera créé s'il n'existe pas)
-                  try {
-                    workoutProvider.addSet(
-                      widget.exercise.id,
-                      reps,
-                      weight,
-                      exerciseName: widget.exercise.name,
-                    );
-                    Navigator.pop(context);
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Erreur: $e')),
-                    );
-                  }
-                },
-              ),
-            ],
-          );
-        },
       ),
     );
   }
@@ -486,6 +388,186 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
         Navigator.pop(context);
       },
       width: double.infinity,
+    );
+  }
+}
+
+/// Widget stateful pour le formulaire d'ajout de série inline
+class _InlineAddSetForm extends StatefulWidget {
+  final int setNumber;
+  final String exerciseId;
+  final String exerciseName;
+
+  const _InlineAddSetForm({
+    required this.setNumber,
+    required this.exerciseId,
+    required this.exerciseName,
+  });
+
+  @override
+  State<_InlineAddSetForm> createState() => _InlineAddSetFormState();
+}
+
+class _InlineAddSetFormState extends State<_InlineAddSetForm> {
+  late final TextEditingController _repsController;
+  late final TextEditingController _weightController;
+
+  @override
+  void initState() {
+    super.initState();
+    _repsController = TextEditingController();
+    _weightController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _repsController.dispose();
+    _weightController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: colorScheme.primaryContainer.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: colorScheme.primary.withOpacity(0.3),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          // Numéro de série
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Text(
+                '${widget.setNumber}',
+                style: TextStyle(
+                  color: colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+          
+          const SizedBox(width: 12),
+          
+          // Champ Reps
+          Expanded(
+            child: TextField(
+              controller: _repsController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+              decoration: InputDecoration(
+                labelText: 'Reps',
+                hintText: '12',
+                isDense: true,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+          ),
+          
+          const SizedBox(width: 8),
+          
+          // Champ Poids
+          Expanded(
+            child: TextField(
+              controller: _weightController,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+              ],
+              decoration: InputDecoration(
+                labelText: 'Poids (kg)',
+                hintText: '50',
+                isDense: true,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+          ),
+          
+          const SizedBox(width: 8),
+          
+          // Bouton ajouter
+          IconButton(
+            icon: const Icon(Icons.add_circle),
+            color: colorScheme.primary,
+            iconSize: 32,
+            onPressed: () {
+              final reps = int.tryParse(_repsController.text);
+              final weight = double.tryParse(_weightController.text) ?? 0;
+              
+              if (reps == null || reps <= 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Les répétitions doivent être > 0'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+                return;
+              }
+              
+              if (weight < 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Le poids doit être ≥ 0'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+                return;
+              }
+              
+              // Ajouter la série
+              try {
+                workoutProvider.addSet(
+                  widget.exerciseId,
+                  reps,
+                  weight,
+                  exerciseName: widget.exerciseName,
+                );
+                
+                // Clear les champs
+                _repsController.clear();
+                _weightController.clear();
+                
+                // Optionnel: refocus sur le champ reps
+                FocusScope.of(context).requestFocus(FocusNode());
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Erreur: $e')),
+                );
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

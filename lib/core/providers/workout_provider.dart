@@ -240,6 +240,17 @@ class WorkoutProvider extends ChangeNotifier {
   Future<void> completeWorkout() async {
     if (_currentWorkout == null) return;
     
+    // Filtrer les exercices pour ne garder que ceux avec au moins une série
+    final exercisesWithSets = _currentWorkout!.exercises
+        .where((ex) => ex.sets.isNotEmpty)
+        .toList();
+    
+    // Validation: ne pas sauvegarder si aucun exercice avec des séries
+    if (exercisesWithSets.isEmpty) {
+      debugPrint('Cannot complete workout: no exercises with sets');
+      throw Exception('Ajoutez au moins un exercice avec des séries avant de terminer');
+    }
+    
     try {
       _isSaving = true;
       
@@ -247,11 +258,6 @@ class WorkoutProvider extends ChangeNotifier {
       final duration = DateTime.now()
           .difference(_currentWorkout!.createdAt)
           .inMinutes;
-      
-      // Filtrer les exercices pour ne garder que ceux avec au moins une série
-      final exercisesWithSets = _currentWorkout!.exercises
-          .where((ex) => ex.sets.isNotEmpty)
-          .toList();
       
       // Mettre à jour le status, la durée et les exercices filtrés
       _currentWorkout = _currentWorkout!.copyWith(
