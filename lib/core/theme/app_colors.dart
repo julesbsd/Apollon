@@ -16,11 +16,32 @@ class AppColors {
   // COULEURS DE BASE
   // ==========================================
 
-  /// Couleur primaire - Bleu énergique pour fitness
-  static const Color primarySeed = Color(0xFF1E88E5); // Bleu vif Material
+  /// Couleur primaire - Bleu Égée pour thème grec premium
+  static const Color primarySeed = Color(0xFF1E88E5); // Bleu Égée
+  static const Color primaryLight = Color(0xFF64B5F6); // Bleu clair
+  static const Color primaryDark = Color(0xFF1565C0); // Bleu profond
 
   /// Couleur secondaire - Orange accent pour actions
   static const Color secondarySeed = Color(0xFFFF6B35); // Orange énergique
+
+  // ==========================================
+  // COULEURS PREMIUM APOLLON
+  // ==========================================
+
+  /// Accent doré - Pour highlights et éléments premium
+  static const Color accentGold = Color(0xFFFFD700); // Or pur
+  static const Color accentGoldLight = Color(0xFFFFE57F); // Or clair
+  static const Color accentGoldDark = Color(0xFFFFA000); // Or brûlé
+
+  /// Couleurs marbre - Pour backgrounds premium
+  static const Color marbleWhite = Color(0xFFF8F9FA); // Marbre blanc
+  static const Color marbleGray = Color(0xFFECEFF1); // Marbre gris
+  static const Color marbleDark = Color(0xFF263238); // Marbre sombre (dark mode)
+
+  /// Couleurs glassmorphism premium
+  static Color glassWhite = const Color(0xFFFFFFFF).withOpacity(0.1);
+  static Color glassBorder = const Color(0xFFFFFFFF).withOpacity(0.2);
+  static Color glassBlur = const Color(0xFFFFFFFF).withOpacity(0.05);
 
   /// Couleur d'erreur - Rouge pour alertes
   static const Color errorSeed = Color(0xFFDC3545);
@@ -69,17 +90,33 @@ class AppColors {
   static const Color glassDisabledTextDark = Color(0xFF4D4D4D); // Gris foncé
 
   // ==========================================
-  // COULEURS GRADIENT (Arrière-plans animés)
+  // COULEURS GRADIENT MESH (Arrière-plans animés premium)
   // ==========================================
 
-  /// Dégradé mode clair
+  /// Mesh gradient mode clair - Bleu Égée + Violet + Blanc marbre
+  static const List<Color> lightMeshGradient = [
+    Color(0xFFE3F2FD), // Bleu très clair
+    Color(0xFFF3E5F5), // Mauve très clair
+    Color(0xFFF8F9FA), // Blanc marbre
+    Color(0xFFE1F5FE), // Cyan très clair
+  ];
+
+  /// Mesh gradient mode sombre - Bleu nuit + Violet + Gris profond
+  static const List<Color> darkMeshGradient = [
+    Color(0xFF0D1B2A), // Bleu nuit profond
+    Color(0xFF1B263B), // Bleu gris sombre
+    Color(0xFF263238), // Marbre sombre
+    Color(0xFF1565C0), // Bleu Égée sombre
+  ];
+
+  /// Gradient classique mode clair (fallback)
   static const List<Color> lightGradient = [
     Color(0xFFE3F2FD), // Bleu très clair
     Color(0xFFF3E5F5), // Mauve très clair
     Color(0xFFFFF3E0), // Orange très clair
   ];
 
-  /// Dégradé mode sombre
+  /// Gradient classique mode sombre (fallback)
   static const List<Color> darkGradient = [
     Color(0xFF0D1B2A), // Bleu nuit
     Color(0xFF1B263B), // Bleu gris sombre

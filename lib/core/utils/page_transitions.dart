@@ -109,26 +109,39 @@ class AppPageRoute {
     );
   }
 
-  /// Transition combinée fade + slide (fluide et élégante)
+  /// Transition combinée fade + slide (fluide et élégante) - Premium version
   static PageRouteBuilder<T> fadeSlide<T>({
     required WidgetBuilder builder,
-    Duration duration = const Duration(milliseconds: 350),
-    Curve curve = Curves.easeOutCubic,
-    Offset beginOffset = const Offset(0.0, 0.05),
+    Duration duration = const Duration(milliseconds: 400),
+    Curve curve = Curves.easeInOutCubic,
+    Offset beginOffset = const Offset(0.0, 0.03),
   }) {
     return PageRouteBuilder<T>(
       pageBuilder: (context, animation, secondaryAnimation) => builder(context),
       transitionDuration: duration,
       reverseTransitionDuration: duration,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        final offsetTween = Tween(begin: beginOffset, end: Offset.zero).chain(
-          CurveTween(curve: curve),
-        );
+        // Animation combinée plus fluide
+        final slideAnimation = Tween(
+          begin: beginOffset,
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        ));
+
+        final fadeAnimation = Tween(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(CurvedAnimation(
+          parent: animation,
+          curve: Interval(0.0, 0.7, curve: curve), // Fade plus rapide
+        ));
         
         return SlideTransition(
-          position: animation.drive(offsetTween),
+          position: slideAnimation,
           child: FadeTransition(
-            opacity: animation.drive(CurveTween(curve: curve)),
+            opacity: fadeAnimation,
             child: child,
           ),
         );

@@ -219,4 +219,46 @@ class WorkoutService {
             .map((doc) => Workout.fromFirestore(doc))
             .toList());
   }
+
+  /// Récupérer les séances paginées (US-5.1)
+  /// Utilisé pour pagination dans HistoryScreen
+  /// Paramètres:
+  /// - [limit]: nombre de résultats (défaut 20)
+  /// - [startAfter]: date de la dernière séance pour pagination
+  /// - [startDate]: filtre par date minimum (pour filtres période)
+  Future<List<Workout>> getUserWorkouts(
+    String userId, {
+    int limit = 20,
+    DateTime? startAfter,
+    DateTime? startDate,
+  }) async {
+    try {
+      Query query = _workoutsCollection(userId)
+          .where('status', isEqualTo: WorkoutStatus.completed.value);
+
+      // Filtre par date de début si spécifié (pour filtres Semaine/Mois)
+      if (startDate != null) {
+        query = query.where('createdAt',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(startDate));
+      }
+
+      // Tri par date décroissante
+      query = query.orderBy('createdAt', descending: true);
+
+      // Pagination: démarrer après la dernière date récupérée
+      if (startAfter != null) {
+        query = query.startAfter([Timestamp.fromDate(startAfter)]);
+      }
+
+      // Limiter le nombre de résultats
+      query = query.limit(limit);
+
+      final snapshot = await query.get();
+      return snapshot.docs
+          .map((doc) => Workout.fromFirestore(doc))
+          .toList();
+    } catch (e) {
+      throw Exception('Erreur lors de la récupération des séances: $e');
+    }
+  }
 }

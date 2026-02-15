@@ -5,30 +5,53 @@ import '../../core/providers/workout_provider.dart';
 import '../../core/widgets/widgets.dart';
 import '../../core/utils/page_transitions.dart';
 import '../workout/exercise_selection_screen.dart';
+import '../history/history_screen.dart';
 
-/// Page d'accueil de l'application Apollon
-/// Implémente US-1.3: Bouton de déconnexion avec confirmation
-/// Implémente US-3.3: Theme switcher accessible depuis menu
+/// Page d'accueil Premium de l'application Apollon
+/// Design Premium Phase 1 :
+/// - MeshGradientBackground animé (breathing effect)
+/// - FloatingGlassAppBar avec glassmorphism
+/// - Section hero avec accueil premium
+/// - Cards glassmorphism pour features
 /// Point de départ pour EPIC-4 (Enregistrement séance)
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  /// Messages motivants selon l'heure
+  String _getGreetingMessage() {
+    final hour = DateTime.now().hour;
+    if (hour < 6) return "Séance de guerrier nocturne ! 🌙";
+    if (hour < 12) return "Prêt à sculpter ta perfection ? 💪";
+    if (hour < 18) return "L'après-midi parfait pour s'entraîner ⚡";
+    if (hour < 22) return "Session du soir, puissance maximale 🔥";
+    return "Courage pour cette séance tardive ! 🌟";
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final workoutProvider = Provider.of<WorkoutProvider>(context);
+    final hasActiveWorkout = workoutProvider.currentWorkout != null;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('APOLLON'),
-        centerTitle: true,
-        backgroundColor: colorScheme.surface.withOpacity(0.8),
-        elevation: 0,
+      extendBodyBehindAppBar: true,
+      appBar: FloatingGlassAppBar(
+        title: 'APOLLON',
+        showTimer: hasActiveWorkout,
+        timerText: hasActiveWorkout ? workoutProvider.elapsedTimeFormatted : null,
+        onTimerTap: hasActiveWorkout
+            ? () {
+                // Navigation vers séance en cours
+                Navigator.of(context).push(
+                  AppPageRoute.fadeSlide(
+                    builder: (context) => const ExerciseSelectionScreen(),
+                  ),
+                );
+              }
+            : null,
         actions: [
-          // Bouton pour ouvrir le drawer
           Builder(
             builder: (context) => IconButton(
-              icon: const Icon(Icons.account_circle),
+              icon: const Icon(Icons.account_circle_outlined),
               onPressed: () => Scaffold.of(context).openEndDrawer(),
               tooltip: 'Profil',
             ),
@@ -36,18 +59,17 @@ class HomePage extends StatelessWidget {
         ],
       ),
       endDrawer: const ProfileDrawer(),
-      body: AppBackground(
+      body: MeshGradientBackground(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(24, 48, 24, 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildWelcomeSection(context),
-                const SizedBox(height: 48),
-                // Gros bouton central avec arc de progression
+                _buildHeroSection(context),
+                const SizedBox(height: 24),
                 _buildMainActionButton(context),
-                const SizedBox(height: 32),
+                // const SizedBox(height: 5),
                 _buildComingSoonCards(context),
               ],
             ),
@@ -57,41 +79,116 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /// Section de bienvenue avec nom de l'utilisateur
-  Widget _buildWelcomeSection(BuildContext context) {
+  /// Section hero premium avec salutation et badge
+  Widget _buildHeroSection(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     final user = authProvider.user;
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final firstName = user?.displayName?.split(' ').first ?? 'Athlète';
 
     return Row(
       children: [
-        Text(
-          'Bonjour, ',
-          style: TextStyle(
-            fontSize: 24,
-            color: colorScheme.onBackground.withOpacity(0.7),
-          ),
-        ),
-        Text(
-          user?.displayName?.split(' ').first ?? 'Athlète',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: colorScheme.primary,
+        // Avatar avec bordure dorée
+        _buildPremiumAvatar(context, user),
+        const SizedBox(width: 16),
+        
+        // Textes de bienvenue
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Salutation avec Cinzel
+              Text(
+                'Bienvenue, $firstName',
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              // Message motivant
+              Text(
+                _getGreetingMessage(),
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+                ),
+              ),
+            ],
           ),
         ),
       ],
     );
   }
 
+  /// Avatar premium avec bordure dorée
+  Widget _buildPremiumAvatar(BuildContext context, user) {
+    final theme = Theme.of(context);
+    final photoUrl = user?.photoURL;
+    
+    return Container(
+      width: 80,
+      height: 80,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFFFFD700), // Or pur
+            Color(0xFFFFE57F), // Or clair
+            Color(0xFFFFA000), // Or brûlé
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFFFD700).withOpacity(0.3),
+            blurRadius: 12,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(3),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: theme.colorScheme.surface,
+        ),
+        child: ClipOval(
+          child: photoUrl != null
+              ? Image.network(
+                  photoUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return _buildDefaultAvatarIcon(theme);
+                  },
+                )
+              : _buildDefaultAvatarIcon(theme),
+        ),
+      ),
+    );
+  }
+
+  /// Icône par défaut pour l'avatar
+  Widget _buildDefaultAvatarIcon(ThemeData theme) {
+    return Container(
+      color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+      child: Icon(
+        Icons.person,
+        size: 40,
+        color: theme.colorScheme.primary,
+      ),
+    );
+  }
+
   /// Bouton principal "Nouvelle séance" avec arc de progression
   /// Implémente US-4.1: Navigation vers ExerciseSelectionScreen
-  /// US-4.1 Enhanced: Arc circulaire progressif (0-60 min = 0-100%)
+  /// US-4.1 Enhanced: Arc circulaire progressif (0-120 min = 0-100%)
   Widget _buildMainActionButton(BuildContext context) {
     final workoutProvider = Provider.of<WorkoutProvider>(context);
     final hasActiveWorkout = workoutProvider.currentWorkout != null;
 
-    // Calcul du progrès : 0.0 à 1.0 (100% à 60 minutes)
+    // Calcul du progrès : 0.0 à 1.0 (100% à 120 minutes = 2H)
     double progress = 0.0;
     String mainText = 'Nouvelle séance';
     String? subtitleText;
@@ -101,135 +198,134 @@ class HomePage extends StatelessWidget {
       // Séance active : afficher le temps et calculer le progrès
       final elapsed = DateTime.now().difference(workoutProvider.currentWorkout!.createdAt);
       
-      // Progress de 0 à 1 sur 60 minutes (3600 secondes)
-      progress = (elapsed.inSeconds / 3600).clamp(0.0, 1.0);
+      // Progress de 0 à 1 sur 120 minutes (7200 secondes = 2H)
+      progress = (elapsed.inSeconds / 7200).clamp(0.0, 1.0);
       
       mainText = 'Séance en cours';
       subtitleText = workoutProvider.elapsedTimeFormatted;
       icon = Icons.fitness_center;
     }
 
-    return Center(
-      child: CircularProgressButton(
-        text: mainText,
-        subtitle: subtitleText,
-        progress: progress,
-        icon: icon,
-        isActive: hasActiveWorkout,
-        onPressed: () {
-          final authProvider = Provider.of<AuthProvider>(context, listen: false);
-          final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
-          
-          // Démarrer une nouvelle séance si pas déjà démarrée
-          if (!workoutProvider.hasActiveWorkout) {
-            workoutProvider.startNewWorkout(authProvider.user!.uid);
-          }
-          
-          // Navigation vers ExerciseSelectionScreen
-          Navigator.of(context).push(
-            AppPageRoute.fadeSlide(
-              builder: (context) => const ExerciseSelectionScreen(),
-            ),
-          );
-        },
-      ),
+    return GlassOrbButton(
+      text: mainText,
+      subtitle: subtitleText,
+      progress: progress,
+      icon: icon,
+      isActive: hasActiveWorkout,
+      onPressed: () {
+        final authProvider = Provider.of<AuthProvider>(context, listen: false);
+        final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
+        
+        // Démarrer une nouvelle séance si pas déjà démarrée
+        if (!workoutProvider.hasActiveWorkout) {
+          workoutProvider.startNewWorkout(authProvider.user!.uid);
+        }
+        
+        // Navigation vers ExerciseSelectionScreen
+        Navigator.of(context).push(
+          AppPageRoute.fadeSlide(
+            builder: (context) => const ExerciseSelectionScreen(),
+          ),
+        );
+      },
     );
   }
 
-  /// Cards "Coming Soon" pour fonctionnalités futures
+  /// Cards "Coming Soon" avec design glassmorphism premium + parallax
   Widget _buildComingSoonCards(BuildContext context) {
-    return Expanded(
-      child: GridView.count(
-        crossAxisCount: 2,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-        childAspectRatio: 0.95,
-        children: [
-          _buildFeatureCard(
+    return GridView.count(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      mainAxisSpacing: 20,
+      crossAxisSpacing: 20,
+      childAspectRatio: 1.0,
+      children: [
+        ParallaxCard(
+          child: _buildPremiumFeatureCard(
             context,
             'Historique',
-            Icons.history,
-            'À venir dans EPIC-5',
+            Icons.article_outlined,
           ),
-          _buildFeatureCard(
+        ),
+        ParallaxCard(
+          child: _buildPremiumFeatureCard(
             context,
             'Statistiques',
             Icons.analytics_outlined,
-            'Prévu pour V2',
           ),
-          _buildFeatureCard(
+        ),
+        ParallaxCard(
+          child: _buildPremiumFeatureCard(
             context,
             'Calendrier',
-            Icons.calendar_today,
-            'Prévu pour V2',
+            Icons.calendar_today_outlined,
           ),
-          _buildFeatureCard(
+        ),
+        ParallaxCard(
+          child: _buildPremiumFeatureCard(
             context,
             'Profil',
             Icons.person_outline,
-            'Prévu pour V2',
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  Widget _buildFeatureCard(
+  Widget _buildPremiumFeatureCard(
     BuildContext context,
     String title,
     IconData icon,
-    String subtitle,
   ) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
-    return AppCard(
-      variant: AppCardVariant.elevated,
-      elevation: 8,
-      padding: const EdgeInsets.all(16),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: colorScheme.primary.withOpacity(0.1),
-            width: 2,
-          ),
-        ),
-        padding: const EdgeInsets.all(10),
+    return MarbleCard(
+      onTap: () {
+        // Navigation selon la feature
+        if (title == 'Historique') {
+          Navigator.of(context).push(
+            AppPageRoute.fadeSlide(
+              builder: (context) => const HistoryScreen(),
+            ),
+          );
+        }
+        // Autres features: TODO
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Icône avec background circulaire
             Container(
-              padding: const EdgeInsets.all(10),
+              width: 56,
+              height: 56,
               decoration: BoxDecoration(
-                color: colorScheme.primary.withOpacity(0.1),
                 shape: BoxShape.circle,
+                color: colorScheme.primary.withOpacity(0.15),
+                border: Border.all(
+                  color: colorScheme.primary.withOpacity(0.3),
+                  width: 2,
+                ),
               ),
               child: Icon(
                 icon,
-                size: 36,
+                size: 26,
                 color: colorScheme.primary,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 16),
+
+            // Titre avec Cinzel
             Text(
               title,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              subtitle,
               textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 11,
-                color: colorScheme.onSurface.withOpacity(0.6),
-              ),
             ),
           ],
         ),

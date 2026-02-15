@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Typographie pour le Design System Apollon
+/// Typographie pour le Design System Apollon Premium
 /// 
-/// Utilise Google Fonts (Raleway) pour une typographie moderne et lisible.
-/// Définit tous les styles de texte utilisés dans l'application.
+/// Utilise Google Fonts :
+/// - Cinzel pour les titres (noblesse grecque, style temple)
+/// - Raleway pour le texte courant (moderne, lisible)
+/// - JetBrains Mono pour les nombres (poids, reps)
 /// 
 /// Convention de nommage:
-/// - display*: Très grands titres (hero sections)
-/// - headline*: Titres de sections
-/// - title*: Titres de cards/widgets
-/// - body*: Texte courant
-/// - label*: Labels de boutons, chips
+/// - display*: Très grands titres (hero sections) - Cinzel
+/// - headline*: Titres de sections - Cinzel
+/// - title*: Titres de cards/widgets - Cinzel
+/// - body*: Texte courant - Raleway
+/// - label*: Labels de boutons, chips - Raleway
 class AppTypography {
   AppTypography._(); // Private constructor
 
@@ -19,13 +21,19 @@ class AppTypography {
   // FAMILLE DE POLICE
   // ==========================================
 
-  /// Police principale: Raleway (Google Fonts)
+  /// Police titres: Cinzel (Google Fonts) - Style grec noble
+  /// - Serif élégante avec influence antique
+  /// - Pour headlines, titles, et éléments premium
+  static const String headingFontFamily = 'Cinzel';
+
+  /// Police texte: Raleway (Google Fonts)
   /// - Élégante, moderne, excellente lisibilité
   /// - Support poids 100-900
-  static const String primaryFontFamily = 'Raleway';
+  /// - Pour body text et labels
+  static const String bodyFontFamily = 'Raleway';
 
-  /// Police secondaire pour les chiffres (optionnel)
-  /// - Jetbrains Mono pour affichage poids/reps (lisibilité chiffres)
+  /// Police secondaire pour les chiffres
+  /// - JetBrains Mono pour affichage poids/reps (lisibilité chiffres)
   static const String monoFontFamily = 'JetBrains Mono';
 
   // ==========================================
@@ -34,67 +42,67 @@ class AppTypography {
 
   /// Génère TextTheme complet pour mode clair
   static TextTheme lightTextTheme = TextTheme(
-    // DISPLAY (Hero, splash screens)
-    displayLarge: GoogleFonts.raleway(
+    // DISPLAY (Hero, splash screens) - Cinzel pour impact premium
+    displayLarge: GoogleFonts.cinzel(
       fontSize: 57,
       fontWeight: FontWeight.w800,
       letterSpacing: -0.25,
       color: Colors.black87,
     ),
-    displayMedium: GoogleFonts.raleway(
+    displayMedium: GoogleFonts.cinzel(
       fontSize: 45,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    displaySmall: GoogleFonts.raleway(
+    displaySmall: GoogleFonts.cinzel(
       fontSize: 36,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.black87,
     ),
 
-    // HEADLINE (Titres de sections majeures)
-    headlineLarge: GoogleFonts.raleway(
+    // HEADLINE (Titres de sections majeures) - Cinzel pour noblesse
+    headlineLarge: GoogleFonts.cinzel(
       fontSize: 32,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    headlineMedium: GoogleFonts.raleway(
+    headlineMedium: GoogleFonts.cinzel(
       fontSize: 28,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    headlineSmall: GoogleFonts.raleway(
+    headlineSmall: GoogleFonts.cinzel(
       fontSize: 24,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.black87,
     ),
 
-    // TITLE (Titres de cards, app bars)
-    titleLarge: GoogleFonts.raleway(
+    // TITLE (Titres de cards, app bars) - Cinzel pour identité
+    titleLarge: GoogleFonts.cinzel(
       fontSize: 22,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    titleMedium: GoogleFonts.raleway(
+    titleMedium: GoogleFonts.cinzel(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.15,
       color: Colors.black87,
     ),
-    titleSmall: GoogleFonts.raleway(
+    titleSmall: GoogleFonts.cinzel(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.1,
       color: Colors.black87,
     ),
 
-    // BODY (Texte courant)
+    // BODY (Texte courant) - Raleway pour lisibilité
     bodyLarge: GoogleFonts.raleway(
       fontSize: 16,
       fontWeight: FontWeight.w400,
@@ -114,7 +122,7 @@ class AppTypography {
       color: Colors.black54,
     ),
 
-    // LABEL (Boutons, chips, badges)
+    // LABEL (Boutons, chips, badges) - Raleway pour clarté
     labelLarge: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w600,
@@ -137,67 +145,67 @@ class AppTypography {
 
   /// Génère TextTheme complet pour mode sombre
   static TextTheme darkTextTheme = TextTheme(
-    // DISPLAY
-    displayLarge: GoogleFonts.raleway(
+    // DISPLAY - Cinzel pour impact premium
+    displayLarge: GoogleFonts.cinzel(
       fontSize: 57,
       fontWeight: FontWeight.w800,
       letterSpacing: -0.25,
       color: Colors.white,
     ),
-    displayMedium: GoogleFonts.raleway(
+    displayMedium: GoogleFonts.cinzel(
       fontSize: 45,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    displaySmall: GoogleFonts.raleway(
+    displaySmall: GoogleFonts.cinzel(
       fontSize: 36,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.white,
     ),
 
-    // HEADLINE
-    headlineLarge: GoogleFonts.raleway(
+    // HEADLINE - Cinzel pour noblesse
+    headlineLarge: GoogleFonts.cinzel(
       fontSize: 32,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    headlineMedium: GoogleFonts.raleway(
+    headlineMedium: GoogleFonts.cinzel(
       fontSize: 28,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    headlineSmall: GoogleFonts.raleway(
+    headlineSmall: GoogleFonts.cinzel(
       fontSize: 24,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.white,
     ),
 
-    // TITLE
-    titleLarge: GoogleFonts.raleway(
+    // TITLE - Cinzel pour identité
+    titleLarge: GoogleFonts.cinzel(
       fontSize: 22,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    titleMedium: GoogleFonts.raleway(
+    titleMedium: GoogleFonts.cinzel(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.15,
       color: Colors.white,
     ),
-    titleSmall: GoogleFonts.raleway(
+    titleSmall: GoogleFonts.cinzel(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.1,
       color: Colors.white,
     ),
 
-    // BODY
+    // BODY - Raleway pour lisibilité
     bodyLarge: GoogleFonts.raleway(
       fontSize: 16,
       fontWeight: FontWeight.w400,
@@ -217,7 +225,7 @@ class AppTypography {
       color: Colors.white70,
     ),
 
-    // LABEL
+    // LABEL - Raleway pour clarté
     labelLarge: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w600,
