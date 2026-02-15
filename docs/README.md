@@ -74,13 +74,14 @@ Documentation complète du backend Firebase et de l'architecture Firestore pour 
 
 ### 🎨 Frontend et Design System
 
-#### 6. **[Design System Liquid Glass](design-system.md)**
+#### 6. **[Design System Material 3 Moderne](design-system.md)**
    ✨ **Documentation complète du style visuel**
    
-   - Vue d'ensemble glassmorphisme
-   - Palette de couleurs (Dark/Light mode)
-   - Typographie (Google Fonts Inter + JetBrains Mono)
-   - Widgets réutilisables (GlassCard, GlassButton, etc.)
+   - Design System Material 3 épuré et moderne
+   - Palette de couleurs (#1E88E5 primary, Dark/Light mode)
+   - Typographie (Google Fonts Raleway + JetBrains Mono)
+   - Widgets réutilisables (AppCard, AppButton, CircularProgressButton, ProfileDrawer, etc.)
+   - Page transitions fluides (5 types disponibles)
    - Exemples d'utilisation complets
    - Bonnes pratiques performance et accessibilité
    
@@ -111,7 +112,7 @@ Documentation complète du backend Firebase et de l'architecture Firestore pour 
    Système de thème Flutter complet dans `lib/core/theme/`
    - `app_colors.dart` : Palette couleurs + Material 3 ColorScheme
    - `app_typography.dart` : Styles texte avec Google Fonts
-   - `app_decorations.dart` : Décorations glassmorphisme
+   - `app_decorations.dart` : Décorations, borders, shadows, spacing
    - `app_theme.dart` : ThemeData complet (light/dark)
 
 #### 11. **Design System - Widgets réutilisables**
@@ -126,7 +127,7 @@ Documentation complète du backend Firebase et de l'architecture Firestore pour 
 ---
 
 ## PARCOURS RECOMMANDÉS
-Lire [Design System Liquid Glass](design-system.md) - Style visuel et widgets
+Lire [Design System Material 3](design-system.md) - Style visuel et widgets
 4. Référencer [Seed Data Exercices](seed-data-exercises.md) - Données
 5. Implémenter modèles Dart et UI (voir exemples dans docs)
 
@@ -173,7 +174,7 @@ Lire [Design System Liquid Glass](design-system.md) - Style visuel et widgets
 ---
 
 ## ARCHITECTURE VISUELLE
-├─ UI (Liquid Glass Design)
+├─ UI (Material 3 Design)
 │    │   ├─ Theme System (colors, typography, decorations)
 │    │   └─ Glass Widgets (cards, buttons, inputs, chips)
 │    └─ Screens (login, workout, history
@@ -183,7 +184,7 @@ PROJET APOLLON
 ├─── Frontend (Flutter)
 │    ├─ Authentication (Google Sign-In)
 │    ├─ State Management (Provider)
-│    └─ UI (Liquid Glass Design)
+│    └─ UI (Material 3 Design)
 │
 ├─── Backend (Firebase)
 │    ├─ Firebase Authentication

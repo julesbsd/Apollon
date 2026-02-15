@@ -6,7 +6,7 @@ Application mobile Flutter de suivi de progression en musculation
 
 ## VUE D'ENSEMBLE
 
-**Apollon** est une application mobile développée en Flutter permettant aux pratiquants de musculation de suivre leurs performances en salle de sport. L'objectif principal est de résoudre le problème d'oubli des poids utilisés lors des séances précédentes, tout en offrant une expérience utilisateur fluide et un design moderne de type Liquid Glass.
+**Apollon** est une application mobile développée en Flutter permettant aux pratiquants de musculation de suivre leurs performances en salle de sport. L'objectif principal est de résoudre le problème d'oubli des poids utilisés lors des séances précédentes, tout en offrant une expérience utilisateur fluide et un design moderne Material 3.
 
 ### Problématique
 
@@ -20,7 +20,7 @@ Application mobile Flutter de suivi de progression en musculation
 Application mobile permettant :
 - La saisie rapide des séances d'entraînement (exercices, séries, répétitions, poids)
 - La visualisation instantanée de l'historique des performances
-- Une interface fluide et intuitive avec design premium Liquid Glass
+- Une interface fluide et intuitive avec design Material 3 moderne
 - Une synchronisation cloud via Firebase pour accès multi-appareils
 
 ---
@@ -114,7 +114,7 @@ Personne utilisant l'application (pratiquant de musculation).
 ### Frontend
 - **Framework :** Flutter/Dart
 - **State Management :** Provider (recommandé pour V1)
-- **Design System :** Modern Liquid Glass (inspiration Apple glassmorphism)
+- **Design System :** Material 3 moderne avec Raleway (#1E88E5)
   - Arrondis prononcés
   - Effets de transparence et flou
   - Animations fluides 60fps minimum
@@ -379,7 +379,12 @@ La séance n'est finalisée et définitivement sauvegardée que lors du clic sur
 - Historique texte simple (dernière séance par exercice)
 - Sauvegarde séance (bouton "Terminer")
 - Mode sombre + mode clair
-- Design System Liquid Glass
+- Design System Material 3 moderne avec Raleway
+- Couleur primaire #1E88E5 (bleu Material Design)
+- Page transitions fluides (5 types)
+- CircularProgressButton avec arc de progression
+- ProfileDrawer avec ThemeSwitcher intégré
+- Dark/Light mode avec persistance
 - Liste exercices prédéfinis (~50 exercices populaires)
 - Mode offline (Firestore natif)
 

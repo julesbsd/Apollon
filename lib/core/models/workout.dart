@@ -6,6 +6,7 @@ import 'workout_exercise.dart';
 /// Structure Firestore: users/{userId}/workouts/{workoutId}
 class Workout {
   final String? id;
+  final String userId;
   final DateTime date;
   final WorkoutStatus status;
   final List<WorkoutExercise> exercises;
@@ -15,6 +16,7 @@ class Workout {
 
   Workout({
     this.id,
+    required this.userId,
     required this.date,
     required this.status,
     required this.exercises,
@@ -29,6 +31,7 @@ class Workout {
     final data = doc.data() as Map<String, dynamic>;
     return Workout(
       id: doc.id,
+      userId: data['userId'] as String? ?? '',
       date: (data['date'] as Timestamp).toDate(),
       status: WorkoutStatus.fromString(data['status'] as String),
       exercises: (data['exercises'] as List)
@@ -44,6 +47,7 @@ class Workout {
   /// Conversion vers Firestore
   Map<String, dynamic> toFirestore() {
     return {
+      'userId': userId,
       'date': Timestamp.fromDate(date),
       'status': status.value,
       'exercises': exercises.map((ex) => ex.toFirestore()).toList(),
@@ -57,6 +61,7 @@ class Workout {
   factory Workout.fromJson(Map<String, dynamic> json) {
     return Workout(
       id: json['id'] as String?,
+      userId: json['userId'] as String? ?? '',
       date: DateTime.parse(json['date'] as String),
       status: WorkoutStatus.fromString(json['status'] as String),
       exercises: (json['exercises'] as List)
@@ -77,6 +82,7 @@ class Workout {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'userId': userId,
       'date': date.toIso8601String(),
       'status': status.value,
       'exercises': exercises.map((ex) => ex.toJson()).toList(),
@@ -141,6 +147,7 @@ class Workout {
   /// Copier avec modifications
   Workout copyWith({
     String? id,
+    String? userId,
     DateTime? date,
     WorkoutStatus? status,
     List<WorkoutExercise>? exercises,
@@ -150,6 +157,7 @@ class Workout {
   }) {
     return Workout(
       id: id ?? this.id,
+      userId: userId ?? this.userId,
       date: date ?? this.date,
       status: status ?? this.status,
       exercises: exercises ?? this.exercises,
@@ -193,8 +201,9 @@ class Workout {
   }
 
   /// Créer une nouvelle séance draft (RG-004)
-  static Workout createDraft() {
+  static Workout createDraft(String userId) {
     return Workout(
+      userId: userId,
       date: DateTime.now(),
       status: WorkoutStatus.draft,
       exercises: [],

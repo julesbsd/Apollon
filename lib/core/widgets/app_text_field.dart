@@ -1,10 +1,9 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
-/// Input TextField avec effet Liquid Glass
+/// Input TextField moderne Material 3
 /// Support Dark et Light mode
 /// Border radius 24px selon Design System
-class LiquidTextField extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? labelText;
   final String? hintText;
@@ -22,7 +21,7 @@ class LiquidTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
 
-  const LiquidTextField({
+  const AppTextField({
     super.key,
     this.controller,
     this.labelText,
@@ -47,77 +46,71 @@ class LiquidTextField extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(24),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-        child: TextField(
-          controller: controller,
-          keyboardType: keyboardType,
-          obscureText: obscureText,
-          maxLines: maxLines,
-          minLines: minLines,
-          onChanged: onChanged,
-          onTap: onTap,
-          readOnly: readOnly,
-          enabled: enabled,
-          textInputAction: textInputAction,
-          focusNode: focusNode,
-          style: theme.textTheme.bodyLarge,
-          decoration: InputDecoration(
-            labelText: labelText,
-            hintText: hintText,
-            errorText: errorText,
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            filled: true,
-            fillColor: colorScheme.surfaceVariant.withOpacity(0.5),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 24,
-              vertical: 16,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(
-                color: colorScheme.outline,
-                width: 1.5,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(
-                color: colorScheme.outline,
-                width: 1.5,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: 2,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide(
-                color: colorScheme.outline.withOpacity(0.3),
-                width: 1.5,
-              ),
-            ),
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      maxLines: maxLines,
+      minLines: minLines,
+      onChanged: onChanged,
+      onTap: onTap,
+      readOnly: readOnly,
+      enabled: enabled,
+      textInputAction: textInputAction,
+      focusNode: focusNode,
+      style: theme.textTheme.bodyLarge,
+      decoration: InputDecoration(
+        labelText: labelText,
+        hintText: hintText,
+        errorText: errorText,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        filled: true,
+        fillColor: colorScheme.surfaceVariant,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 16,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: colorScheme.outline,
+            width: 1.5,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: colorScheme.outline,
+            width: 1.5,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: colorScheme.primary,
+            width: 2,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: colorScheme.error,
+            width: 2,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: colorScheme.error,
+            width: 2,
+          ),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: colorScheme.outline.withOpacity(0.3),
+            width: 1.5,
           ),
         ),
       ),
@@ -127,7 +120,7 @@ class LiquidTextField extends StatelessWidget {
 
 /// TextField pour saisie numérique (reps, poids)
 /// Variant spécialisé pour les nombres
-class LiquidNumberField extends StatelessWidget {
+class AppNumberField extends StatelessWidget {
   final TextEditingController? controller;
   final String? labelText;
   final String? hintText;
@@ -138,7 +131,7 @@ class LiquidNumberField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final String? suffix;
 
-  const LiquidNumberField({
+  const AppNumberField({
     super.key,
     this.controller,
     this.labelText,
@@ -153,7 +146,7 @@ class LiquidNumberField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LiquidTextField(
+    return AppTextField(
       controller: controller,
       labelText: labelText,
       hintText: hintText,

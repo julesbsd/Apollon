@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/theme_provider.dart';
-import 'liquid_card.dart';
+import '../providers/theme_provider.dart';
+import 'app_card.dart';
 
 /// Widget pour changer le thème de l'app (Dark/Light/System)
-/// Avec effet Liquid Glass et animations fluides
+/// Avec effet moderne et animations fluides
 class ThemeSwitcher extends StatelessWidget {
   const ThemeSwitcher({super.key});
 
@@ -15,7 +15,7 @@ class ThemeSwitcher extends StatelessWidget {
     
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
-        return LiquidCard(
+        return AppCard(
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

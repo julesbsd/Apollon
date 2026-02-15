@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/auth_provider.dart';
-import '../../core/widgets/liquid/liquid_button.dart';
-import '../../core/widgets/liquid/liquid_card.dart';
-import '../../core/widgets/liquid/theme_switcher.dart';
+import '../../core/providers/workout_provider.dart';
+import '../../core/widgets/widgets.dart';
+import '../../core/utils/page_transitions.dart';
+import '../workout/exercise_selection_screen.dart';
 
 /// Page d'accueil de l'application Apollon
 /// Implémente US-1.3: Bouton de déconnexion avec confirmation
@@ -24,21 +25,18 @@ class HomePage extends StatelessWidget {
         backgroundColor: colorScheme.surface.withOpacity(0.8),
         elevation: 0,
         actions: [
-          // Menu avec option de déconnexion
-          _buildProfileMenu(context),
+          // Bouton pour ouvrir le drawer
+          Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(Icons.account_circle),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              tooltip: 'Profil',
+            ),
+          ),
         ],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              colorScheme.background,
-              colorScheme.surface,
-            ],
-          ),
-        ),
+      endDrawer: const ProfileDrawer(),
+      body: AppBackground(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -46,9 +44,10 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildWelcomeSection(context),
+                const SizedBox(height: 48),
+                // Gros bouton central avec arc de progression
+                _buildMainActionButton(context),
                 const SizedBox(height: 32),
-                _buildMainButton(context),
-                const SizedBox(height: 16),
                 _buildComingSoonCards(context),
               ],
             ),
@@ -64,21 +63,19 @@ class HomePage extends StatelessWidget {
     final user = authProvider.user;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
         Text(
-          'Bonjour,',
+          'Bonjour, ',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             color: colorScheme.onBackground.withOpacity(0.7),
           ),
         ),
-        const SizedBox(height: 4),
         Text(
           user?.displayName?.split(' ').first ?? 'Athlète',
           style: TextStyle(
-            fontSize: 32,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
             color: colorScheme.primary,
           ),
@@ -87,23 +84,55 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /// Bouton principal "Nouvelle séance"
-  /// Placeholder pour EPIC-4
-  Widget _buildMainButton(BuildContext context) {
-    return LiquidButton(
-      text: 'Nouvelle séance',
-      icon: Icons.add_circle_outline,
-      onPressed: () {
-        // TODO: Navigation vers ExerciseSelectionScreen (EPIC-4)
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('À implémenter dans EPIC-4'),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      },
-      variant: LiquidButtonVariant.primary,
-      width: double.infinity,
+  /// Bouton principal "Nouvelle séance" avec arc de progression
+  /// Implémente US-4.1: Navigation vers ExerciseSelectionScreen
+  /// US-4.1 Enhanced: Arc circulaire progressif (0-60 min = 0-100%)
+  Widget _buildMainActionButton(BuildContext context) {
+    final workoutProvider = Provider.of<WorkoutProvider>(context);
+    final hasActiveWorkout = workoutProvider.currentWorkout != null;
+
+    // Calcul du progrès : 0.0 à 1.0 (100% à 60 minutes)
+    double progress = 0.0;
+    String mainText = 'Nouvelle séance';
+    String? subtitleText;
+    IconData icon = Icons.add_circle_outline;
+
+    if (hasActiveWorkout) {
+      // Séance active : afficher le temps et calculer le progrès
+      final elapsed = DateTime.now().difference(workoutProvider.currentWorkout!.createdAt);
+      
+      // Progress de 0 à 1 sur 60 minutes (3600 secondes)
+      progress = (elapsed.inSeconds / 3600).clamp(0.0, 1.0);
+      
+      mainText = 'Séance en cours';
+      subtitleText = workoutProvider.elapsedTimeFormatted;
+      icon = Icons.fitness_center;
+    }
+
+    return Center(
+      child: CircularProgressButton(
+        text: mainText,
+        subtitle: subtitleText,
+        progress: progress,
+        icon: icon,
+        isActive: hasActiveWorkout,
+        onPressed: () {
+          final authProvider = Provider.of<AuthProvider>(context, listen: false);
+          final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
+          
+          // Démarrer une nouvelle séance si pas déjà démarrée
+          if (!workoutProvider.hasActiveWorkout) {
+            workoutProvider.startNewWorkout(authProvider.user!.uid);
+          }
+          
+          // Navigation vers ExerciseSelectionScreen
+          Navigator.of(context).push(
+            AppPageRoute.fadeSlide(
+              builder: (context) => const ExerciseSelectionScreen(),
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -112,8 +141,9 @@ class HomePage extends StatelessWidget {
     return Expanded(
       child: GridView.count(
         crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+        childAspectRatio: 0.95,
         children: [
           _buildFeatureCard(
             context,
@@ -152,164 +182,58 @@ class HomePage extends StatelessWidget {
   ) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return LiquidCard(
+    return AppCard(
+      variant: AppCardVariant.elevated,
+      elevation: 8,
       padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 40,
-            color: colorScheme.primary.withOpacity(0.5),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              color: colorScheme.onSurface.withOpacity(0.5),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// Menu de profil avec options Thème et Déconnexion (US-1.3 + US-3.3)
-  Widget _buildProfileMenu(BuildContext context) {
-    return PopupMenuButton<String>(
-      icon: const Icon(Icons.account_circle),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      itemBuilder: (context) => [
-        const PopupMenuItem(
-          value: 'theme',
-          child: Row(
-            children: [
-              Icon(Icons.palette_outlined, size: 20),
-              SizedBox(width: 12),
-              Text('Thème'),
-            ],
-          ),
-        ),
-        const PopupMenuItem(
-          value: 'logout',
-          child: Row(
-            children: [
-              Icon(Icons.logout, size: 20),
-              SizedBox(width: 12),
-              Text('Déconnexion'),
-            ],
-          ),
-        ),
-      ],
-      onSelected: (value) {
-        if (value == 'theme') {
-          _showThemeSheet(context);
-        } else if (value == 'logout') {
-          _showLogoutConfirmation(context);
-        }
-      },
-    );
-  }
-
-  /// Bottom sheet pour changer le thème (US-3.3)
-  void _showThemeSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(24),
+      child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(24),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: colorScheme.primary.withOpacity(0.1),
+            width: 2,
           ),
         ),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Handle bar
             Container(
-              width: 40,
-              height: 4,
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(2),
+                color: colorScheme.primary.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                icon,
+                size: 36,
+                color: colorScheme.primary,
               ),
             ),
-            const SizedBox(height: 24),
-            const ThemeSwitcher(),
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: colorScheme.onSurface,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              subtitle,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 11,
+                color: colorScheme.onSurface.withOpacity(0.6),
+              ),
+            ),
           ],
         ),
       ),
     );
-  }
-
-  /// Dialog de confirmation de déconnexion (US-1.3)
-  void _showLogoutConfirmation(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        title: const Text('Déconnexion'),
-        content: const Text(
-          'Êtes-vous sûr de vouloir vous déconnecter ?',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Annuler'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(dialogContext).pop();
-              _performLogout(context);
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text('Déconnexion'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// Exécution de la déconnexion
-  Future<void> _performLogout(BuildContext context) async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final success = await authProvider.signOut();
-
-    if (!success && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            authProvider.errorMessage ?? 'Erreur lors de la déconnexion',
-          ),
-          backgroundColor: Theme.of(context).colorScheme.error,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      );
-    }
   }
 }

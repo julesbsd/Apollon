@@ -17,7 +17,7 @@ class AppColors {
   // ==========================================
 
   /// Couleur primaire - Bleu énergique pour fitness
-  static const Color primarySeed = Color(0xFF4A90E2); // Bleu vif
+  static const Color primarySeed = Color(0xFF1E88E5); // Bleu vif Material
 
   /// Couleur secondaire - Orange accent pour actions
   static const Color secondarySeed = Color(0xFFFF6B35); // Orange énergique

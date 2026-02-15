@@ -1,34 +1,33 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
-/// Bouton avec effet Liquid Glass (glassmorphism)
-/// Supporte Dark et Light mode avec animations fluides
+/// Bouton moderne Material 3 avec animations
+/// Supporte Dark et Light mode
 /// Arrondis 24px selon Design System Apollon
-class LiquidButton extends StatefulWidget {
+class AppButton extends StatefulWidget {
   final String text;
   final VoidCallback? onPressed;
   final bool isLoading;
-  final LiquidButtonVariant variant;
+  final AppButtonVariant variant;
   final IconData? icon;
   final double? width;
   final EdgeInsets? padding;
 
-  const LiquidButton({
+  const AppButton({
     super.key,
     required this.text,
     this.onPressed,
     this.isLoading = false,
-    this.variant = LiquidButtonVariant.primary,
+    this.variant = AppButtonVariant.primary,
     this.icon,
     this.width,
     this.padding,
   });
 
   @override
-  State<LiquidButton> createState() => _LiquidButtonState();
+  State<AppButton> createState() => _AppButtonState();
 }
 
-class _LiquidButtonState extends State<LiquidButton>
+class _AppButtonState extends State<AppButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
@@ -77,43 +76,48 @@ class _LiquidButtonState extends State<LiquidButton>
     // Couleurs selon variant
     Color backgroundColor;
     Color textColor;
-    Color borderColor;
-    bool showBlur;
+    Color? borderColor;
     List<BoxShadow> shadows;
 
     switch (widget.variant) {
-      case LiquidButtonVariant.primary:
-        backgroundColor = colorScheme.primary.withOpacity(0.85);
+      case AppButtonVariant.primary:
+        backgroundColor = colorScheme.primary;
         textColor = colorScheme.onPrimary;
-        borderColor = colorScheme.primary.withOpacity(0.3);
-        showBlur = true;
-        shadows = [
-          BoxShadow(
-            color: colorScheme.primary.withOpacity(0.3),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ];
+        borderColor = null;
+        shadows = !_isPressed
+            ? [
+                BoxShadow(
+                  color: colorScheme.primary.withOpacity(0.4),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ]
+            : [];
         break;
-      case LiquidButtonVariant.secondary:
-        backgroundColor = colorScheme.surface.withOpacity(0.7);
-        textColor = colorScheme.onSurface;
-        borderColor = Colors.white.withOpacity(0.15);
-        showBlur = true;
-        shadows = [];
+      case AppButtonVariant.secondary:
+        backgroundColor = colorScheme.secondaryContainer;
+        textColor = colorScheme.onSecondaryContainer;
+        borderColor = null;
+        shadows = !_isPressed
+            ? [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ]
+            : [];
         break;
-      case LiquidButtonVariant.outlined:
+      case AppButtonVariant.outlined:
         backgroundColor = Colors.transparent;
         textColor = colorScheme.primary;
-        borderColor = colorScheme.primary.withOpacity(0.5);
-        showBlur = false;
+        borderColor = colorScheme.primary;
         shadows = [];
         break;
-      case LiquidButtonVariant.text:
+      case AppButtonVariant.text:
         backgroundColor = Colors.transparent;
         textColor = colorScheme.primary;
-        borderColor = Colors.transparent;
-        showBlur = false;
+        borderColor = null;
         shadows = [];
         break;
     }
@@ -126,24 +130,11 @@ class _LiquidButtonState extends State<LiquidButton>
           onTapDown: _handleTapDown,
           onTapUp: _handleTapUp,
           onTapCancel: _handleTapCancel,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
-            child: showBlur
-                ? BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                    child: _buildContainer(
-                      backgroundColor,
-                      borderColor,
-                      shadows,
-                      textColor,
-                    ),
-                  )
-                : _buildContainer(
-                    backgroundColor,
-                    borderColor,
-                    shadows,
-                    textColor,
-                  ),
+          child: _buildContainer(
+            backgroundColor,
+            borderColor,
+            shadows,
+            textColor,
           ),
         ),
       ),
@@ -152,7 +143,7 @@ class _LiquidButtonState extends State<LiquidButton>
 
   Widget _buildContainer(
     Color backgroundColor,
-    Color borderColor,
+    Color? borderColor,
     List<BoxShadow> shadows,
     Color textColor,
   ) {
@@ -161,11 +152,13 @@ class _LiquidButtonState extends State<LiquidButton>
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: borderColor,
-          width: 1.5,
-        ),
-        boxShadow: _isPressed ? [] : shadows,
+        border: borderColor != null
+            ? Border.all(
+                color: borderColor,
+                width: 2,
+              )
+            : null,
+        boxShadow: shadows,
       ),
       child: Material(
         color: Colors.transparent,
@@ -235,10 +228,10 @@ class _LiquidButtonState extends State<LiquidButton>
   }
 }
 
-/// Variants de style pour LiquidButton avec animations
-enum LiquidButtonVariant {
-  primary,   // Bouton principal (coloré avec blur)
-  secondary, // Bouton secondaire (transparent avec blur)
+/// Variants de style pour AppButton
+enum AppButtonVariant {
+  primary,   // Bouton principal coloré
+  secondary, // Bouton secondaire
   outlined,  // Bouton outlined (bordure uniquement)
   text,      // Bouton text (pas de bordure ni background)
 }

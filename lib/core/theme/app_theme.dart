@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Design System Apollon - Liquid Glass Style
-/// Palette inspirée Apple glassmorphism avec modes Dark et Light
+/// Design System Apollon - Style Moderne Material 3
+/// Palette cohérente avec modes Dark et Light
 /// Border radius global: 24px (Design System requirement)
 class AppTheme {
   // ============================================

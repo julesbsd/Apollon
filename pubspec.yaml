@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # Google Fonts pour le Design System Liquid Glass
-  # Polices utilisées : Inter (UI) et JetBrains Mono (nombres)
+  # Polices utilisées : Raleway (UI) et JetBrains Mono (nombres)
   google_fonts: ^6.1.0
 
   # Firebase

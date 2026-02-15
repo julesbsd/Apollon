@@ -1,34 +1,33 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
-/// Card avec effet Liquid Glass (glassmorphism)
-/// Supporte Dark et Light mode avec animations
+/// Card moderne Material 3 avec animations
+/// Supporte Dark et Light mode
 /// Arrondis 24px selon Design System Apollon
-class LiquidCard extends StatefulWidget {
+class AppCard extends StatefulWidget {
   final Widget child;
   final EdgeInsets? padding;
   final double? width;
   final double? height;
   final VoidCallback? onTap;
-  final LiquidCardVariant variant;
+  final AppCardVariant variant;
   final double? elevation;
 
-  const LiquidCard({
+  const AppCard({
     super.key,
     required this.child,
     this.padding,
     this.width,
     this.height,
     this.onTap,
-    this.variant = LiquidCardVariant.standard,
+    this.variant = AppCardVariant.standard,
     this.elevation,
   });
 
   @override
-  State<LiquidCard> createState() => _LiquidCardState();
+  State<AppCard> createState() => _AppCardState();
 }
 
-class _LiquidCardState extends State<LiquidCard>
+class _AppCardState extends State<AppCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
@@ -76,63 +75,55 @@ class _LiquidCardState extends State<LiquidCard>
 
     // Configuration selon variant
     Color backgroundColor;
-    Color borderColor;
-    double blurAmount;
+    Color? borderColor;
     double defaultElevation;
 
     switch (widget.variant) {
-      case LiquidCardVariant.standard:
-        backgroundColor = colorScheme.surface.withOpacity(0.75);
-        borderColor = Colors.white.withOpacity(0.15);
-        blurAmount = 12;
-        defaultElevation = 0;
+      case AppCardVariant.standard:
+        backgroundColor = colorScheme.surface;
+        borderColor = null;
+        defaultElevation = 1;
         break;
-      case LiquidCardVariant.elevated:
-        backgroundColor = colorScheme.surface.withOpacity(0.85);
-        borderColor = Colors.white.withOpacity(0.2);
-        blurAmount = 16;
-        defaultElevation = 8;
+      case AppCardVariant.elevated:
+        backgroundColor = colorScheme.surface;
+        borderColor = null;
+        defaultElevation = 4;
         break;
-      case LiquidCardVariant.outlined:
-        backgroundColor = Colors.transparent;
-        borderColor = colorScheme.outline.withOpacity(0.5);
-        blurAmount = 8;
+      case AppCardVariant.outlined:
+        backgroundColor = colorScheme.surface;
+        borderColor = colorScheme.outline;
         defaultElevation = 0;
         break;
     }
 
     final elevation = widget.elevation ?? defaultElevation;
-    final shadows = elevation > 0
+    final shadows = elevation > 0 && !_isPressed
         ? [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: elevation * 2,
-              offset: Offset(0, elevation / 2),
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: elevation * 3,
+              offset: Offset(0, elevation),
             ),
           ]
         : <BoxShadow>[];
 
-    final card = ClipRRect(
-      borderRadius: BorderRadius.circular(24),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: blurAmount, sigmaY: blurAmount),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          width: widget.width,
-          height: widget.height,
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: borderColor,
-              width: 1.5,
-            ),
-            boxShadow: _isPressed ? [] : shadows,
-          ),
-          padding: widget.padding ?? const EdgeInsets.all(16),
-          child: widget.child,
-        ),
+    final card = AnimatedContainer(
+      duration: const Duration(milliseconds: 150),
+      width: widget.width,
+      height: widget.height,
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(24),
+        border: borderColor != null
+            ? Border.all(
+                color: borderColor,
+                width: 1.5,
+              )
+            : null,
+        boxShadow: shadows,
       ),
+      padding: widget.padding ?? const EdgeInsets.all(16),
+      child: widget.child,
     );
 
     // Si onTap est défini, rendre la card cliquable avec animation
@@ -153,9 +144,9 @@ class _LiquidCardState extends State<LiquidCard>
   }
 }
 
-/// Variants de style pour LiquidCard
-enum LiquidCardVariant {
-  standard, // Card standard avec blur modéré
-  elevated, // Card élevée avec shadow et blur fort
-  outlined, // Card outlined transparente
+/// Variants de style pour AppCard
+enum AppCardVariant {
+  standard, // Card standard avec subtle shadow
+  elevated, // Card élevée avec shadow prononcée
+  outlined, // Card avec bordure
 }

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 /// Typographie pour le Design System Apollon
 /// 
-/// Utilise Google Fonts (Inter) pour une typographie moderne et lisible.
+/// Utilise Google Fonts (Raleway) pour une typographie moderne et lisible.
 /// Définit tous les styles de texte utilisés dans l'application.
 /// 
 /// Convention de nommage:
@@ -19,10 +19,10 @@ class AppTypography {
   // FAMILLE DE POLICE
   // ==========================================
 
-  /// Police principale: Inter (Google Fonts)
-  /// - Moderne, lisible, excellent pour UI
-  /// - Support poids 300-800
-  static const String primaryFontFamily = 'Inter';
+  /// Police principale: Raleway (Google Fonts)
+  /// - Élégante, moderne, excellente lisibilité
+  /// - Support poids 100-900
+  static const String primaryFontFamily = 'Raleway';
 
   /// Police secondaire pour les chiffres (optionnel)
   /// - Jetbrains Mono pour affichage poids/reps (lisibilité chiffres)
@@ -35,19 +35,19 @@ class AppTypography {
   /// Génère TextTheme complet pour mode clair
   static TextTheme lightTextTheme = TextTheme(
     // DISPLAY (Hero, splash screens)
-    displayLarge: GoogleFonts.inter(
+    displayLarge: GoogleFonts.raleway(
       fontSize: 57,
       fontWeight: FontWeight.w800,
       letterSpacing: -0.25,
       color: Colors.black87,
     ),
-    displayMedium: GoogleFonts.inter(
+    displayMedium: GoogleFonts.raleway(
       fontSize: 45,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    displaySmall: GoogleFonts.inter(
+    displaySmall: GoogleFonts.raleway(
       fontSize: 36,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
@@ -55,19 +55,19 @@ class AppTypography {
     ),
 
     // HEADLINE (Titres de sections majeures)
-    headlineLarge: GoogleFonts.inter(
+    headlineLarge: GoogleFonts.raleway(
       fontSize: 32,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    headlineMedium: GoogleFonts.inter(
+    headlineMedium: GoogleFonts.raleway(
       fontSize: 28,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    headlineSmall: GoogleFonts.inter(
+    headlineSmall: GoogleFonts.raleway(
       fontSize: 24,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
@@ -75,19 +75,19 @@ class AppTypography {
     ),
 
     // TITLE (Titres de cards, app bars)
-    titleLarge: GoogleFonts.inter(
+    titleLarge: GoogleFonts.raleway(
       fontSize: 22,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.black87,
     ),
-    titleMedium: GoogleFonts.inter(
+    titleMedium: GoogleFonts.raleway(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.15,
       color: Colors.black87,
     ),
-    titleSmall: GoogleFonts.inter(
+    titleSmall: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.1,
@@ -95,19 +95,19 @@ class AppTypography {
     ),
 
     // BODY (Texte courant)
-    bodyLarge: GoogleFonts.inter(
+    bodyLarge: GoogleFonts.raleway(
       fontSize: 16,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.5,
       color: Colors.black87,
     ),
-    bodyMedium: GoogleFonts.inter(
+    bodyMedium: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.25,
       color: Colors.black87,
     ),
-    bodySmall: GoogleFonts.inter(
+    bodySmall: GoogleFonts.raleway(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.4,
@@ -115,19 +115,19 @@ class AppTypography {
     ),
 
     // LABEL (Boutons, chips, badges)
-    labelLarge: GoogleFonts.inter(
+    labelLarge: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.1,
       color: Colors.black87,
     ),
-    labelMedium: GoogleFonts.inter(
+    labelMedium: GoogleFonts.raleway(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.5,
       color: Colors.black87,
     ),
-    labelSmall: GoogleFonts.inter(
+    labelSmall: GoogleFonts.raleway(
       fontSize: 11,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.5,
@@ -138,19 +138,19 @@ class AppTypography {
   /// Génère TextTheme complet pour mode sombre
   static TextTheme darkTextTheme = TextTheme(
     // DISPLAY
-    displayLarge: GoogleFonts.inter(
+    displayLarge: GoogleFonts.raleway(
       fontSize: 57,
       fontWeight: FontWeight.w800,
       letterSpacing: -0.25,
       color: Colors.white,
     ),
-    displayMedium: GoogleFonts.inter(
+    displayMedium: GoogleFonts.raleway(
       fontSize: 45,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    displaySmall: GoogleFonts.inter(
+    displaySmall: GoogleFonts.raleway(
       fontSize: 36,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
@@ -158,19 +158,19 @@ class AppTypography {
     ),
 
     // HEADLINE
-    headlineLarge: GoogleFonts.inter(
+    headlineLarge: GoogleFonts.raleway(
       fontSize: 32,
       fontWeight: FontWeight.w700,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    headlineMedium: GoogleFonts.inter(
+    headlineMedium: GoogleFonts.raleway(
       fontSize: 28,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    headlineSmall: GoogleFonts.inter(
+    headlineSmall: GoogleFonts.raleway(
       fontSize: 24,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
@@ -178,19 +178,19 @@ class AppTypography {
     ),
 
     // TITLE
-    titleLarge: GoogleFonts.inter(
+    titleLarge: GoogleFonts.raleway(
       fontSize: 22,
       fontWeight: FontWeight.w600,
       letterSpacing: 0,
       color: Colors.white,
     ),
-    titleMedium: GoogleFonts.inter(
+    titleMedium: GoogleFonts.raleway(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.15,
       color: Colors.white,
     ),
-    titleSmall: GoogleFonts.inter(
+    titleSmall: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.1,
@@ -198,19 +198,19 @@ class AppTypography {
     ),
 
     // BODY
-    bodyLarge: GoogleFonts.inter(
+    bodyLarge: GoogleFonts.raleway(
       fontSize: 16,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.5,
       color: Colors.white,
     ),
-    bodyMedium: GoogleFonts.inter(
+    bodyMedium: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.25,
       color: Colors.white,
     ),
-    bodySmall: GoogleFonts.inter(
+    bodySmall: GoogleFonts.raleway(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.4,
@@ -218,19 +218,19 @@ class AppTypography {
     ),
 
     // LABEL
-    labelLarge: GoogleFonts.inter(
+    labelLarge: GoogleFonts.raleway(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.1,
       color: Colors.white,
     ),
-    labelMedium: GoogleFonts.inter(
+    labelMedium: GoogleFonts.raleway(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.5,
       color: Colors.white,
     ),
-    labelSmall: GoogleFonts.inter(
+    labelSmall: GoogleFonts.raleway(
       fontSize: 11,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.5,

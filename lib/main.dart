@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'core/providers/auth_provider.dart' as app_providers;
 import 'core/providers/theme_provider.dart';
+import 'core/providers/workout_provider.dart';
+import 'core/services/workout_service.dart';
 import 'app.dart';
 
 /// Point d'entrée de l'application Apollon
@@ -20,6 +22,9 @@ void main() async {
   final themeProvider = ThemeProvider();
   await themeProvider.init();
   
+  // Initialiser les services
+  final workoutService = WorkoutService();
+  
   runApp(
     // Configuration des Providers
     MultiProvider(
@@ -30,8 +35,12 @@ void main() async {
         // ThemeProvider pour gérer le thème Dark/Light (EPIC-3.3)
         ChangeNotifierProvider.value(value: themeProvider),
         
-        // TODO: Ajouter WorkoutProvider (EPIC-4)
-        // TODO: Ajouter ExerciseProvider (EPIC-4)
+        // WorkoutProvider pour gérer la séance en cours (EPIC-4.4)
+        ChangeNotifierProvider(
+          create: (_) => WorkoutProvider(workoutService: workoutService),
+        ),
+        
+        // TODO: Ajouter ExerciseProvider (EPIC-4.2)
       ],
       child: const ApolloApp(),
     ),

@@ -1,34 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/auth_provider.dart';
-import '../../core/widgets/liquid/liquid_button.dart';
-import '../../core/widgets/liquid/liquid_card.dart';
+import '../../core/widgets/widgets.dart';
 
 /// Écran de connexion avec Google Sign-In
 /// Implémente US-1.1: Connexion avec compte Google
 /// Respecte RG-001: Authentification Google obligatoire
-/// Design: Liquid Glass avec Dark/Light mode support
+/// Design: Moderne Material 3 avec Dark/Light mode support
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Scaffold(
-      body: Container(
-        // Gradient de fond subtil
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              colorScheme.background,
-              colorScheme.surface,
-            ],
-          ),
-        ),
+      body: AppBackground(
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -36,7 +21,7 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildLogo(colorScheme),
+                  _buildLogo(Theme.of(context).colorScheme),
                   const SizedBox(height: 48),
                   _buildWelcomeCard(context),
                   const SizedBox(height: 32),
@@ -85,11 +70,11 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  /// Card de bienvenue avec Liquid Glass effect
+  /// Card de bienvenue
   Widget _buildWelcomeCard(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return LiquidCard(
+    return AppCard(
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
@@ -120,12 +105,12 @@ class LoginScreen extends StatelessWidget {
   Widget _buildGoogleSignInButton(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (context, authProvider, child) {
-        return LiquidButton(
+        return AppButton(
           text: 'Se connecter avec Google',
           icon: Icons.login,
           onPressed: () => _handleGoogleSignIn(context, authProvider),
           isLoading: authProvider.isLoading,
-          variant: LiquidButtonVariant.primary,
+          variant: AppButtonVariant.primary,
           width: double.infinity,
         );
       },
@@ -140,7 +125,7 @@ class LoginScreen extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        return LiquidCard(
+        return AppCard(
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
