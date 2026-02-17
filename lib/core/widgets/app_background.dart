@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class AppBackground extends StatelessWidget {
   final Widget child;
 
-  const AppBackground({
-    super.key,
-    required this.child,
-  });
+  const AppBackground({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +16,7 @@ class AppBackground extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            colorScheme.background,
-            colorScheme.surface,
-          ],
+          colors: [colorScheme.surface, colorScheme.surface],
         ),
       ),
       child: child,

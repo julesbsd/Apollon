@@ -6,9 +6,9 @@ import '../models/exercise.dart';
 /// Implémente US-2.2: Récupération et filtrage des exercices
 class ExerciseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  
+
   /// Collection des exercices
-  CollectionReference get _exercisesCollection => 
+  CollectionReference get _exercisesCollection =>
       _firestore.collection('exercises');
 
   /// Récupérer tous les exercices (Stream en temps réel)
@@ -17,10 +17,16 @@ class ExerciseService {
     return _exercisesCollection
         .orderBy('name')
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Exercise.fromFirestore(
-                doc.data() as Map<String, dynamic>, doc.id))
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map(
+                (doc) => Exercise.fromFirestore(
+                  doc.data() as Map<String, dynamic>,
+                  doc.id,
+                ),
+              )
+              .toList(),
+        );
   }
 
   /// Récupérer les exercices filtrés par groupe musculaire
@@ -31,10 +37,16 @@ class ExerciseService {
         .where('muscleGroups', arrayContains: muscleGroup)
         .orderBy('name')
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Exercise.fromFirestore(
-                doc.data() as Map<String, dynamic>, doc.id))
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map(
+                (doc) => Exercise.fromFirestore(
+                  doc.data() as Map<String, dynamic>,
+                  doc.id,
+                ),
+              )
+              .toList(),
+        );
   }
 
   /// Récupérer les exercices filtrés par type
@@ -45,10 +57,16 @@ class ExerciseService {
         .where('type', isEqualTo: type)
         .orderBy('name')
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Exercise.fromFirestore(
-                doc.data() as Map<String, dynamic>, doc.id))
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map(
+                (doc) => Exercise.fromFirestore(
+                  doc.data() as Map<String, dynamic>,
+                  doc.id,
+                ),
+              )
+              .toList(),
+        );
   }
 
   /// Récupérer les exercices filtrés par groupe musculaire ET type
@@ -62,10 +80,16 @@ class ExerciseService {
         .where('type', isEqualTo: type)
         .orderBy('name')
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Exercise.fromFirestore(
-                doc.data() as Map<String, dynamic>, doc.id))
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map(
+                (doc) => Exercise.fromFirestore(
+                  doc.data() as Map<String, dynamic>,
+                  doc.id,
+                ),
+              )
+              .toList(),
+        );
   }
 
   /// Rechercher des exercices par nom (filtre client-side)
@@ -77,13 +101,15 @@ class ExerciseService {
       return [];
     }
 
-    final snapshot = await _exercisesCollection
-        .orderBy('name')
-        .get();
+    final snapshot = await _exercisesCollection.orderBy('name').get();
 
     final allExercises = snapshot.docs
-        .map((doc) => Exercise.fromFirestore(
-            doc.data() as Map<String, dynamic>, doc.id))
+        .map(
+          (doc) => Exercise.fromFirestore(
+            doc.data() as Map<String, dynamic>,
+            doc.id,
+          ),
+        )
         .toList();
 
     // Filtrage case-insensitive sur le nom
@@ -99,8 +125,7 @@ class ExerciseService {
     try {
       final doc = await _exercisesCollection.doc(exerciseId).get();
       if (!doc.exists) return null;
-      return Exercise.fromFirestore(
-          doc.data() as Map<String, dynamic>, doc.id);
+      return Exercise.fromFirestore(doc.data() as Map<String, dynamic>, doc.id);
     } catch (e) {
       throw Exception('Erreur lors de la récupération de l\'exercice: $e');
     }

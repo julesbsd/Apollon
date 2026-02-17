@@ -53,8 +53,8 @@ void main() {
         exerciseName: 'Bench Press',
         sets: [
           WorkoutSet(reps: 10, weight: 80), // 800
-          WorkoutSet(reps: 8, weight: 85),  // 680
-          WorkoutSet(reps: 6, weight: 90),  // 540
+          WorkoutSet(reps: 8, weight: 85), // 680
+          WorkoutSet(reps: 6, weight: 90), // 540
         ],
       );
 
@@ -105,9 +105,9 @@ void main() {
         exerciseId: 'ex123',
         exerciseName: 'Dips',
         sets: [
-          WorkoutSet(reps: 12, weight: 0),   // Bodyweight
-          WorkoutSet(reps: 10, weight: 10),  // +10kg
-          WorkoutSet(reps: 8, weight: 15),   // +15kg
+          WorkoutSet(reps: 12, weight: 0), // Bodyweight
+          WorkoutSet(reps: 10, weight: 10), // +10kg
+          WorkoutSet(reps: 8, weight: 15), // +15kg
         ],
       );
 
@@ -119,15 +119,10 @@ void main() {
       final exercise = WorkoutExercise(
         exerciseId: 'ex123',
         exerciseName: 'Bench Press',
-        sets: [
-          WorkoutSet(reps: 10, weight: 80),
-        ],
+        sets: [WorkoutSet(reps: 10, weight: 80)],
       );
 
-      final newSets = [
-        ...exercise.sets,
-        WorkoutSet(reps: 8, weight: 85),
-      ];
+      final newSets = [...exercise.sets, WorkoutSet(reps: 8, weight: 85)];
 
       final updated = exercise.copyWith(sets: newSets);
 

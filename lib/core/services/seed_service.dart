@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
 /// Service pour importer les exercices seed data dans Firestore
-/// 
+///
 /// Utilisation: SeedService().importExercises()
 /// A executer une seule fois lors de l'initialisation du projet
 class SeedService {
@@ -20,8 +20,9 @@ class SeedService {
       print('Demarrage import exercices...');
 
       // Charger JSON depuis assets
-      final jsonString =
-          await rootBundle.loadString('assets/seed_data/exercises.json');
+      final jsonString = await rootBundle.loadString(
+        'assets/seed_data/exercises.json',
+      );
       final List<dynamic> exercisesJson = jsonDecode(jsonString);
 
       print('Fichier charge: ${exercisesJson.length} exercices');
@@ -42,8 +43,8 @@ class SeedService {
             // Creer nouvel exercice
             await _firestore.collection('exercises').add({
               'name': name,
-              'nameSearch':
-                  name.toLowerCase(), // Pour recherche textuelle (lowercase)
+              'nameSearch': name
+                  .toLowerCase(), // Pour recherche textuelle (lowercase)
               'muscleGroups': exerciseData['muscleGroups'] as List<dynamic>,
               'type': exerciseData['type'] as String,
               'emoji': exerciseData['emoji'] as String,
@@ -70,11 +71,7 @@ class SeedService {
       print('Erreurs: $errors');
       print('===================================\n');
 
-      return {
-        'created': created,
-        'skipped': skipped,
-        'errors': errors,
-      };
+      return {'created': created, 'skipped': skipped, 'errors': errors};
     } catch (e) {
       print('Erreur lors du chargement du fichier JSON: $e');
       rethrow;

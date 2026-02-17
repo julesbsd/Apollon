@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '../lib/firebase_options.dart';
+import 'package:apollon/firebase_options.dart';
 
 /// Script pour importer les exercices prédéfinis (seed data) dans Firestore
 /// 
@@ -88,7 +88,7 @@ Future<void> main() async {
       // Commit batch si limite atteinte
       if (batchCount >= maxBatchSize) {
         await batch.commit();
-        print('\n📦 Batch commit (${batchCount} documents)\n');
+        print('\n📦 Batch commit ($batchCount documents)\n');
         batch = firestore.batch();
         batchCount = 0;
       }

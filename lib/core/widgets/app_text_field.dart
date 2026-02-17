@@ -45,7 +45,7 @@ class AppTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
@@ -66,45 +66,30 @@ class AppTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: colorScheme.surfaceVariant,
+        fillColor: colorScheme.surfaceContainerHighest,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 24,
           vertical: 16,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
-          borderSide: BorderSide(
-            color: colorScheme.outline,
-            width: 1.5,
-          ),
+          borderSide: BorderSide(color: colorScheme.outline, width: 1.5),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
-          borderSide: BorderSide(
-            color: colorScheme.outline,
-            width: 1.5,
-          ),
+          borderSide: BorderSide(color: colorScheme.outline, width: 1.5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
-          borderSide: BorderSide(
-            color: colorScheme.primary,
-            width: 2,
-          ),
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
-          borderSide: BorderSide(
-            color: colorScheme.error,
-            width: 2,
-          ),
+          borderSide: BorderSide(color: colorScheme.error, width: 2),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
-          borderSide: BorderSide(
-            color: colorScheme.error,
-            width: 2,
-          ),
+          borderSide: BorderSide(color: colorScheme.error, width: 2),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
@@ -156,9 +141,9 @@ class AppNumberField extends StatelessWidget {
         signed: false,
       ),
       prefixIcon: prefixIcon,
-      suffixIcon: suffixIcon != null
-          ? suffixIcon
-          : (suffix != null
+      suffixIcon:
+          suffixIcon ??
+          (suffix != null
               ? Padding(
                   padding: const EdgeInsets.only(right: 16),
                   child: Center(
@@ -166,11 +151,10 @@ class AppNumberField extends StatelessWidget {
                     child: Text(
                       suffix!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withOpacity(0.6),
-                          ),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withOpacity(0.6),
+                      ),
                     ),
                   ),
                 )

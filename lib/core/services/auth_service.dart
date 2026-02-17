@@ -18,13 +18,13 @@ class AuthService {
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   /// Connexion avec Google Sign-In (US-1.1)
-  /// 
+  ///
   /// Processus:
   /// 1. Déconnexion Google pour forcer sélection de compte
   /// 2. Authentification Google (popup)
   /// 3. Authentification Firebase avec credentials Google
   /// 4. Création/Mise à jour profil utilisateur dans Firestore
-  /// 
+  ///
   /// Throws:
   /// - Exception si l'utilisateur annule
   /// - FirebaseAuthException en cas d'erreur Firebase
@@ -43,7 +43,8 @@ class AuthService {
       }
 
       // Obtenir les détails d'authentification
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       // Créer les credentials Firebase
       final credential = GoogleAuthProvider.credential(
@@ -52,8 +53,9 @@ class AuthService {
       );
 
       // Connecter avec Firebase
-      final UserCredential userCredential = 
-          await _auth.signInWithCredential(credential);
+      final UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
 
       // Créer ou mettre à jour le profil utilisateur dans Firestore
       if (userCredential.user != null) {
@@ -85,10 +87,7 @@ class AuthService {
   /// Déconnecte à la fois de Firebase et de Google Sign-In
   Future<void> signOut() async {
     try {
-      await Future.wait([
-        _auth.signOut(),
-        _googleSignIn.signOut(),
-      ]);
+      await Future.wait([_auth.signOut(), _googleSignIn.signOut()]);
     } catch (e) {
       throw Exception('Erreur lors de la déconnexion: $e');
     }
@@ -96,7 +95,7 @@ class AuthService {
 
   /// Créer ou mettre à jour le profil utilisateur dans Firestore
   /// Collection: users/{userId}
-  /// 
+  ///
   /// Structure document:
   /// - uid: ID utilisateur Firebase
   /// - email: Email du compte Google

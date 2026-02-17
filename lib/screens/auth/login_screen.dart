@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 32),
-        
+
         // Titre APOLLON avec Cinzel (Greek nobility)
         Text(
           'APOLLON',
@@ -95,12 +95,12 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        
+
         // Sous-titre avec Raleway
         Text(
           'Temple Digital du Dépassement',
           style: theme.textTheme.titleMedium?.copyWith(
-            color: colorScheme.onBackground.withOpacity(0.7),
+            color: colorScheme.onSurface.withOpacity(0.7),
             letterSpacing: 1.5,
           ),
         ),
@@ -162,7 +162,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              
+
               // Description
               Text(
                 'Sculptez votre excellence dans notre temple digital. Chaque série compte, chaque répétition forge votre légende.',
@@ -314,11 +314,7 @@ class LoginScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.error_outline,
-                    color: colorScheme.error,
-                    size: 24,
-                  ),
+                  Icon(Icons.error_outline, color: colorScheme.error, size: 24),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Text(
@@ -356,7 +352,12 @@ class LoginScreen extends StatelessWidget {
       // Afficher SnackBar en cas d'erreur
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(authProvider.errorMessage ?? 'Erreur de connexion'),
+          content: Text(
+            authProvider.errorMessage ?? 'Erreur de connexion',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onError,
+            ),
+          ),
           backgroundColor: Theme.of(context).colorScheme.error,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(

@@ -7,7 +7,9 @@ import 'package:apollon/core/providers/auth_provider.dart' as app_providers;
 import 'package:apollon/app.dart';
 
 void main() {
-  testWidgets('App displays LoginScreen when not authenticated', (WidgetTester tester) async {
+  testWidgets('App displays LoginScreen when not authenticated', (
+    WidgetTester tester,
+  ) async {
     // Build the app with Provider
     await tester.pumpWidget(
       ChangeNotifierProvider(
@@ -24,14 +26,12 @@ void main() {
     expect(find.text('Se connecter avec Google'), findsOneWidget);
   });
 
-  testWidgets('LiquidButton displays text correctly', (WidgetTester tester) async {
+  testWidgets('LiquidButton displays text correctly', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: const Text('Test'),
-          ),
-        ),
+        home: Scaffold(body: Center(child: const Text('Test'))),
       ),
     );
 

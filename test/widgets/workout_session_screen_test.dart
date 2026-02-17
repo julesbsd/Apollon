@@ -5,6 +5,7 @@ import 'package:apollon/core/providers/workout_provider.dart';
 import 'package:apollon/core/providers/auth_provider.dart' as app_providers;
 import 'package:apollon/core/models/exercise.dart';
 import 'package:apollon/screens/workout/workout_session_screen.dart';
+import '../helpers/test_helpers.dart';
 
 void main() {
   group('WorkoutSessionScreen Widget Tests', () {
@@ -19,8 +20,8 @@ void main() {
     );
 
     testWidgets('should display exercise name', (WidgetTester tester) async {
-      final workoutProvider = WorkoutProvider();
-      
+      final workoutProvider = createTestWorkoutProvider();
+
       await tester.pumpWidget(
         MultiProvider(
           providers: [
@@ -37,15 +38,17 @@ void main() {
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier que le nom de l'exercice est affiché
       expect(find.text('Bench Press'), findsOneWidget);
     });
 
-    testWidgets('should display add set button initially', (WidgetTester tester) async {
-      final workoutProvider = WorkoutProvider();
-      
+    testWidgets('should display add set button initially', (
+      WidgetTester tester,
+    ) async {
+      final workoutProvider = createTestWorkoutProvider();
+
       await tester.pumpWidget(
         MultiProvider(
           providers: [
@@ -62,15 +65,17 @@ void main() {
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier qu'il y a un bouton pour ajouter une série
       expect(find.textContaining('Ajouter'), findsWidgets);
     });
 
-    testWidgets('should have SafeArea and Scaffold', (WidgetTester tester) async {
-      final workoutProvider = WorkoutProvider();
-      
+    testWidgets('should have SafeArea and Scaffold', (
+      WidgetTester tester,
+    ) async {
+      final workoutProvider = createTestWorkoutProvider();
+
       await tester.pumpWidget(
         MultiProvider(
           providers: [
@@ -87,7 +92,7 @@ void main() {
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier la structure de base
       expect(find.byType(Scaffold), findsOneWidget);
@@ -95,8 +100,8 @@ void main() {
     });
 
     testWidgets('should have back button', (WidgetTester tester) async {
-      final workoutProvider = WorkoutProvider();
-      
+      final workoutProvider = createTestWorkoutProvider();
+
       await tester.pumpWidget(
         MultiProvider(
           providers: [
@@ -113,15 +118,15 @@ void main() {
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier qu'il y a un bouton de retour
       expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     });
 
     testWidgets('should display exercise emoji', (WidgetTester tester) async {
-      final workoutProvider = WorkoutProvider();
-      
+      final workoutProvider = createTestWorkoutProvider();
+
       await tester.pumpWidget(
         MultiProvider(
           providers: [
@@ -138,10 +143,11 @@ void main() {
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier que l'emoji est affiché
       expect(find.text('💪'), findsOneWidget);
     });
   });
 }
+

@@ -10,7 +10,7 @@ import '../workout/workout_session_screen.dart';
 
 /// Écran de sélection d'exercice
 /// Implémente US-4.2: Filtres par groupe musculaire, type, et recherche
-/// 
+///
 /// Features:
 /// - Tabs par groupe musculaire (Pectoraux, Dos, Jambes, etc.)
 /// - Sous-tabs par type (Poids libres, Machine, Poids corporel, Cardio)
@@ -28,14 +28,14 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
     with SingleTickerProviderStateMixin {
   final ExerciseService _exerciseService = ExerciseService();
   final TextEditingController _searchController = TextEditingController();
-  
+
   late TabController _tabController;
-  
+
   // Filtres
   String? _selectedMuscleGroup;
   String? _selectedType;
   String _searchQuery = '';
-  
+
   // Groupes musculaires pour les tabs
   final List<String> _muscleGroups = [
     'Tous',
@@ -46,7 +46,7 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
     'Bras',
     'Abdominaux',
   ];
-  
+
   // Types d'exercice pour les sous-tabs
   final List<String> _exerciseTypes = [
     'Tous',
@@ -55,44 +55,44 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
     'Poids corporel',
     'Cardio',
   ];
-  
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: _muscleGroups.length, vsync: this);
     _tabController.addListener(_onTabChanged);
   }
-  
+
   @override
   void dispose() {
     _tabController.dispose();
     _searchController.dispose();
     super.dispose();
   }
-  
+
   void _onTabChanged() {
     setState(() {
       final index = _tabController.index;
       _selectedMuscleGroup = index == 0 ? null : _muscleGroups[index];
     });
   }
-  
+
   void _onTypeSelected(String type) {
     setState(() {
       _selectedType = type == 'Tous' ? null : type;
     });
   }
-  
+
   void _onSearchChanged(String query) {
     setState(() {
       _searchQuery = query.toLowerCase();
     });
   }
-  
+
   /// Filtre les exercices selon les critères sélectionnés
   List<Exercise> _filterExercises(List<Exercise> exercises) {
     var filtered = exercises;
-    
+
     // Filtre par groupe musculaire
     if (_selectedMuscleGroup != null) {
       filtered = filtered.where((ex) {
@@ -101,40 +101,43 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
         );
       }).toList();
     }
-    
+
     // Filtre par type
     if (_selectedType != null) {
       filtered = filtered.where((ex) {
         return ex.type.toLowerCase() == _selectedType!.toLowerCase();
       }).toList();
     }
-    
+
     // Filtre par recherche
     if (_searchQuery.isNotEmpty) {
       filtered = filtered.where((ex) {
         return ex.name.toLowerCase().contains(_searchQuery) ||
-               ex.muscleGroups.any(
-                 (group) => group.toLowerCase().contains(_searchQuery),
-               );
+            ex.muscleGroups.any(
+              (group) => group.toLowerCase().contains(_searchQuery),
+            );
       }).toList();
     }
-    
+
     return filtered;
   }
-  
+
   /// Navigation vers l'écran d'enregistrement de séance
   void _selectExercise(BuildContext context, Exercise exercise) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
-    
+    final workoutProvider = Provider.of<WorkoutProvider>(
+      context,
+      listen: false,
+    );
+
     // Démarrer une nouvelle séance si pas déjà démarrée
     if (!workoutProvider.hasActiveWorkout) {
       workoutProvider.startNewWorkout(authProvider.user!.uid);
     }
-    
+
     // Note: L'exercice sera ajouté à la séance lors du premier enregistrement de série
     // Cela évite d'avoir des exercices vides dans la séance
-    
+
     // Navigation vers WorkoutSessionScreen
     Navigator.of(context).push(
       AppPageRoute.slideRight(
@@ -142,11 +145,11 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
       ),
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     return Scaffold(
       appBar: const WorkoutTimerAppBar(
         title: 'Sélection d\'exercice',
@@ -165,7 +168,7 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
                 onChanged: _onSearchChanged,
               ),
             ),
-            
+
             // Tabs par groupe musculaire
             TabBar(
               controller: _tabController,
@@ -176,20 +179,23 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
               indicatorColor: colorScheme.primary,
               tabs: _muscleGroups.map((group) => Tab(text: group)).toList(),
             ),
-            
+
             // Sous-tabs par type
             SizedBox(
               height: 50,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 itemCount: _exerciseTypes.length,
                 itemBuilder: (context, index) {
                   final type = _exerciseTypes[index];
-                  final isSelected = _selectedType == null 
-                      ? type == 'Tous' 
+                  final isSelected = _selectedType == null
+                      ? type == 'Tous'
                       : _selectedType == type;
-                  
+
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
@@ -204,7 +210,7 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
                 },
               ),
             ),
-            
+
             // Liste des exercices
             Expanded(
               child: StreamBuilder<List<Exercise>>(
@@ -213,7 +219,7 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
-                  
+
                   if (snapshot.hasError) {
                     return Center(
                       child: Column(
@@ -245,9 +251,9 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
                       ),
                     );
                   }
-                  
+
                   final exercises = _filterExercises(snapshot.data ?? []);
-                  
+
                   if (exercises.isEmpty) {
                     return Center(
                       child: Column(
@@ -279,17 +285,13 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
                       ),
                     );
                   }
-                  
+
                   return ListView.builder(
                     padding: const EdgeInsets.all(16),
                     itemCount: exercises.length,
                     itemBuilder: (context, index) {
                       final exercise = exercises[index];
-                      return _buildExerciseCard(
-                        context,
-                        exercise,
-                        colorScheme,
-                      );
+                      return _buildExerciseCard(context, exercise, colorScheme);
                     },
                   );
                 },
@@ -300,7 +302,7 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
       ),
     );
   }
-  
+
   Widget _buildExerciseCard(
     BuildContext context,
     Exercise exercise,
@@ -321,6 +323,24 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
               decoration: BoxDecoration(
                 color: colorScheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  // Neumorphism - Ombre claire en haut à gauche
+                  BoxShadow(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white.withOpacity(0.08)
+                        : Colors.white.withOpacity(0.9),
+                    blurRadius: 8,
+                    offset: const Offset(-4, -4),
+                  ),
+                  // Neumorphism - Ombre sombre en bas à droite
+                  BoxShadow(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.black.withOpacity(0.6)
+                        : colorScheme.primary.withOpacity(0.2),
+                    blurRadius: 8,
+                    offset: const Offset(4, 4),
+                  ),
+                ],
               ),
               child: Center(
                 child: Text(
@@ -329,9 +349,9 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
                 ),
               ),
             ),
-            
+
             const SizedBox(width: 16),
-            
+
             // Infos exercice
             Expanded(
               child: Column(
@@ -356,7 +376,7 @@ class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen>
                 ],
               ),
             ),
-            
+
             // Flèche
             Icon(
               Icons.arrow_forward_ios,

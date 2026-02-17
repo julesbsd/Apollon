@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 /// Palette de couleurs pour le Design System Apollon
-/// 
+///
 /// Génère automatiquement une palette complète à partir de couleurs de base,
 /// en utilisant ColorScheme.fromSeed() de Material 3 pour cohérence.
-/// 
+///
 /// Supporte:
 /// - Mode sombre (dark)
 /// - Mode clair (light)
@@ -36,7 +36,9 @@ class AppColors {
   /// Couleurs marbre - Pour backgrounds premium
   static const Color marbleWhite = Color(0xFFF8F9FA); // Marbre blanc
   static const Color marbleGray = Color(0xFFECEFF1); // Marbre gris
-  static const Color marbleDark = Color(0xFF263238); // Marbre sombre (dark mode)
+  static const Color marbleDark = Color(
+    0xFF263238,
+  ); // Marbre sombre (dark mode)
 
   /// Couleurs glassmorphism premium
   static Color glassWhite = const Color(0xFFFFFFFF).withOpacity(0.1);
@@ -74,7 +76,9 @@ class AppColors {
   // ==========================================
 
   // Mode clair - Effets de verre
-  static const Color glassLightBackground = Color(0xFFF5F5F7); // Gris très clair
+  static const Color glassLightBackground = Color(
+    0xFFF5F5F7,
+  ); // Gris très clair
   static const Color glassLightSurface = Color(0xFFFFFFFF); // Blanc pur
   static const Color glassLightOverlay = Color(0x1A000000); // Noir 10% opacité
 
@@ -84,8 +88,12 @@ class AppColors {
   static const Color glassDarkOverlay = Color(0x1AFFFFFF); // Blanc 10% opacité
 
   // États disabled
-  static const Color glassDisabledBackgroundLight = Color(0xFFF0F0F0); // Gris très clair
-  static const Color glassDisabledBackgroundDark = Color(0xFF2C2C2E); // Gris sombre
+  static const Color glassDisabledBackgroundLight = Color(
+    0xFFF0F0F0,
+  ); // Gris très clair
+  static const Color glassDisabledBackgroundDark = Color(
+    0xFF2C2C2E,
+  ); // Gris sombre
   static const Color glassDisabledTextLight = Color(0xFFBDBDBD); // Gris moyen
   static const Color glassDisabledTextDark = Color(0xFF4D4D4D); // Gris foncé
 

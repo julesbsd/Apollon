@@ -443,14 +443,78 @@ flutter run --release
 
 ---
 
+## TESTS & QUALITÉ
+
+### Tests Unitaires
+
+**Status:** ✅ **39/39 tests passent** (100% des tests modèles)
+
+```bash
+# Exécuter tous les tests
+flutter test
+
+# Exécuter uniquement les tests modèles
+flutter test test/models/
+```
+
+**Couverture:**
+- ✅ Modèles métier (WorkoutSet, Workout, Exercise, WorkoutExercise)
+- ✅ Validation règles de gestion (RG-003: reps > 0, poids ≥ 0)
+- ⚠️ Tests widgets nécessitent Firebase mocks (prévu V2)
+
+### Qualité du Code
+
+**Status:** ✅ **255 issues** (toutes de niveau info, aucune erreur)
+
+```bash
+# Analyser le code
+flutter analyze
+
+# Appliquer corrections automatiques
+dart fix --apply
+
+# Formater le code
+dart format .
+```
+
+**Métriques:**
+- ✅ 54 fichiers formatés selon conventions Dart
+- ✅ Architecture propre (Models/Services/Providers/UI)
+- ✅ Performance optimisée (ListView.builder, const, dispose)
+- ✅ Aucun memory leak détecté
+
+**Audit complet:** Voir [AUDIT-PERFORMANCE-MVP-V1.md](AUDIT-PERFORMANCE-MVP-V1.md)
+
+---
+
 ## DONNÉES D'INITIALISATION
 
 ### Exercices prédéfinis
-L'application sera livrée avec une liste d'environ 50 exercices populaires, catégorisés par :
+L'application est livrée avec une liste d'environ 50 exercices populaires, catégorisés par :
 - Groupe Musculaire (pectoraux, dos, jambes, épaules, bras, abdominaux, etc.)
 - Type d'Exercice (poids libres, machines, poids corporel, cardio)
 
 Les exercices sont stockés dans la collection Firestore `exercises` avec une structure standardisée.
+
+---
+
+## LIENS UTILES
+
+### 📊 Status et Progression
+
+- **[STATUS.md](STATUS.md)** - Dashboard visuel du projet (épics, tests, qualité)
+- **[CHANGELOG.md](CHANGELOG.md)** - Historique des versions
+- **[DOCUMENTATION.md](DOCUMENTATION.md)** - Index complet de la documentation
+
+### 📝 Documentation Technique
+
+- **[docs/](docs/)** - Documentation complète (Firebase, Architecture, Design)
+- **[AUDIT-PERFORMANCE-MVP-V1.md](AUDIT-PERFORMANCE-MVP-V1.md)** - Rapport d'audit détaillé
+
+### 🎯 Gestion Projet
+
+- **[Backlog MVP V1](_byan-output/bmb-creations/Backlog-MVP-V1.md)** - Épics et user stories
+- **[Backlog V2 Roadmap](_byan-output/bmb-creations/Backlog-V2-Roadmap.md)** - Fonctionnalités futures
 
 ---
 
@@ -476,4 +540,5 @@ Pour toute question ou suggestion concernant le projet Apollon.
 
 ---
 
-**Dernière mise à jour :** 15 février 2026
+**Dernière mise à jour :** 17 février 2026  
+**Version:** MVP V1 - Complet ✅

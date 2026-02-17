@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// PulseIcon - Icône avec effet pulse glow pour états actifs
-/// 
+///
 /// Design "Temple Digital" :
 /// - Pulse/glow animé
 /// - Couleur personnalisable
@@ -41,9 +41,10 @@ class _PulseIconState extends State<PulseIcon>
       duration: const Duration(milliseconds: 1500),
     );
 
-    _pulseAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _pulseAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     if (widget.isActive) {
       _controller.repeat(reverse: true);
@@ -83,21 +84,32 @@ class _PulseIconState extends State<PulseIcon>
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: iconColor.withOpacity(0.15),
-            boxShadow: widget.isActive
-                ? [
-                    BoxShadow(
-                      color: iconColor.withOpacity(0.3 + pulseValue * 0.2),
-                      blurRadius: 12 + pulseValue * 8,
-                      spreadRadius: 2 + pulseValue * 3,
-                    ),
-                  ]
-                : null,
+            boxShadow: [
+              // Neumorphism - Toujours actif
+              BoxShadow(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white.withOpacity(0.06)
+                    : Colors.white.withOpacity(0.8),
+                blurRadius: 6,
+                offset: const Offset(-2, -2),
+              ),
+              BoxShadow(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black.withOpacity(0.5)
+                    : iconColor.withOpacity(0.2),
+                blurRadius: 6,
+                offset: const Offset(2, 2),
+              ),
+              // Glow animé si actif
+              if (widget.isActive)
+                BoxShadow(
+                  color: iconColor.withOpacity(0.3 + pulseValue * 0.2),
+                  blurRadius: 12 + pulseValue * 8,
+                  spreadRadius: 2 + pulseValue * 3,
+                ),
+            ],
           ),
-          child: Icon(
-            widget.icon,
-            size: widget.size,
-            color: iconColor,
-          ),
+          child: Icon(widget.icon, size: widget.size, color: iconColor),
         );
       },
     );

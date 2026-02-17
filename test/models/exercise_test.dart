@@ -174,10 +174,9 @@ void main() {
       expect(MuscleGroup.categories.containsKey('Haut du corps'), true);
       expect(MuscleGroup.categories.containsKey('Abdominaux'), true);
       expect(MuscleGroup.categories.containsKey('Bas du corps'), true);
-      
+
       expect(MuscleGroup.categories['Haut du corps']!.length, 5);
       expect(MuscleGroup.categories['Bas du corps']!.length, 4);
     });
   });
 }
-

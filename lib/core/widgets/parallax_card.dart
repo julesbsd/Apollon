@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 /// ParallaxCard - Wrapper qui ajoute un effet parallax subtil au scroll
-/// 
+///
 /// Design Premium :
 /// - Effet parallax au scroll (déplacement vertical léger)
 /// - Animation fluide et naturelle
@@ -68,7 +67,10 @@ class ParallaxFlowDelegate extends FlowDelegate {
     );
 
     final viewportDimension = scrollable.position.viewportDimension;
-    final scrollFraction = (listItemOffset.dy / viewportDimension).clamp(-1.0, 1.0);
+    final scrollFraction = (listItemOffset.dy / viewportDimension).clamp(
+      -1.0,
+      1.0,
+    );
 
     // Offset vertical subtil basé sur le scroll
     final verticalAlignment = -scrollFraction * (100 * parallaxStrength);
@@ -76,15 +78,12 @@ class ParallaxFlowDelegate extends FlowDelegate {
     // Transformation optionnelle avec légère rotation
     if (enableRotation) {
       final rotationAngle = scrollFraction * 0.02; // Rotation très subtile
-      
+
       final matrix = Matrix4.identity()
         ..translate(0.0, verticalAlignment)
         ..rotateZ(rotationAngle);
 
-      context.paintChild(
-        0,
-        transform: matrix,
-      );
+      context.paintChild(0, transform: matrix);
     } else {
       // Juste le parallax vertical
       context.paintChild(

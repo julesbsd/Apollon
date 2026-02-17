@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 /// Décorations et styles pour effets Liquid Glass (glassmorphism)
-/// 
+///
 /// Caractéristiques du style Liquid Glass:
 /// - Arrondis prononcés (16-32px)
 /// - Effets de flou (backdrop filter)
@@ -18,22 +18,30 @@ class AppDecorations {
   // ==========================================
 
   /// Border radius par défaut
-  static const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(16));
+  static const BorderRadius defaultRadius = BorderRadius.all(
+    Radius.circular(16),
+  );
 
   /// Petits arrondis (chips, badges)
   static const BorderRadius smallRadius = BorderRadius.all(Radius.circular(8));
 
   /// Moyens arrondis (cards, buttons)
-  static const BorderRadius mediumRadius = BorderRadius.all(Radius.circular(16));
+  static const BorderRadius mediumRadius = BorderRadius.all(
+    Radius.circular(16),
+  );
 
   /// Grands arrondis (modals, sheets)
   static const BorderRadius largeRadius = BorderRadius.all(Radius.circular(24));
 
   /// Très grands arrondis (effet pill)
-  static const BorderRadius extraLargeRadius = BorderRadius.all(Radius.circular(32));
+  static const BorderRadius extraLargeRadius = BorderRadius.all(
+    Radius.circular(32),
+  );
 
   /// Radius circulaire complet (avatars, FAB)
-  static const BorderRadius circularRadius = BorderRadius.all(Radius.circular(999));
+  static const BorderRadius circularRadius = BorderRadius.all(
+    Radius.circular(999),
+  );
 
   // Aliases pour compatibilité
   static const BorderRadius borderRadiusMedium = mediumRadius;
@@ -45,42 +53,45 @@ class AppDecorations {
 
   /// Ombre légère (hover, cards surélevées)
   static List<BoxShadow> get lightShadow => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.05),
-          blurRadius: 10,
-          offset: const Offset(0, 2),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.05),
+      blurRadius: 10,
+      offset: const Offset(0, 2),
+    ),
+  ];
 
   /// Ombre moyenne (cards, modals)
   static List<BoxShadow> get mediumShadow => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.10),
-          blurRadius: 20,
-          offset: const Offset(0, 4),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.10),
+      blurRadius: 20,
+      offset: const Offset(0, 4),
+    ),
+  ];
 
   /// Ombre forte (dialogs, FAB)
   static List<BoxShadow> get strongShadow => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.15),
-          blurRadius: 30,
-          offset: const Offset(0, 8),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.15),
+      blurRadius: 30,
+      offset: const Offset(0, 8),
+    ),
+  ];
 
   /// Ombre de glow (accent, primary actions)
   static List<BoxShadow> glowShadow(Color color) => [
-        BoxShadow(
-          color: color.withOpacity(0.4),
-          blurRadius: 20,
-          offset: const Offset(0, 4),
-        ),
-      ];
+    BoxShadow(
+      color: color.withOpacity(0.4),
+      blurRadius: 20,
+      offset: const Offset(0, 4),
+    ),
+  ];
 
   // Alias pour compatibilité
-  static List<BoxShadow> shadowGlow(BuildContext context, {required Color color}) {
+  static List<BoxShadow> shadowGlow(
+    BuildContext context, {
+    required Color color,
+  }) {
     return glowShadow(color);
   }
 
@@ -108,10 +119,12 @@ class AppDecorations {
     Border? border,
   }) {
     return BoxDecoration(
-      color: (backgroundColor ?? AppColors.glassLightSurface)
-          .withOpacity(AppColors.glassOpacityLight),
+      color: (backgroundColor ?? AppColors.glassLightSurface).withOpacity(
+        AppColors.glassOpacityLight,
+      ),
       borderRadius: borderRadius ?? defaultRadius,
-      border: border ??
+      border:
+          border ??
           Border.all(
             color: Colors.white.withOpacity(AppColors.glassBorderOpacity),
             width: 1.5,
@@ -127,10 +140,12 @@ class AppDecorations {
     Border? border,
   }) {
     return BoxDecoration(
-      color: (backgroundColor ?? AppColors.glassDarkSurface)
-          .withOpacity(AppColors.glassOpacityDark),
+      color: (backgroundColor ?? AppColors.glassDarkSurface).withOpacity(
+        AppColors.glassOpacityDark,
+      ),
       borderRadius: borderRadius ?? defaultRadius,
-      border: border ??
+      border:
+          border ??
           Border.all(
             color: Colors.white.withOpacity(AppColors.glassBorderOpacity),
             width: 1.5,
@@ -165,7 +180,10 @@ class AppDecorations {
   // ==========================================
 
   /// Card standard (avec ombre)
-  static BoxDecoration card(BuildContext context, {BorderRadius? borderRadius}) {
+  static BoxDecoration card(
+    BuildContext context, {
+    BorderRadius? borderRadius,
+  }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return BoxDecoration(
       color: Theme.of(context).cardColor,
@@ -253,10 +271,7 @@ class AppDecorations {
     return BoxDecoration(
       color: buttonColor.withOpacity(isDark ? 0.7 : 0.8),
       borderRadius: borderRadius ?? mediumRadius,
-      border: Border.all(
-        color: buttonColor.withOpacity(0.5),
-        width: 1.5,
-      ),
+      border: Border.all(color: buttonColor.withOpacity(0.5), width: 1.5),
       boxShadow: glowShadow(buttonColor),
     );
   }
@@ -274,11 +289,7 @@ class AppDecorations {
     BorderRadius? borderRadius,
   }) {
     return BoxDecoration(
-      gradient: LinearGradient(
-        colors: colors,
-        begin: begin,
-        end: end,
-      ),
+      gradient: LinearGradient(colors: colors, begin: begin, end: end),
       borderRadius: borderRadius,
     );
   }
@@ -291,10 +302,7 @@ class AppDecorations {
     BorderRadius? borderRadius,
   }) {
     return BoxDecoration(
-      gradient: RadialGradient(
-        colors: colors,
-        center: center,
-      ),
+      gradient: RadialGradient(colors: colors, center: center),
       borderRadius: borderRadius,
     );
   }
@@ -304,7 +312,7 @@ class AppDecorations {
   // ==========================================
 
   /// Crée un ImageFilter pour effet glassmorphism
-  /// 
+  ///
   /// Usage:
   /// ```dart
   /// BackdropFilter(
@@ -312,22 +320,16 @@ class AppDecorations {
   ///   child: Container(...),
   /// )
   /// ```
-  static ImageFilter get blurFilter => ImageFilter.blur(
-        sigmaX: 10.0,
-        sigmaY: 10.0,
-      );
+  static ImageFilter get blurFilter =>
+      ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0);
 
   /// Blur fort (modals, overlays)
-  static ImageFilter get strongBlurFilter => ImageFilter.blur(
-        sigmaX: 20.0,
-        sigmaY: 20.0,
-      );
+  static ImageFilter get strongBlurFilter =>
+      ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0);
 
   /// Blur léger (cards, surfaces)
-  static ImageFilter get lightBlurFilter => ImageFilter.blur(
-        sigmaX: 5.0,
-        sigmaY: 5.0,
-      );
+  static ImageFilter get lightBlurFilter =>
+      ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0);
 
   // ==========================================
   // DIVIDERS
@@ -372,7 +374,9 @@ class AppDecorations {
   static const EdgeInsets extraLargePadding = EdgeInsets.all(32);
 
   /// Padding horizontal
-  static const EdgeInsets horizontalPadding = EdgeInsets.symmetric(horizontal: 16);
+  static const EdgeInsets horizontalPadding = EdgeInsets.symmetric(
+    horizontal: 16,
+  );
 
   /// Padding vertical
   static const EdgeInsets verticalPadding = EdgeInsets.symmetric(vertical: 16);

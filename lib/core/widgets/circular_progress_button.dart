@@ -40,12 +40,12 @@ class CircularProgressButton extends StatelessWidget {
               size: Size(size, size),
               painter: _CircularProgressPainter(
                 progress: progress,
-                backgroundColor: colorScheme.surfaceVariant,
+                backgroundColor: colorScheme.surfaceContainerHighest,
                 progressColor: colorScheme.primary,
                 strokeWidth: 14,
               ),
             ),
-            
+
             // Container central avec le contenu
             Container(
               width: size * 0.75,
@@ -54,6 +54,23 @@ class CircularProgressButton extends StatelessWidget {
                 color: colorScheme.surface,
                 shape: BoxShape.circle,
                 boxShadow: [
+                  // Neumorphism - Ombre claire (highlight) en haut à gauche
+                  BoxShadow(
+                    color: colorScheme.brightness == Brightness.dark
+                        ? Colors.white.withOpacity(0.08)
+                        : Colors.white.withOpacity(1.0),
+                    blurRadius: 16,
+                    offset: const Offset(-8, -8),
+                  ),
+                  // Neumorphism - Ombre sombre en bas à droite
+                  BoxShadow(
+                    color: colorScheme.brightness == Brightness.dark
+                        ? Colors.black.withOpacity(0.6)
+                        : colorScheme.primary.withOpacity(0.2),
+                    blurRadius: 16,
+                    offset: const Offset(8, 8),
+                  ),
+                  // Glow principal
                   BoxShadow(
                     color: colorScheme.primary.withOpacity(0.3),
                     blurRadius: 40,
@@ -78,11 +95,7 @@ class CircularProgressButton extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        icon,
-                        size: 64,
-                        color: colorScheme.primary,
-                      ),
+                      Icon(icon, size: 64, color: colorScheme.primary),
                       const SizedBox(height: 16),
                       Text(
                         text,
@@ -109,7 +122,7 @@ class CircularProgressButton extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // Indicateur de progression (petit badge en haut)
             if (isActive && progress > 0)
               Positioned(
@@ -165,31 +178,32 @@ class _CircularProgressPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = (size.width - strokeWidth) / 2;
-    
+
     // Paint pour le background (cercle complet gris)
     final backgroundPaint = Paint()
       ..color = backgroundColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
-    
+
     // Paint pour la progression (arc coloré)
     final progressPaint = Paint()
       ..color = progressColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
-    
+
     // Dessiner le cercle de fond complet
     canvas.drawCircle(center, radius, backgroundPaint);
-    
+
     // Dessiner l'arc de progression
     // Commence en haut (90° dans le sens horaire = -π/2 radians)
     // Va jusqu'à progress * 2π (tour complet)
     if (progress > 0) {
       final startAngle = -math.pi / 2; // Commence en haut
-      final sweepAngle = 2 * math.pi * progress; // Angle proportionnel au progrès
-      
+      final sweepAngle =
+          2 * math.pi * progress; // Angle proportionnel au progrès
+
       canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),
         startAngle,
@@ -203,8 +217,8 @@ class _CircularProgressPainter extends CustomPainter {
   @override
   bool shouldRepaint(_CircularProgressPainter oldDelegate) {
     return oldDelegate.progress != progress ||
-           oldDelegate.backgroundColor != backgroundColor ||
-           oldDelegate.progressColor != progressColor ||
-           oldDelegate.strokeWidth != strokeWidth;
+        oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.progressColor != progressColor ||
+        oldDelegate.strokeWidth != strokeWidth;
   }
 }

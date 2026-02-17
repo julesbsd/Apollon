@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// Typographie pour le Design System Apollon Premium
-/// 
+///
 /// Utilise Google Fonts :
 /// - Cinzel pour les titres (noblesse grecque, style temple)
 /// - Raleway pour le texte courant (moderne, lisible)
 /// - JetBrains Mono pour les nombres (poids, reps)
-/// 
+///
 /// Convention de nommage:
 /// - display*: Très grands titres (hero sections) - Cinzel
 /// - headline*: Titres de sections - Cinzel
@@ -280,10 +280,7 @@ class AppTypography {
 
   /// Style pour emojis petits (chips, badges)
   static TextStyle emojiSmallStyle(BuildContext context) {
-    return const TextStyle(
-      fontSize: 20,
-      fontFamily: 'Apple Color Emoji',
-    );
+    return const TextStyle(fontSize: 20, fontFamily: 'Apple Color Emoji');
   }
 
   // ==========================================
@@ -301,7 +298,8 @@ class AppTypography {
   }
 
   static TextStyle titleMedium(BuildContext context) {
-    return Theme.of(context).textTheme.titleMedium ?? lightTextTheme.titleMedium!;
+    return Theme.of(context).textTheme.titleMedium ??
+        lightTextTheme.titleMedium!;
   }
 
   static TextStyle titleSmall(BuildContext context) {
@@ -325,7 +323,8 @@ class AppTypography {
   }
 
   static TextStyle labelMedium(BuildContext context) {
-    return Theme.of(context).textTheme.labelMedium ?? lightTextTheme.labelMedium!;
+    return Theme.of(context).textTheme.labelMedium ??
+        lightTextTheme.labelMedium!;
   }
 
   static TextStyle labelSmall(BuildContext context) {

@@ -89,9 +89,37 @@ Documentation complète du backend Firebase et de l'architecture Firestore pour 
 
 ---
 
+### 🧪 Tests et Qualité
+
+#### 7. **[Tests & Qualité Code](tests-and-quality.md)**
+   ✅ **Documentation tests et standards qualité**
+   
+   - Tests unitaires (39/39 modèles ✅)
+   - Tests widgets (stratégie mocking V2)
+   - Qualité code (255 issues info)
+   - Performance (optimisations appliquées)
+   - Checklist qualité avant commit
+   - Roadmap tests V2
+   - Outils et commandes utiles
+   
+   **👉 RÉFÉRENCE pour développement qualité**
+
+#### 8. **[AUDIT-PERFORMANCE-MVP-V1.md](../AUDIT-PERFORMANCE-MVP-V1.md)**
+   📊 **Rapport audit complet EPIC-6**
+   
+   - Analyse tests (39/47 status)
+   - Code quality audit détaillé
+   - Performance analysis
+   - Optimisations appliquées
+   - Recommandations V2 priorisées
+   
+   **👉 CONSULTER pour état qualité projet**
+
+---
+
 ### 📁 Fichiers techniques
 
-#### 7. **[firestore.rules](../firestore.rules)**
+#### 9. **[firestore.rules](../firestore.rules)**
    Fichier de Security Rules Firestore (à déployer)
    
    ```bash

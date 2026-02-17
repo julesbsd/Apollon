@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// GoldenBadge - Badge premium avec glow or pour achievements
-/// 
+///
 /// Design "Temple Digital" :
 /// - Gradient gold (or pur → or clair)
 /// - Glow animé doré
@@ -20,7 +20,10 @@ class GoldenBadge extends StatefulWidget {
     this.icon,
     this.size = 32,
     this.animated = true,
-  }) : assert(text != null || icon != null, 'Either text or icon must be provided');
+  }) : assert(
+         text != null || icon != null,
+         'Either text or icon must be provided',
+       );
 
   @override
   State<GoldenBadge> createState() => _GoldenBadgeState();
@@ -39,9 +42,10 @@ class _GoldenBadgeState extends State<GoldenBadge>
       duration: const Duration(milliseconds: 2000),
     );
 
-    _glowAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _glowAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     if (widget.animated) {
       _controller.repeat(reverse: true);
@@ -80,7 +84,9 @@ class _GoldenBadgeState extends State<GoldenBadge>
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFFFD700).withOpacity(0.4 + glowValue * 0.3),
+                color: const Color(
+                  0xFFFFD700,
+                ).withOpacity(0.4 + glowValue * 0.3),
                 blurRadius: 12 + glowValue * 8,
                 spreadRadius: 2 + glowValue * 2,
               ),

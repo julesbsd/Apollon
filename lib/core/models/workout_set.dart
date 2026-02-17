@@ -5,16 +5,17 @@ class WorkoutSet {
   final int reps;
   final double weight;
 
-  WorkoutSet({
-    required this.reps,
-    required this.weight,
-  }) {
+  WorkoutSet({required this.reps, required this.weight}) {
     // RG-003: Validation des données de série
     if (reps <= 0) {
-      throw ArgumentError('Le nombre de répétitions doit être supérieur à 0 (reps: $reps)');
+      throw ArgumentError(
+        'Le nombre de répétitions doit être supérieur à 0 (reps: $reps)',
+      );
     }
     if (weight < 0) {
-      throw ArgumentError('Le poids doit être supérieur ou égal à 0 (weight: $weight)');
+      throw ArgumentError(
+        'Le poids doit être supérieur ou égal à 0 (weight: $weight)',
+      );
     }
   }
 
@@ -28,10 +29,7 @@ class WorkoutSet {
 
   /// Conversion vers Firestore
   Map<String, dynamic> toFirestore() {
-    return {
-      'reps': reps,
-      'weight': weight,
-    };
+    return {'reps': reps, 'weight': weight};
   }
 
   /// Conversion depuis JSON
@@ -44,10 +42,7 @@ class WorkoutSet {
 
   /// Conversion vers JSON
   Map<String, dynamic> toJson() {
-    return {
-      'reps': reps,
-      'weight': weight,
-    };
+    return {'reps': reps, 'weight': weight};
   }
 
   /// Vérifier si c'est une série au poids de corps (0 kg)
@@ -69,22 +64,14 @@ class WorkoutSet {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is WorkoutSet && 
-           other.reps == reps && 
-           other.weight == weight;
+    return other is WorkoutSet && other.reps == reps && other.weight == weight;
   }
 
   @override
   int get hashCode => reps.hashCode ^ weight.hashCode;
 
   /// Copier avec modifications
-  WorkoutSet copyWith({
-    int? reps,
-    double? weight,
-  }) {
-    return WorkoutSet(
-      reps: reps ?? this.reps,
-      weight: weight ?? this.weight,
-    );
+  WorkoutSet copyWith({int? reps, double? weight}) {
+    return WorkoutSet(reps: reps ?? this.reps, weight: weight ?? this.weight);
   }
 }

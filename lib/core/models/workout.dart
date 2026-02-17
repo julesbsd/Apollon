@@ -10,7 +10,7 @@ class Workout {
   final DateTime date;
   final WorkoutStatus status;
   final List<WorkoutExercise> exercises;
-  final int? duration; // Durée en minutes (V2)
+  final int? duration; // Durée en secondes
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -35,8 +35,11 @@ class Workout {
       date: (data['date'] as Timestamp).toDate(),
       status: WorkoutStatus.fromString(data['status'] as String),
       exercises: (data['exercises'] as List)
-          .map((exerciseData) => WorkoutExercise.fromFirestore(
-              exerciseData as Map<String, dynamic>))
+          .map(
+            (exerciseData) => WorkoutExercise.fromFirestore(
+              exerciseData as Map<String, dynamic>,
+            ),
+          )
           .toList(),
       duration: data['duration'] as int?,
       createdAt: (data['createdAt'] as Timestamp).toDate(),
@@ -65,14 +68,16 @@ class Workout {
       date: DateTime.parse(json['date'] as String),
       status: WorkoutStatus.fromString(json['status'] as String),
       exercises: (json['exercises'] as List)
-          .map((exerciseData) => WorkoutExercise.fromJson(
-              exerciseData as Map<String, dynamic>))
+          .map(
+            (exerciseData) =>
+                WorkoutExercise.fromJson(exerciseData as Map<String, dynamic>),
+          )
           .toList(),
       duration: json['duration'] as int?,
-      createdAt: json['createdAt'] != null 
+      createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'] as String)
           : DateTime.now(),
-      updatedAt: json['updatedAt'] != null 
+      updatedAt: json['updatedAt'] != null
           ? DateTime.parse(json['updatedAt'] as String)
           : DateTime.now(),
     );
@@ -97,12 +102,12 @@ class Workout {
 
   /// Nombre total de séries
   int get totalSets {
-    return exercises.fold(0, (sum, ex) => sum + ex.totalSets);
+    return exercises.fold(0, (total, ex) => total + ex.totalSets);
   }
 
   /// Volume total de la séance (reps * poids)
   double get totalVolume {
-    return exercises.fold(0.0, (sum, ex) => sum + ex.totalVolume);
+    return exercises.fold(0.0, (total, ex) => total + ex.totalVolume);
   }
 
   /// Vérifier si la séance est vide (aucun exercice)
@@ -117,17 +122,20 @@ class Workout {
   /// Formater la date pour affichage (ex: "15/02/2026")
   String get displayDate {
     return '${date.day.toString().padLeft(2, '0')}/'
-           '${date.month.toString().padLeft(2, '0')}/'
-           '${date.year}';
+        '${date.month.toString().padLeft(2, '0')}/'
+        '${date.year}';
   }
 
-  /// Formater la durée pour affichage (ex: "45 min")
+  /// Formater la durée pour affichage (ex: "1h23" ou "45min")
   String get displayDuration {
     if (duration == null) return '-';
-    if (duration! < 60) return '$duration min';
-    final hours = duration! ~/ 60;
-    final minutes = duration! % 60;
-    return '${hours}h${minutes.toString().padLeft(2, '0')}';
+    final hours = duration! ~/ 3600;
+    final minutes = (duration! % 3600) ~/ 60;
+    
+    if (hours > 0) {
+      return '${hours}h${minutes.toString().padLeft(2, '0')}';
+    }
+    return '${minutes}min';
   }
 
   @override
@@ -194,10 +202,7 @@ class Workout {
 
   /// Marquer la séance comme terminée (RG-006)
   Workout complete({int? duration}) {
-    return copyWith(
-      status: WorkoutStatus.completed,
-      duration: duration,
-    );
+    return copyWith(status: WorkoutStatus.completed, duration: duration);
   }
 
   /// Créer une nouvelle séance draft (RG-004)

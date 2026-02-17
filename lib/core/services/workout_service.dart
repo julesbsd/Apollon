@@ -18,8 +18,9 @@ class WorkoutService {
   /// Retourne: workoutId de la séance créée
   Future<String> createWorkout(String userId, Workout workout) async {
     try {
-      final docRef = await _workoutsCollection(userId)
-          .add(workout.toFirestore());
+      final docRef = await _workoutsCollection(
+        userId,
+      ).add(workout.toFirestore());
       return docRef.id;
     } catch (e) {
       throw Exception('Erreur lors de la création de la séance: $e');
@@ -37,9 +38,9 @@ class WorkoutService {
     }
 
     try {
-      await _workoutsCollection(userId)
-          .doc(workout.id)
-          .update(workout.toFirestore());
+      await _workoutsCollection(
+        userId,
+      ).doc(workout.id).update(workout.toFirestore());
     } catch (e) {
       throw Exception('Erreur lors de la mise à jour de la séance: $e');
     }
@@ -52,9 +53,10 @@ class WorkoutService {
     return _workoutsCollection(userId)
         .orderBy('date', descending: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Workout.fromFirestore(doc))
-            .toList());
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) => Workout.fromFirestore(doc)).toList(),
+        );
   }
 
   /// Récupérer uniquement les séances terminées (completed)
@@ -64,9 +66,10 @@ class WorkoutService {
         .where('status', isEqualTo: WorkoutStatus.completed.value)
         .orderBy('date', descending: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Workout.fromFirestore(doc))
-            .toList());
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) => Workout.fromFirestore(doc)).toList(),
+        );
   }
 
   /// Récupérer le brouillon en cours (draft)
@@ -118,7 +121,7 @@ class WorkoutService {
       // Chercher la première séance contenant cet exercice
       for (final doc in snapshot.docs) {
         final workout = Workout.fromFirestore(doc);
-        
+
         // Chercher l'exercice dans la séance
         for (final exercise in workout.exercises) {
           if (exercise.exerciseId == exerciseId) {
@@ -130,7 +133,8 @@ class WorkoutService {
       return null; // Aucune séance trouvée pour cet exercice
     } catch (e) {
       throw Exception(
-          'Erreur lors de la récupération de l\'historique exercice: $e');
+        'Erreur lors de la récupération de l\'historique exercice: $e',
+      );
     }
   }
 
@@ -155,7 +159,7 @@ class WorkoutService {
     try {
       await _workoutsCollection(userId).doc(workoutId).update({
         'status': WorkoutStatus.completed.value,
-        if (duration != null) 'duration': duration,
+        'duration': ?duration,
         'updatedAt': FieldValue.serverTimestamp(),
       });
     } catch (e) {
@@ -182,8 +186,7 @@ class WorkoutService {
 
       return deletedCount;
     } catch (e) {
-      throw Exception(
-          'Erreur lors du nettoyage des brouillons: $e');
+      throw Exception('Erreur lors du nettoyage des brouillons: $e');
     }
   }
 
@@ -191,14 +194,12 @@ class WorkoutService {
   /// Utilisé pour statistiques (V2)
   Future<int> countCompletedWorkouts(String userId) async {
     try {
-      final snapshot = await _workoutsCollection(userId)
-          .where('status', isEqualTo: WorkoutStatus.completed.value)
-          .count()
-          .get();
+      final snapshot = await _workoutsCollection(
+        userId,
+      ).where('status', isEqualTo: WorkoutStatus.completed.value).count().get();
       return snapshot.count ?? 0;
     } catch (e) {
-      throw Exception(
-          'Erreur lors du comptage des séances: $e');
+      throw Exception('Erreur lors du comptage des séances: $e');
     }
   }
 
@@ -215,9 +216,10 @@ class WorkoutService {
         .where('date', isLessThanOrEqualTo: Timestamp.fromDate(endDate))
         .orderBy('date', descending: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Workout.fromFirestore(doc))
-            .toList());
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) => Workout.fromFirestore(doc)).toList(),
+        );
   }
 
   /// Récupérer les séances paginées (US-5.1)
@@ -233,13 +235,16 @@ class WorkoutService {
     DateTime? startDate,
   }) async {
     try {
-      Query query = _workoutsCollection(userId)
-          .where('status', isEqualTo: WorkoutStatus.completed.value);
+      Query query = _workoutsCollection(
+        userId,
+      ).where('status', isEqualTo: WorkoutStatus.completed.value);
 
       // Filtre par date de début si spécifié (pour filtres Semaine/Mois)
       if (startDate != null) {
-        query = query.where('createdAt',
-            isGreaterThanOrEqualTo: Timestamp.fromDate(startDate));
+        query = query.where(
+          'createdAt',
+          isGreaterThanOrEqualTo: Timestamp.fromDate(startDate),
+        );
       }
 
       // Tri par date décroissante
@@ -254,9 +259,7 @@ class WorkoutService {
       query = query.limit(limit);
 
       final snapshot = await query.get();
-      return snapshot.docs
-          .map((doc) => Workout.fromFirestore(doc))
-          .toList();
+      return snapshot.docs.map((doc) => Workout.fromFirestore(doc)).toList();
     } catch (e) {
       throw Exception('Erreur lors de la récupération des séances: $e');
     }

@@ -4,7 +4,7 @@ import '../theme/app_colors.dart';
 import 'pulse_icon.dart';
 
 /// FloatingGlassAppBar - AppBar premium avec glassmorphism flottante
-/// 
+///
 /// Caractéristiques :
 /// - Glassmorphism avec backdrop blur
 /// - Flotte (détachée du haut de l'écran)
@@ -12,7 +12,8 @@ import 'pulse_icon.dart';
 /// - Bordure gradient subtile en bas
 /// - S'adapte automatiquement au mode sombre/clair
 /// - Support du chronomètre workout (optionnel)
-class FloatingGlassAppBar extends StatelessWidget implements PreferredSizeWidget {
+class FloatingGlassAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final Widget? leading;
@@ -34,8 +35,8 @@ class FloatingGlassAppBar extends StatelessWidget implements PreferredSizeWidget
 
   @override
   Size get preferredSize => Size.fromHeight(
-        kToolbarHeight + (bottom?.preferredSize.height ?? 0.0) + 10.0,
-      );
+    kToolbarHeight + (bottom?.preferredSize.height ?? 0.0) + 10.0,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,23 @@ class FloatingGlassAppBar extends StatelessWidget implements PreferredSizeWidget
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
+              // Neumorphism - Ombre claire (highlight) en haut à gauche - LÉGER
+              BoxShadow(
+                color: isDark
+                    ? Colors.white.withOpacity(0.06)
+                    : Colors.white.withOpacity(0.8),
+                blurRadius: 12,
+                offset: const Offset(-6, -6),
+              ),
+              // Neumorphism - Ombre sombre en bas à droite - LÉGER
+              BoxShadow(
+                color: isDark
+                    ? Colors.black.withOpacity(0.5)
+                    : Colors.black.withOpacity(0.15),
+                blurRadius: 12,
+                offset: const Offset(6, 6),
+              ),
+              // Shadow principale
               BoxShadow(
                 color: isDark
                     ? Colors.black.withOpacity(0.3)
@@ -126,10 +144,12 @@ class FloatingGlassAppBar extends StatelessWidget implements PreferredSizeWidget
                                   vertical: 6,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: theme.colorScheme.primaryContainer.withOpacity(0.5),
+                                  color: theme.colorScheme.primaryContainer
+                                      .withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
-                                    color: theme.colorScheme.primary.withOpacity(0.3),
+                                    color: theme.colorScheme.primary
+                                        .withOpacity(0.3),
                                     width: 1,
                                   ),
                                 ),
@@ -139,17 +159,21 @@ class FloatingGlassAppBar extends StatelessWidget implements PreferredSizeWidget
                                     PulseIcon(
                                       icon: Icons.timer_outlined,
                                       size: 16,
-                                      color: theme.colorScheme.onPrimaryContainer,
+                                      color:
+                                          theme.colorScheme.onPrimaryContainer,
                                       isActive: true,
                                     ),
                                     const SizedBox(width: 6),
                                     Text(
                                       timerText!,
-                                      style: theme.textTheme.labelMedium?.copyWith(
-                                        fontFamily: 'JetBrains Mono',
-                                        fontWeight: FontWeight.w600,
-                                        color: theme.colorScheme.onPrimaryContainer,
-                                      ),
+                                      style: theme.textTheme.labelMedium
+                                          ?.copyWith(
+                                            fontFamily: 'JetBrains Mono',
+                                            fontWeight: FontWeight.w600,
+                                            color: theme
+                                                .colorScheme
+                                                .onPrimaryContainer,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -162,7 +186,7 @@ class FloatingGlassAppBar extends StatelessWidget implements PreferredSizeWidget
                         ],
                       ),
                     ),
-                    if (bottom != null) bottom!,
+                    ?bottom,
                   ],
                 ),
               ),
@@ -175,7 +199,8 @@ class FloatingGlassAppBar extends StatelessWidget implements PreferredSizeWidget
 }
 
 /// FloatingGlassAppBarSimple - Version simplifiée sans timer
-class FloatingGlassAppBarSimple extends StatelessWidget implements PreferredSizeWidget {
+class FloatingGlassAppBarSimple extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final Widget? leading;

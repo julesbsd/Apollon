@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import '../theme/app_colors.dart';
 
 /// MeshGradientBackground - Background premium avec gradient mesh animé
-/// 
+///
 /// Caractéristiques :
 /// - Gradient mesh avec 4 couleurs organiques
 /// - Animation breathing subtile (20s loop)
@@ -40,10 +40,7 @@ class _MeshGradientBackgroundState extends State<MeshGradientBackground>
     _animation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     // Loop infini
     _controller.repeat(reverse: true);
@@ -58,7 +55,9 @@ class _MeshGradientBackgroundState extends State<MeshGradientBackground>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final colors = isDark ? AppColors.darkMeshGradient : AppColors.lightMeshGradient;
+    final colors = isDark
+        ? AppColors.darkMeshGradient
+        : AppColors.lightMeshGradient;
 
     return AnimatedBuilder(
       animation: _animation,
@@ -82,18 +81,13 @@ class _MeshGradientBackgroundState extends State<MeshGradientBackground>
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: colors,
-      stops: [
-        0.0,
-        0.3 + breathingOffset,
-        0.7 - breathingOffset,
-        1.0,
-      ],
+      stops: [0.0, 0.3 + breathingOffset, 0.7 - breathingOffset, 1.0],
     );
   }
 }
 
 /// MeshGradientBackgroundStatic - Version statique sans animation
-/// 
+///
 /// Utilisez cette version pour :
 /// - Écrans où l'animation n'est pas nécessaire
 /// - Meilleure performance sur devices bas de gamme
@@ -101,15 +95,14 @@ class _MeshGradientBackgroundState extends State<MeshGradientBackground>
 class MeshGradientBackgroundStatic extends StatelessWidget {
   final Widget child;
 
-  const MeshGradientBackgroundStatic({
-    super.key,
-    required this.child,
-  });
+  const MeshGradientBackgroundStatic({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final colors = isDark ? AppColors.darkMeshGradient : AppColors.lightMeshGradient;
+    final colors = isDark
+        ? AppColors.darkMeshGradient
+        : AppColors.lightMeshGradient;
 
     return Container(
       decoration: BoxDecoration(

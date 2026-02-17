@@ -82,7 +82,7 @@ void main() {
             exerciseName: 'Bench Press',
             sets: [
               WorkoutSet(reps: 10, weight: 80), // 800
-              WorkoutSet(reps: 8, weight: 85),  // 680
+              WorkoutSet(reps: 8, weight: 85), // 680
             ],
           ),
         ],

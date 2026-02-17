@@ -23,7 +23,10 @@ class WorkoutExercise {
       exerciseId: data['exerciseId'] as String,
       exerciseName: data['exerciseName'] as String,
       sets: (data['sets'] as List)
-          .map((setData) => WorkoutSet.fromFirestore(setData as Map<String, dynamic>))
+          .map(
+            (setData) =>
+                WorkoutSet.fromFirestore(setData as Map<String, dynamic>),
+          )
           .toList(),
       createdAt: (data['createdAt'] as Timestamp).toDate(),
     );
@@ -45,9 +48,11 @@ class WorkoutExercise {
       exerciseId: json['exerciseId'] as String,
       exerciseName: json['exerciseName'] as String,
       sets: (json['sets'] as List)
-          .map((setData) => WorkoutSet.fromJson(setData as Map<String, dynamic>))
+          .map(
+            (setData) => WorkoutSet.fromJson(setData as Map<String, dynamic>),
+          )
           .toList(),
-      createdAt: json['createdAt'] != null 
+      createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'] as String)
           : DateTime.now(),
     );
@@ -68,12 +73,12 @@ class WorkoutExercise {
 
   /// Volume total (reps * poids) pour cet exercice
   double get totalVolume {
-    return sets.fold(0.0, (sum, set) => sum + (set.reps * set.weight));
+    return sets.fold(0.0, (total, set) => total + (set.reps * set.weight));
   }
 
   /// Nombre total de répétitions
   int get totalReps {
-    return sets.fold(0, (sum, set) => sum + set.reps);
+    return sets.fold(0, (total, set) => total + set.reps);
   }
 
   /// Poids maximum utilisé dans les séries
@@ -100,9 +105,9 @@ class WorkoutExercise {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is WorkoutExercise && 
-           other.exerciseId == exerciseId &&
-           other.createdAt == createdAt;
+    return other is WorkoutExercise &&
+        other.exerciseId == exerciseId &&
+        other.createdAt == createdAt;
   }
 
   @override

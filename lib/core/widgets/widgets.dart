@@ -1,5 +1,7 @@
 /// Barrel export file pour tous les widgets de l'application
 /// Simplifie les imports
+library;
+
 export 'app_background.dart';
 export 'app_bar.dart';
 export 'app_button.dart';

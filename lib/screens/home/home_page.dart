@@ -2,21 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/providers/workout_provider.dart';
-import '../../core/widgets/widgets.dart';
+import '../../core/providers/theme_provider.dart';
+import '../../core/theme/app_theme.dart';
+import '../../core/widgets/glass_orb_button.dart';
+import '../../core/widgets/marble_card.dart';
 import '../../core/utils/page_transitions.dart';
 import '../workout/exercise_selection_screen.dart';
 import '../history/history_screen.dart';
+import '../statistics/statistics_screen.dart';
+import '../statistics/personal_records_screen.dart';
 
-/// Page d'accueil Premium de l'application Apollon
-/// Design Premium Phase 1 :
-/// - MeshGradientBackground animé (breathing effect)
-/// - FloatingGlassAppBar avec glassmorphism
-/// - Section hero avec accueil premium
-/// - Cards glassmorphism pour features
-/// Point de départ pour EPIC-4 (Enregistrement séance)
-class HomePage extends StatelessWidget {
+/// Page d'accueil Apollon V2 - Design Moderne Épuré
+///
+/// Migration du style Liquid Glass vers un design moderne minimaliste.
+/// Implémentation du brief DESIGN_MODERNE_SPECIFICATION.md
+///
+/// Features:
+/// - Background uniforme (pas de gradient animé)
+/// - AppBar standard épurée
+/// - Section progression avec CircularProgressCard
+/// - Catégories avec ModernCategoryIcon
+/// - Workouts populaires avec ModernImageCard
+/// - Layout spacieux et aéré
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   /// Messages motivants selon l'heure
   String _getGreetingMessage() {
     final hour = DateTime.now().hour;
@@ -29,95 +44,347 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final authProvider = Provider.of<AuthProvider>(context);
     final workoutProvider = Provider.of<WorkoutProvider>(context);
-    final hasActiveWorkout = workoutProvider.currentWorkout != null;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: FloatingGlassAppBar(
-        title: 'APOLLON',
-        showTimer: hasActiveWorkout,
-        timerText: hasActiveWorkout ? workoutProvider.elapsedTimeFormatted : null,
-        onTimerTap: hasActiveWorkout
-            ? () {
-                // Navigation vers séance en cours
-                Navigator.of(context).push(
-                  AppPageRoute.fadeSlide(
-                    builder: (context) => const ExerciseSelectionScreen(),
-                  ),
-                );
-              }
-            : null,
-        actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.account_circle_outlined),
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
-              tooltip: 'Profil',
-            ),
-          ),
-        ],
-      ),
-      endDrawer: const ProfileDrawer(),
-      body: MeshGradientBackground(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 24),
-                  _buildHeroSection(context),
-                  const SizedBox(height: 20),
-                  _buildMainActionButton(context),
-                  const SizedBox(height: 12),
-                  _buildComingSoonCards(context),
-                  const SizedBox(height: 24),
-                ],
-              ),
-            ),
-          ),
+      backgroundColor: theme.brightness == Brightness.dark
+          ? AppTheme.neutralGray900
+          : const Color(0xFFF0F0F0),
+      appBar: _buildAppBar(context, authProvider),
+      drawer: _buildDrawer(context),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(AppTheme.spacingL),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeroSection(context, authProvider),
+            const SizedBox(height: AppTheme.spacingXL),
+            _buildProgressSection(context, workoutProvider),
+            const SizedBox(height: AppTheme.spacingL),
+            _buildPopularWorkoutsSection(context),
+            const SizedBox(height: AppTheme.spacingL),
+          ],
         ),
       ),
     );
   }
 
-  /// Section hero premium avec salutation et badge
-  Widget _buildHeroSection(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
-    final user = authProvider.user;
+  /// AppBar moderne épurée
+  PreferredSizeWidget _buildAppBar(
+    BuildContext context,
+    AuthProvider authProvider,
+  ) {
     final theme = Theme.of(context);
-    final firstName = user?.displayName?.split(' ').first ?? 'Athlète';
 
-    return Row(
+    return AppBar(
+      title: Text(
+        'APOLLON',
+        style: theme.textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+          letterSpacing: 1.2,
+        ),
+      ),
+      centerTitle: false,
+      actions: [
+        IconButton(
+          icon: CircleAvatar(
+            radius: 18,
+            backgroundColor: theme.colorScheme.primaryContainer,
+            backgroundImage: authProvider.user?.photoURL != null
+                ? NetworkImage(authProvider.user!.photoURL!)
+                : null,
+            child: authProvider.user?.photoURL == null
+                ? Icon(
+                    Icons.person,
+                    size: 20,
+                    color: theme.colorScheme.primary,
+                  )
+                : null,
+          ),
+          onPressed: () {
+            // TODO: Navigation vers profil
+          },
+        ),
+        const SizedBox(width: 8),
+      ],
+    );
+  }
+
+  /// Section hero avec salutation
+  Widget _buildHeroSection(BuildContext context, AuthProvider authProvider) {
+    final theme = Theme.of(context);
+    final firstName =
+        authProvider.user?.displayName?.split(' ').first ?? 'Athlète';
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Avatar avec bordure dorée
-        _buildPremiumAvatar(context, user),
-        const SizedBox(width: 16),
-        
-        // Textes de bienvenue
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Text(
+          'Bienvenue, $firstName',
+          style: theme.textTheme.headlineMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          _getGreetingMessage(),
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.colorScheme.onSurface.withOpacity(0.7),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Section GlassOrbButton pour nouvelle séance
+  Widget _buildProgressSection(
+    BuildContext context,
+    WorkoutProvider workoutProvider,
+  ) {
+    final hasActiveWorkout = workoutProvider.hasActiveWorkout;
+
+    // Calcul progression (séance active : temps / 120 min)
+    double progress = 0.0;
+
+    if (hasActiveWorkout) {
+      final elapsed = DateTime.now().difference(
+        workoutProvider.currentWorkout!.createdAt,
+      );
+      progress = (elapsed.inSeconds / 7200).clamp(0.0, 1.0);
+    }
+
+    return GlassOrbButton(
+      text: hasActiveWorkout ? 'Séance en cours' : 'Commencer une nouvelle séance',
+      subtitle: hasActiveWorkout
+          ? '${workoutProvider.currentWorkout!.totalExercises} exercices • ${workoutProvider.elapsedTimeFormatted}'
+          : null,
+      progress: progress,
+      icon: hasActiveWorkout ? Icons.fitness_center : Icons.add_circle_outline,
+      isActive: hasActiveWorkout,
+      onPressed: () => _startWorkout(context, null),
+    );
+  }
+
+  /// Section fonctionnalités avec MarbleCard
+  Widget _buildPopularWorkoutsSection(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Fonctionnalités',
+          style: theme.textTheme.headlineSmall,
+        ),
+        const SizedBox(height: AppTheme.spacingM),
+
+        // Card Historique
+        MarbleCard(
+          onTap: () {
+            Navigator.of(context).push(
+              AppPageRoute.fadeSlide(
+                builder: (context) => const HistoryScreen(),
+              ),
+            );
+          },
+          child: Row(
             children: [
-              // Salutation avec Cinzel
-              Text(
-                'Bienvenue, $firstName',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.5,
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.history,
+                  color: theme.colorScheme.primary,
+                  size: 28,
                 ),
               ),
-              const SizedBox(height: 8),
-
-              // Message motivant
-              Text(
-                _getGreetingMessage(),
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Historique',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Consulte tes séances passées',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
                 ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: theme.colorScheme.onSurface.withOpacity(0.5),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: AppTheme.spacingM),
+
+        // Card Statistiques
+        MarbleCard(
+          onTap: () {
+            Navigator.of(context).push(
+              AppPageRoute.fadeSlide(
+                builder: (context) => const StatisticsScreen(),
+              ),
+            );
+          },
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppTheme.successGreen.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.bar_chart,
+                  color: AppTheme.successGreen,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Statistiques',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Analyse tes performances',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: theme.colorScheme.onSurface.withOpacity(0.5),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: AppTheme.spacingM),
+
+        // Card Records Personnels
+        MarbleCard(
+          onTap: () {
+            final userId = context.read<AuthProvider>().user?.uid;
+            if (userId != null) {
+              Navigator.of(context).push(
+                AppPageRoute.fadeSlide(
+                  builder: (context) => PersonalRecordsScreen(userId: userId),
+                ),
+              );
+            }
+          },
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFFFFD700), Color(0xFFFFAA00)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.emoji_events,
+                  color: Colors.white,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Records Personnels',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Tes meilleures performances',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: theme.colorScheme.onSurface.withOpacity(0.5),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: AppTheme.spacingM),
+
+        // Card Paramètres
+        MarbleCard(
+          onTap: () {
+            // TODO: Navigation paramètres
+          },
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceVariant,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.settings,
+                  color: theme.colorScheme.onSurfaceVariant,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Paramètres',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Personnalise ton expérience',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: theme.colorScheme.onSurface.withOpacity(0.5),
               ),
             ],
           ),
@@ -126,218 +393,137 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /// Avatar premium avec bordure dorée
-  Widget _buildPremiumAvatar(BuildContext context, user) {
+  /// Drawer pour navigation
+  Widget _buildDrawer(BuildContext context) {
     final theme = Theme.of(context);
-    final photoUrl = user?.photoURL;
-    
-    return Container(
-      width: 80,
-      height: 80,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFFFD700), // Or pur
-            Color(0xFFFFE57F), // Or clair
-            Color(0xFFFFA000), // Or brûlé
+    final authProvider = Provider.of<AuthProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    return Drawer(
+      child: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(AppTheme.spacingL),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: theme.colorScheme.primaryContainer,
+                    backgroundImage: authProvider.user?.photoURL != null
+                        ? NetworkImage(authProvider.user!.photoURL!)
+                        : null,
+                    child: authProvider.user?.photoURL == null
+                        ? Icon(
+                            Icons.person,
+                            size: 30,
+                            color: theme.colorScheme.primary,
+                          )
+                        : null,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          authProvider.user?.displayName ?? 'Athlète',
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          authProvider.user?.email ?? '',
+                          style: theme.textTheme.bodySmall,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.history),
+              title: const Text('Historique'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  AppPageRoute.fadeSlide(
+                    builder: (context) => const HistoryScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.bar_chart),
+              title: const Text('Statistiques'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  AppPageRoute.fadeSlide(
+                    builder: (context) => const StatisticsScreen(),
+                  ),
+                );
+              },
+            ),
+            SwitchListTile(
+              secondary: Icon(
+                themeProvider.isDarkMode
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
+              ),
+              title: const Text('Thème sombre'),
+              value: themeProvider.isDarkMode,
+              onChanged: (bool value) async {
+                // Change le thème sans fermer le drawer
+                await themeProvider.toggleTheme();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Paramètres'),
+              onTap: () {
+                Navigator.pop(context);
+                // TODO: Navigation paramètres
+              },
+            ),
+            const Spacer(),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.logout, color: AppTheme.errorRed),
+              title: const Text('Déconnexion'),
+              textColor: AppTheme.errorRed,
+              onTap: () async {
+                await authProvider.signOut();
+                if (context.mounted) {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
+              },
+            ),
           ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFFFFD700).withOpacity(0.3),
-            blurRadius: 12,
-            spreadRadius: 2,
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(3),
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: theme.colorScheme.surface,
-        ),
-        child: ClipOval(
-          child: photoUrl != null
-              ? Image.network(
-                  photoUrl,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return _buildDefaultAvatarIcon(theme);
-                  },
-                )
-              : _buildDefaultAvatarIcon(theme),
-        ),
       ),
     );
   }
 
-  /// Icône par défaut pour l'avatar
-  Widget _buildDefaultAvatarIcon(ThemeData theme) {
-    return Container(
-      color: theme.colorScheme.primaryContainer.withOpacity(0.3),
-      child: Icon(
-        Icons.person,
-        size: 40,
-        color: theme.colorScheme.primary,
-      ),
-    );
-  }
+  /// Démarrer un workout
+  void _startWorkout(BuildContext context, String? type) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final workoutProvider =
+        Provider.of<WorkoutProvider>(context, listen: false);
 
-  /// Bouton principal "Nouvelle séance" avec arc de progression
-  /// Implémente US-4.1: Navigation vers ExerciseSelectionScreen
-  /// US-4.1 Enhanced: Arc circulaire progressif (0-120 min = 0-100%)
-  Widget _buildMainActionButton(BuildContext context) {
-    final workoutProvider = Provider.of<WorkoutProvider>(context);
-    final hasActiveWorkout = workoutProvider.currentWorkout != null;
-
-    // Calcul du progrès : 0.0 à 1.0 (100% à 120 minutes = 2H)
-    double progress = 0.0;
-    String mainText = 'Nouvelle séance';
-    String? subtitleText;
-    IconData icon = Icons.add_circle_outline;
-
-    if (hasActiveWorkout) {
-      // Séance active : afficher le temps et calculer le progrès
-      final elapsed = DateTime.now().difference(workoutProvider.currentWorkout!.createdAt);
-      
-      // Progress de 0 à 1 sur 120 minutes (7200 secondes = 2H)
-      progress = (elapsed.inSeconds / 7200).clamp(0.0, 1.0);
-      
-      mainText = 'Séance en cours';
-      subtitleText = workoutProvider.elapsedTimeFormatted;
-      icon = Icons.fitness_center;
+    // Démarrer une nouvelle séance si pas déjà démarrée
+    if (!workoutProvider.hasActiveWorkout) {
+      workoutProvider.startNewWorkout(authProvider.user!.uid);
     }
 
-    return GlassOrbButton(
-      text: mainText,
-      subtitle: subtitleText,
-      progress: progress,
-      icon: icon,
-      isActive: hasActiveWorkout,
-      onPressed: () {
-        final authProvider = Provider.of<AuthProvider>(context, listen: false);
-        final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
-        
-        // Démarrer une nouvelle séance si pas déjà démarrée
-        if (!workoutProvider.hasActiveWorkout) {
-          workoutProvider.startNewWorkout(authProvider.user!.uid);
-        }
-        
-        // Navigation vers ExerciseSelectionScreen
-        Navigator.of(context).push(
-          AppPageRoute.fadeSlide(
-            builder: (context) => const ExerciseSelectionScreen(),
-          ),
-        );
-      },
-    );
-  }
-
-  /// Cards "Coming Soon" avec design glassmorphism premium
-  Widget _buildComingSoonCards(BuildContext context) {
-    return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      childAspectRatio: 0.95,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: _buildPremiumFeatureCard(
-            context,
-            'Historique',
-            Icons.article_outlined,
-          ),
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: _buildPremiumFeatureCard(
-            context,
-            'Statistiques',
-            Icons.analytics_outlined,
-          ),
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: _buildPremiumFeatureCard(
-            context,
-            'Calendrier',
-            Icons.calendar_today_outlined,
-          ),
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: _buildPremiumFeatureCard(
-            context,
-            'Profil',
-            Icons.person_outline,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPremiumFeatureCard(
-    BuildContext context,
-    String title,
-    IconData icon,
-  ) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return MarbleCard(
-      onTap: () {
-        // Navigation selon la feature
-        if (title == 'Historique') {
-          Navigator.of(context).push(
-            AppPageRoute.fadeSlide(
-              builder: (context) => const HistoryScreen(),
-            ),
-          );
-        }
-        // Autres features: TODO
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Icône avec background circulaire
-            Container(
-              width: 56,
-              height: 56,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: colorScheme.primary.withOpacity(0.15),
-                border: Border.all(
-                  color: colorScheme.primary.withOpacity(0.3),
-                  width: 2,
-                ),
-              ),
-              child: Icon(
-                icon,
-                size: 26,
-                color: colorScheme.primary,
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Titre avec Cinzel
-            Text(
-              title,
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+    // Navigation vers ExerciseSelectionScreen
+    Navigator.of(context).push(
+      AppPageRoute.fadeSlide(
+        builder: (context) => const ExerciseSelectionScreen(),
       ),
     );
   }

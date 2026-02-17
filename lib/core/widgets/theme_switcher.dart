@@ -12,7 +12,7 @@ class ThemeSwitcher extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return AppCard(
@@ -38,7 +38,7 @@ class ThemeSwitcher extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              
+
               // Options de thème
               _ThemeOption(
                 title: 'Sombre',
@@ -47,7 +47,7 @@ class ThemeSwitcher extends StatelessWidget {
                 onTap: () => themeProvider.setDarkMode(),
               ),
               const SizedBox(height: 12),
-              
+
               _ThemeOption(
                 title: 'Clair',
                 icon: Icons.light_mode,
@@ -55,7 +55,7 @@ class ThemeSwitcher extends StatelessWidget {
                 onTap: () => themeProvider.setLightMode(),
               ),
               const SizedBox(height: 12),
-              
+
               _ThemeOption(
                 title: 'Système',
                 icon: Icons.brightness_auto,
@@ -88,16 +88,13 @@ class _ThemeOption extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 14,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: isSelected
               ? colorScheme.primary.withOpacity(0.15)
@@ -109,6 +106,25 @@ class _ThemeOption extends StatelessWidget {
                 : colorScheme.outline.withOpacity(0.3),
             width: isSelected ? 2 : 1,
           ),
+          boxShadow: isSelected
+              ? [
+                  // Neumorphism - Effet sélectionné
+                  BoxShadow(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white.withOpacity(0.06)
+                        : Colors.white.withOpacity(0.8),
+                    blurRadius: 8,
+                    offset: const Offset(-3, -3),
+                  ),
+                  BoxShadow(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.black.withOpacity(0.5)
+                        : colorScheme.primary.withOpacity(0.15),
+                    blurRadius: 8,
+                    offset: const Offset(3, 3),
+                  ),
+                ]
+              : null,
         ),
         child: Row(
           children: [
@@ -132,11 +148,7 @@ class _ThemeOption extends StatelessWidget {
               ),
             ),
             if (isSelected)
-              Icon(
-                Icons.check_circle,
-                color: colorScheme.primary,
-                size: 24,
-              ),
+              Icon(Icons.check_circle, color: colorScheme.primary, size: 24),
           ],
         ),
       ),
@@ -154,7 +166,7 @@ class ThemeToggleButton extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         final isDark = Theme.of(context).brightness == Brightness.dark;
-        
+
         return IconButton(
           icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
           onPressed: () => themeProvider.toggleTheme(),

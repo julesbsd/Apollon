@@ -22,12 +22,12 @@ class ApolloApp extends StatelessWidget {
         return MaterialApp(
           title: 'Apollon',
           debugShowCheckedModeBanner: false,
-          
+
           // Utilise les thèmes définis dans app_theme.dart (US-3.1)
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeProvider.themeMode,
-          
+
           // StreamBuilder pour gérer l'auto-login (US-1.2)
           home: Consumer<app_providers.AuthProvider>(
             builder: (context, authProvider, child) {
@@ -38,7 +38,7 @@ class ApolloApp extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return _buildLoadingScreen(context);
                   }
-                  
+
                   // Si utilisateur connecté → HomePage
                   // Si non connecté → LoginScreen
                   final user = snapshot.data;
@@ -56,7 +56,7 @@ class ApolloApp extends StatelessWidget {
   /// Utilise le thème pour afficher le loader avec les bonnes couleurs
   Widget _buildLoadingScreen(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: CircularProgressIndicator(
           color: Theme.of(context).colorScheme.primary,

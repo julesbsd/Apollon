@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/workout_provider.dart';
+import './pr_celebration_animation.dart';
 
 /// AppBar personnalisé avec chronomètre de séance
 /// Enhanced US-4.1: Affiche le temps écoulé en temps réel
-/// 
+///
 /// Features:
 /// - Chronomètre visible en permanence (HH:MM:SS)
 /// - Bouton "Terminer la séance" avec confirmation
 /// - Animation subtle du chrono
-class WorkoutTimerAppBar extends StatelessWidget implements PreferredSizeWidget {
+class WorkoutTimerAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final Widget? leading;
@@ -57,17 +59,13 @@ class WorkoutTimerAppBar extends StatelessWidget implements PreferredSizeWidget 
             builder: (context, value, child) {
               return Opacity(
                 opacity: 0.5 + (value * 0.5),
-                child: Icon(
-                  Icons.timer,
-                  color: colorScheme.primary,
-                  size: 20,
-                ),
+                child: Icon(Icons.timer, color: colorScheme.primary, size: 20),
               );
             },
           ),
-          
+
           const SizedBox(width: 8),
-          
+
           // Temps écoulé
           Text(
             workoutProvider.elapsedTimeFormatted,
@@ -83,11 +81,7 @@ class WorkoutTimerAppBar extends StatelessWidget implements PreferredSizeWidget 
       actions: [
         // Bouton "Terminer la séance"
         IconButton(
-          icon: Icon(
-            Icons.stop_circle,
-            color: colorScheme.error,
-            size: 28,
-          ),
+          icon: Icon(Icons.stop_circle, color: colorScheme.error, size: 28),
           tooltip: 'Terminer la séance',
           onPressed: () => _showCompleteDialog(context, workoutProvider),
         ),
@@ -103,21 +97,94 @@ class WorkoutTimerAppBar extends StatelessWidget implements PreferredSizeWidget 
   ) async {
     final colorScheme = Theme.of(context).colorScheme;
     final workout = workoutProvider.currentWorkout;
-    
+
     if (workout == null) return;
 
+    // Vérifier si la séance est vide (pas d'exercices avec des séries)
+    final hasExercises = workout.exercises.any((ex) => ex.sets.isNotEmpty);
+
+    if (!hasExercises) {
+      // Séance vide: afficher un dialog différent pour abandonner
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          title: Row(
+            children: [
+              Icon(Icons.info_outline, color: colorScheme.primary),
+              const SizedBox(width: 12),
+              const Text('Séance vide'),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Vous n\'avez enregistré aucun exercice dans cette séance.',
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'La séance ne sera pas enregistrée dans votre historique.',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: colorScheme.onSurface.withOpacity(0.7),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Continuer la séance'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              style: FilledButton.styleFrom(
+                backgroundColor: colorScheme.error,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text('Abandonner'),
+            ),
+          ],
+        ),
+      );
+
+      if (confirmed == true && context.mounted) {
+        // Abandonner la séance sans sauvegarder
+        workoutProvider.cancelWorkout();
+
+        if (context.mounted) {
+          // Retour à la HomePage
+          Navigator.popUntil(context, (route) => route.isFirst);
+
+          // Message d'information
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Séance abandonnée'),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: colorScheme.surfaceVariant,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          );
+        }
+      }
+      return;
+    }
+
+    // Séance avec exercices: afficher le dialog normal
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: Row(
           children: [
-            Icon(
-              Icons.check_circle_outline,
-              color: colorScheme.primary,
-            ),
+            Icon(Icons.check_circle_outline, color: colorScheme.primary),
             const SizedBox(width: 12),
             const Text('Terminer la séance ?'),
           ],
@@ -128,10 +195,7 @@ class WorkoutTimerAppBar extends StatelessWidget implements PreferredSizeWidget 
           children: [
             const Text(
               'Résumé de votre séance :',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 16),
             _buildSummaryRow(
@@ -189,35 +253,73 @@ class WorkoutTimerAppBar extends StatelessWidget implements PreferredSizeWidget 
 
     if (confirmed == true && context.mounted) {
       try {
-        await workoutProvider.completeWorkout();
-        
+        print('🏁 Completing workout...');
+        // Terminer la séance et récupérer les nouveaux PR
+        final newPRs = await workoutProvider.completeWorkout();
+        print('🎯 Workout completed! New PRs: ${newPRs.length}');
+
         if (context.mounted) {
           // Retour à la HomePage
           Navigator.popUntil(context, (route) => route.isFirst);
-          
+
+          // Afficher les confettis pour chaque nouveau PR (avec délai)
+          if (newPRs.isNotEmpty) {
+            print('🎊 Showing confetti for ${newPRs.length} PRs');
+            // Délai pour que la navigation se termine
+            await Future.delayed(const Duration(milliseconds: 300));
+            
+            if (context.mounted) {
+              for (final pr in newPRs) {
+                print('🎉 Showing confetti for ${pr.exerciseName}: ${pr.weight}kg x ${pr.reps}');
+                showPrCelebration(
+                  context,
+                  exerciseName: pr.exerciseName,
+                  weight: pr.weight,
+                  reps: pr.reps,
+                );
+                // Délai entre chaque animation si plusieurs PR
+                if (newPRs.length > 1 && pr != newPRs.last) {
+                  await Future.delayed(const Duration(milliseconds: 500));
+                }
+              }
+            }
+          } else {
+            print('ℹ️ No new PRs to display');
+          }
+
           // Message de confirmation
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  Icon(Icons.check_circle, color: colorScheme.onPrimary),
-                  const SizedBox(width: 12),
-                  const Text('Séance enregistrée ! 💪'),
-                ],
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Row(
+                  children: [
+                    Icon(Icons.check_circle, color: colorScheme.onPrimary),
+                    const SizedBox(width: 12),
+                    Text(
+                      newPRs.isNotEmpty
+                          ? 'Séance enregistrée ! ${newPRs.length} nouveau(x) record(s) ! 🏆'
+                          : 'Séance enregistrée ! 💪',
+                      style: TextStyle(color: colorScheme.onPrimary),
+                    ),
+                  ],
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: colorScheme.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: colorScheme.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          );
+            );
+          }
         }
       } catch (e) {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Erreur lors de la sauvegarde: $e'),
+              content: Text(
+                'Erreur lors de la sauvegarde: $e',
+                style: TextStyle(color: colorScheme.onError),
+              ),
               backgroundColor: colorScheme.error,
             ),
           );
@@ -233,14 +335,10 @@ class WorkoutTimerAppBar extends StatelessWidget implements PreferredSizeWidget 
     String value,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     return Row(
       children: [
-        Icon(
-          icon,
-          size: 20,
-          color: colorScheme.primary,
-        ),
+        Icon(icon, size: 20, color: colorScheme.primary),
         const SizedBox(width: 12),
         Text(
           label,

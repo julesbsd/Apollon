@@ -7,7 +7,7 @@ import '../../core/widgets/widgets.dart';
 
 /// Écran de détail d'une séance
 /// Implémente US-5.2: Affichage complet d'une séance
-/// 
+///
 /// Features:
 /// - Affichage date, durée, nombre d'exercices
 /// - Liste de tous les exercices avec leurs séries
@@ -17,10 +17,7 @@ import '../../core/widgets/widgets.dart';
 class WorkoutDetailScreen extends StatefulWidget {
   final Workout workout;
 
-  const WorkoutDetailScreen({
-    super.key,
-    required this.workout,
-  });
+  const WorkoutDetailScreen({super.key, required this.workout});
 
   @override
   State<WorkoutDetailScreen> createState() => _WorkoutDetailScreenState();
@@ -192,11 +189,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
 
     return Column(
       children: [
-        Icon(
-          icon,
-          size: 28,
-          color: theme.colorScheme.primary,
-        ),
+        Icon(icon, size: 28, color: theme.colorScheme.primary),
         const SizedBox(height: 8),
         Text(
           value,
@@ -224,9 +217,9 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
           padding: const EdgeInsets.only(left: 4, bottom: 12),
           child: Text(
             'Exercices',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
           ),
         ),
         ...widget.workout.exercises.asMap().entries.map((entry) {
@@ -264,6 +257,19 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                   decoration: BoxDecoration(
                     color: theme.colorScheme.primary,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      // Neumorphism - Effet primary brillant
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.3),
+                        blurRadius: 6,
+                        offset: const Offset(-2, -2),
+                      ),
+                      BoxShadow(
+                        color: theme.colorScheme.primary.withOpacity(0.8),
+                        blurRadius: 6,
+                        offset: const Offset(2, 2),
+                      ),
+                    ],
                   ),
                   child: Center(
                     child: Text(
@@ -322,6 +328,24 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
               border: Border.all(
                 color: theme.colorScheme.primary.withOpacity(0.3),
               ),
+              boxShadow: [
+                // Neumorphism - Ombre claire en haut à gauche
+                BoxShadow(
+                  color: theme.brightness == Brightness.dark
+                      ? Colors.white.withOpacity(0.06)
+                      : Colors.white.withOpacity(0.8),
+                  blurRadius: 5,
+                  offset: const Offset(-2, -2),
+                ),
+                // Neumorphism - Ombre sombre en bas à droite
+                BoxShadow(
+                  color: theme.brightness == Brightness.dark
+                      ? Colors.black.withOpacity(0.5)
+                      : theme.colorScheme.primary.withOpacity(0.2),
+                  blurRadius: 5,
+                  offset: const Offset(2, 2),
+                ),
+              ],
             ),
             child: Center(
               child: Text(
@@ -414,9 +438,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         content: const Text(
           'Cette action est irréversible. Toutes les données de cette séance seront perdues.',
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -449,10 +471,13 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
       );
 
       if (mounted) {
-        Navigator.pop(context); // Retour à l'historique
+        Navigator.pop(context, true); // Retour avec signal de suppression
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Séance supprimée avec succès'),
+          SnackBar(
+            content: const Text(
+              'Séance supprimée avec succès',
+              style: TextStyle(color: Colors.white),
+            ),
             backgroundColor: Colors.green,
           ),
         );
@@ -462,7 +487,12 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         setState(() => _isDeleting = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Erreur: ${e.toString()}'),
+            content: Text(
+              'Erreur: ${e.toString()}',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onError,
+              ),
+            ),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

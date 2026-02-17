@@ -4,20 +4,21 @@ import 'package:intl/intl.dart';
 import '../../core/models/workout.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/services/workout_service.dart';
-import '../../core/widgets/widgets.dart';
+import '../../core/widgets/marble_card.dart';
+import '../../core/theme/app_theme.dart';
 import '../../core/utils/page_transitions.dart';
 import 'workout_detail_screen.dart';
 
-/// Écran d'historique des séances
+/// Écran d'historique des séances - Design Moderne V2
 /// Implémente US-5.1: Liste des séances avec filtres et recherche
-/// 
+///
 /// Features:
 /// - Liste paginée des séances (20 par page)
 /// - Tri par date décroissante
 /// - Pull-to-refresh
 /// - Filtres: Semaine, Mois, Tout
 /// - Recherche par exercice
-/// - Design premium avec MarbleCard
+/// - Design moderne épuré avec MarbleCard
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
 
@@ -35,7 +36,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   bool _isLoading = true;
   bool _isLoadingMore = false;
   String? _error;
-  
+
   // Filtres
   String _selectedPeriod = 'Tout'; // 'Semaine', 'Mois', 'Tout'
   String _searchQuery = '';
@@ -86,7 +87,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       // Calculer la date de début selon le filtre
       DateTime? startDate;
       final now = DateTime.now();
-      
+
       if (_selectedPeriod == 'Semaine') {
         startDate = now.subtract(const Duration(days: 7));
       } else if (_selectedPeriod == 'Mois') {
@@ -146,10 +147,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
     // Filtrer par recherche (nom d'exercice)
     if (_searchQuery.isNotEmpty) {
       filtered = filtered.where((workout) {
-        return workout.exercises.any((exercise) =>
-            exercise.exerciseName
-                .toLowerCase()
-                .contains(_searchQuery.toLowerCase()));
+        return workout.exercises.any(
+          (exercise) => exercise.exerciseName.toLowerCase().contains(
+            _searchQuery.toLowerCase(),
+          ),
+        );
       }).toList();
     }
 
@@ -164,49 +166,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MeshGradientBackground(
-        child: SafeArea(
-          child: Column(
-            children: [
-              // AppBar custom
-              _buildAppBar(context),
-              
-              // Filtres et recherche
-              _buildFiltersSection(context),
-              
-              // Liste des séances
-              Expanded(
-                child: _buildWorkoutsList(context),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// AppBar personnalisée
-  Widget _buildAppBar(BuildContext context) {
     final theme = Theme.of(context);
     
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
+    return Scaffold(
+      backgroundColor: theme.brightness == Brightness.dark
+          ? AppTheme.neutralGray900
+          : const Color(0xFFF0F0F0),
+      appBar: AppBar(
+        title: const Text(
+          'Historique',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
           ),
-          const SizedBox(width: 8),
-          Text(
-            'Historique',
-            style: theme.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0.5,
-            ),
-          ),
-          const Spacer(),
+        ),
+        actions: [
           // Bouton tri
           IconButton(
             icon: Icon(
@@ -218,6 +192,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
             tooltip: _sortAscending ? 'Plus anciennes' : 'Plus récentes',
           ),
         ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Filtres et recherche
+            _buildFiltersSection(context),
+
+            // Liste des séances
+            Expanded(child: _buildWorkoutsList(context)),
+          ],
+        ),
       ),
     );
   }
@@ -254,7 +239,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             },
           ),
           const SizedBox(height: 12),
-          
+
           // Filtres par période
           Row(
             children: [
@@ -275,7 +260,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget _buildPeriodChip(String period) {
     final isSelected = _selectedPeriod == period;
     final theme = Theme.of(context);
-    
+
     return FilterChip(
       label: Text(period),
       selected: isSelected,
@@ -346,17 +331,22 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget _buildWorkoutCard(BuildContext context, Workout workout) {
     final theme = Theme.of(context);
     final dateFormat = DateFormat('dd/MM/yyyy');
-    
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: MarbleCard(
-        onTap: () {
-          Navigator.push(
+        onTap: () async {
+          final deleted = await Navigator.push<bool>(
             context,
             AppPageRoute.fadeSlide(
               builder: (context) => WorkoutDetailScreen(workout: workout),
             ),
           );
+
+          // Recharger l'historique si séance supprimée
+          if (deleted == true && mounted) {
+            _loadWorkouts(refresh: true);
+          }
         },
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -401,7 +391,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ],
               ),
               const SizedBox(height: 12),
-              
+
               // Nombre d'exercices et séries totales
               Row(
                 children: [
@@ -419,10 +409,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ],
               ),
               const SizedBox(height: 12),
-              
+
               // Aperçu des exercices
               Text(
-                workout.exercises.map((e) => e.exerciseName).take(3).join(', ') +
+                workout.exercises
+                        .map((e) => e.exerciseName)
+                        .take(3)
+                        .join(', ') +
                     (workout.exercises.length > 3 ? '...' : ''),
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.onSurface.withOpacity(0.7),
@@ -440,15 +433,31 @@ class _HistoryScreenState extends State<HistoryScreen> {
   /// Chip de statistique
   Widget _buildStatChip(BuildContext context, IconData icon, String label) {
     final theme = Theme.of(context);
-    
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: theme.colorScheme.primaryContainer.withOpacity(0.3),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: theme.colorScheme.primary.withOpacity(0.3),
-        ),
+        border: Border.all(color: theme.colorScheme.primary.withOpacity(0.3)),
+        boxShadow: [
+          // Neumorphism - Ombre claire en haut à gauche
+          BoxShadow(
+            color: theme.brightness == Brightness.dark
+                ? Colors.white.withOpacity(0.06)
+                : Colors.white.withOpacity(0.8),
+            blurRadius: 6,
+            offset: const Offset(-3, -3),
+          ),
+          // Neumorphism - Ombre sombre en bas à droite
+          BoxShadow(
+            color: theme.brightness == Brightness.dark
+                ? Colors.black.withOpacity(0.5)
+                : theme.colorScheme.primary.withOpacity(0.2),
+            blurRadius: 6,
+            offset: const Offset(3, 3),
+          ),
+        ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -470,7 +479,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   /// État vide
   Widget _buildEmptyState(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -507,7 +516,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     final duration = Duration(seconds: seconds);
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
-    
+
     if (hours > 0) {
       return '${hours}h${minutes.toString().padLeft(2, '0')}';
     }

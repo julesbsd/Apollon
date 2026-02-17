@@ -107,6 +107,30 @@ service cloud.firestore {
         // Suppression séance (EC-004)
         allow delete: if isOwner(userId);
       }
+      
+      // ==========================================
+      // SUBCOLLECTION: personal_records
+      // ==========================================
+      
+      match /personal_records/{recordId} {
+        // RG-001: Isolation complète utilisateur
+        allow read: if isOwner(userId);
+        
+        // Création d'un record personnel
+        allow create: if isOwner(userId)
+                      && request.resource.data.keys().hasAll(['userId', 'exerciseId', 'exerciseName', 'weight', 'reps', 'achievedAt'])
+                      && request.resource.data.userId == userId
+                      && request.resource.data.weight is number
+                      && request.resource.data.weight > 0
+                      && request.resource.data.reps is int
+                      && request.resource.data.reps > 0;
+        
+        // Mise à jour record (si amélioration du record)
+        allow update: if isOwner(userId);
+        
+        // Suppression record
+        allow delete: if isOwner(userId);
+      }
     }
     
     // ==========================================

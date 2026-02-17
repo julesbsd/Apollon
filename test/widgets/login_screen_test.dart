@@ -7,73 +7,74 @@ import 'package:apollon/core/widgets/widgets.dart';
 
 void main() {
   group('LoginScreen Widget Tests', () {
-    testWidgets('should display logo and app name', (WidgetTester tester) async {
+    testWidgets('should display logo and app name', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         ChangeNotifierProvider(
           create: (_) => app_providers.AuthProvider(),
-          child: const MaterialApp(
-            home: LoginScreen(),
-          ),
+          child: const MaterialApp(home: LoginScreen()),
         ),
       );
 
-      await tester.pumpAndSettle();
+      // Use pump() instead of pumpAndSettle() due to infinite animation in MeshGradientBackground
+      await tester.pump();
 
       // Vérifier que le titre APOLLON est affiché
       expect(find.text('APOLLON'), findsOneWidget);
-      
+
       // Vérifier que le bouton de connexion Google est présent
       expect(find.text('Se connecter avec Google'), findsOneWidget);
     });
 
-    testWidgets('should display MeshGradientBackground', (WidgetTester tester) async {
+    testWidgets('should display MeshGradientBackground', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         ChangeNotifierProvider(
           create: (_) => app_providers.AuthProvider(),
-          child: const MaterialApp(
-            home: LoginScreen(),
-          ),
+          child: const MaterialApp(home: LoginScreen()),
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier que le MeshGradientBackground est présent
       expect(find.byType(MeshGradientBackground), findsOneWidget);
     });
 
-    testWidgets('should have google sign in button', (WidgetTester tester) async {
+    testWidgets('should have google sign in button', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         ChangeNotifierProvider(
           create: (_) => app_providers.AuthProvider(),
-          child: const MaterialApp(
-            home: LoginScreen(),
-          ),
+          child: const MaterialApp(home: LoginScreen()),
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier que le bouton est présent et tappable
       final button = find.text('Se connecter avec Google');
       expect(button, findsOneWidget);
-      
+
       // Le bouton doit être dans un widget interactif
       // On vérifie juste qu'il existe, la structure exacte peut varier
       expect(find.byType(InkWell), findsWidgets);
     });
 
-    testWidgets('should display tagline or description', (WidgetTester tester) async {
+    testWidgets('should display tagline or description', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         ChangeNotifierProvider(
           create: (_) => app_providers.AuthProvider(),
-          child: const MaterialApp(
-            home: LoginScreen(),
-          ),
+          child: const MaterialApp(home: LoginScreen()),
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier qu'il y a du texte descriptif (le texte exact peut varier)
       expect(find.byType(Text), findsWidgets);
@@ -83,13 +84,11 @@ void main() {
       await tester.pumpWidget(
         ChangeNotifierProvider(
           create: (_) => app_providers.AuthProvider(),
-          child: const MaterialApp(
-            home: LoginScreen(),
-          ),
+          child: const MaterialApp(home: LoginScreen()),
         ),
       );
 
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Vérifier que l'écran utilise SafeArea
       expect(find.byType(SafeArea), findsOneWidget);

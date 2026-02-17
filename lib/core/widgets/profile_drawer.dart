@@ -42,10 +42,7 @@ class ProfileDrawer extends StatelessWidget {
                     height: 80,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 3,
-                      ),
+                      border: Border.all(color: Colors.white, width: 3),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
@@ -70,7 +67,7 @@ class ProfileDrawer extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Nom
                   Text(
                     user?.displayName ?? 'Athlète',
@@ -82,7 +79,7 @@ class ProfileDrawer extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 4),
-                  
+
                   // Email
                   Text(
                     user?.email ?? '',
@@ -97,9 +94,9 @@ class ProfileDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Options
             Expanded(
               child: ListView(
@@ -119,9 +116,9 @@ class ProfileDrawer extends StatelessWidget {
                     ),
                   ),
                   const ThemeSwitcher(),
-                  
+
                   const SizedBox(height: 32),
-                  
+
                   // Section Compte
                   Padding(
                     padding: const EdgeInsets.only(left: 16, bottom: 8),
@@ -135,7 +132,7 @@ class ProfileDrawer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   // Option Déconnexion
                   _DrawerOption(
                     icon: Icons.logout,
@@ -143,16 +140,26 @@ class ProfileDrawer extends StatelessWidget {
                     color: colorScheme.error,
                     onTap: () {
                       // Capturer les providers avant de fermer le drawer
-                      final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                      final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
+                      final authProvider = Provider.of<AuthProvider>(
+                        context,
+                        listen: false,
+                      );
+                      final workoutProvider = Provider.of<WorkoutProvider>(
+                        context,
+                        listen: false,
+                      );
                       Navigator.pop(context); // Fermer le drawer
-                      _showLogoutConfirmation(context, authProvider, workoutProvider);
+                      _showLogoutConfirmation(
+                        context,
+                        authProvider,
+                        workoutProvider,
+                      );
                     },
                   ),
                 ],
               ),
             ),
-            
+
             // Footer avec version
             Padding(
               padding: const EdgeInsets.all(16),
@@ -178,13 +185,11 @@ class ProfileDrawer extends StatelessWidget {
   ) {
     // Vérifier s'il y a une séance en cours
     final hasActiveWorkout = workoutProvider.hasActiveWorkout;
-    
+
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: const Text('Déconnexion'),
         content: Text(
           hasActiveWorkout
@@ -223,7 +228,7 @@ class ProfileDrawer extends StatelessWidget {
     if (workoutProvider.hasActiveWorkout) {
       workoutProvider.cancelWorkout();
     }
-    
+
     final success = await authProvider.signOut();
 
     if (!success && context.mounted) {
@@ -231,6 +236,9 @@ class ProfileDrawer extends StatelessWidget {
         SnackBar(
           content: Text(
             authProvider.errorMessage ?? 'Erreur lors de la déconnexion',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onError,
+            ),
           ),
           backgroundColor: Theme.of(context).colorScheme.error,
           behavior: SnackBarBehavior.floating,
@@ -271,11 +279,7 @@ class _DrawerOption extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Row(
             children: [
-              Icon(
-                icon,
-                color: effectiveColor,
-                size: 24,
-              ),
+              Icon(icon, color: effectiveColor, size: 24),
               const SizedBox(width: 16),
               Text(
                 title,

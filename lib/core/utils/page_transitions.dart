@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Transitions de page fluides réutilisables pour l'application Apollon
-/// 
+///
 /// Usage:
 /// ```dart
 /// Navigator.push(
@@ -25,15 +25,13 @@ class AppPageRoute {
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;
-        final tween = Tween(begin: begin, end: end).chain(
-          CurveTween(curve: curve),
-        );
+        final tween = Tween(
+          begin: begin,
+          end: end,
+        ).chain(CurveTween(curve: curve));
         final offsetAnimation = animation.drive(tween);
-        
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
+
+        return SlideTransition(position: offsetAnimation, child: child);
       },
     );
   }
@@ -51,15 +49,13 @@ class AppPageRoute {
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
-        final tween = Tween(begin: begin, end: end).chain(
-          CurveTween(curve: curve),
-        );
+        final tween = Tween(
+          begin: begin,
+          end: end,
+        ).chain(CurveTween(curve: curve));
         final offsetAnimation = animation.drive(tween);
-        
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
+
+        return SlideTransition(position: offsetAnimation, child: child);
       },
     );
   }
@@ -100,10 +96,7 @@ class AppPageRoute {
             Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve)),
           ),
           alignment: alignment,
-          child: FadeTransition(
-            opacity: animation,
-            child: child,
-          ),
+          child: FadeTransition(opacity: animation, child: child),
         );
       },
     );
@@ -125,25 +118,18 @@ class AppPageRoute {
         final slideAnimation = Tween(
           begin: beginOffset,
           end: Offset.zero,
-        ).animate(CurvedAnimation(
-          parent: animation,
-          curve: curve,
-        ));
+        ).animate(CurvedAnimation(parent: animation, curve: curve));
 
-        final fadeAnimation = Tween(
-          begin: 0.0,
-          end: 1.0,
-        ).animate(CurvedAnimation(
-          parent: animation,
-          curve: Interval(0.0, 0.7, curve: curve), // Fade plus rapide
-        ));
-        
+        final fadeAnimation = Tween(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
+            parent: animation,
+            curve: Interval(0.0, 0.7, curve: curve), // Fade plus rapide
+          ),
+        );
+
         return SlideTransition(
           position: slideAnimation,
-          child: FadeTransition(
-            opacity: fadeAnimation,
-            child: child,
-          ),
+          child: FadeTransition(opacity: fadeAnimation, child: child),
         );
       },
     );
@@ -191,10 +177,4 @@ extension NavigatorTransitionExtension on NavigatorState {
 }
 
 /// Types de transitions disponibles
-enum AppPageTransitionType {
-  slideUp,
-  slideRight,
-  fade,
-  scale,
-  fadeSlide,
-}
+enum AppPageTransitionType { slideUp, slideRight, fade, scale, fadeSlide }

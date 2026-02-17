@@ -27,8 +27,7 @@ class AppCard extends StatefulWidget {
   State<AppCard> createState() => _AppCardState();
 }
 
-class _AppCardState extends State<AppCard>
-    with SingleTickerProviderStateMixin {
+class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   bool _isPressed = false;
@@ -40,9 +39,10 @@ class _AppCardState extends State<AppCard>
       vsync: this,
       duration: const Duration(milliseconds: 150),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.98).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.98,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -115,10 +115,7 @@ class _AppCardState extends State<AppCard>
         color: backgroundColor,
         borderRadius: BorderRadius.circular(24),
         border: borderColor != null
-            ? Border.all(
-                color: borderColor,
-                width: 1.5,
-              )
+            ? Border.all(color: borderColor, width: 1.5)
             : null,
         boxShadow: shadows,
       ),
@@ -133,10 +130,7 @@ class _AppCardState extends State<AppCard>
         onTapDown: _handleTapDown,
         onTapUp: _handleTapUp,
         onTapCancel: _handleTapCancel,
-        child: ScaleTransition(
-          scale: _scaleAnimation,
-          child: card,
-        ),
+        child: ScaleTransition(scale: _scaleAnimation, child: card),
       );
     }
 

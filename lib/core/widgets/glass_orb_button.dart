@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 /// GlassOrbButton - Bouton premium avec glassmorphism pour action principale
-/// 
+///
 /// Design "Temple Digital" :
 /// - Glassmorphism avec backdrop blur
 /// - Progression horizontale (remplissage gauche → droite sur 2H)
@@ -83,22 +83,47 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
         final pulseValue = _pulseAnimation.value;
 
         return Container(
-          height: 200,
+          // height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(32),
             boxShadow: [
-              // Shadow principale
+              // Neumorphism - Ombre claire (highlight) en haut à gauche - LÉGER
+              BoxShadow(
+                color: isDark
+                    ? Colors.white.withOpacity(0.08)
+                    : Colors.white.withOpacity(0.9),
+                blurRadius: 15,
+                offset: const Offset(-8, -8),
+              ),
+              // Neumorphism - Ombre sombre en bas à droite - LÉGER
+              BoxShadow(
+                color: isDark
+                    ? Colors.black.withOpacity(0.6)
+                    : colorScheme.primary.withOpacity(0.2),
+                blurRadius: 15,
+                offset: const Offset(8, 8),
+              ),
+              // Shadow principale pour la profondeur
               BoxShadow(
                 color: isDark
                     ? Colors.black.withOpacity(0.4)
-                    : colorScheme.primary.withOpacity(0.15),
+                    : colorScheme.primary.withOpacity(0.2),
                 blurRadius: 32,
                 offset: const Offset(0, 12),
               ),
+              // Shadow secondaire pour plus de profondeur en mode clair
+              if (!isDark)
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 16,
+                  offset: const Offset(0, 4),
+                ),
               // Glow animé si actif
               if (widget.isActive)
                 BoxShadow(
-                  color: colorScheme.primary.withOpacity(0.2 + pulseValue * 0.1),
+                  color: colorScheme.primary.withOpacity(
+                    0.2 + pulseValue * 0.1,
+                  ),
                   blurRadius: 24 + pulseValue * 8,
                   spreadRadius: 0 + pulseValue * 2,
                 ),
@@ -130,13 +155,22 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                       end: Alignment.centerRight,
                                       colors: widget.isActive
                                           ? [
-                                              colorScheme.primary.withOpacity(0.5),
-                                              colorScheme.primary.withOpacity(0.3),
-                                              colorScheme.primaryContainer.withOpacity(0.2),
+                                              colorScheme.primary.withOpacity(
+                                                0.5,
+                                              ),
+                                              colorScheme.primary.withOpacity(
+                                                0.3,
+                                              ),
+                                              colorScheme.primaryContainer
+                                                  .withOpacity(0.2),
                                             ]
                                           : [
-                                              colorScheme.primary.withOpacity(0.3),
-                                              colorScheme.primary.withOpacity(0.15),
+                                              colorScheme.primary.withOpacity(
+                                                0.3,
+                                              ),
+                                              colorScheme.primary.withOpacity(
+                                                0.15,
+                                              ),
                                             ],
                                     ),
                                   ),
@@ -145,7 +179,7 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                             ),
                           ),
                         ),
-                      
+
                       // Container glassmorphism avec bordure bleu pure (pas de gold)
                       Container(
                         decoration: BoxDecoration(
@@ -164,8 +198,8 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                       colorScheme.surface.withOpacity(0.25),
                                     ]
                                   : [
-                                      Colors.white.withOpacity(0.6),
-                                      Colors.white.withOpacity(0.35),
+                                      const Color(0xFFFFFFFF),
+                                      const Color(0xFFFAFAFA),
                                     ],
                             ),
                             border: widget.isActive
@@ -176,7 +210,7 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                 : Border.all(
                                     color: isDark
                                         ? Colors.white.withOpacity(0.15)
-                                        : Colors.white.withOpacity(0.6),
+                                        : colorScheme.primary.withOpacity(0.2),
                                     width: 2,
                                   ),
                           ),
@@ -191,16 +225,20 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                       center: Alignment.topLeft,
                                       radius: 1.5,
                                       colors: [
-                                        Colors.white.withOpacity(isDark ? 0.05 : 0.15),
+                                        Colors.white.withOpacity(
+                                          isDark ? 0.05 : 0.15,
+                                        ),
                                         Colors.transparent,
-                                        Colors.black.withOpacity(isDark ? 0.15 : 0.05),
+                                        Colors.black.withOpacity(
+                                          isDark ? 0.15 : 0.05,
+                                        ),
                                       ],
                                       stops: const [0.0, 0.5, 1.0],
                                     ),
                                   ),
                                 ),
                               ),
-                              
+
                               // Contenu principal
                               Material(
                                 color: Colors.transparent,
@@ -212,123 +250,23 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                       horizontal: 32,
                                       vertical: 16,
                                     ),
-                                    child: Row(
-                                      children: [
-                                    // Icône avec background circulaire
-                                    Container(
-                                      width: 80,
-                                      height: 80,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: widget.isActive
-                                              ? [
-                                                  colorScheme.primary.withOpacity(0.3),
-                                                  colorScheme.primaryContainer.withOpacity(0.2),
-                                                ]
-                                              : [
-                                                  colorScheme.primary.withOpacity(0.25),
-                                                  colorScheme.primary.withOpacity(0.15),
-                                                ],
-                                        ),
-                                        border: Border.all(
-                                          color: widget.isActive
-                                              ? colorScheme.primary.withOpacity(0.6)
-                                              : colorScheme.primary.withOpacity(0.4),
-                                          width: 2,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: colorScheme.primary.withOpacity(0.3),
-                                            blurRadius: widget.isActive ? 20 : 16,
-                                            spreadRadius: widget.isActive ? 3 : 2,
+                                    child: widget.isActive
+                                        ? _buildActiveLayout(
+                                            theme,
+                                            colorScheme,
+                                            isDark,
+                                          )
+                                        : _buildInactiveLayout(
+                                            theme,
+                                            colorScheme,
+                                            isDark,
                                           ),
-                                        ],
-                                      ),
-                                      child: Icon(
-                                        widget.icon,
-                                        size: 40,
-                                        color: colorScheme.primary,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 24),
-
-                                    // Texte et sous-titre
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          // Titre avec Cinzel
-                                          Text(
-                                            widget.text,
-                                            style: theme.textTheme.headlineSmall?.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              letterSpacing: 0.5,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.visible,
-                                            softWrap: true,
-                                          ),
-                                          if (widget.subtitle != null) ...[
-                                            const SizedBox(height: 8),
-                                            // Sous-titre avec JetBrains Mono pour timer
-                                            Text(
-                                              widget.subtitle!,
-                                              style: theme.textTheme.titleMedium?.copyWith(
-                                                fontFamily: 'JetBrains Mono',
-                                                fontWeight: FontWeight.w600,
-                                                color: widget.isActive
-                                                    ? colorScheme.primary
-                                                    : colorScheme.onSurface.withOpacity(0.7),
-                                              ),
-                                            ),
-                                          ],
-                                        ],
-                                      ),
-                                    ),
-
-                                    // Badge pourcentage
-                                    if (widget.isActive && widget.progress > 0)
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 16,
-                                          vertical: 10,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              colorScheme.primary.withOpacity(0.3),
-                                              colorScheme.primaryContainer.withOpacity(0.2),
-                                            ],
-                                          ),
-                                          borderRadius: BorderRadius.circular(16),
-                                          border: Border.all(
-                                            color: colorScheme.primary.withOpacity(0.5),
-                                            width: 1.5,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          '${(widget.progress * 100).toInt()}%',
-                                          style: theme.textTheme.titleMedium?.copyWith(
-                                            fontFamily: 'JetBrains Mono',
-                                            fontWeight: FontWeight.bold,
-                                            color: colorScheme.primary,
-                                          ),
-                                        ),
-                                      ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                          ],
                         ),
-                      ),
                       ),
                     ],
                   ),
@@ -338,6 +276,140 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
           ),
         );
       },
+    );
+  }
+
+  /// Layout pour séance inactive (avec icône)
+  Widget _buildInactiveLayout(
+    ThemeData theme,
+    ColorScheme colorScheme,
+    bool isDark,
+  ) {
+    return Row(
+      children: [
+        // Icône + avec background circulaire
+        Container(
+          width: 64,
+          height: 64,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                colorScheme.primary.withOpacity(0.25),
+                colorScheme.primary.withOpacity(0.15),
+              ],
+            ),
+            border: Border.all(
+              color: colorScheme.primary.withOpacity(0.4),
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: colorScheme.primary.withOpacity(0.3),
+                blurRadius: 16,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: Icon(
+            Icons.add_circle_outline,
+            size: 32,
+            color: colorScheme.primary,
+          ),
+        ),
+        const SizedBox(width: 20),
+
+        // Texte à droite uniquement
+        Expanded(
+          child: Text(
+            'Commencer une nouvelle séance',
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.3,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Layout pour séance active (sans icône, avec cercle de progression)
+  Widget _buildActiveLayout(
+    ThemeData theme,
+    ColorScheme colorScheme,
+    bool isDark,
+  ) {
+    return Row(
+      children: [
+        // Texte à gauche
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Titre en haut (réduit)
+              Text(
+                widget.text,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.3,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              if (widget.subtitle != null) ...[
+                const SizedBox(height: 6),
+                // Sous-titre en dessous
+                Text(
+                  widget.subtitle!,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontFamily: 'JetBrains Mono',
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.primary,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+
+        const SizedBox(width: 20),
+
+        // Cercle de progression à droite (taille fixe)
+        SizedBox(
+          width: 72,
+          height: 72,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // CircularProgressIndicator
+              SizedBox(
+                width: 72,
+                height: 72,
+                child: CircularProgressIndicator(
+                  value: widget.progress,
+                  strokeWidth: 5,
+                  backgroundColor: colorScheme.primary.withOpacity(0.2),
+                  color: colorScheme.primary,
+                ),
+              ),
+              // Pourcentage au centre
+              Text(
+                '${(widget.progress * 100).toInt()}%',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontFamily: 'JetBrains Mono',
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

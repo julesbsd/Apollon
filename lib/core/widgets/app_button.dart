@@ -40,9 +40,10 @@ class _AppButtonState extends State<AppButton>
       vsync: this,
       duration: const Duration(milliseconds: 150),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.95,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -72,7 +73,7 @@ class _AppButtonState extends State<AppButton>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     // Couleurs selon variant
     Color backgroundColor;
     Color textColor;
@@ -153,10 +154,7 @@ class _AppButtonState extends State<AppButton>
         color: backgroundColor,
         borderRadius: BorderRadius.circular(24),
         border: borderColor != null
-            ? Border.all(
-                color: borderColor,
-                width: 2,
-              )
+            ? Border.all(color: borderColor, width: 2)
             : null,
         boxShadow: shadows,
       ),
@@ -166,11 +164,9 @@ class _AppButtonState extends State<AppButton>
           onTap: widget.isLoading ? null : widget.onPressed,
           borderRadius: BorderRadius.circular(24),
           child: Padding(
-            padding: widget.padding ??
-                const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
-                ),
+            padding:
+                widget.padding ??
+                const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             child: widget.isLoading
                 ? _buildLoadingIndicator(textColor)
                 : _buildContent(textColor),
@@ -230,8 +226,8 @@ class _AppButtonState extends State<AppButton>
 
 /// Variants de style pour AppButton
 enum AppButtonVariant {
-  primary,   // Bouton principal coloré
+  primary, // Bouton principal coloré
   secondary, // Bouton secondaire
-  outlined,  // Bouton outlined (bordure uniquement)
-  text,      // Bouton text (pas de bordure ni background)
+  outlined, // Bouton outlined (bordure uniquement)
+  text, // Bouton text (pas de bordure ni background)
 }

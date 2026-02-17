@@ -88,12 +88,7 @@ class ExerciseType {
   static const String bodyWeight = 'Poids corporel';
   static const String cardio = 'Cardio';
 
-  static const List<String> all = [
-    freeWeights,
-    machine,
-    bodyWeight,
-    cardio,
-  ];
+  static const List<String> all = [freeWeights, machine, bodyWeight, cardio];
 }
 
 /// Groupes musculaires possibles

@@ -87,7 +87,7 @@ Future<void> main() async {
   }
 
   // Afficher statistiques finales
-  print('\n' + '=' * 50);
+  print('\n${'=' * 50}');
   print('✅ IMPORT TERMINÉ');
   print('✅ Créés:   $created exercices');
   print('⏭️  Ignorés: $skipped exercices (existent déjà)');
