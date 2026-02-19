@@ -18,6 +18,7 @@ import 'secrets.dart' as secrets;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+
   // Initialiser Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
