@@ -90,38 +90,38 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
               // Neumorphism - Ombre claire (highlight) en haut à gauche - LÉGER
               BoxShadow(
                 color: isDark
-                    ? Colors.white.withOpacity(0.08)
-                    : Colors.white.withOpacity(0.9),
+                    ? Colors.white.withValues(alpha: 0.08)
+                    : Colors.white.withValues(alpha: 0.9),
                 blurRadius: 15,
                 offset: const Offset(-8, -8),
               ),
               // Neumorphism - Ombre sombre en bas à droite - LÉGER
               BoxShadow(
                 color: isDark
-                    ? Colors.black.withOpacity(0.6)
-                    : colorScheme.primary.withOpacity(0.2),
+                    ? Colors.black.withValues(alpha: 0.6)
+                    : colorScheme.primary.withValues(alpha: 0.2),
                 blurRadius: 15,
                 offset: const Offset(8, 8),
               ),
               // Shadow principale pour la profondeur
               BoxShadow(
                 color: isDark
-                    ? Colors.black.withOpacity(0.4)
-                    : colorScheme.primary.withOpacity(0.2),
+                    ? Colors.black.withValues(alpha: 0.4)
+                    : colorScheme.primary.withValues(alpha: 0.2),
                 blurRadius: 32,
                 offset: const Offset(0, 12),
               ),
               // Shadow secondaire pour plus de profondeur en mode clair
               if (!isDark)
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
+                  color: Colors.black.withValues(alpha: 0.08),
                   blurRadius: 16,
                   offset: const Offset(0, 4),
                 ),
               // Glow animé si actif
               if (widget.isActive)
                 BoxShadow(
-                  color: colorScheme.primary.withOpacity(
+                  color: colorScheme.primary.withValues(alpha: 
                     0.2 + pulseValue * 0.1,
                   ),
                   blurRadius: 24 + pulseValue * 8,
@@ -155,20 +155,20 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                       end: Alignment.centerRight,
                                       colors: widget.isActive
                                           ? [
-                                              colorScheme.primary.withOpacity(
+                                              colorScheme.primary.withValues(alpha: 
                                                 0.5,
                                               ),
-                                              colorScheme.primary.withOpacity(
+                                              colorScheme.primary.withValues(alpha: 
                                                 0.3,
                                               ),
                                               colorScheme.primaryContainer
-                                                  .withOpacity(0.2),
+                                                  .withValues(alpha: 0.2),
                                             ]
                                           : [
-                                              colorScheme.primary.withOpacity(
+                                              colorScheme.primary.withValues(alpha: 
                                                 0.3,
                                               ),
-                                              colorScheme.primary.withOpacity(
+                                              colorScheme.primary.withValues(alpha: 
                                                 0.15,
                                               ),
                                             ],
@@ -194,8 +194,8 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                               end: Alignment.bottomRight,
                               colors: isDark
                                   ? [
-                                      colorScheme.surface.withOpacity(0.5),
-                                      colorScheme.surface.withOpacity(0.25),
+                                      colorScheme.surface.withValues(alpha: 0.5),
+                                      colorScheme.surface.withValues(alpha: 0.25),
                                     ]
                                   : [
                                       const Color(0xFFFFFFFF),
@@ -204,13 +204,13 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                             ),
                             border: widget.isActive
                                 ? Border.all(
-                                    color: colorScheme.primary.withOpacity(0.7),
+                                    color: colorScheme.primary.withValues(alpha: 0.7),
                                     width: 2.5,
                                   )
                                 : Border.all(
                                     color: isDark
-                                        ? Colors.white.withOpacity(0.15)
-                                        : colorScheme.primary.withOpacity(0.2),
+                                        ? Colors.white.withValues(alpha: 0.15)
+                                        : colorScheme.primary.withValues(alpha: 0.2),
                                     width: 2,
                                   ),
                           ),
@@ -225,11 +225,11 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                                       center: Alignment.topLeft,
                                       radius: 1.5,
                                       colors: [
-                                        Colors.white.withOpacity(
+                                        Colors.white.withValues(alpha: 
                                           isDark ? 0.05 : 0.15,
                                         ),
                                         Colors.transparent,
-                                        Colors.black.withOpacity(
+                                        Colors.black.withValues(alpha: 
                                           isDark ? 0.15 : 0.05,
                                         ),
                                       ],
@@ -297,17 +297,17 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                colorScheme.primary.withOpacity(0.25),
-                colorScheme.primary.withOpacity(0.15),
+                colorScheme.primary.withValues(alpha: 0.25),
+                colorScheme.primary.withValues(alpha: 0.15),
               ],
             ),
             border: Border.all(
-              color: colorScheme.primary.withOpacity(0.4),
+              color: colorScheme.primary.withValues(alpha: 0.4),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
-                color: colorScheme.primary.withOpacity(0.3),
+                color: colorScheme.primary.withValues(alpha: 0.3),
                 blurRadius: 16,
                 spreadRadius: 2,
               ),
@@ -393,7 +393,7 @@ class _GlassOrbButtonState extends State<GlassOrbButton>
                 child: CircularProgressIndicator(
                   value: widget.progress,
                   strokeWidth: 5,
-                  backgroundColor: colorScheme.primary.withOpacity(0.2),
+                  backgroundColor: colorScheme.primary.withValues(alpha: 0.2),
                   color: colorScheme.primary,
                 ),
               ),

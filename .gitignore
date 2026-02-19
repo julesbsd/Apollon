@@ -44,6 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Secrets locaux (clés API)
+lib/secrets.dart
+
 # Firebase - Fichiers sensibles (API keys, OAuth)
 **/google-services.json
 **/GoogleService-Info.plist

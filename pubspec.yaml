@@ -43,10 +43,16 @@ dependencies:
   firebase_core: ^2.24.0
   firebase_auth: ^4.16.0
   cloud_firestore: ^4.14.0
+  firebase_storage: ^11.5.6
   google_sign_in: ^6.1.6
   
   # State Management
   provider: ^6.1.1
+  
+  # HTTP et cache images
+  http: ^1.1.0
+  cached_network_image: ^3.3.0
+  flutter_svg: ^2.2.3
   
   # Graphiques et visualisations
   fl_chart: ^0.68.0
@@ -58,6 +64,7 @@ dependencies:
 
   # Persistence
   shared_preferences: ^2.2.2
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -85,7 +92,8 @@ flutter:
   # Assets
   assets:
     - assets/seed_data/exercises.json
-  #   - images/a_dot_ham.jpeg
+    - assets/exercise_images/
+    - assets/exercise_images/manifest.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

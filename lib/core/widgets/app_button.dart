@@ -88,7 +88,7 @@ class _AppButtonState extends State<AppButton>
         shadows = !_isPressed
             ? [
                 BoxShadow(
-                  color: colorScheme.primary.withOpacity(0.4),
+                  color: colorScheme.primary.withValues(alpha: 0.4),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -102,7 +102,7 @@ class _AppButtonState extends State<AppButton>
         shadows = !_isPressed
             ? [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
+                  color: Colors.black.withValues(alpha: 0.08),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),

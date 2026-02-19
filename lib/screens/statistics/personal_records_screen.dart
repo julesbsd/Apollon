@@ -31,12 +31,10 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen> {
   }
 
   Future<void> _loadRecords() async {
-    print('🔄 Loading personal records for user: ${widget.userId}');
     setState(() => _isLoading = true);
 
     try {
       final records = await _statisticsService.getAllPersonalRecords(widget.userId);
-      print('📋 Loaded ${records.length} personal records');
       
       if (mounted) {
         setState(() {
@@ -46,7 +44,6 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen> {
         });
       }
     } catch (e) {
-      print('❌ Error loading records: $e');
       if (mounted) {
         setState(() => _isLoading = false);
       }
@@ -119,20 +116,20 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen> {
           Icon(
             Icons.emoji_events_outlined,
             size: 80,
-            color: theme.colorScheme.onSurface.withOpacity(0.3),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.3),
           ),
           const SizedBox(height: AppTheme.spacingM),
           Text(
             'Aucun record personnel',
             style: theme.textTheme.titleLarge?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.6),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
             ),
           ),
           const SizedBox(height: AppTheme.spacingS),
           Text(
             'Complète des séances pour établir tes premiers records !',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.4),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
             ),
             textAlign: TextAlign.center,
           ),
@@ -166,12 +163,12 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen> {
                   boxShadow: [
                     // Neumorphism - Effet doré brillant
                     BoxShadow(
-                      color: Colors.white.withOpacity(0.6),
+                      color: Colors.white.withValues(alpha: 0.6),
                       blurRadius: 8,
                       offset: const Offset(-3, -3),
                     ),
                     BoxShadow(
-                      color: const Color(0xFFB8860B).withOpacity(0.6),
+                      color: const Color(0xFFB8860B).withValues(alpha: 0.6),
                       blurRadius: 8,
                       offset: const Offset(3, 3),
                     ),
@@ -205,7 +202,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen> {
                         Icon(
                           Icons.fitness_center,
                           size: 16,
-                          color: theme.colorScheme.onSurface.withOpacity(0.6),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -222,13 +219,13 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen> {
                         Icon(
                           Icons.calendar_today,
                           size: 14,
-                          color: theme.colorScheme.onSurface.withOpacity(0.4),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
                         ),
                         const SizedBox(width: 4),
                         Text(
                           dateFormat.format(record.achievedAt),
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurface.withOpacity(0.6),
+                            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                           ),
                         ),
                       ],
@@ -253,12 +250,12 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen> {
                   boxShadow: [
                     // Neumorphism - Effet doré brillant
                     BoxShadow(
-                      color: Colors.white.withOpacity(0.5),
+                      color: Colors.white.withValues(alpha: 0.5),
                       blurRadius: 6,
                       offset: const Offset(-2, -2),
                     ),
                     BoxShadow(
-                      color: const Color(0xFFB8860B).withOpacity(0.5),
+                      color: const Color(0xFFB8860B).withValues(alpha: 0.5),
                       blurRadius: 6,
                       offset: const Offset(2, 2),
                     ),

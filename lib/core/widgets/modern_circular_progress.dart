@@ -104,8 +104,8 @@ class CircularProgressCard extends StatelessWidget {
                   subtitle!,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: isDark 
-                        ? AppTheme.darkOnSurface.withOpacity(0.7)
-                        : AppTheme.neutralGray800.withOpacity(0.7),
+                        ? AppTheme.darkOnSurface.withValues(alpha: 0.7)
+                        : AppTheme.neutralGray800.withValues(alpha: 0.7),
                   ),
                 ),
               ],

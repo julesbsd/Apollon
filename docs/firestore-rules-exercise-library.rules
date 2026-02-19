@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ==========================================
+    // EXERCISES LIBRARY (Workout API Catalog)
+    // ==========================================
+    
+    // Collection des exercices du catalogue Workout API
+    // Lecture publique, écriture authentifiée
+    match /exercises_library/{exerciseId} {
+      // Lecture autorisée pour tous (catalogue public)
+      allow read: if true;
+      
+      // Écriture réservée aux admins/scripts d'import
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    // ==========================================
+    // EXERCISES (Legacy - peut être supprimé)
+    // ==========================================
+    
+    match /exercises/{exerciseId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // ==========================================
+    // WORKOUTS
+    // ==========================================
+    
+    match /workouts/{workoutId} {
+      // Lecture: propriétaire uniquement
+      allow read: if request.auth != null && 
+                     request.auth.uid == resource.data.userId;
+      
+      // Création: utilisateur authentifié
+      allow create: if request.auth != null && 
+                       request.auth.uid == request.resource.data.userId;
+      
+      // Mise à jour: propriétaire uniquement
+      allow update: if request.auth != null && 
+                       request.auth.uid == resource.data.userId;
+      
+      // Suppression: propriétaire uniquement
+      allow delete: if request.auth != null && 
+                       request.auth.uid == resource.data.userId;
+    }
+    
+    // ==========================================
+    // USERS
+    // ==========================================
+    
+    match /users/{userId} {
+      // Lecture: propriétaire uniquement
+      allow read: if request.auth != null && request.auth.uid == userId;
+      
+      // Écriture: propriétaire uniquement
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

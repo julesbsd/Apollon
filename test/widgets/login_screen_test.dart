@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:apollon/core/providers/auth_provider.dart' as app_providers;
 import 'package:apollon/screens/auth/login_screen.dart';
 import 'package:apollon/core/widgets/widgets.dart';
+import '../helpers/test_helpers.dart';
 
 void main() {
   group('LoginScreen Widget Tests', () {
@@ -11,8 +12,8 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        ChangeNotifierProvider(
-          create: (_) => app_providers.AuthProvider(),
+        ChangeNotifierProvider<app_providers.AuthProvider>(
+          create: (_) => TestAuthProvider(MockAuthService()),
           child: const MaterialApp(home: LoginScreen()),
         ),
       );
@@ -31,8 +32,8 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        ChangeNotifierProvider(
-          create: (_) => app_providers.AuthProvider(),
+        ChangeNotifierProvider<app_providers.AuthProvider>(
+          create: (_) => TestAuthProvider(MockAuthService()),
           child: const MaterialApp(home: LoginScreen()),
         ),
       );
@@ -47,8 +48,8 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        ChangeNotifierProvider(
-          create: (_) => app_providers.AuthProvider(),
+        ChangeNotifierProvider<app_providers.AuthProvider>(
+          create: (_) => TestAuthProvider(MockAuthService()),
           child: const MaterialApp(home: LoginScreen()),
         ),
       );
@@ -68,8 +69,8 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        ChangeNotifierProvider(
-          create: (_) => app_providers.AuthProvider(),
+        ChangeNotifierProvider<app_providers.AuthProvider>(
+          create: (_) => TestAuthProvider(MockAuthService()),
           child: const MaterialApp(home: LoginScreen()),
         ),
       );
@@ -82,8 +83,8 @@ void main() {
 
     testWidgets('should be in SafeArea', (WidgetTester tester) async {
       await tester.pumpWidget(
-        ChangeNotifierProvider(
-          create: (_) => app_providers.AuthProvider(),
+        ChangeNotifierProvider<app_providers.AuthProvider>(
+          create: (_) => TestAuthProvider(MockAuthService()),
           child: const MaterialApp(home: LoginScreen()),
         ),
       );

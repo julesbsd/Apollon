@@ -112,22 +112,22 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
         vertical: 4,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+        color: theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(AppTheme.radiusS),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.white.withOpacity(0.08)
-                : Colors.white.withOpacity(0.8),
+                ? Colors.white.withValues(alpha: 0.08)
+                : Colors.white.withValues(alpha: 0.8),
             blurRadius: 6,
             offset: const Offset(-3, -3),
           ),
           // Neumorphism - Ombre sombre en bas à droite
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.black.withOpacity(0.6)
-                : theme.colorScheme.primary.withOpacity(0.15),
+                ? Colors.black.withValues(alpha: 0.6)
+                : theme.colorScheme.primary.withValues(alpha: 0.15),
             blurRadius: 6,
             offset: const Offset(3, 3),
           ),
@@ -177,7 +177,7 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
           barTouchData: BarTouchData(
             enabled: true,
             touchTooltipData: BarTouchTooltipData(
-              getTooltipColor: (group) => theme.colorScheme.surface.withOpacity(0.9),
+              getTooltipColor: (group) => theme.colorScheme.surface.withValues(alpha: 0.9),
               tooltipRoundedRadius: AppTheme.radiusS,
               getTooltipItem: (group, groupIndex, rod, rodIndex) {
                 if (groupIndex >= _dataPoints.length) return null;
@@ -240,10 +240,10 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
           gridData: FlGridData(
             show: true,
             drawVerticalLine: false,
-            horizontalInterval: maxVolume / 4,
+            horizontalInterval: maxVolume > 0 ? maxVolume / 4 : 1.0,
             getDrawingHorizontalLine: (value) {
               return FlLine(
-                color: theme.colorScheme.onSurface.withOpacity(0.1),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
                 strokeWidth: 1,
               );
             },
@@ -294,22 +294,22 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
     return Container(
       padding: const EdgeInsets.all(AppTheme.spacingM),
       decoration: BoxDecoration(
-        color: AppTheme.primaryBlue.withOpacity(0.1),
+        color: AppTheme.primaryBlue.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.white.withOpacity(0.06)
-                : Colors.white.withOpacity(0.9),
+                ? Colors.white.withValues(alpha: 0.06)
+                : Colors.white.withValues(alpha: 0.9),
             blurRadius: 10,
             offset: const Offset(-5, -5),
           ),
           // Neumorphism - Ombre sombre en bas à droite
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.black.withOpacity(0.5)
-                : theme.colorScheme.primary.withOpacity(0.15),
+                ? Colors.black.withValues(alpha: 0.5)
+                : theme.colorScheme.primary.withValues(alpha: 0.15),
             blurRadius: 10,
             offset: const Offset(5, 5),
           ),
@@ -326,7 +326,7 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
           Container(
             height: 30,
             width: 1,
-            color: theme.colorScheme.onSurface.withOpacity(0.2),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
           ),
           _buildStatItem(
             theme,
@@ -336,7 +336,7 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
           Container(
             height: 30,
             width: 1,
-            color: theme.colorScheme.onSurface.withOpacity(0.2),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
           ),
           _buildStatItem(
             theme,
@@ -362,7 +362,7 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
         Text(
           label,
           style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurface.withOpacity(0.6),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
       ],
@@ -379,13 +379,13 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
             Icon(
               Icons.bar_chart,
               size: 48,
-              color: theme.colorScheme.onSurface.withOpacity(0.3),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.3),
             ),
             const SizedBox(height: AppTheme.spacingM),
             Text(
               'Pas de données pour cette période',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               textAlign: TextAlign.center,
             ),

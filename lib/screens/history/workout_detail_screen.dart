@@ -130,7 +130,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                       Text(
                         'à ${timeFormat.format(widget.workout.createdAt)}',
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.7),
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                         ),
                       ),
                     ],
@@ -201,7 +201,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         Text(
           label,
           style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurface.withOpacity(0.6),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
       ],
@@ -260,12 +260,12 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                     boxShadow: [
                       // Neumorphism - Effet primary brillant
                       BoxShadow(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         blurRadius: 6,
                         offset: const Offset(-2, -2),
                       ),
                       BoxShadow(
-                        color: theme.colorScheme.primary.withOpacity(0.8),
+                        color: theme.colorScheme.primary.withValues(alpha: 0.8),
                         blurRadius: 6,
                         offset: const Offset(2, 2),
                       ),
@@ -323,25 +323,25 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+              color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: theme.colorScheme.primary.withOpacity(0.3),
+                color: theme.colorScheme.primary.withValues(alpha: 0.3),
               ),
               boxShadow: [
                 // Neumorphism - Ombre claire en haut à gauche
                 BoxShadow(
                   color: theme.brightness == Brightness.dark
-                      ? Colors.white.withOpacity(0.06)
-                      : Colors.white.withOpacity(0.8),
+                      ? Colors.white.withValues(alpha: 0.06)
+                      : Colors.white.withValues(alpha: 0.8),
                   blurRadius: 5,
                   offset: const Offset(-2, -2),
                 ),
                 // Neumorphism - Ombre sombre en bas à droite
                 BoxShadow(
                   color: theme.brightness == Brightness.dark
-                      ? Colors.black.withOpacity(0.5)
-                      : theme.colorScheme.primary.withOpacity(0.2),
+                      ? Colors.black.withValues(alpha: 0.5)
+                      : theme.colorScheme.primary.withValues(alpha: 0.2),
                   blurRadius: 5,
                   offset: const Offset(2, 2),
                 ),
@@ -375,7 +375,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                   TextSpan(
                     text: ' reps × ',
                     style: TextStyle(
-                      color: theme.colorScheme.onSurface.withOpacity(0.6),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                   TextSpan(
@@ -388,7 +388,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                   TextSpan(
                     text: ' kg',
                     style: TextStyle(
-                      color: theme.colorScheme.onSurface.withOpacity(0.6),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                 ],

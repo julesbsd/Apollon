@@ -1,0 +1,104 @@
+{
+  "preseeded_exercises": [
+    {
+      "id": "7a6f9920-7d58-476d-8c34-9508b20d4dc6",
+      "code": "BARBELL_BENCH_PRESS",
+      "filename": "barbell_bench_press.svg"
+    },
+    {
+      "id": "e7c2ba66-ff0a-4d9e-ba49-5ed54e411467",
+      "code": "DEADLIFT",
+      "filename": "deadlift.svg"
+    },
+    {
+      "id": "e51e9549-d9b7-463e-a8e2-19b3d00ee8af",
+      "code": "BARBELL_SHOULDER_PRESS",
+      "filename": "barbell_shoulder_press.svg"
+    },
+    {
+      "id": "85bddde0-fd5a-44dc-9ad0-7d11480df59f",
+      "code": "LEG_PRESS",
+      "filename": "leg_press.svg"
+    },
+    {
+      "id": "90492bc2-1804-4a68-8179-cf62b2807f21",
+      "code": "BARBELL_CURL",
+      "filename": "barbell_curl.svg"
+    },
+    {
+      "id": "d12de636-6dec-4cec-b55e-27079dd8cdd6",
+      "code": "SUPINATED_GRIP_PULL_UPS",
+      "filename": "supinated_grip_pull_ups.svg"
+    },
+    {
+      "id": "418bd319-fa86-4773-a172-5273d950adb3",
+      "code": "PRONATED_GRIP_PULL_UPS",
+      "filename": "pronated_grip_pull_ups.svg"
+    },
+    {
+      "id": "244b7106-7d3d-42eb-bc1a-485578d2c235",
+      "code": "DIPS",
+      "filename": "dips.svg"
+    },
+    {
+      "id": "5fcb938e-a4fa-4c9c-9f59-77e3ab1dfe98",
+      "code": "INCLINE_BARBELL_BENCH_PRESS",
+      "filename": "incline_barbell_bench_press.svg"
+    },
+    {
+      "id": "b9b45b9f-49ef-41ce-b038-3cba517aa275",
+      "code": "DECLINE_BARBELL_BENCH_PRESS",
+      "filename": "decline_barbell_bench_press.svg"
+    },
+    {
+      "id": "b8fadf63-943f-46c2-955a-d36adcec782b",
+      "code": "BENT_OVER_DUMBBELL_ROW",
+      "filename": "bent_over_dumbbell_row.svg"
+    },
+    {
+      "id": "f75fb129-1f8d-4d11-96b3-02874c0c0833",
+      "code": "LEG_CURL",
+      "filename": "leg_curl.svg"
+    },
+    {
+      "id": "c5c22898-23f4-4156-86d3-bda2177adae2",
+      "code": "LEG_EXTENSION",
+      "filename": "leg_extension.svg"
+    },
+    {
+      "id": "1548269e-bf89-4902-bf57-d988a1b4500d",
+      "code": "LATERAL_RAISE_WITH_DUMBBELLS",
+      "filename": "lateral_raise_with_dumbbells.svg"
+    },
+    {
+      "id": "04797c93-3325-4f79-9d30-7d56348796ca",
+      "code": "ARNOLD_DUMBBELL_PRESS",
+      "filename": "arnold_dumbbell_press.svg"
+    },
+    {
+      "id": "87680ca6-38b0-4db1-9460-244c883816a0",
+      "code": "CRUNCHES",
+      "filename": "crunches.svg"
+    },
+    {
+      "id": "21c37b13-51b8-4590-bf7b-4ec9a45d53a7",
+      "code": "PLANK",
+      "filename": "plank.svg"
+    },
+    {
+      "id": "611a0d2a-eee4-41bf-8371-5899e1d64f26",
+      "code": "LUNGES",
+      "filename": "lunges.svg"
+    },
+    {
+      "id": "d9850407-2961-4932-bd1b-679ccd3de7e2",
+      "code": "STANDING_CALF_RAISES",
+      "filename": "standing_calf_raises.svg"
+    },
+    {
+      "id": "99148772-f963-47bc-8657-087f1b468a71",
+      "code": "STIFF_LEG_DEADLIFT",
+      "filename": "stiff_leg_deadlift.svg"
+    }
+  ]
+}

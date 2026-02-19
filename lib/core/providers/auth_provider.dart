@@ -6,7 +6,7 @@ import '../services/auth_service.dart';
 /// Utilise ChangeNotifier pour notifier les widgets des changements
 /// Respecte le pattern Provider recommandé pour Apollon
 class AuthProvider extends ChangeNotifier {
-  final AuthService _authService = AuthService();
+  final AuthService _authService;
 
   User? _user;
   bool _isLoading = false;
@@ -28,7 +28,8 @@ class AuthProvider extends ChangeNotifier {
   /// Utilisé par app.dart pour l'auto-login (US-1.2)
   Stream<User?> get authStateChanges => _authService.authStateChanges;
 
-  AuthProvider() {
+  AuthProvider({AuthService? authService})
+      : _authService = authService ?? AuthService() {
     // Initialiser avec l'utilisateur actuel
     _user = _authService.currentUser;
 

@@ -7,7 +7,7 @@ import '../../core/theme/app_theme.dart';
 import '../../core/widgets/glass_orb_button.dart';
 import '../../core/widgets/marble_card.dart';
 import '../../core/utils/page_transitions.dart';
-import '../workout/exercise_selection_screen.dart';
+import '../exercise_library/exercise_library_selection_screen.dart';
 import '../history/history_screen.dart';
 import '../statistics/statistics_screen.dart';
 import '../statistics/personal_records_screen.dart';
@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
         Text(
           _getGreetingMessage(),
           style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurface.withOpacity(0.7),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
       ],
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Icon(
                 Icons.chevron_right,
-                color: theme.colorScheme.onSurface.withOpacity(0.5),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
               ),
             ],
           ),
@@ -247,7 +247,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppTheme.successGreen.withOpacity(0.2),
+                  color: AppTheme.successGreen.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
@@ -277,7 +277,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Icon(
                 Icons.chevron_right,
-                color: theme.colorScheme.onSurface.withOpacity(0.5),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
               ),
             ],
           ),
@@ -336,7 +336,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Icon(
                 Icons.chevron_right,
-                color: theme.colorScheme.onSurface.withOpacity(0.5),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
               ),
             ],
           ),
@@ -384,7 +384,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Icon(
                 Icons.chevron_right,
-                color: theme.colorScheme.onSurface.withOpacity(0.5),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
               ),
             ],
           ),
@@ -510,7 +510,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   /// Démarrer un workout
-  void _startWorkout(BuildContext context, String? type) {
+  Future<void> _startWorkout(BuildContext context, String? type) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final workoutProvider =
         Provider.of<WorkoutProvider>(context, listen: false);
@@ -520,10 +520,11 @@ class _HomePageState extends State<HomePage> {
       workoutProvider.startNewWorkout(authProvider.user!.uid);
     }
 
-    // Navigation vers ExerciseSelectionScreen
+    // Navigation vers catalogue Exercise Library
+    // L'utilisateur sélectionne un exercice, puis WorkoutSessionScreen gère l'ajout
     Navigator.of(context).push(
       AppPageRoute.fadeSlide(
-        builder: (context) => const ExerciseSelectionScreen(),
+        builder: (context) => const ExerciseLibrarySelectionScreen(),
       ),
     );
   }

@@ -240,7 +240,7 @@ class _WorkoutHeatmapCalendarState extends State<WorkoutHeatmapCalendar> {
                 Text(
                   'Moins',
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.8),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -258,7 +258,7 @@ class _WorkoutHeatmapCalendarState extends State<WorkoutHeatmapCalendar> {
                 Text(
                   'Plus',
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.8),
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -287,23 +287,23 @@ class _WorkoutHeatmapCalendarState extends State<WorkoutHeatmapCalendar> {
             : Colors.white,
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         border: Border.all(
-          color: color.withOpacity(0.3),
+          color: color.withValues(alpha: 0.3),
           width: 1,
         ),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.white.withOpacity(0.06)
-                : Colors.white.withOpacity(0.9),
+                ? Colors.white.withValues(alpha: 0.06)
+                : Colors.white.withValues(alpha: 0.9),
             blurRadius: 10,
             offset: const Offset(-5, -5),
           ),
           // Neumorphism - Ombre sombre en bas à droite
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.black.withOpacity(0.5)
-                : theme.colorScheme.primary.withOpacity(0.2),
+                ? Colors.black.withValues(alpha: 0.5)
+                : theme.colorScheme.primary.withValues(alpha: 0.2),
             blurRadius: 10,
             offset: const Offset(5, 5),
           ),
@@ -323,7 +323,7 @@ class _WorkoutHeatmapCalendarState extends State<WorkoutHeatmapCalendar> {
           Text(
             label,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -340,7 +340,7 @@ class _WorkoutHeatmapCalendarState extends State<WorkoutHeatmapCalendar> {
         color: color,
         borderRadius: BorderRadius.circular(2),
         border: Border.all(
-          color: theme.colorScheme.onSurface.withOpacity(0.2),
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
           width: 0.5,
         ),
       ),

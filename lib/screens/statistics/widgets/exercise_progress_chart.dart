@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../../../core/services/statistics_service.dart';
 import '../../../core/models/statistics.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/marble_card.dart';
-import '../../../core/services/exercise_service.dart';
-import '../../../core/models/exercise.dart';
+import '../../../core/models/exercise_library.dart';
+import '../../../core/providers/exercise_library_provider.dart';
 
 /// Widget graphique ligne progression par exercice
 /// Style inspiré de l'image: ligne avec points, dégradé area chart
@@ -25,10 +26,8 @@ class ExerciseProgressChart extends StatefulWidget {
 }
 
 class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
-  final ExerciseService _exerciseService = ExerciseService();
-  
-  List<Exercise> _exercises = [];
-  Exercise? _selectedExercise;
+  List<ExerciseLibrary> _exercises = [];
+  ExerciseLibrary? _selectedExercise;
   List<ProgressDataPoint> _dataPoints = [];
   bool _isLoading = true;
 
@@ -40,9 +39,12 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
 
   Future<void> _loadExercises() async {
     try {
-      final exercisesStream = _exerciseService.getAllExercises();
-      final exercises = await exercisesStream.first;
-      
+      final provider = context.read<ExerciseLibraryProvider>();
+      if (provider.allExercises.isEmpty) {
+        await provider.loadExercises();
+      }
+      final exercises = provider.allExercises;
+
       if (mounted) {
         setState(() {
           _exercises = exercises;
@@ -92,7 +94,10 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
 
     return MarbleCard(
       child: Padding(
-        padding: const EdgeInsets.all(AppTheme.spacingL),
+        padding: const EdgeInsets.symmetric(
+          vertical: 0,
+          horizontal: 0,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -132,43 +137,43 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
         vertical: AppTheme.spacingS,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+        color: theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.white.withOpacity(0.08)
-                : Colors.white.withOpacity(0.8),
+                ? Colors.white.withValues(alpha: 0.08)
+                : Colors.white.withValues(alpha: 0.8),
             blurRadius: 8,
             offset: const Offset(-4, -4),
           ),
           // Neumorphism - Ombre sombre en bas à droite
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.black.withOpacity(0.6)
-                : theme.colorScheme.primary.withOpacity(0.2),
+                ? Colors.black.withValues(alpha: 0.6)
+                : theme.colorScheme.primary.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(4, 4),
           ),
         ],
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<Exercise>(
+        child: DropdownButton<ExerciseLibrary>(
           value: _selectedExercise,
           isExpanded: true,
           icon: Icon(Icons.expand_more, color: theme.colorScheme.primary),
           style: theme.textTheme.titleMedium,
           items: _exercises.map((exercise) {
-            return DropdownMenuItem<Exercise>(
+            return DropdownMenuItem<ExerciseLibrary>(
               value: exercise,
               child: Text(
-                '${exercise.emoji} ${exercise.name}',
+                exercise.name,
                 style: theme.textTheme.bodyLarge,
               ),
             );
           }).toList(),
-          onChanged: (Exercise? newExercise) {
+          onChanged: (ExerciseLibrary? newExercise) {
             if (newExercise != null) {
               setState(() {
                 _selectedExercise = newExercise;
@@ -204,10 +209,10 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
           gridData: FlGridData(
             show: true,
             drawVerticalLine: false,
-            horizontalInterval: range / 4,
+            horizontalInterval: range > 0 ? range / 4 : 1.0,
             getDrawingHorizontalLine: (value) {
               return FlLine(
-                color: theme.colorScheme.onSurface.withOpacity(0.1),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
                 strokeWidth: 1,
               );
             },
@@ -279,8 +284,8 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppTheme.primaryBlue.withOpacity(0.3),
-                    AppTheme.primaryBlue.withOpacity(0.05),
+                    AppTheme.primaryBlue.withValues(alpha: 0.3),
+                    AppTheme.primaryBlue.withValues(alpha: 0.05),
                   ],
                 ),
               ),
@@ -288,7 +293,7 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
           ],
           lineTouchData: LineTouchData(
             touchTooltipData: LineTouchTooltipData(
-              getTooltipColor: (touchedSpot) => theme.colorScheme.surface.withOpacity(0.9),
+              getTooltipColor: (touchedSpot) => theme.colorScheme.surface.withValues(alpha: 0.9),
               tooltipRoundedRadius: AppTheme.radiusS,
               getTooltipItems: (touchedSpots) {
                 return touchedSpots.map((spot) {
@@ -327,22 +332,22 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
       padding: const EdgeInsets.all(AppTheme.spacingM),
       decoration: BoxDecoration(
         color: (isPositive ? AppTheme.successGreen : AppTheme.errorRed)
-            .withOpacity(0.1),
+            .withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.white.withOpacity(0.06)
-                : Colors.white.withOpacity(0.9),
+                ? Colors.white.withValues(alpha: 0.06)
+                : Colors.white.withValues(alpha: 0.9),
             blurRadius: 10,
             offset: const Offset(-5, -5),
           ),
           // Neumorphism - Ombre sombre en bas à droite
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.black.withOpacity(0.5)
-                : theme.colorScheme.primary.withOpacity(0.15),
+                ? Colors.black.withValues(alpha: 0.5)
+                : theme.colorScheme.primary.withValues(alpha: 0.15),
             blurRadius: 10,
             offset: const Offset(5, 5),
           ),
@@ -357,7 +362,7 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
               Text(
                 'Progression',
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
               const SizedBox(height: 4),
@@ -376,7 +381,7 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
               Text(
                 'Variation',
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
               const SizedBox(height: 4),
@@ -404,13 +409,13 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
             Icon(
               Icons.timeline,
               size: 48,
-              color: theme.colorScheme.onSurface.withOpacity(0.3),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.3),
             ),
             const SizedBox(height: AppTheme.spacingM),
             Text(
               'Pas de données pour cet exercice',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               textAlign: TextAlign.center,
             ),

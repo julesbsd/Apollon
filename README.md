@@ -490,11 +490,25 @@ dart format .
 ## DONNÉES D'INITIALISATION
 
 ### Exercices prédéfinis
-L'application est livrée avec une liste d'environ 50 exercices populaires, catégorisés par :
-- Groupe Musculaire (pectoraux, dos, jambes, épaules, bras, abdominaux, etc.)
-- Type d'Exercice (poids libres, machines, poids corporel, cardio)
 
-Les exercices sont stockés dans la collection Firestore `exercises` avec une structure standardisée.
+L'application intègre un **catalogue de 94 exercices professionnels** via l'API Workout API, avec :
+
+**Données** :
+- Noms standardisés en français
+- Classification par muscles primaires/secondaires
+- Catégorisation par équipement (poids libres, machines, poids corporel)
+- Descriptions techniques complètes
+- Stockage dans la collection Firestore `exercises_library`
+
+**Images (système hybride à trois niveaux)** :
+- ✅ **20 images SVG préchargées** dans l'APK (top exercices, affichage instantané)
+- ✅ **74 images téléchargeables** à la demande (téléchargement au premier affichage)
+- ✅ **Stockage permanent** dans le répertoire privé de l'application
+- ✅ **Optimisation quota API** : 21/100 requêtes utilisées, 79 disponibles
+- ✅ **Fallback émoji** pour les exercices sans image
+
+📘 **Documentation complète** : [docs/IMAGE_SYSTEM.md](docs/IMAGE_SYSTEM.md)  
+📘 **Feature README** : [lib/features/exercise_library/README.md](lib/features/exercise_library/README.md)
 
 ---
 
@@ -508,8 +522,10 @@ Les exercices sont stockés dans la collection Firestore `exercises` avec une st
 
 ### 📝 Documentation Technique
 
+- **[docs/IMAGE_SYSTEM.md](docs/IMAGE_SYSTEM.md)** - Système d'images hybride (assets/local/remote)
 - **[docs/](docs/)** - Documentation complète (Firebase, Architecture, Design)
 - **[AUDIT-PERFORMANCE-MVP-V1.md](AUDIT-PERFORMANCE-MVP-V1.md)** - Rapport d'audit détaillé
+- **[lib/features/exercise_library/README.md](lib/features/exercise_library/README.md)** - Catalogue d'exercices Workout API
 
 ### 🎯 Gestion Projet
 
@@ -540,5 +556,5 @@ Pour toute question ou suggestion concernant le projet Apollon.
 
 ---
 
-**Dernière mise à jour :** 17 février 2026  
-**Version:** MVP V1 - Complet ✅
+**Dernière mise à jour :** 18 février 2026  
+**Version:** MVP V1.1 - Images hybrides ✅

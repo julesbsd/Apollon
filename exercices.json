@@ -1,0 +1,3384 @@
+[
+  {
+    "id": "0a432495-4bcf-4146-952f-ba6ee263c44c",
+    "code": "DUMBBELL_SHRUGS",
+    "primaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Haussements d’épaules avec haltères",
+    "description": "Tenez-vous droit avec un haltère dans chaque main, les bras tendus le long du corps, paumes tournées vers vous. Gardez la poitrine levée, les épaules légèrement tirées en arrière et la sangle abdominale engagée. Sans plier les coudes, levez les épaules vers les oreilles aussi haut que possible. Concentrez-vous sur la contraction des muscles trapèzes en haut du mouvement. Marquez une courte pause, puis redescendez lentement les épaules de manière contrôlée. Évitez de faire rouler ou tourner les épaules — le mouvement doit être vertical et maîtrisé."
+  },
+  {
+    "id": "e51e9549-d9b7-463e-a8e2-19b3d00ee8af",
+    "code": "BARBELL_SHOULDER_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé militaire avec barre",
+    "description": "Tenez-vous droit, les pieds à la largeur des épaules, avec une barre posée au niveau des épaules, paumes vers l’avant et coudes légèrement en avant de la barre. Engagez votre sangle abdominale et resserrez les omoplates. Poussez la barre vers le haut en ligne droite jusqu’à ce que vos bras soient complètement tendus au-dessus de la tête, sans verrouiller les coudes. En haut du mouvement, la barre doit être légèrement en arrière de la tête pour un bon alignement. Redescendez ensuite la barre à hauteur d’épaules de manière contrôlée. Gardez le buste bien droit sans vous pencher en arrière."
+  },
+  {
+    "id": "719744b2-7c47-4224-916f-45d08d59175f",
+    "code": "CABLE_LATERAL_RAISE",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Élévations latérales à la poulie",
+    "description": "Réglez la poulie en position basse et fixez une poignée simple. Tenez-vous de côté par rapport à la machine, en saisissant la poignée avec la main la plus éloignée de la poulie. Laissez le bras le long du corps avec une légère flexion du coude. Engagez la ceinture abdominale et levez le bras sur le côté jusqu’à atteindre la hauteur des épaules, en gardant un mouvement lent et contrôlé. Marquez une courte pause en haut, puis redescendez à la position de départ. Gardez le buste immobile et évitez de balancer le corps. Répétez le mouvement de l’autre côté."
+  },
+  {
+    "id": "07e4e1b2-e5b1-4d5e-b211-e6879f618a04",
+    "code": "UPRIGHT_ROW",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Rowing vertical à la barre",
+    "description": "Tenez-vous droit avec une barre en prise serrée et en pronation à hauteur des hanches. Gardez le dos droit, la poitrine sortie et les abdominaux engagés. Tirez la barre verticalement le long du corps en menant le mouvement avec les coudes, qui doivent monter plus haut que les poignets. Continuez à monter jusqu’à atteindre le haut de la poitrine ou le cou. Marquez une courte pause en haut, puis redescendez la barre lentement et de manière contrôlée à la position de départ. Évitez de balancer le corps ou d’utiliser l’élan."
+  },
+  {
+    "id": "04a477b1-e17d-445a-9669-5607f1e3c5b6",
+    "code": "FRONT_RAISE_WITH_DUMBBELLS",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Élévations frontales avec haltères",
+    "description": "Tenez-vous droit avec un haltère dans chaque main, les bras tendus devant les cuisses, paumes tournées vers le corps. Gardez la poitrine haute, les épaules détendues et la ceinture abdominale engagée. Levez un ou deux bras devant vous jusqu'à hauteur d’épaules, en gardant une légère flexion des coudes et les poignets neutres. Marquez une courte pause en haut pour contracter les épaules. Redescendez lentement les haltères à la position de départ. Évitez d’utiliser l’élan ou de balancer le corps pendant le mouvement."
+  },
+  {
+    "id": "f737837d-22ac-4fa1-bb9c-5724e5c14512",
+    "code": "DUMBBELL_SHOULDER_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé militaire avec haltères",
+    "description": "Asseyez-vous sur un banc avec dossier et placez un haltère sur chaque cuisse. Utilisez vos jambes pour aider à amener les haltères à hauteur d’épaules, coudes fléchis et paumes tournées vers l’avant. Poussez les haltères vers le haut jusqu’à ce que vos bras soient complètement tendus au-dessus de la tête, en rapprochant légèrement les poids en haut du mouvement sans verrouiller les coudes. Redescendez les haltères de façon contrôlée à hauteur d’épaules. Gardez les abdos contractés et évitez de cambrer le dos. L’exercice peut également se faire debout, à condition de maintenir une posture stricte et le gainage."
+  },
+  {
+    "id": "1548269e-bf89-4902-bf57-d988a1b4500d",
+    "code": "LATERAL_RAISE_WITH_DUMBBELLS",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Élévations latérales avec haltères",
+    "description": "Tenez-vous droit avec un haltère dans chaque main, les bras détendus le long du corps, paumes tournées vers vous. Engagez vos abdominaux et gardez la poitrine haute. Avec une légère flexion des coudes, levez les bras sur les côtés jusqu'à atteindre la hauteur des épaules, en gardant un mouvement fluide et contrôlé. Marquez une courte pause en haut en contractant les épaules. Redescendez lentement les haltères à la position initiale. Évitez de balancer le corps ou d'utiliser l’élan. Cet exercice peut également être réalisé en position assise pour une meilleure isolation."
+  },
+  {
+    "id": "04797c93-3325-4f79-9d30-7d56348796ca",
+    "code": "ARNOLD_DUMBBELL_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé Arnold avec haltères",
+    "description": "Asseyez-vous sur un banc avec dossier, un haltère dans chaque main posé sur vos cuisses. Amenez les haltères à hauteur de poitrine, paumes tournées vers vous et coudes fléchis devant vous. Commencez la poussée en effectuant une rotation des poignets vers l’extérieur tout en poussant les haltères vers le haut. En haut du mouvement, les bras sont tendus et les paumes tournées vers l’avant. Inversez le mouvement en redescendant les haltères, tout en tournant à nouveau les poignets vers l’intérieur pour revenir à la position de départ. Gardez les abdos engagés et effectuez le mouvement lentement et de manière contrôlée."
+  },
+  {
+    "id": "f75fb129-1f8d-4d11-96b3-02874c0c0833",
+    "code": "LEG_CURL",
+    "primaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Leg curl",
+    "description": "Allongez-vous sur la machine en plaçant vos pieds sous le coussin, de manière à la coller au niveau des chevilles. Saisissez les poignées devant vous. Contractez les ischio-jambiers afin de rapprocher le coussin de vos fessiers. Contrôlez ensuite la descente jusqu'à revenir en position de départ, sans verrouiller complètement les genoux, puis continuez. Il est également possible de réaliser cet exercice de manière unilatérale, une jambe après l'autre."
+  },
+  {
+    "id": "e7794d4f-7a83-4d59-8674-defb984bc750",
+    "code": "CABLE_FRONT_RAISE",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Élévations frontales à la poulie",
+    "description": "Réglez la poulie en position basse et fixez une poignée simple. Placez-vous dos à la machine, la poignée tenue dans une main, bras le long du corps et paume tournée vers la cuisse. Engagez les abdominaux et levez le bras devant vous jusqu’à hauteur d’épaule, en gardant une légère flexion du coude et le poignet neutre. Marquez une courte pause en haut, puis redescendez lentement la poignée à la position de départ de manière contrôlée. Évitez d’utiliser l’élan ou de vous pencher en arrière. Répétez le même mouvement avec l’autre bras."
+  },
+  {
+    "id": "7bbceac2-84db-4312-b0e0-ef8b09ccf2ba",
+    "code": "REVERSE_FLY_ON_INCLINE_BENCH",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Écarté inversé sur banc incliné",
+    "description": "Allongez-vous sur le ventre sur un banc incliné, un haltère dans chaque main, les bras tendus vers le sol, paumes face à face. Gardez la poitrine en contact avec le banc et engagez la sangle abdominale. Avec une légère flexion des coudes, élevez les bras latéralement en arc de cercle jusqu’à atteindre la hauteur des épaules. Concentrez-vous sur la contraction des omoplates en haut du mouvement. Redescendez lentement les haltères de manière contrôlée jusqu’à la position de départ. Évitez tout élan ou mouvement brusque des bras."
+  },
+  {
+    "id": "2f8f829a-d9d7-4103-ad18-cbfce8acb090",
+    "code": "CABLE_REVERSE_FLY",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Écarté inversé à la poulie",
+    "description": "Placez-vous face à la machine, avec les poulies réglées en position haute. Saisissez la poignée gauche avec la main droite et la poignée droite avec la main gauche, de manière à croiser les bras devant vous, coudes légèrement fléchis et mains juste en dessous de la hauteur des épaules. Engagez la sangle abdominale et ouvrez les bras en grand arc de cercle jusqu’à ce qu’ils soient alignés avec les épaules et perpendiculaires au torse. Concentrez-vous sur la contraction des deltoïdes postérieurs en fin de mouvement. Revenez lentement à la position de départ avec les bras croisés, en contrôlant le mouvement sans élan ni sollicitation excessive du dos."
+  },
+  {
+    "id": "33de4217-b37f-469f-b135-0be975053423",
+    "code": "DUMBBELL_BICEPS_CURL",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Curl biceps avec haltères",
+    "description": "Tenez-vous debout avec un haltère dans chaque main, les bras tendus le long du corps, paumes tournées vers l’avant. Gardez les coudes près du torse et le dos droit. Fléchissez les coudes pour monter les haltères vers les épaules, en gardant les bras supérieurs immobiles. Concentrez-vous sur la contraction des biceps en haut du mouvement. Redescendez lentement les haltères à la position de départ sans verrouiller complètement les coudes. Cet exercice peut également être réalisé assis sur un banc."
+  },
+  {
+    "id": "90492bc2-1804-4a68-8179-cf62b2807f21",
+    "code": "BARBELL_CURL",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Curl à la barre",
+    "description": "Tenez-vous debout avec une barre en main, prise en supination à la largeur des épaules, paumes tournées vers l’avant. Laissez les bras tendus devant les cuisses. Gardez les coudes près du torse et fléchissez les coudes pour monter la barre vers les épaules, en maintenant les bras supérieurs immobiles. Contractez les biceps en haut du mouvement, puis redescendez lentement la barre jusqu’à la position de départ sans verrouiller les coudes. Gardez le dos droit pendant toute l'exécution."
+  },
+  {
+    "id": "dce0c0f8-92be-44a3-af62-9c574623579f",
+    "code": "INCLINE_DUMBBELL_REVERSE_FLY",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Écarté inversé avec haltères en inclinaison",
+    "description": "Tenez-vous debout avec un haltère dans chaque main, les bras tendus le long du corps. Penchez-vous vers l’avant en gardant le dos droit et les genoux légèrement fléchis, jusqu’à ce que votre torse soit proche de l’horizontale. Avec une légère flexion des coudes, écartez les bras latéralement en arc de cercle jusqu’à atteindre la hauteur des épaules, en serrant les omoplates en haut du mouvement. Redescendez lentement les haltères de manière contrôlée jusqu’à la position de départ. Vous pouvez également réaliser cet exercice assis sur un banc incliné pour plus de stabilité."
+  },
+  {
+    "id": "04c8ae19-1d33-40ae-a545-dc35f3b03b75",
+    "code": "FACE_PULL",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Tirage visage à la corde",
+    "description": "Réglez la poulie en position haute et attachez une corde. Placez-vous face à la machine et saisissez chaque extrémité de la corde en prise neutre, les pouces pointant vers vous. Reculez légèrement et tendez les bras vers l’avant avec une légère flexion des coudes. Tirez la corde vers votre visage en ramenant les coudes vers l’arrière et vers l’extérieur tout en contractant les omoplates. En fin de mouvement, les coudes doivent être à hauteur d’épaules et les avant-bras former un angle de 90°, la corde écartée près du visage. Revenez lentement à la position de départ en contrôlant le mouvement et en gardant la tension dans le câble."
+  },
+  {
+    "id": "232fcb78-53e6-4811-b490-c075b9e9fc1b",
+    "code": "REVERSE_BUTTERFLY",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Écarté inversé à la machine",
+    "description": "Asseyez-vous face à l’arrière de la machine butterfly (pec deck) et ajustez le siège de façon à ce que vos épaules soient alignées avec les poignées. Saisissez les poignées en prise neutre, coudes légèrement fléchis. Écartez les bras vers l’arrière en arc de cercle en contractant bien les omoplates en fin de mouvement. Gardez la poitrine collée au dossier et évitez d’utiliser l’élan. Revenez lentement à la position de départ de manière contrôlée pour compléter la répétition."
+  },
+  {
+    "id": "c2410039-1cc4-4786-80bd-bf73a1cc0989",
+    "code": "DUMBBELL_HAMMER_GRIP_CURL",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Curl marteau avec haltères",
+    "description": "Tenez-vous debout avec un haltère dans chaque main, les bras tendus le long du corps, paumes tournées vers vous en prise neutre. Gardez les coudes proches du torse et le dos bien droit. Fléchissez les coudes pour monter les haltères vers les épaules en maintenant les paumes tournées vers l’intérieur pendant tout le mouvement. Contractez les biceps en haut du mouvement, puis redescendez lentement les haltères à la position initiale sans verrouiller complètement les coudes. Cet exercice peut également être réalisé assis sur un banc."
+  },
+  {
+    "id": "1a83a7c1-dcb2-450b-8635-45995419ead3",
+    "code": "BICEPS_CURL_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Curl biceps à la machine",
+    "description": "Réglez la hauteur du siège afin que vos bras soient bien positionnés sur le support incliné, avec les coudes alignés avec l’axe de rotation de la machine. Saisissez les poignées ou la barre en prise supination. Gardez les bras supérieurs collés au pupitre et ramenez la charge vers vos épaules en fléchissant les coudes et en contractant les biceps. Marquez une courte pause en haut, puis redescendez lentement sans verrouiller complètement les coudes. Effectuez le mouvement de manière fluide et contrôlée."
+  },
+  {
+    "id": "189f06ce-580c-46e2-91b5-21b010f6ef67",
+    "code": "REVERSE_BARBELL_CURL",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      },
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Curl inversé à la barre",
+    "description": "Tenez-vous debout avec une barre en main, en prise pronation (paumes vers le bas), les mains à la largeur des épaules. Gardez les coudes près du corps et les bras tendus devant les cuisses. Fléchissez les coudes pour monter la barre vers les épaules, en gardant les bras supérieurs immobiles. Concentrez-vous sur la contraction des avant-bras et des biceps. Redescendez la barre lentement et de manière contrôlée jusqu’à la position de départ, sans verrouiller complètement les coudes. Gardez le dos droit pendant toute l’exécution."
+  },
+  {
+    "id": "8855bcea-babe-445e-a378-7d7df2fe0f32",
+    "code": "BICEPS_CABLE_CURL",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Curl biceps à la poulie",
+    "description": "Placez-vous face à une poulie basse avec une barre droite attachée. Saisissez la barre en prise supination, mains à la largeur des épaules, bras tendus devant les cuisses. Gardez les coudes près du corps et fléchissez les bras pour remonter la barre vers les épaules. Contractez les biceps en haut du mouvement. Redescendez lentement la barre à la position initiale en gardant le contrôle, sans verrouiller complètement les coudes."
+  },
+  {
+    "id": "046bd521-311e-4d29-9690-b55bf7682ec6",
+    "code": "HIGH_CABLE_CURLS",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Curl biceps à la poulie haute",
+    "description": "Placez-vous au centre d'une machine à poulies vis-à-vis, les poulies réglées en position haute. Saisissez une poignée dans chaque main en prise supination, bras tendus sur les côtés à hauteur d’épaules sans verrouiller les coudes. Gardez les bras parallèles au sol et fixes. Fléchissez les coudes pour ramener les poignées vers la tête en contractant les biceps. Marquez une pause en haut du mouvement, puis revenez lentement à la position de départ tout en maintenant la tension dans les câbles."
+  },
+  {
+    "id": "e809c52c-650d-4c25-b1e4-6a719a4202d7",
+    "code": "SPIDER_CURL",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Curl spider",
+    "description": "Allongez-vous sur le ventre sur un banc incliné, la poitrine bien appuyée et les bras tendus vers le sol, un haltère dans chaque main, paumes tournées vers l’avant. Gardez les bras verticaux et fixes. Fléchissez les coudes pour remonter les haltères vers les épaules en contractant les biceps. Marquez une courte pause en haut, puis redescendez lentement et de manière contrôlée sans verrouiller complètement les coudes. Cet exercice peut également être réalisé avec une barre."
+  },
+  {
+    "id": "d12de636-6dec-4cec-b55e-27079dd8cdd6",
+    "code": "SUPINATED_GRIP_PULL_UPS",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      },
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Tractions en supination",
+    "description": "Saisissez une barre de traction en prise supination (paumes vers vous), les mains à la largeur des épaules. Commencez en suspension complète, bras tendus. Gainez les abdominaux et tirez la poitrine vers la barre en fléchissant les coudes et en resserrant les omoplates. Continuez le mouvement jusqu’à ce que votre menton dépasse la barre. Marquez une courte pause en haut, puis redescendez lentement de façon contrôlée sans verrouiller les coudes. Gardez le corps stable et évitez les mouvements de balancier."
+  },
+  {
+    "id": "244b7106-7d3d-42eb-bc1a-485578d2c235",
+    "code": "DIPS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Dips",
+    "description": "Placez-vous entre deux barres parallèles, en utilisant une marche ou une plateforme si nécessaire pour atteindre la position de départ. Saisissez les barres en prise neutre et tendez les bras sans verrouiller les coudes. Gainez le corps pour rester stable. Descendez lentement en fléchissant les bras jusqu’à ce que les bras soient parallèles au sol. Évitez que les coudes ne montent plus haut que les épaules. Remontez ensuite en poussant sur les bras en contractant les triceps et les pectoraux. Gardez le buste droit et évitez les mouvements de balancier."
+  },
+  {
+    "id": "ec96a12e-90b4-4964-80ed-e72a48158878",
+    "code": "BENCH_DIPS",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Dips entre bancs",
+    "description": "Placez-vous dos à un banc plat, les mains posées à plat sur le bord, doigts vers l’avant. Allongez les jambes devant vous, talons au sol et hanches surélevées. Descendez lentement en fléchissant les coudes jusqu’à ce que vos bras soient parallèles au sol. Évitez que les épaules ne descendent plus bas que les coudes. Remontez en tendant les bras, sans verrouiller les coudes en haut du mouvement. Gainez bien le corps pour une exécution stable."
+  },
+  {
+    "id": "bea2a527-acdd-4a67-bc74-6ba2d7e9cb73",
+    "code": "LYING_BARBELL_EXTENSIONS",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Extensions allongé à la barre",
+    "description": "Asseyez-vous sur un banc plat avec une barre posée sur vos cuisses, en la saisissant avec une prise serrée en pronation. Allongez-vous ensuite sur le dos et tendez les bras verticalement, la barre au-dessus de la poitrine. En gardant les coudes serrés et fixes, fléchissez-les pour abaisser la barre vers le front, uniquement avec les avant-bras. Une fois proche du front, remontez la barre en tendant les bras sans verrouiller les coudes. Seuls les avant-bras doivent bouger pendant l'exercice."
+  },
+  {
+    "id": "446784b8-1e8e-41c4-a06f-aa6fa0743bbb",
+    "code": "CLOSE_GRIP_CHEST_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé couché prise serrée",
+    "description": "Asseyez-vous sur un banc plat avec une barre posée sur vos cuisses, saisie en prise serrée avec les paumes tournées vers le bas. Allongez-vous et tendez les bras verticalement au-dessus de votre poitrine. Gardez les coudes proches du corps et descendez la barre de manière contrôlée jusqu’au milieu de la poitrine. Poussez ensuite la barre vers le haut jusqu’à la position de départ en tendant les bras sans verrouiller les coudes. Gardez une tension constante sur les triceps pendant tout le mouvement."
+  },
+  {
+    "id": "d1625a78-9eae-4e2d-b3aa-81c33ac33bc8",
+    "code": "DUMBBELL_OVERHEAD_TRICEPS_EXTENSION",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Extension triceps au-dessus de la tête avec haltère",
+    "description": "Asseyez-vous sur un banc avec un dossier, en tenant un haltère avec les deux mains. Saisissez l'haltère par le disque supérieur, paumes face au poids pour une meilleure stabilité. Tendez les bras au-dessus de la tête. Fléchissez les coudes pour abaisser l’haltère derrière la tête, en veillant à garder les bras supérieurs immobiles et proches des oreilles. Ne laissez pas l’haltère toucher la nuque. Une fois la descente terminée, tendez les bras pour revenir à la position initiale. Gardez le dos droit et limitez le mouvement aux avant-bras."
+  },
+  {
+    "id": "7a6f9920-7d58-476d-8c34-9508b20d4dc6",
+    "code": "BARBELL_BENCH_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé couché à la barre",
+    "description": "Allongez-vous sur un banc avec les pieds bien ancrés au sol. Saisissez la barre légèrement plus large que la largeur des épaules, les poignets alignés avec les coudes. Décrochez la barre et positionnez-la au-dessus de la poitrine. Descendez-la lentement en fléchissant les coudes, jusqu’au milieu de la poitrine, en gardant les coudes à environ 45° du torse. Poussez ensuite la barre vers le haut en tendant les bras sans verrouiller les coudes. Veillez à conserver une symétrie entre les deux bras et à ne pas trop cambrer le bas du dos. En fin de série, replacez la barre avec précaution sur le rack."
+  },
+  {
+    "id": "08833b02-e25d-4dda-8fdd-e81ad171107c",
+    "code": "DUMBBELL_KICKBACK",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Extension triceps avec haltère",
+    "description": "Placez un genou et la main du même côté sur un banc plat pour vous stabiliser, en gardant le dos droit et la tête dans l’alignement de la colonne. Tenez un haltère avec l’autre main, bras fléchi et bras supérieur parallèle au buste. Étendez complètement le bras en tendant le coude jusqu’à ce que l’haltère soit dirigé vers l’arrière. Gardez le bras supérieur fixe et près du corps pendant tout le mouvement. Contractez les triceps en haut, puis revenez lentement à la position de départ sans laisser tomber le coude. Effectuez les répétitions souhaitées et changez de côté."
+  },
+  {
+    "id": "427f803e-13ae-4994-82fe-fec9a8440a18",
+    "code": "ROPE_TRICEPS_EXTENSION",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Extension triceps à la corde",
+    "description": "Attachez une corde à une poulie haute et placez-vous face à la machine. Saisissez la corde en prise neutre, les coudes serrés contre le corps et les avant-bras parallèles au sol. Étendez les bras vers le bas en poussant la corde vers les cuisses, en écartant légèrement les extrémités à la fin du mouvement. Contractez les triceps, puis revenez lentement à la position de départ en fléchissant les coudes. Seuls les avant-bras doivent bouger pendant l'exercice."
+  },
+  {
+    "id": "bca9220b-bdb7-4b7d-803f-4c3ff0f05cc4",
+    "code": "OVERHEAD_TRICEPS_EXTENSION",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Extension triceps au-dessus de la tête à la corde",
+    "description": "Attachez une corde à une poulie haute et placez-vous dos à la machine. Saisissez la corde en prise neutre et amenez vos mains derrière la tête, coudes fléchis pointant vers l’avant. Avancez légèrement d’un pas et inclinez-vous un peu vers l’avant. Tendez les bras devant vous en poussant la corde vers l’avant et le haut jusqu’à extension complète. Gardez les coudes fixes tout au long du mouvement. Revenez ensuite à la position de départ en fléchissant les coudes. Maintenez le dos droit et ne bougez que les avant-bras."
+  },
+  {
+    "id": "3232d389-cf66-4eaf-bb77-b63fa7cd34fd",
+    "code": "CLOSE_GRIP_PUSH-UPS",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Pompes en prise serrée",
+    "description": "Mettez-vous à genoux et placez vos mains au sol, proches l’une de l’autre, juste sous la poitrine. Tendez les jambes vers l’arrière pour vous mettre en position de planche, en appui sur la pointe des pieds. Gardez le corps bien droit et les abdos engagés. Descendez en fléchissant les coudes, tout en les gardant collés au buste. Évitez que les coudes ne s’écartent. Une fois la poitrine proche du sol, poussez sur les paumes pour revenir à la position de départ. Gardez le dos droit et le mouvement contrôlé tout au long de l’exercice."
+  },
+  {
+    "id": "5fcb938e-a4fa-4c9c-9f59-77e3ab1dfe98",
+    "code": "INCLINE_BARBELL_BENCH_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé incliné à la barre",
+    "description": "Allongez-vous sur un banc incliné, les pieds bien ancrés au sol. Saisissez la barre légèrement plus large que la largeur des épaules. Décrochez la barre et positionnez-la au-dessus de la partie supérieure de la poitrine. Descendez-la lentement en fléchissant les coudes jusqu’à atteindre le haut de la poitrine. Remontez la barre en tendant les bras sans verrouiller complètement les coudes. Gardez le dos plaqué contre le banc, une exécution symétrique et évitez de cambrer excessivement. Reposez la barre avec précaution à la fin de la série."
+  },
+  {
+    "id": "b9b45b9f-49ef-41ce-b038-3cba517aa275",
+    "code": "DECLINE_BARBELL_BENCH_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé décliné à la barre",
+    "description": "Allongez-vous sur un banc décliné avec les pieds calés sous les supports et le dos bien plaqué contre le dossier. Saisissez la barre légèrement plus large que la largeur des épaules. Décrochez la barre et positionnez-la au-dessus de la partie inférieure de la poitrine. Descendez-la lentement en fléchissant les coudes, en les gardant à un angle modéré par rapport au buste. Remontez ensuite la barre en tendant les bras sans verrouiller les coudes. Maintenez une bonne symétrie, le dos stable, et replacez la barre avec précaution à la fin de la série."
+  },
+  {
+    "id": "a71513f6-144b-4ede-8005-415bc940da24",
+    "code": "DUMBBELL_BENCH_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé couché avec haltères",
+    "description": "Asseyez-vous sur un banc plat avec un haltère dans chaque main en prise neutre ou classique. Allongez-vous avec les pieds bien ancrés au sol et amenez les haltères à hauteur de poitrine. Poussez les haltères vers le haut jusqu’à ce que les bras soient presque tendus, en rapprochant les poids en haut du mouvement. Descendez ensuite les haltères de manière contrôlée en fléchissant les coudes, jusqu’au niveau de la poitrine, selon votre mobilité. Remontez-les en gardant un mouvement fluide et contrôlé, sans verrouiller les coudes. Gardez le dos plaqué contre le banc et veillez à une exécution symétrique."
+  },
+  {
+    "id": "2fc1dcb9-7da7-48ab-af13-66f8fd2889ce",
+    "code": "INCLINE_DUMBBELL_BENCH_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé incliné avec haltères",
+    "description": "Asseyez-vous sur un banc incliné avec un haltère dans chaque main, en prise neutre ou classique. Allongez-vous avec les pieds bien ancrés au sol et positionnez les haltères à hauteur de poitrine. Poussez les haltères vers le haut en suivant un angle légèrement incliné, jusqu’à presque tendre les bras, en rapprochant les poids en haut du mouvement. Redescendez lentement les haltères en fléchissant les coudes, jusqu’à atteindre le haut de la poitrine. Ne verrouillez pas les coudes en haut et gardez un mouvement fluide et contrôlé. Maintenez le dos collé au banc et veillez à une exécution symétrique."
+  },
+  {
+    "id": "9235f517-37bd-4c4d-977a-998987b48bb6",
+    "code": "DECLINE_DUMBBELL_BENCH_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Développé décliné avec haltères",
+    "description": "Asseyez-vous sur un banc décliné avec un haltère dans chaque main en prise neutre ou classique. Allongez-vous et sécurisez vos pieds sous les supports. Amenez les haltères à hauteur de poitrine, puis poussez-les vers le haut jusqu’à ce que vos bras soient presque tendus, en rapprochant les poids en haut du mouvement. Descendez les haltères de manière contrôlée vers le bas de la poitrine en fléchissant les coudes. Ne verrouillez pas les coudes en fin de mouvement. Gardez une exécution symétrique et contrôlée, avec le dos bien plaqué contre le banc."
+  },
+  {
+    "id": "6bff0fba-9347-4053-9c10-e6eb0d4bef5c",
+    "code": "DUMBBELL_CHEST_FLYS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Écarté couché avec haltères",
+    "description": "Asseyez-vous sur un banc plat avec un haltère dans chaque main en prise neutre. Allongez-vous avec les pieds bien ancrés au sol et tendez les bras au-dessus de la poitrine, les haltères proches l’un de l’autre. Écartez les bras vers l’extérieur en suivant un arc large, les coudes légèrement fléchis. Descendez jusqu’à atteindre environ la hauteur de la poitrine selon votre mobilité. Contractez les pectoraux pour ramener les haltères l’un vers l’autre en position initiale. Gardez un mouvement fluide et évitez de verrouiller les coudes. Pour cibler davantage le haut des pectoraux, vous pouvez incliner légèrement le banc, mais une inclinaison trop importante sollicitera davantage les épaules."
+  },
+  {
+    "id": "de4e50a9-4d37-4f1d-9ac7-dd00822b86ca",
+    "code": "PUSH_UPS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Pompes",
+    "description": "Placez-vous à quatre pattes, les mains à la largeur des épaules ou légèrement plus écartées, les jambes tendues vers l’arrière en appui sur la pointe des pieds. Gardez le corps bien aligné de la tête aux talons en contractant les abdominaux et les fessiers. Descendez la poitrine vers le sol en fléchissant les coudes, qui doivent rester proches du corps. Lorsque la poitrine approche du sol, poussez sur les paumes pour revenir en position initiale, bras tendus. Maintenez une ligne droite avec le dos tout au long du mouvement, sans laisser les hanches s’affaisser ou se lever."
+  },
+  {
+    "id": "3e9e4c94-b860-4e5f-9058-d842dade4d22",
+    "code": "PEC_DECK",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Pec-deck / Butterfly",
+    "description": "Réglez le siège de manière à ce que vos coudes soient à hauteur d’épaule lorsque vous saisissez les poignées. Asseyez-vous avec le dos bien calé contre le dossier et les pieds à plat au sol. Gardez une légère flexion des coudes et rapprochez les poignées devant votre poitrine en contractant les pectoraux. Marquez une courte pause en fin de mouvement, puis revenez lentement en position de départ en contrôlant l’ouverture des bras. Maintenez un mouvement fluide et le dos bien en appui durant toute l’exécution."
+  },
+  {
+    "id": "5f673aaa-0c3f-4ced-b95a-af47fffc14a5",
+    "code": "SEATED_CHEST_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Presse à poitrine assise",
+    "description": "Réglez le siège de façon à ce que les poignées soient alignées avec le milieu de votre poitrine. Asseyez-vous avec le dos bien appuyé contre le dossier et les pieds à plat au sol. Saisissez les poignées en gardant les coudes fléchis à environ 90 degrés. Poussez les poignées vers l’avant en tendant les bras de manière contrôlée, sans verrouiller les coudes en fin de mouvement. Revenez ensuite lentement en position de départ en fléchissant les coudes, tout en maintenant la tension dans les pectoraux."
+  },
+  {
+    "id": "39abb044-2eeb-4d7b-8d02-05cb7cf0b5d5",
+    "code": "HIGH_CABLE_CHEST_FLY",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Écarté à la poulie haute",
+    "description": "Réglez les poulies en position haute et placez-vous au centre de la machine. Saisissez les poignées en prise neutre et avancez légèrement d’un pas pour créer de la tension. Avec une légère flexion des coudes, ouvrez les bras en grand, puis rapprochez les mains l’une de l’autre devant votre poitrine en contractant les pectoraux. Contrôlez bien le mouvement, notamment lors de la phase négative. Ne laissez pas les poignées partir trop loin derrière pour éviter les tensions sur les épaules. Vous pouvez vous pencher légèrement en avant pour cibler certaines zones du muscle pectoral."
+  },
+  {
+    "id": "bdeca3e6-15cb-4649-bf80-e642d664e5a7",
+    "code": "INCLINE_CHEST_PRESS_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Presse à poitrine inclinée",
+    "description": "Réglez la hauteur du siège afin que les poignées soient alignées avec le haut de votre poitrine. Asseyez-vous avec le dos bien calé contre le dossier et les pieds à plat au sol. Saisissez les poignées fermement et poussez-les vers le haut et légèrement vers l’avant en tendant les bras, sans verrouiller les coudes en fin de mouvement. Ramenez ensuite les poignées lentement en position de départ de manière contrôlée. Gardez la poitrine engagée et le dos bien en appui pendant toute l’exécution."
+  },
+  {
+    "id": "418bd319-fa86-4773-a172-5273d950adb3",
+    "code": "PRONATED_GRIP_PULL_UPS",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Tractions en pronation",
+    "description": "Saisissez la barre en prise pronation (paumes tournées vers l’extérieur), les mains à largeur d’épaules ou un peu plus large. Contractez les dorsaux pour tirer votre corps vers le haut jusqu’à ce que votre menton dépasse la barre. Maintenez un mouvement fluide et contrôlé. Redescendez lentement sans verrouiller complètement les coudes en bas du mouvement. Gardez le corps gainé et évitez les mouvements de balancier. Concentrez-vous sur le travail du dos dès le début du tirage, sans solliciter excessivement les biceps."
+  },
+  {
+    "id": "d433e913-a6cb-457c-b071-2d2184561fb4",
+    "code": "LOW_CABLE_CHEST_FLY",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Écarté à la poulie basse",
+    "description": "Réglez les poulies en position basse et placez-vous au centre de la machine. Saisissez les poignées en prise neutre, puis avancez légèrement d’un pas pour créer de la tension. En gardant une légère flexion des coudes, montez les bras en arc de cercle tout en rapprochant les mains l’une de l’autre au-dessus de la tête, en contractant les pectoraux. Marquez une courte pause en haut, puis redescendez les bras lentement en contrôlant le mouvement pour revenir à la position de départ. Gardez les pectoraux engagés pendant toute l’exécution."
+  },
+  {
+    "id": "de25897d-75b8-4bd3-a426-16b050bccf9b",
+    "code": "HORIZONTAL_ROW_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Rowing horizontal à la machine",
+    "description": "Asseyez-vous face à la machine et placez vos pieds sur les supports. Fléchissez les genoux pour saisir les poignées en gardant le dos droit. Tendez ensuite légèrement les jambes pour reculer et débloquer la charge. Ramenez les épaules vers l’arrière et serrez les omoplates en tirant les poignées vers votre ventre, au niveau du nombril. Contrôlez la descente pour revenir à la position de départ. Une fois les répétitions terminées, repliez les genoux pour reposer la charge sans courber le dos."
+  },
+  {
+    "id": "10b040d7-a6ef-40ab-896c-faa1ff467f75",
+    "code": "BARBELL_BENT_OVER_ROW",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Rowing buste penché à la barre",
+    "description": "Tenez-vous debout, les pieds à largeur d’épaules, et saisissez la barre en prise pronation (paumes vers le bas) au niveau des hanches. Penchez-vous vers l’avant en gardant le dos droit et la poitrine relevée. Tirez la barre vers le bas du ventre en ramenant les épaules en arrière et en serrant les omoplates. Redescendez la barre de façon contrôlée jusqu’à la position de départ. Gardez le dos bien droit pendant tout le mouvement. Cet exercice peut aussi être réalisé en prise supination (paumes vers le haut) pour cibler davantage les biceps."
+  },
+  {
+    "id": "b8fadf63-943f-46c2-955a-d36adcec782b",
+    "code": "BENT_OVER_DUMBBELL_ROW",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Rowing buste penché avec haltères",
+    "description": "Tenez un haltère dans chaque main, les bras le long du corps. Fléchissez légèrement les genoux et penchez-vous vers l’avant en gardant le dos droit et la poitrine relevée. Ramenez les haltères vers les hanches en ramenant les épaules en arrière et en serrant les omoplates. Redescendez les haltères de façon contrôlée jusqu’à ce que les bras soient presque tendus. Concentrez-vous sur l’activation du dos et limitez l’implication des biceps pour bien cibler les muscles dorsaux."
+  },
+  {
+    "id": "1c6a479f-b59e-47e3-bd6b-e746ecbee601",
+    "code": "PULL_DOWN",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Tirage vertical à la machine",
+    "description": "Asseyez-vous sur le siège face à la machine et saisissez la barre en prise pronation (paumes vers l’extérieur), les mains écartées à largeur d’épaules ou un peu plus. Contractez les dorsaux pour faire descendre la barre vers le haut de la poitrine en gardant le buste droit. Marquez une courte pause en bas, puis revenez lentement à la position de départ sans verrouiller les coudes. Concentrez-vous sur un mouvement contrôlé en phase négative. Vous pouvez aussi réaliser cet exercice en prise supination (paumes vers vous) pour solliciter davantage les biceps."
+  },
+  {
+    "id": "0834c776-97f9-44e5-afc5-139f05a580f8",
+    "code": "UNILATERAL_BENT_OVER_ROW",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Rowing unilatéral avec haltère",
+    "description": "Placez un genou et la main du même côté sur un banc plat pour stabiliser votre corps, en veillant à garder le dos droit et parallèle au sol. Avec la main libre, saisissez un haltère et tirez-le vers la hanche en ramenant l’épaule en arrière et en serrant l’omoplate. Marquez une courte pause en haut du mouvement, puis redescendez l’haltère de manière contrôlée jusqu’à ce que le bras soit presque tendu. Concentrez-vous sur l’activation des muscles du dos plutôt que sur les biceps. Une fois la série terminée, effectuez le mouvement avec l’autre bras."
+  },
+  {
+    "id": "6bbb19ad-cdb3-46ee-80fe-c23dc3b05eb1",
+    "code": "BACK_EXTENSIONS",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Extensions lombaires",
+    "description": "Installez-vous sur la machine à extensions lombaires en calant vos pieds et en ajustant le coussin pour qu’il repose juste en dessous de vos hanches. Commencez en position droite, le buste aligné avec les jambes. Penchez-vous vers l’avant en pliant les hanches, tout en gardant le dos droit, et descendez selon votre amplitude de mouvement. Redressez ensuite le buste en contractant les lombaires jusqu’à revenir à une position droite, sans aller au-delà pour éviter l’hyperextension. Vous pouvez tenir un disque contre la poitrine pour ajouter de la difficulté."
+  },
+  {
+    "id": "bf08a85a-aa3a-4242-895c-a9025a99a284",
+    "code": "PULLOVER",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Pullover",
+    "description": "Placez un haltère sur vos genoux, assis sur le banc. Allongez-vous sur le dos, et faites passer l'haltère au-dessus de vous avec les paumes des mains face au disque pour faciliter l'équilibre du poids et être plus à l'aise lors de l'exécution. Tendez vos bras vers le haut, légèrement fléchis, et pivotez vos épaules vers l'arrière en faisant passer le poids derrière votre tête. Contractez vos dorsaux pour revenir les bras tendus vers le haut, et continuez. Veillez à conserver une prise ferme sur la charge utilisée pour ne pas vous blesser. Cet exercice peut également être réalisé avec une barre."
+  },
+  {
+    "id": "21c37b13-51b8-4590-bf7b-4ec9a45d53a7",
+    "code": "PLANK",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Planche",
+    "description": "Agenouillez-vous puis placez vos coudes sur le tapis et tendez vos jambes afin de répartir votre poids sur la pointe des pieds et les avant-bras. Votre dos doit rester droit tout au long de la série. Contractez les abdominaux afin de conserver cette position durant la période de temps que vous vous êtes fixé, puis relâchez."
+  },
+  {
+    "id": "0ee686db-2fc7-4f69-b154-f59d1f3d2f84",
+    "code": "AUSTRALIAN_PULL_UPS",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Tractions australiennes",
+    "description": "Réglez la barre à une hauteur permettant de la saisir tout en gardant les talons en appui au sol. Saisissez la barre en prise pronation (paumes vers l'extérieur), les mains à largeur d’épaules ou un peu plus large. Rapprochez vos omoplates pour amener la poitrine vers la barre, en gardant le corps bien droit et les abdos contractés. Redescendez de manière contrôlée sans verrouiller les coudes en bas du mouvement. Concentrez-vous sur l’activation du dos en limitant l’intervention des biceps en début de tirage."
+  },
+  {
+    "id": "50dfce16-5d45-4f12-9928-5730fc027689",
+    "code": "T_BAR_ROW",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Rowing barre en T",
+    "description": "Placez-vous au-dessus de la barre en T, les pieds à la largeur des épaules. Pliez légèrement les genoux et penchez-vous vers l’avant en gardant le dos droit et la poitrine relevée. Saisissez les poignées avec une prise pronation ou neutre selon le type de barre. Tirez la charge vers votre ventre en ramenant les omoplates l’une vers l’autre et en poussant les coudes vers l’arrière. Contractez les muscles du dos en haut du mouvement, puis redescendez la barre de manière contrôlée sans verrouiller les bras. Concentrez-vous sur l’engagement du dos, en limitant l’intervention des biceps."
+  },
+  {
+    "id": "e7c2ba66-ff0a-4d9e-ba49-5ed54e411467",
+    "code": "DEADLIFT",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      },
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      },
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Soulevé de terre",
+    "description": "Tenez-vous debout, les pieds écartés à la largeur des épaules, avec la barre placée au-dessus du milieu de vos pieds. Penchez-vous en avant en fléchissant les hanches et les genoux tout en gardant le dos droit et la poitrine relevée. Saisissez la barre en prise pronation (paumes vers vous), puis activez vos dorsaux en tirant légèrement les épaules vers l’arrière. Poussez à travers les talons pour soulever la barre en redressant simultanément les jambes et les hanches. Marquez une courte pause en haut sans cambrer le dos, puis redescendez la barre en contrôlant le mouvement, en repliant les hanches et les genoux tout en gardant le dos droit."
+  },
+  {
+    "id": "21c04a87-a1a5-4d5d-9281-5ad226fb67e7",
+    "code": "PUSHDOWN_STRAIGHT_ARM",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      },
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Tirage vertical bras tendus",
+    "description": "Placez-vous debout face à la machine à poulie et saisissez la barre droite en prise pronation (paumes vers le bas). Reculez légèrement et fléchissez légèrement les genoux en gardant le dos bien droit. Avec les bras tendus mais sans verrouiller les coudes, utilisez vos dorsaux pour abaisser la barre jusqu’au niveau de vos cuisses, tout en gardant les bras droits pendant tout le mouvement. Remontez ensuite la barre de manière contrôlée jusqu’à la position initiale. Gardez le dos droit et le tronc engagé tout au long de l’exercice."
+  },
+  {
+    "id": "1da82d9e-159a-4100-ba47-bf51b8ca46f0",
+    "code": "LOW_CABLE_ROW",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Rowing bas à la poulie",
+    "description": "Placez-vous debout ou assis face à la poulie basse et saisissez la poignée en prise pronation (paumes vers le bas). Gardez le dos droit et la poitrine sortie en tirant la poignée vers le bas du torse, en contractant les omoplates. Marquez une courte pause en haut, puis revenez lentement en position de départ en contrôlant le mouvement. Vous pouvez également effectuer cet exercice en prise supination (paumes vers le haut) pour plus de sollicitation des biceps, ou de manière unilatérale pour isoler chaque côté."
+  },
+  {
+    "id": "b1f27510-a952-4227-a104-a6a3b7c21313",
+    "code": "TRX_ROW",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Rowing TRX",
+    "description": "Saisissez les deux poignées en prise neutre, inclinez-vous vers l’arrière en gardant les bras et les jambes tendus sans verrouiller les coudes. Tirez avec les bras pour rapprocher votre poitrine des poignées en gardant les coudes le long du corps. Contrôlez la descente pour revenir en position de départ. Gardez le corps bien droit tout au long du mouvement. Vous pouvez ajuster la difficulté en modifiant votre position ou la hauteur des poignées, ainsi qu’en changeant la prise (pronation ou supination)."
+  },
+  {
+    "id": "87680ca6-38b0-4db1-9460-244c883816a0",
+    "code": "CRUNCHES",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Crunchs",
+    "description": "Allongez-vous sur le dos sur un tapis, jambes fléchies. Placez vos mains au niveau des tempes, ou bien croisez vos bras au niveau de la poitrine, et contractez les abdominaux pour décoller le haut du corps, tout en conservant en permanence le bas du dos collé au tapis. Revenez ensuite en position de départ et continuez."
+  },
+  {
+    "id": "7c8bf962-f791-48bd-994c-999809cdfc00",
+    "code": "ROTATION_CRUNCHES",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      },
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Crunchs avec rotation",
+    "description": "Allongez-vous sur le dos sur un tapis, jambes fléchies. Placez vos mains au niveau des tempes, et croisez l'une de vos jambes en plaçant votre cheville sur le genou opposé. Contractez alors les abdominaux tout en effectuant une légère rotation de manière à venir rapprocher votre coude de la jambe qui est croisée, puis revenez en position de départ. Faites la même chose en croisant l'autre jambe. Veillez à ne pas décoller le bas du dos du tapis lors de l'exécution."
+  },
+  {
+    "id": "15c20cbb-254d-4496-840e-01c36cf60ef3",
+    "code": "LEG_RAISES",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Relevés de jambes",
+    "description": "Allongez-vous sur le dos sur un tapis, les bras le long du corps et les jambes tendues ou légèrement fléchies. Contractez les abdominaux afin de relever vos jambes jusqu'à former un angle d'environ 90°, puis contrôlez la descente pour revenir à la position initiale, en vous arrêtant juste avant que vos pieds ne touchent le sol pour optimiser le travail du muscle. Veillez à conserver votre dos collé au tapis lors de l'exécution."
+  },
+  {
+    "id": "620f989d-ace5-4e43-bb11-363515753047",
+    "code": "LATERAL_PLANK",
+    "primaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Planche latérale",
+    "description": "Agenouillez-vous puis placez l'un de vos coudes sur le tapis et tendez vos jambes du côté opposé, afin de répartir votre poids sur un pied et l'avant-bras sollicité. Vous vous retrouvez ainsi sur un côté afin de solliciter le muscle oblique. Votre dos doit rester droit tout au long de la série. Contractez les abdominaux afin de conserver cette position durant la période de temps que vous vous êtes fixé, puis relâchez. Réalisez la même chose de l'autre côté."
+  },
+  {
+    "id": "a5c9db8f-88bf-43af-b6ef-eba58e466ce9",
+    "code": "MOUNTAIN_CLIMBERS",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Mountain climbers",
+    "description": "Agenouillez-vous puis placez vos mains à plat sur le tapis et tendez vos jambes. Fléchissez l'un de vos genoux de manière à le rapprocher de votre poitrine. A ce moment, tendez à nouveau cette même jambe pour la replacer en position de départ, tout en fléchissant le genou opposé. Répétez ce cycle en maintenant un rythme rapide pour travailler votre cardio. Pensez à bien contracter les abdominaux durant l'exécution."
+  },
+  {
+    "id": "32c95cca-ab36-4164-abc6-a6408eeab2b8",
+    "code": "RUSSIAN_TWIST",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      },
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Russian twist",
+    "description": "Asseyez-vous sur un tapis, les genoux fléchis, et joignez vos mains devant vous. Décollez alors légèrement vos deux pieds du sol, et effectuez une rotation du bassin en contractant vos obliques pour ramener vos mains vers un côté de votre corps, en les maintenant jointes. Faites la même chose vers le côté opposé, et continuez. Veillez à conserver vos abdominaux gainez pour optimiser le travail des abdominaux et maintenir votre posture et votre équilibre."
+  },
+  {
+    "id": "1fbcc41d-2fe1-4966-991c-c752ff19fe5e",
+    "code": "CABLE_CRUNCHES",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "f976b436-aaba-4195-8f80-a940ca95db3b",
+        "code": "CABLE",
+        "name": "Câble"
+      }
+    ],
+    "name": "Crunchs à la poulie",
+    "description": "Positionnez une double corde sur une poulie haute, et agenouillez-vous face à celle-ci. Saisissez la corde à deux mains en prise neutre (la paume des mains vers l'intérieur), le dos droit au départ du mouvement. Contractez vos abdominaux afin d'arrondir votre dos vers l'avant, en maintenant les extrémités de la corde au niveau des oreilles. Une fois la contraction maximale atteinte, revenez alors à la position initiale en retenant le mouvement afin d'optimiser le travail du muscle. Veillez à ne pas descendre trop bas lors de l'exécution pour ne pas solliciter les fléchisseurs de la hanche et concentrer le travail sur les abdominaux."
+  },
+  {
+    "id": "e3344e08-498e-4b31-bae5-ef9e7bbf84c8",
+    "code": "SQUAT",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Squat",
+    "description": "Installez une barre sur un rack positionné à la hauteur qui vous convient le mieux. Placez la barre en appui sur vos trapèzes, derrière votre nuque, puis tendez vos jambes pour la décoller du rack. Reculez légèrement, et écartez vos pieds à largeur d'épaules ou un peu plus larges. Le dos bien droit et les abdominaux gainés, fléchissez vos genoux en concentrant la charge le plus possible sur vos talons afin de maintenir un bon équilibre. Simulez le fait de vous asseoir sur une chaise, et conservez une trajectoire droite tout au long du mouvement. Une fois en bas (plus ou moins bas selon votre mobilité), contractez vos quadriceps ainsi que vos fessiers afin de faire remonter la barre et revenir en position de départ. Une fois votre série terminée, replacer la barre sur le rack. Veillez à toujours conserver le dos droit lors de l'exécution, et à ne pas trop avancer vos genoux vers l'avant lorsque vous réalisez vos flexions."
+  },
+  {
+    "id": "82665259-66e8-418c-8a55-e631b023f244",
+    "code": "V_UPS",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "V-ups",
+    "description": "Allongez-vous sur un tapis, les jambes collées et les bras le long du corps. En contractant vos abdominaux, ramenez vos jambes vers le haut en les maintenant tendues, et décollez le torse en essayant de venir toucher vos pieds avec vos mains. L'objectif est de trouver un équilibre permettant de tenir uniquement sur les fessiers lorsque vous effectuez vos répétitions."
+  },
+  {
+    "id": "a8a782cf-6f94-4072-a681-27afa13c5624",
+    "code": "SCISSORS",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Ciseaux",
+    "description": "Allongez-vous sur un tapis, les jambes collées et les bras le long du corps. Décollez légèrement vos deux jambes du sol, et levez l'une de vos jambes en la conservant tendue, tandis que l'autre reste en position initiale. Faites redescendre la jambe qui était montée tout en relevant l'autre jambe. Alternez ainsi durant toute votre série. Veillez à bien conserver le dos plaqué contre le tapis lors de l'exécution."
+  },
+  {
+    "id": "1cfda8a0-7b6a-4c5b-8835-d8b8c988b186",
+    "code": "ROMAN_CHAIR_LEG_RAISES",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Relevés de jambes à la chaise romaine",
+    "description": "Plaquez votre dos sur le dossier, et placez vos coudes sur les repose-coudes de manière à ce que vos bras soient fléchis à 90°. Les jambes tendues et jointes, fléchissez-les afin de monter vos genoux au maximum, en contractant les abdominaux tout au long du mouvement. En conservant cette contraction, revenez en position de départ les jambes tendues, et continuez. Cet exercice peut également être réalisé en conservant les jambes tendues en permanence, ce qui le rend plus compliqué et plus efficace. Veiller à toujours avoir le dos collé contre le dossier lors de l'exécution."
+  },
+  {
+    "id": "868fc7dc-cc48-4dad-b115-e84277e3dacb",
+    "code": "HEEL_TOUCHES",
+    "primaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Touchers de talons",
+    "description": "Allongez-vous sur un tapis, les genoux fléchis et les bras le long du corps. En contractant votre oblique, touchez votre talon d'un côté avec votre main, sans décoller votre dos du tapis. Revenez en position de départ puis faites la même chose de l'autre côté. Veillez à conserver les abdominaux contractés tout au long du mouvement pour optimiser le travail du muscle."
+  },
+  {
+    "id": "d75a24ad-7b17-4648-8426-1ac26a423212",
+    "code": "AB_WHEEL",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      },
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Roue abdominale",
+    "description": "Agenouillez-vous (sur un tapis de préférence) et saisissez l'AB Wheel face à vous en étant courbé, puis faites la rouler le plus loin possible vers l'avant en gainant vos abdominaux jusqu'à ce que votre dos soit droit. Restez dans cette position 2 ou 3 secondes, puis contractez vos abdominaux afin de faire revenir la roue vers vous jusqu'à la position initiale. Veillez à garder vos bras et vos genoux serrés lors de l'exécution."
+  },
+  {
+    "id": "5eda8fe1-dcb5-4613-8bcd-1b5240e59f46",
+    "code": "HANGING_LEG_RAISES",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Relevés de jambes suspendu",
+    "description": "Saisissez la barre en prise pronation (la paume des mains vers l'extérieur), le corps droit et les abdominaux gainés afin de ne pas vous balancer. Contractez vos abdominaux afin de lever vos jambes devant vous, tout en les conservant tendues. Touchez la barre avec vos pieds (ou rapprochez-vous-en au maximum), puis contrôlez la descente jusqu'à revenir en position initiale. Cet exercice peut également être effectué en pliant les genoux à 90° lors de la phase de contraction, afin de faciliter l'exercice."
+  },
+  {
+    "id": "8f1e77dc-6219-4291-bda4-f2bbe8149a6b",
+    "code": "JUMP_SQUAT",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Squat sauté",
+    "description": "En position debout, écartez vos pieds à largeur d'épaules ou un peu plus large. Tendez vos bras ou joignez vos mains devant vous, et fléchissez les jambes afin de réaliser un mouvement de squat. Descendez plus ou moins bas en fonction de votre mobilité. Une fois en bas de du mouvement, sautez de manière explosive en contractant les quadriceps, et faites en sorte de toucher le sol avec la pointe des pieds et de plier vos jambes afin d'amortir au mieux le choc. Veillez à conserver le dos droit pendant l'exécution."
+  },
+  {
+    "id": "611a0d2a-eee4-41bf-8371-5899e1d64f26",
+    "code": "LUNGES",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      },
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Fentes",
+    "description": "En position debout, les pieds écartez à largeur du bassin, faites un pas en avant et fléchissez la jambe que vous venez d'avancer. Veillez à rester droit verticalement lors de la flexion, et limitez-vous à un angle de 90° au maximum. Votre jambe arrière est appuyée sur la pointe des pieds, parallèle au sol. Contractez la jambe de devant afin de vous redresser et revenir en position de départ. Libre à vous de continuer à avancer en faisant un pas avec l'autre jambe, ou bien de rester sur place, en continuant sur la même jambe ou en alternant à chaque répétition. Veillez à toujours conserver le dos droit lors de l'exécution, et à ne pas trop avancer vos genoux vers l'avant lorsque vous réalisez vos flexions."
+  },
+  {
+    "id": "694d26e0-6b81-4a4d-90ea-6260f07c217f",
+    "code": "HACK_SQUAT",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Squat guidé",
+    "description": "Montez sur la plateforme en plaquant bien votre dos contre le dossier et en vous positionnant entre les deux supports. Placez vos pieds sur la plateforme, écartés à largeur d'épaules, plus ou moins haut selon le muscle que vous souhaitez cibler. Débloquez la presse à l'aide des poignées, et tendez vos jambes sans verrouiller les genoux pour débloquer la charge. Fléchissez les jambes et contrôlez la descente, en vous arrêtant plus ou moins bas selon votre mobilité. Une fois en bas, contractez vos quadriceps et vos fessiers de manière à soulever la charge appuyée sur vos épaules et revenir en position de départ. Veillez à ne jamais décoller le dos du siège et à toujours vous tenir droit, et à ne pas verrouiller vos genoux lorsque vous tendez les jambes."
+  },
+  {
+    "id": "e603c228-701b-4239-ada5-14b6b09fa628",
+    "code": "BURPEES",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      },
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      },
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "959e7bec-f8a2-4274-8289-b95031e11763",
+        "code": "CALVES",
+        "name": "Mollets"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Burpees",
+    "description": "En position debout, écartez vos pieds à largeur d'épaules ou un peu plus large. Fléchissez les genoux en réalisant un squat, et placez vos mains sur le sol lorsque vous êtes en bas de votre mouvement. Une fois accroupie, supportez votre poids avec vos bras et tendez vos jambes en arrière afin de vous maintenir avec la pointe des pieds. Faites alors une pompe en étant gainé avec le dos droit, puis ramenez vos pieds au niveau de vos mains qui sont toujours placées au sol. Replacez-vous en position basse de squat, et sautez de manière explosive en contractant les quadriceps et en levant les bras pour vous donner de l'impulsion. Faites en sorte de toucher le sol avec la pointe des pieds et de plier vos jambes afin d'amortir au mieux le choc. Continuez en effectuant à nouveau un squat après votre réception."
+  },
+  {
+    "id": "b2fba2d4-0cf3-491b-ab2f-c8fd4b58879f",
+    "code": "PISTOL_SQUAT",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Pistol squat",
+    "description": "Tenez-vous debout, les bras tendus le long du corps. En équilibre sur une jambe, réalisez un mouvement de squat, et descendez plus ou moins bas selon votre mobilité. Lors de la descente, tendez vos bras devant vous afin de répartir votre poids et maintenir un alignement pendant le mouvement. Une fois en bas, contractez le quadriceps pour remonter en position initiale, puis faites la même chose avec la jambe opposée. Veillez à ne pas trop avancer votre genou vers l'avant lorsque vous réalisez vos flexions."
+  },
+  {
+    "id": "03b63fcb-3634-423c-80de-98eab4e55027",
+    "code": "FRONT_SQUAT",
+    "primaryMuscles": [
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Squat avant",
+    "description": "Installez une barre sur un rack positionné à la hauteur qui vous convient le mieux. Placez la barre en appui sur l'avant de vos épaules et saisissez-la avec la paume des mains vers le haut (vous pouvez aussi croiser vos bras sur la barre pour éviter la pression sur les poignets). Tendez vos jambes pour décoller la barre du rack. Reculez légèrement, et écartez vos pieds à largeur d'épaules ou un peu plus larges. Le dos bien droit et les abdominaux gainés, fléchissez vos genoux en concentrant la charge le plus possible sur vos talons afin de maintenir un bon équilibre. Simulez le fait de vous asseoir sur une chaise, et conservez une trajectoire droite tout au long du mouvement. Une fois en bas (plus ou moins bas selon votre mobilité), contractez vos quadriceps ainsi que vos fessiers afin de faire remonter la barre et revenir en position de départ. Une fois votre série terminée, replacer la barre sur le rack. Veillez à toujours conserver le dos droit lors de l'exécution, et à ne pas trop avancer vos genoux vers l'avant lorsque vous réalisez vos flexions."
+  },
+  {
+    "id": "c5c22898-23f4-4156-86d3-bda2177adae2",
+    "code": "LEG_EXTENSION",
+    "primaryMuscles": [
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Extension des jambes",
+    "description": "Asseyez-vous sur la machine le dos plaqué au dossier. Placez vos pieds sous le coussin, de manière à le coller au niveau des chevilles. Contractez vos quadriceps afin de faire monter le coussin, et de vous retrouver les jambes tendues. Contrôlez ensuite la descente jusqu'à revenir en position de départ puis continuez. Il est également possible de réaliser cet exercice de manière unilatérale, une jambe après l'autre."
+  },
+  {
+    "id": "31eb74fc-e71e-48aa-884e-89efda1860ab",
+    "code": "JUMPING_JACKS",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      },
+      {
+        "id": "959e7bec-f8a2-4274-8289-b95031e11763",
+        "code": "CALVES",
+        "name": "Mollets"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Jumping jacks",
+    "description": "En position debout, écartez vos pieds à largeur d'épaules ou un peu plus large, les bras le long du corps. Sautez et écartez davantage les jambes, et levez vos bras sur les côtés pour les rapprocher au-dessus de votre tête et coller vos mains. Sautez à nouveau afin de revenir en position de départ, en redescendant vos bras le long du corps et en replaçant vos pieds à largeur d'épaules. Veillez à rester bien droit lors de l'exécution."
+  },
+  {
+    "id": "a8f68237-a6d3-4f0b-a77c-262f67177a92",
+    "code": "JUMPING_LUNGES",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Fentes sautées",
+    "description": "En position debout, les pieds écartez à largeur du bassin, faites un pas en avant et fléchissez la jambe que vous venez d'avancer. Veillez à rester droit verticalement lors de la flexion, et limitez-vous à un angle de 90° au maximum. Votre jambe arrière est appuyée sur la pointe des pieds, parallèle au sol. Contractez de manière explosive la jambe de devant afin de sauter et d'alterner la jambe arrière avec la jambe avant pendant que vous êtes en l'air. Faites en sorte de toucher le sol avec la pointe des pieds et de plier vos jambes afin d'amortir au mieux le choc. Réalisez alors la même chose en inversant la jambe sollicitée, puis continuez. Veillez à toujours conserver le dos droit lors de l'exécution, et à ne pas trop avancer vos genoux vers l'avant lorsque vous réalisez vos flexions."
+  },
+  {
+    "id": "d9850407-2961-4932-bd1b-679ccd3de7e2",
+    "code": "STANDING_CALF_RAISES",
+    "primaryMuscles": [
+      {
+        "id": "959e7bec-f8a2-4274-8289-b95031e11763",
+        "code": "CALVES",
+        "name": "Mollets"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Élévations mollets debout",
+    "description": "Placez-vous face à la machine, en tenant sur l'avant de vos pieds, puis réglez la hauteur des supports pour les positionner sur vos épaules. Les jambes tendues et le dos droit, réalisez une extension avec vos mollets pour vous mettre sur la pointe des pieds, puis redescendez les talons vers le sol pour revenir à la position de départ."
+  },
+  {
+    "id": "c3589fc0-c93f-4d8a-9982-ff5cc1405153",
+    "code": "CALF_PRESS_LEG_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "959e7bec-f8a2-4274-8289-b95031e11763",
+        "code": "CALVES",
+        "name": "Mollets"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Extensions mollets à la presse",
+    "description": "Asseyez-vous en plaquant bien votre dos contre le dossier. Placez l'avant de vos pieds sur le bas de la plateforme, écartés à largeur d'épaules. Débloquez la presse à l'aide des poignées, puis tendez les jambes sans verrouiller les genoux. Réalisez une extension avec vos mollets jusqu'à vous retrouver sur la pointe des pieds, puis relâchez cette extension pour revenir en position de départ. Veillez à ne jamais décoller le dos ou les fesses du siège."
+  },
+  {
+    "id": "85bddde0-fd5a-44dc-9ad0-7d11480df59f",
+    "code": "LEG_PRESS",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Presse à cuisses",
+    "description": "Asseyez-vous en plaquant bien votre dos contre le dossier. Placez vos pieds sur la plateforme, écartés à largeur d'épaules, plus ou moins haut selon le muscle que vous souhaitez cibler. Débloquez la presse à l'aide des poignées, et tendez vos jambes sans verrouiller les genoux pour débloquer la charge. Fléchissez les jambes et contrôlez la descente, en vous arrêtant plus ou moins bas selon votre mobilité. Une fois en bas, contractez vos quadriceps et vos fessiers de manière à faire revenir la plateforme à sa position de départ. Veillez à ne jamais décoller le dos ou les fesses du siège, et à ne pas verrouiller vos genoux lorsque vous tendez les jambes."
+  },
+  {
+    "id": "803823cf-5031-426d-b88b-1a5b6e86bee0",
+    "code": "WALL_SIT",
+    "primaryMuscles": [
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "b85ee150-2a32-4371-aa83-6186940443b0",
+        "code": "BODY_WEIGHT",
+        "name": "Poids du corps"
+      }
+    ],
+    "name": "Chaise contre le mur",
+    "description": "En position debout, placez-vous dos à un mur, les pieds écartés à largeur d'épaules ou un peu plus large. Fléchissez les genoux jusqu'à former un angle de 90° environ, et placez vos mains sur vos genoux ou contre le mur. Gainez vos cuisses et maintenez cette position aussi longtemps que la durée souhaitée pour votre série, en concentrant votre poids sur vos talons. Veillez à toujours avoir le dos plaqué contre le mur."
+  },
+  {
+    "id": "d1420150-c118-46dd-adf4-8f6ac314e475",
+    "code": "GOBLET_SQUAT",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Goblet squat",
+    "description": "En position debout, les pieds écartés à largeur d'épaules ou un peu plus large, saisissez un haltère avec la paume des mains face au disque pour faciliter l'équilibre du poids et être plus à l'aise lors de l'exécution. Faites-le monter au niveau de votre poitrine, les coudes pliés. Le dos bien droit et les abdominaux gainés, fléchissez vos genoux en concentrant la charge le plus possible sur vos talons afin de maintenir un bon équilibre. Simulez le fait de vous asseoir sur une chaise, et conservez une trajectoire droite tout au long du mouvement. Une fois en bas (plus ou moins bas selon votre mobilité), contractez vos quadriceps ainsi que vos fessiers afin de revenir en position de départ. Veillez à toujours conserver le dos droit lors de l'exécution, et à ne pas trop avancer vos genoux vers l'avant lorsque vous réalisez vos flexions."
+  },
+  {
+    "id": "99148772-f963-47bc-8657-087f1b468a71",
+    "code": "STIFF_LEG_DEADLIFT",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Soulevé de terre jambes tendues",
+    "description": "En position debout, placez-vous devant la barre qui se trouve au sol. Penchez-vous en avant en gardant le dos droit et les jambes légèrement fléchies afin de saisir la barre en prise pronation (la paume des mains vers vous). Contractez les lombaires pour vous redresser, en gardant les jambes presque tendues. Marquez une courte pause en haut du mouvement, puis déposez la barre au sol en conservant toujours le dos droit. Veillez à conserver les épaules bien tirées en arrière durant l'exécution."
+  },
+  {
+    "id": "c36825d7-4520-4ca0-960a-f97b3ac7d4c8",
+    "code": "KETTLEBELL_SWING",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      },
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "cb62959e-0f58-436c-a7f4-a6430d92fc3f",
+        "code": "FREE_WEIGHT",
+        "name": "Poids libres"
+      }
+    ],
+    "name": "Balancé avec Kettlebell",
+    "description": "En position debout, écartez les pieds à largeur d'épaules ou un peu plus larges. Fléchissez les jambes et penchez-vous en avant en gardant le dos droit afin de saisir le Kettlebell à deux mains. Réalisez un léger balancier avec les hanches tout en poussant avec vos cuisses afin de faire monter le Kettlebell face à vous, bras tendus, jusqu'à ce que celui-ci soit à la hauteur de vos yeux. Vos bras doivent simplement suivre l'impulsion en intervenant au minimum. Une fois en haut du mouvement, contrôlez la descente en retenant légèrement la charge avec vos épaules, jusqu'à faire passer le poids entre vos jambes, puis donnez à nouveau une impulsion pour poursuivre votre série. Veillez à conserver le dos droit pendant l'exécution. Vous pouvez faire monter le poids au-dessus de la tête si vous êtes à l'aise avec l'exercice."
+  },
+  {
+    "id": "1b7bdb28-1d3a-4b38-8903-cb75b6b09a63",
+    "code": "ADDUCTOR_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Machine à adducteurs",
+    "description": "Asseyez-vous sur la machine le dos plaqué au dossier. Placez vos jambes de manière à ce que l'intérieur de vos cuisses ainsi que vos pieds soient contre les supports. Rapprochez vos jambes l'une de l'autre en contractant les adducteurs, puis contrôlez ensuite le retour en position de départ."
+  },
+  {
+    "id": "adf9f5eb-719c-4de5-9d95-00873cb6ae19",
+    "code": "ABDUCTORS_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "f2fcb345-847b-4cdc-94be-4a2038b96d0c",
+        "code": "ABDUCTORS",
+        "name": "Abducteurs"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Machine à abducteurs",
+    "description": "Asseyez-vous sur la machine le dos plaqué au dossier. Placez vos jambes de manière à ce que l'extérieur de vos cuisses ainsi que vos pieds soient contre les supports. Ecartez vos jambes l'une de l'autre en contractant les abducteurs, puis contrôlez ensuite le retour en position de départ."
+  },
+  {
+    "id": "c3769ed6-3021-4e41-859e-4682ae49e472",
+    "code": "SEATED_CALF_RAISES",
+    "primaryMuscles": [
+      {
+        "id": "959e7bec-f8a2-4274-8289-b95031e11763",
+        "code": "CALVES",
+        "name": "Mollets"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Élévations mollets assis",
+    "description": "Asseyez-vous sur le siège, en réglant les coussins en hauteur pour que vos cuisses soient bien calées en dessous. Débloquez la charge en réalisant une extension avec vos mollets pour finir sur la pointe des pieds, puis redescendez les talons vers le sol pour revenir à la position de départ."
+  }
+]

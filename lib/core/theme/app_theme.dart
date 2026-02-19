@@ -190,18 +190,18 @@ class AppTheme {
         primary: primaryBlue,
         primaryContainer: primaryBlueDark,
         secondary: primaryBlueLight,
-        secondaryContainer: primaryBlueLight.withOpacity(0.2),
+        secondaryContainer: primaryBlueLight.withValues(alpha: 0.2),
         tertiary: successGreen,
-        tertiaryContainer: successGreen.withOpacity(0.2),
+        tertiaryContainer: successGreen.withValues(alpha: 0.2),
         error: errorRed,
-        errorContainer: errorRed.withOpacity(0.2),
+        errorContainer: errorRed.withValues(alpha: 0.2),
         surface: darkSurface,
         surfaceContainerHighest: darkSurfaceVariant,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onError: Colors.white,
         onSurface: darkOnSurface,
-        outline: Colors.white.withOpacity(0.1),
+        outline: Colors.white.withValues(alpha: 0.1),
       ),
 
       scaffoldBackgroundColor: darkBackground,
@@ -214,7 +214,7 @@ class AppTheme {
         centerTitle: true,
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: darkSurface.withOpacity(0.8),
+        backgroundColor: darkSurface.withValues(alpha: 0.8),
         foregroundColor: darkOnBackground,
         titleTextStyle: GoogleFonts.inter(
           fontSize: 20,
@@ -231,7 +231,7 @@ class AppTheme {
         color: darkSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusXL),
-          side: BorderSide(color: Colors.white.withOpacity(0.1), width: 1),
+          side: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 1),
         ),
         margin: EdgeInsets.zero,
       ),
@@ -303,14 +303,14 @@ class AppTheme {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radiusL),
           borderSide: BorderSide(
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withValues(alpha: 0.1),
             width: 1.5,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radiusL),
           borderSide: BorderSide(
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withValues(alpha: 0.1),
             width: 1.5,
           ),
         ),
@@ -329,12 +329,12 @@ class AppTheme {
         labelStyle: GoogleFonts.inter(
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: darkOnSurface.withOpacity(0.7),
+          color: darkOnSurface.withValues(alpha: 0.7),
         ),
         hintStyle: GoogleFonts.inter(
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: darkOnSurface.withOpacity(0.5),
+          color: darkOnSurface.withValues(alpha: 0.5),
         ),
       ),
 
@@ -344,7 +344,7 @@ class AppTheme {
         backgroundColor: darkSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusXXL),
-          side: BorderSide(color: Colors.white.withOpacity(0.1), width: 1),
+          side: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 1),
         ),
         titleTextStyle: GoogleFonts.inter(
           fontSize: 22,
@@ -381,7 +381,7 @@ class AppTheme {
 
       // Divider
       dividerTheme: DividerThemeData(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         thickness: 1,
         space: 1,
       ),
@@ -403,13 +403,13 @@ class AppTheme {
       // Palette de couleurs
       colorScheme: ColorScheme.light(
         primary: primaryBlue,
-        primaryContainer: primaryBlueLight.withOpacity(0.1),
+        primaryContainer: primaryBlueLight.withValues(alpha: 0.1),
         secondary: primaryBlueDark,
-        secondaryContainer: primaryBlueDark.withOpacity(0.1),
+        secondaryContainer: primaryBlueDark.withValues(alpha: 0.1),
         tertiary: successGreen,
-        tertiaryContainer: successGreen.withOpacity(0.1),
+        tertiaryContainer: successGreen.withValues(alpha: 0.1),
         error: errorRed,
-        errorContainer: errorRed.withOpacity(0.1),
+        errorContainer: errorRed.withValues(alpha: 0.1),
         surface: lightSurface,
         surfaceContainerHighest: lightSurfaceVariant,
         onPrimary: Colors.white,
@@ -429,7 +429,7 @@ class AppTheme {
         centerTitle: true,
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: lightSurface.withOpacity(0.8),
+        backgroundColor: lightSurface.withValues(alpha: 0.8),
         foregroundColor: lightOnBackground,
         titleTextStyle: GoogleFonts.inter(
           fontSize: 20,
@@ -544,12 +544,12 @@ class AppTheme {
         labelStyle: GoogleFonts.inter(
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: lightOnSurface.withOpacity(0.7),
+          color: lightOnSurface.withValues(alpha: 0.7),
         ),
         hintStyle: GoogleFonts.inter(
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: lightOnSurface.withOpacity(0.5),
+          color: lightOnSurface.withValues(alpha: 0.5),
         ),
       ),
 

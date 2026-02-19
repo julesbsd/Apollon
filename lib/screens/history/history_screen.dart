@@ -268,8 +268,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
         setState(() => _selectedPeriod = period);
         _loadWorkouts(refresh: true);
       },
-      backgroundColor: theme.colorScheme.surface.withOpacity(0.5),
-      selectedColor: theme.colorScheme.primary.withOpacity(0.3),
+      backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.5),
+      selectedColor: theme.colorScheme.primary.withValues(alpha: 0.3),
       checkmarkColor: theme.colorScheme.primary,
     );
   }
@@ -418,7 +418,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         .join(', ') +
                     (workout.exercises.length > 3 ? '...' : ''),
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -437,23 +437,23 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+        color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: theme.colorScheme.primary.withOpacity(0.3)),
+        border: Border.all(color: theme.colorScheme.primary.withValues(alpha: 0.3)),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.white.withOpacity(0.06)
-                : Colors.white.withOpacity(0.8),
+                ? Colors.white.withValues(alpha: 0.06)
+                : Colors.white.withValues(alpha: 0.8),
             blurRadius: 6,
             offset: const Offset(-3, -3),
           ),
           // Neumorphism - Ombre sombre en bas à droite
           BoxShadow(
             color: theme.brightness == Brightness.dark
-                ? Colors.black.withOpacity(0.5)
-                : theme.colorScheme.primary.withOpacity(0.2),
+                ? Colors.black.withValues(alpha: 0.5)
+                : theme.colorScheme.primary.withValues(alpha: 0.2),
             blurRadius: 6,
             offset: const Offset(3, 3),
           ),
@@ -487,7 +487,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           Icon(
             Icons.history,
             size: 80,
-            color: theme.colorScheme.onSurface.withOpacity(0.3),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.3),
           ),
           const SizedBox(height: 16),
           Text(
@@ -502,7 +502,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ? 'Aucun résultat pour "$_searchQuery"'
                 : 'Commencez une séance pour voir votre historique',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.6),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
             ),
             textAlign: TextAlign.center,
           ),

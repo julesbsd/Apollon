@@ -30,7 +30,7 @@ class ProfileDrawer extends StatelessWidget {
                   end: Alignment.bottomRight,
                   colors: [
                     colorScheme.primary,
-                    colorScheme.primary.withOpacity(0.7),
+                    colorScheme.primary.withValues(alpha: 0.7),
                   ],
                 ),
               ),
@@ -45,7 +45,7 @@ class ProfileDrawer extends StatelessWidget {
                       border: Border.all(color: Colors.white, width: 3),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withValues(alpha: 0.2),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -85,7 +85,7 @@ class ProfileDrawer extends StatelessWidget {
                     user?.email ?? '',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 1,
@@ -110,7 +110,7 @@ class ProfileDrawer extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface.withOpacity(0.5),
+                        color: colorScheme.onSurface.withValues(alpha: 0.5),
                         letterSpacing: 1.2,
                       ),
                     ),
@@ -127,7 +127,7 @@ class ProfileDrawer extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface.withOpacity(0.5),
+                        color: colorScheme.onSurface.withValues(alpha: 0.5),
                         letterSpacing: 1.2,
                       ),
                     ),
@@ -167,7 +167,7 @@ class ProfileDrawer extends StatelessWidget {
                 'APOLLON v1.0.0',
                 style: TextStyle(
                   fontSize: 11,
-                  color: colorScheme.onSurface.withOpacity(0.4),
+                  color: colorScheme.onSurface.withValues(alpha: 0.4),
                 ),
               ),
             ),

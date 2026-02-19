@@ -41,9 +41,9 @@ class AppColors {
   ); // Marbre sombre (dark mode)
 
   /// Couleurs glassmorphism premium
-  static Color glassWhite = const Color(0xFFFFFFFF).withOpacity(0.1);
-  static Color glassBorder = const Color(0xFFFFFFFF).withOpacity(0.2);
-  static Color glassBlur = const Color(0xFFFFFFFF).withOpacity(0.05);
+  static Color glassWhite = const Color(0xFFFFFFFF).withValues(alpha: 0.1);
+  static Color glassBorder = const Color(0xFFFFFFFF).withValues(alpha: 0.2);
+  static Color glassBlur = const Color(0xFFFFFFFF).withValues(alpha: 0.05);
 
   /// Couleur d'erreur - Rouge pour alertes
   static const Color errorSeed = Color(0xFFDC3545);
@@ -214,6 +214,6 @@ class AppColors {
   /// Crée une couleur avec opacité glassmorphism
   static Color withGlassOpacity(Color color, bool isDark) {
     final opacity = isDark ? glassOpacityDark : glassOpacityLight;
-    return color.withOpacity(opacity);
+    return color.withValues(alpha: opacity);
   }
 }

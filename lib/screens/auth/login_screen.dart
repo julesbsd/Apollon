@@ -55,17 +55,17 @@ class LoginScreen extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                colorScheme.primary.withOpacity(0.25),
-                colorScheme.primary.withOpacity(0.15),
+                colorScheme.primary.withValues(alpha: 0.25),
+                colorScheme.primary.withValues(alpha: 0.15),
               ],
             ),
             border: Border.all(
-              color: colorScheme.primary.withOpacity(0.4),
+              color: colorScheme.primary.withValues(alpha: 0.4),
               width: 3,
             ),
             boxShadow: [
               BoxShadow(
-                color: colorScheme.primary.withOpacity(0.3),
+                color: colorScheme.primary.withValues(alpha: 0.3),
                 blurRadius: 32,
                 spreadRadius: 8,
               ),
@@ -88,7 +88,7 @@ class LoginScreen extends StatelessWidget {
             color: colorScheme.primary,
             shadows: [
               Shadow(
-                color: colorScheme.primary.withOpacity(0.3),
+                color: colorScheme.primary.withValues(alpha: 0.3),
                 blurRadius: 16,
               ),
             ],
@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
         Text(
           'Temple Digital du Dépassement',
           style: theme.textTheme.titleMedium?.copyWith(
-            color: colorScheme.onSurface.withOpacity(0.7),
+            color: colorScheme.onSurface.withValues(alpha: 0.7),
             letterSpacing: 1.5,
           ),
         ),
@@ -127,25 +127,25 @@ class LoginScreen extends StatelessWidget {
               end: Alignment.bottomRight,
               colors: isDark
                   ? [
-                      colorScheme.surface.withOpacity(0.6),
-                      colorScheme.surface.withOpacity(0.3),
+                      colorScheme.surface.withValues(alpha: 0.6),
+                      colorScheme.surface.withValues(alpha: 0.3),
                     ]
                   : [
-                      Colors.white.withOpacity(0.7),
-                      Colors.white.withOpacity(0.4),
+                      Colors.white.withValues(alpha: 0.7),
+                      Colors.white.withValues(alpha: 0.4),
                     ],
             ),
             border: Border.all(
               color: isDark
-                  ? Colors.white.withOpacity(0.15)
-                  : Colors.white.withOpacity(0.6),
+                  ? Colors.white.withValues(alpha: 0.15)
+                  : Colors.white.withValues(alpha: 0.6),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
                 color: isDark
-                    ? Colors.black.withOpacity(0.3)
-                    : colorScheme.primary.withOpacity(0.1),
+                    ? Colors.black.withValues(alpha: 0.3)
+                    : colorScheme.primary.withValues(alpha: 0.1),
                 blurRadius: 24,
                 offset: const Offset(0, 8),
               ),
@@ -168,7 +168,7 @@ class LoginScreen extends StatelessWidget {
                 'Sculptez votre excellence dans notre temple digital. Chaque série compte, chaque répétition forge votre légende.',
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: colorScheme.onSurface.withOpacity(0.8),
+                  color: colorScheme.onSurface.withValues(alpha: 0.8),
                   height: 1.6,
                 ),
               ),
@@ -199,21 +199,21 @@ class LoginScreen extends StatelessWidget {
                   end: Alignment.bottomRight,
                   colors: isDark
                       ? [
-                          colorScheme.primary.withOpacity(0.3),
-                          colorScheme.primary.withOpacity(0.2),
+                          colorScheme.primary.withValues(alpha: 0.3),
+                          colorScheme.primary.withValues(alpha: 0.2),
                         ]
                       : [
-                          colorScheme.primary.withOpacity(0.15),
-                          colorScheme.primary.withOpacity(0.1),
+                          colorScheme.primary.withValues(alpha: 0.15),
+                          colorScheme.primary.withValues(alpha: 0.1),
                         ],
                 ),
                 border: Border.all(
-                  color: colorScheme.primary.withOpacity(0.5),
+                  color: colorScheme.primary.withValues(alpha: 0.5),
                   width: 2,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: colorScheme.primary.withOpacity(0.3),
+                    color: colorScheme.primary.withValues(alpha: 0.3),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -299,16 +299,16 @@ class LoginScreen extends StatelessWidget {
                   end: Alignment.bottomRight,
                   colors: isDark
                       ? [
-                          colorScheme.errorContainer.withOpacity(0.3),
-                          colorScheme.errorContainer.withOpacity(0.2),
+                          colorScheme.errorContainer.withValues(alpha: 0.3),
+                          colorScheme.errorContainer.withValues(alpha: 0.2),
                         ]
                       : [
-                          colorScheme.errorContainer.withOpacity(0.5),
-                          colorScheme.errorContainer.withOpacity(0.3),
+                          colorScheme.errorContainer.withValues(alpha: 0.5),
+                          colorScheme.errorContainer.withValues(alpha: 0.3),
                         ],
                 ),
                 border: Border.all(
-                  color: colorScheme.error.withOpacity(0.5),
+                  color: colorScheme.error.withValues(alpha: 0.5),
                   width: 1.5,
                 ),
               ),

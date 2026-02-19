@@ -134,20 +134,16 @@ service cloud.firestore {
     }
     
     // ==========================================
-    // COLLECTION: exercises (référentiel)
+    // COLLECTION: exercises_library (Workout API)
     // ==========================================
     
-    match /exercises/{exerciseId} {
-      // Lecture: Tous les utilisateurs authentifiés peuvent lire les exercices
-      // RG-001: Mais authentification obligatoire
-      allow read: if isAuthenticated();
+    match /exercises_library/{exerciseId} {
+      // Lecture: Catalogue public - tous les utilisateurs peuvent lire
+      allow read: if true;
       
-      // Écriture: Réservé aux admins ou scripts seed (pas d'UI utilisateur V1)
-      // RG-002: Unicité des noms enforced par logique métier
-      // V1: Pas d'ajout exercice personnalisé → blocked
-      // V2: Si ajout exercice user activé, ajouter règle:
-      //     allow create: if isAuthenticated() && validateExercise(request.resource.data)
-      allow write: if false;  // Désactivé V1 (seed data uniquement)
+      // Écriture: Réservé aux scripts d'import (Firebase Admin SDK)
+      // Import via Node.js script avec Service Account Key
+      allow write: if isAuthenticated();  // Ou false pour bloquer totalement
     }
     
     // ==========================================

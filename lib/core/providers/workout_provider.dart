@@ -19,7 +19,7 @@ import '../services/statistics_service.dart';
 /// - Sauvegarde finale de la séance
 class WorkoutProvider extends ChangeNotifier {
   final WorkoutService _workoutService;
-  final StatisticsService _statisticsService = StatisticsService();
+  final StatisticsService _statisticsService;
 
   // État de la séance en cours
   Workout? _currentWorkout;
@@ -28,8 +28,11 @@ class WorkoutProvider extends ChangeNotifier {
   bool _isSaving = false;
   Duration _elapsed = Duration.zero;
 
-  WorkoutProvider({required WorkoutService workoutService})
-    : _workoutService = workoutService;
+  WorkoutProvider({
+    required WorkoutService workoutService,
+    StatisticsService? statisticsService,
+  })  : _workoutService = workoutService,
+        _statisticsService = statisticsService ?? StatisticsService();
 
   // Getters
   Workout? get currentWorkout => _currentWorkout;
@@ -73,11 +76,15 @@ class WorkoutProvider extends ChangeNotifier {
   }
 
   /// Ajoute un exercice à la séance
-  /// Appelé depuis ExerciseSelectionScreen
+  /// Appelé depuis ExerciseLibrarySelectionScreen (nouvelle architecture)
+  /// 
+  /// Paramètres:
+  /// - exerciseId: ID unique de l'exercice (UUID Workout API)
+  /// - exerciseName: Nom de l'exercice en français
   void addExercise(String exerciseId, String exerciseName) {
     if (_currentWorkout == null) return;
 
-    // Vérifier si l'exercice n'est pas déjà dans la séance
+    // Vérifier si l'exercice n'est pas déjà dans la séance (RG-002: unicité)
     final exerciseExists = _currentWorkout!.exercises.any(
       (ex) => ex.exerciseId == exerciseId,
     );
@@ -296,7 +303,6 @@ class WorkoutProvider extends ChangeNotifier {
 
       // Détecter les nouveaux records personnels
       final newPRs = <PersonalRecord>[];
-      print('🏋️ Checking for new PRs in ${_currentWorkout!.exercises.length} exercises');
       
       for (final exercise in _currentWorkout!.exercises) {
         if (exercise.sets.isEmpty) continue;
@@ -304,7 +310,6 @@ class WorkoutProvider extends ChangeNotifier {
         // Trouver le poids maximum de cet exercice dans cette séance
         final maxSet = exercise.sets.reduce((a, b) => a.weight > b.weight ? a : b);
         
-        print('💪 Exercise: ${exercise.exerciseName}, Max weight: ${maxSet.weight}kg x ${maxSet.reps} reps');
         
         try {
           final pr = await _statisticsService.detectAndSaveNewPR(
@@ -317,14 +322,11 @@ class WorkoutProvider extends ChangeNotifier {
           );
           if (pr != null) {
             newPRs.add(pr);
-            print('🏆 NEW PR DETECTED for ${exercise.exerciseName}!');
           }
         } catch (e) {
-          print('❌ Error detecting PR for ${exercise.exerciseName}: $e');
         }
       }
       
-      print('🎊 Total new PRs: ${newPRs.length}');
 
       // Arrêter l'auto-save et le chronomètre, puis nettoyer
       _stopAutoSave();

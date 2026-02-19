@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../core/models/exercise.dart';
 import '../../core/models/workout_set.dart';
 import '../../core/providers/workout_provider.dart';
 import '../../core/providers/auth_provider.dart';
-import '../../core/services/workout_service.dart';
+import '../../core/services/statistics_service.dart';
 import '../../core/widgets/widgets.dart';
+import '../../core/models/exercise_library.dart';
+import '../exercise_library/widgets/exercise_image_widget.dart';
+import '../exercise_library/widgets/exercise_history_graph_panel.dart';
 
 /// Écran d'enregistrement de séance pour un exercice
 /// Implémente US-4.3: Affichage historique + ajout de séries
@@ -19,7 +21,7 @@ import '../../core/widgets/widgets.dart';
 /// - Boutons "Terminer l'exercice" et "Terminer la séance"
 /// - Auto-save toutes les 10s (RG-004) géré par WorkoutProvider
 class WorkoutSessionScreen extends StatefulWidget {
-  final Exercise exercise;
+  final ExerciseLibrary exercise;
 
   const WorkoutSessionScreen({super.key, required this.exercise});
 
@@ -28,46 +30,11 @@ class WorkoutSessionScreen extends StatefulWidget {
 }
 
 class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
-  final WorkoutService _workoutService = WorkoutService();
-
-  // État pour l'historique (chargé une seule fois)
-  bool _isLoadingHistory = true;
-  dynamic _lastWorkout;
-  String? _historyError;
+  final StatisticsService _statisticsService = StatisticsService();
 
   @override
   void initState() {
     super.initState();
-    _loadHistory();
-  }
-
-  /// Charger l'historique une seule fois au démarrage
-  Future<void> _loadHistory() async {
-    final authProvider = context.read<AuthProvider>();
-    try {
-      final result = await _workoutService.getLastWorkoutForExercise(
-        authProvider.user!.uid,
-        widget.exercise.id,
-      );
-      if (mounted) {
-        setState(() {
-          _lastWorkout = result;
-          _isLoadingHistory = false;
-        });
-      }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _historyError = e.toString();
-          _isLoadingHistory = false;
-        });
-      }
-    }
-  }
-
-  /// Format date DD/MM
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -79,192 +46,151 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
     final currentExercise = workoutProvider.getExercise(widget.exercise.id);
 
     return Scaffold(
-      appBar: const WorkoutTimerAppBar(
-        title: 'Enregistrement',
-        showTimer: true,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
-      body: AppBackground(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Header exercice
-              _buildExerciseHeader(context, colorScheme),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Image de l'exercice en haut (système hybride asset/local/remote)
+            _buildExerciseImage(context),
 
-              const SizedBox(height: 24),
+            // Contenu avec padding
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Nom de l'exercice + chips (catégorie, muscles)
+                  _buildExerciseInfo(context, colorScheme),
 
-              // Section historique
-              _buildHistorySection(context, colorScheme),
+                  const SizedBox(height: 16),
 
-              const SizedBox(height: 24),
+                  // Description technique (expandable, sans titre)
+                  if (widget.exercise.description.isNotEmpty)
+                    _buildDescriptionSection(context, colorScheme),
 
-              // Section séries actuelles
-              _buildCurrentSetsSection(
-                context,
-                colorScheme,
-                workoutProvider,
-                currentExercise?.sets ?? [],
+                  const SizedBox(height: 24),
+
+                  // Section historique
+                  _buildHistorySection(context, colorScheme),
+
+                  const SizedBox(height: 24),
+
+                  // Section séries actuelles
+                  _buildCurrentSetsSection(
+                    context,
+                    colorScheme,
+                    workoutProvider,
+                    currentExercise?.sets ?? [],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Boutons d'action
+                  _buildActionButtons(context, workoutProvider),
+
+                  // Espace pour la barre flottante globale en bas
+                  const SizedBox(height: 100),
+                ],
               ),
-
-              const SizedBox(height: 24),
-
-              // Boutons d'action
-              _buildActionButtons(context, workoutProvider),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  /// Header avec infos de l'exercice
-  Widget _buildExerciseHeader(BuildContext context, ColorScheme colorScheme) {
-    return AppCard(
-      variant: AppCardVariant.elevated,
-      padding: const EdgeInsets.all(20),
-      child: Row(
-        children: [
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                // Neumorphism - Ombre claire en haut à gauche
-                BoxShadow(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white.withOpacity(0.08)
-                      : Colors.white.withOpacity(0.9),
-                  blurRadius: 10,
-                  offset: const Offset(-5, -5),
+  /// Infos de l'exercice : nom + chips (catégorie, muscles)
+  Widget _buildExerciseInfo(BuildContext context, ColorScheme colorScheme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Nom de l'exercice
+        Text(
+          widget.exercise.name,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onSurface,
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // Chips: catégorie + groupes musculaires
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            // Chips types d'exercice
+            ...widget.exercise.types.map(
+              (type) => Chip(
+                label: Text(
+                  type.name,
+                  style: const TextStyle(fontSize: 12),
                 ),
-                // Neumorphism - Ombre sombre en bas à droite
-                BoxShadow(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.black.withOpacity(0.6)
-                      : colorScheme.primary.withOpacity(0.25),
-                  blurRadius: 10,
-                  offset: const Offset(5, 5),
-                ),
-              ],
-            ),
-            child: Center(
-              child: Text(
-                widget.exercise.emoji,
-                style: const TextStyle(fontSize: 40),
+                backgroundColor: colorScheme.primary.withValues(alpha: 0.2),
+                labelStyle: TextStyle(color: colorScheme.primary),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
             ),
-          ),
-
-          const SizedBox(width: 16),
-
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.exercise.name,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
+            
+            // Chips muscles primaires
+            ...widget.exercise.primaryMuscles.map(
+              (muscle) => Chip(
+                label: Text(
+                  muscle.name,
+                  style: const TextStyle(fontSize: 12),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  '${widget.exercise.muscleGroups.join(', ')} • ${widget.exercise.type}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: colorScheme.onSurface.withOpacity(0.6),
-                  ),
-                ),
-              ],
+                backgroundColor: colorScheme.surface,
+                labelStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.8)),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      ],
     );
   }
 
-  /// Section historique (dernière séance - RG-005)
+  /// Section historique & progression avec sélecteur glissant
   Widget _buildHistorySection(BuildContext context, ColorScheme colorScheme) {
-    return AppCard(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.history, size: 20, color: colorScheme.primary),
-              const SizedBox(width: 8),
-              Text(
-                'Historique',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-            ],
+    final userId = context.read<AuthProvider>().user?.uid;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Historique & Progression',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onSurface,
           ),
-
-          const SizedBox(height: 16),
-
-          // Afficher l'état chargé une seule fois
-          if (_isLoadingHistory)
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: CircularProgressIndicator(),
-              ),
-            )
-          else if (_historyError != null)
-            Text(
-              'Erreur de chargement',
-              style: TextStyle(fontSize: 14, color: colorScheme.error),
-            )
-          else if (_lastWorkout == null || _lastWorkout.sets.isEmpty)
-            Text(
-              'Aucune donnée pour cet exercice\nPremière fois ! 💪',
-              style: TextStyle(
-                fontSize: 14,
-                color: colorScheme.onSurface.withOpacity(0.6),
-              ),
-            )
-          else
-            // Afficher les séries de la dernière séance
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Dernière séance (${_formatDate(_lastWorkout.createdAt)}):',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                ..._lastWorkout.sets.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final set = entry.value;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Text(
-                      '• Série ${index + 1}: ${set.display()}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: colorScheme.onSurface.withOpacity(0.7),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ],
-            ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 16),
+        if (userId == null)
+          Text(
+            'Connecte-toi pour voir ton historique',
+            style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
+          )
+        else
+          ExerciseHistoryGraphPanel(
+            exerciseId: widget.exercise.id,
+            exerciseName: widget.exercise.name,
+            userId: userId,
+            statisticsService: _statisticsService,
+          ),
+      ],
     );
   }
 
@@ -342,22 +268,22 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   // Neumorphism - Ombre claire en haut à gauche
                   BoxShadow(
                     color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white.withOpacity(0.06)
-                        : Colors.white.withOpacity(0.8),
+                        ? Colors.white.withValues(alpha: 0.06)
+                        : Colors.white.withValues(alpha: 0.8),
                     blurRadius: 6,
                     offset: const Offset(-3, -3),
                   ),
                   // Neumorphism - Ombre sombre en bas à droite
                   BoxShadow(
                     color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.black.withOpacity(0.5)
-                        : colorScheme.primary.withOpacity(0.15),
+                        ? Colors.black.withValues(alpha: 0.5)
+                        : colorScheme.primary.withValues(alpha: 0.15),
                     blurRadius: 6,
                     offset: const Offset(3, 3),
                   ),
@@ -390,8 +316,26 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
     );
   }
 
+  /// Image de l'exercice avec système hybride (full width, en haut)
+  Widget _buildExerciseImage(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 300,
+      child: ExerciseImageWidget(
+        exerciseId: widget.exercise.id,
+        size: double.infinity,
+        fit: BoxFit.contain,
+        borderRadius: BorderRadius.zero,
+      ),
+    );
+  }
+
+  /// Section description technique (expandable, sans titre)
+  Widget _buildDescriptionSection(BuildContext context, ColorScheme colorScheme) {
+    return _ExpandableDescription(description: widget.exercise.description);
+  }
+
   /// Bouton "Terminer l'exercice"
-  /// Note: "Terminer la séance" est maintenant dans WorkoutTimerAppBar
   Widget _buildActionButtons(
     BuildContext context,
     WorkoutProvider workoutProvider,
@@ -453,26 +397,26 @@ class _InlineAddSetFormState extends State<_InlineAddSetForm> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: colorScheme.primaryContainer.withOpacity(0.3),
+        color: colorScheme.primaryContainer.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.primary.withOpacity(0.3),
+          color: colorScheme.primary.withValues(alpha: 0.3),
           width: 1,
         ),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche
           BoxShadow(
             color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white.withOpacity(0.06)
-                : Colors.white.withOpacity(0.9),
+                ? Colors.white.withValues(alpha: 0.06)
+                : Colors.white.withValues(alpha: 0.9),
             blurRadius: 10,
             offset: const Offset(-5, -5),
           ),
           // Neumorphism - Ombre sombre en bas à droite
           BoxShadow(
             color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.black.withOpacity(0.5)
-                : colorScheme.primary.withOpacity(0.2),
+                ? Colors.black.withValues(alpha: 0.5)
+                : colorScheme.primary.withValues(alpha: 0.2),
             blurRadius: 10,
             offset: const Offset(5, 5),
           ),
@@ -490,12 +434,12 @@ class _InlineAddSetFormState extends State<_InlineAddSetForm> {
               boxShadow: [
                 // Neumorphism - Effet primary intense
                 BoxShadow(
-                  color: Colors.white.withOpacity(0.3),
+                  color: Colors.white.withValues(alpha: 0.3),
                   blurRadius: 6,
                   offset: const Offset(-2, -2),
                 ),
                 BoxShadow(
-                  color: colorScheme.primary.withOpacity(0.8),
+                  color: colorScheme.primary.withValues(alpha: 0.8),
                   blurRadius: 6,
                   offset: const Offset(2, 2),
                 ),
@@ -618,6 +562,92 @@ class _InlineAddSetFormState extends State<_InlineAddSetForm> {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Widget de description expandable
+/// 
+/// Affiche 2 lignes par défaut avec un bouton "Voir plus"
+/// Clic sur le texte ou le bouton pour expand/collapse
+class _ExpandableDescription extends StatefulWidget {
+  final String description;
+
+  const _ExpandableDescription({
+    required this.description,
+  });
+
+  @override
+  State<_ExpandableDescription> createState() => _ExpandableDescriptionState();
+}
+
+class _ExpandableDescriptionState extends State<_ExpandableDescription> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Texte avec limitation de lignes
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _isExpanded = !_isExpanded;
+            });
+          },
+          child: AnimatedCrossFade(
+            firstChild: Text(
+              widget.description,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                height: 1.6,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            secondChild: Text(
+              widget.description,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                height: 1.6,
+              ),
+            ),
+            crossFadeState: _isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: const Duration(milliseconds: 200),
+          ),
+        ),
+        const SizedBox(height: 8),
+        
+        // Bouton Voir plus / Voir moins
+        InkWell(
+          onTap: () {
+            setState(() {
+              _isExpanded = !_isExpanded;
+            });
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                _isExpanded ? 'Voir moins' : 'Voir plus',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(width: 4),
+              Icon(
+                _isExpanded ? Icons.expand_less : Icons.expand_more,
+                size: 20,
+                color: theme.colorScheme.primary,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

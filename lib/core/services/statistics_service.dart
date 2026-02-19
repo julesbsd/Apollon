@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/workout.dart';
+import '../models/workout_set.dart';
 import '../models/statistics.dart';
 import '../models/personal_record.dart';
 
@@ -129,6 +130,51 @@ class StatisticsService {
     }
   }
 
+  /// Historique brut d'un exercice : chaque séance avec toutes ses séries
+  /// Utilisé par ExerciseHistoryGraphPanel pour l'onglet "Historique"
+  Future<List<({DateTime date, String workoutId, List<WorkoutSet> sets, double maxWeight})>>
+      getExerciseRawHistory(
+    String userId,
+    String exerciseId, {
+    int lastNWorkouts = 20,
+  }) async {
+    try {
+      final workoutsSnapshot = await _workoutsCollection(userId)
+          .where('status', isEqualTo: WorkoutStatus.completed.value)
+          .orderBy('date', descending: true)
+          .limit(60)
+          .get();
+
+      final result = <({DateTime date, String workoutId, List<WorkoutSet> sets, double maxWeight})>[];
+
+      for (final doc in workoutsSnapshot.docs) {
+        final workout = Workout.fromFirestore(doc);
+        try {
+          final ex = workout.exercises.firstWhere(
+            (e) => e.exerciseId == exerciseId,
+          );
+          if (ex.sets.isEmpty) continue;
+          final maxW = ex.sets.map((s) => s.weight).reduce((a, b) => a > b ? a : b);
+          result.add((
+            date: workout.date,
+            workoutId: workout.id ?? '',
+            sets: ex.sets,
+            maxWeight: maxW,
+          ));
+          if (result.length >= lastNWorkouts) break;
+        } catch (_) {
+          continue;
+        }
+      }
+
+      // Ordre chronologique croissant
+      result.sort((a, b) => a.date.compareTo(b.date));
+      return result;
+    } catch (_) {
+      return [];
+    }
+  }
+
   /// US-V2-1.3: Données pour graphique volume total
   Future<List<VolumeDataPoint>> getVolumeByPeriod(
     String userId, {
@@ -186,10 +232,8 @@ class StatisticsService {
   /// Un seul record par exercice (le plus lourd)
   Future<List<PersonalRecord>> getAllPersonalRecords(String userId) async {
     try {
-      print('📥 Fetching all personal records for user: $userId');
       final snapshot = await _recordsCollection(userId).get();
 
-      print('📊 Found ${snapshot.docs.length} PR documents in Firestore');
       
       // Grouper par exercice et garder seulement le poids max
       final Map<String, PersonalRecord> bestRecords = {};
@@ -208,10 +252,8 @@ class StatisticsService {
       // Trier par date décroissante (plus récent en premier)
       records.sort((a, b) => b.achievedAt.compareTo(a.achievedAt));
           
-      print('✅ Returning ${records.length} unique PRs (one per exercise)');
       return records;
     } catch (e) {
-      print('❌ Error fetching personal records: $e');
       return [];
     }
   }
@@ -226,14 +268,12 @@ class StatisticsService {
     String? workoutId,
   ) async {
     try {
-      print('🔍 Checking PR for $exerciseName: ${weight}kg x $reps reps');
       
       // Vérifier si c'est un nouveau record (sans orderBy pour éviter problème d'index)
       final existingPRs = await _recordsCollection(userId)
           .where('exerciseId', isEqualTo: exerciseId)
           .get();
 
-      print('📊 Existing PRs found: ${existingPRs.docs.length}');
       
       bool isNewRecord = false;
       double currentMaxWeight = 0;
@@ -241,7 +281,6 @@ class StatisticsService {
       if (existingPRs.docs.isEmpty) {
         // Aucun record existant, c'est forcément un nouveau record
         isNewRecord = true;
-        print('✨ First PR for this exercise!');
       } else {
         // Trouver le poids max parmi tous les records existants
         for (final doc in existingPRs.docs) {
@@ -252,13 +291,10 @@ class StatisticsService {
           }
         }
         
-        print('📈 Current record: ${currentMaxWeight}kg');
         
         if (weight > currentMaxWeight) {
           isNewRecord = true;
-          print('🎉 New PR! ${weight}kg > ${currentMaxWeight}kg');
         } else {
-          print('❌ Not a PR: ${weight}kg <= ${currentMaxWeight}kg');
         }
       }
 
@@ -275,14 +311,11 @@ class StatisticsService {
         );
 
         final docRef = await _recordsCollection(userId).add(newPR.toFirestore());
-        print('💾 PR saved with ID: ${docRef.id}');
         return newPR.copyWith(id: docRef.id);
       }
 
       return null; // Pas de nouveau PR
     } catch (e) {
-      print('❌ Error detecting PR: $e');
-      print('Stack trace: ${StackTrace.current}');
       return null;
     }
   }

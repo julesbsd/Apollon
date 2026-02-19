@@ -97,13 +97,13 @@ class _ThemeOption extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: isSelected
-              ? colorScheme.primary.withOpacity(0.15)
+              ? colorScheme.primary.withValues(alpha: 0.15)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isSelected
                 ? colorScheme.primary
-                : colorScheme.outline.withOpacity(0.3),
+                : colorScheme.outline.withValues(alpha: 0.3),
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected
@@ -111,15 +111,15 @@ class _ThemeOption extends StatelessWidget {
                   // Neumorphism - Effet sélectionné
                   BoxShadow(
                     color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white.withOpacity(0.06)
-                        : Colors.white.withOpacity(0.8),
+                        ? Colors.white.withValues(alpha: 0.06)
+                        : Colors.white.withValues(alpha: 0.8),
                     blurRadius: 8,
                     offset: const Offset(-3, -3),
                   ),
                   BoxShadow(
                     color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.black.withOpacity(0.5)
-                        : colorScheme.primary.withOpacity(0.15),
+                        ? Colors.black.withValues(alpha: 0.5)
+                        : colorScheme.primary.withValues(alpha: 0.15),
                     blurRadius: 8,
                     offset: const Offset(3, 3),
                   ),
@@ -132,7 +132,7 @@ class _ThemeOption extends StatelessWidget {
               icon,
               color: isSelected
                   ? colorScheme.primary
-                  : colorScheme.onSurface.withOpacity(0.6),
+                  : colorScheme.onSurface.withValues(alpha: 0.6),
               size: 24,
             ),
             const SizedBox(width: 16),

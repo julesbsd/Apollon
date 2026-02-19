@@ -42,31 +42,31 @@ class MarbleCard extends StatelessWidget {
           // Neumorphism - Ombre claire (highlight) en haut à gauche - LÉGER
           BoxShadow(
             color: isDark
-                ? Colors.white.withOpacity(0.08)
-                : Colors.white.withOpacity(0.9),
+                ? Colors.white.withValues(alpha: 0.08)
+                : Colors.white.withValues(alpha: 0.9),
             blurRadius: 15,
             offset: const Offset(-8, -8),
           ),
           // Neumorphism - Ombre sombre en bas à droite - LÉGER
           BoxShadow(
             color: isDark
-                ? Colors.black.withOpacity(0.6)
-                : Colors.black.withOpacity(0.2),
+                ? Colors.black.withValues(alpha: 0.6)
+                : Colors.black.withValues(alpha: 0.2),
             blurRadius: 15,
             offset: const Offset(8, 8),
           ),
           // Shadow principale pour la profondeur
           BoxShadow(
             color: isDark
-                ? Colors.black.withOpacity(0.3)
-                : colorScheme.primary.withOpacity(0.15),
+                ? Colors.black.withValues(alpha: 0.3)
+                : colorScheme.primary.withValues(alpha: 0.15),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
           // Shadow secondaire pour plus de profondeur en mode clair
           if (!isDark)
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -85,9 +85,9 @@ class MarbleCard extends StatelessWidget {
                 end: Alignment.bottomRight,
                 colors: isDark
                     ? [
-                        colorScheme.surface.withOpacity(0.6),
-                        colorScheme.surface.withOpacity(0.4),
-                        colorScheme.surface.withOpacity(0.5),
+                        colorScheme.surface.withValues(alpha: 0.6),
+                        colorScheme.surface.withValues(alpha: 0.4),
+                        colorScheme.surface.withValues(alpha: 0.5),
                       ]
                     : [
                         const Color(0xFFFFFFFF), // Blanc opaque
@@ -99,8 +99,8 @@ class MarbleCard extends StatelessWidget {
               border: showBorder
                   ? Border.all(
                       color: isDark
-                          ? Colors.white.withOpacity(0.1)
-                          : colorScheme.primary.withOpacity(0.12),
+                          ? Colors.white.withValues(alpha: 0.1)
+                          : colorScheme.primary.withValues(alpha: 0.12),
                       width: 1.5,
                     )
                   : null,

@@ -4,7 +4,8 @@
   "description": "Scripts Firebase Admin pour Apollon",
   "type": "module",
   "scripts": {
-    "seed": "node seed_exercises_node.js"
+    "seed": "node seed_exercises_node.js",
+    "import-library": "node import_exercise_library.js"
   },
   "dependencies": {
     "firebase-admin": "^12.0.0"

@@ -1,182 +1,161 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:apollon/core/models/exercise.dart';
+import 'package:apollon/core/models/exercise_library.dart';
+import 'package:apollon/core/models/muscle_info.dart';
+import 'package:apollon/core/models/type_info.dart';
+import 'package:apollon/core/models/category_info.dart';
 
 void main() {
-  group('Exercise', () {
-    test('should create Exercise with valid data', () {
-      final exercise = Exercise(
-        id: 'ex123',
-        name: 'Bench Press',
-        muscleGroups: [MuscleGroup.chest],
-        type: ExerciseType.freeWeights,
-        emoji: '💪',
-      );
+  group('ExerciseLibrary', () {
+    late ExerciseLibrary exercise;
 
+    setUp(() {
+      exercise = ExerciseLibrary(
+        id: 'ex123',
+        code: 'BARBELL_BENCH_PRESS',
+        name: 'Développé couché barre',
+        description: 'Exercice de poitrine avec barre',
+        primaryMuscles: [
+          MuscleInfo(code: 'CHEST', name: 'Pectoraux'),
+        ],
+        secondaryMuscles: [
+          MuscleInfo(code: 'TRICEPS', name: 'Triceps'),
+        ],
+        types: [
+          TypeInfo(code: 'FREE_WEIGHTS', name: 'Poids libres'),
+        ],
+        categories: [
+          CategoryInfo(code: 'BARBELL', name: 'Barre'),
+        ],
+        syncedAt: DateTime(2024, 1, 1),
+        source: 'workout-api',
+        hasImage: true,
+      );
+    });
+
+    test('should create ExerciseLibrary with valid data', () {
       expect(exercise.id, 'ex123');
-      expect(exercise.name, 'Bench Press');
-      expect(exercise.muscleGroups.length, 1);
-      expect(exercise.muscleGroups.first, MuscleGroup.chest);
-      expect(exercise.type, ExerciseType.freeWeights);
-      expect(exercise.emoji, '💪');
+      expect(exercise.code, 'BARBELL_BENCH_PRESS');
+      expect(exercise.name, 'Développé couché barre');
+      expect(exercise.description, 'Exercice de poitrine avec barre');
+      expect(exercise.hasImage, true);
+      expect(exercise.source, 'workout-api');
     });
 
-    test('should handle multiple muscle groups', () {
-      final exercise = Exercise(
-        id: 'ex123',
-        name: 'Pull-up',
-        muscleGroups: [MuscleGroup.back, MuscleGroup.biceps],
-        type: ExerciseType.bodyWeight,
-        emoji: '🏋️',
-      );
-
-      expect(exercise.muscleGroups.length, 2);
-      expect(exercise.muscleGroups.contains(MuscleGroup.back), true);
-      expect(exercise.muscleGroups.contains(MuscleGroup.biceps), true);
+    test('should return correct primaryMusclesText', () {
+      expect(exercise.primaryMusclesText, 'Pectoraux');
     });
 
-    test('should convert to/from JSON correctly', () {
-      final exercise = Exercise(
-        id: 'ex123',
-        name: 'Bench Press',
-        description: 'Chest exercise',
-        muscleGroups: [MuscleGroup.chest, MuscleGroup.triceps],
-        type: ExerciseType.freeWeights,
-        emoji: '💪',
-      );
-
-      final json = exercise.toJson();
-
-      expect(json['id'], 'ex123');
-      expect(json['name'], 'Bench Press');
-      expect(json['description'], 'Chest exercise');
-      expect(json['muscleGroups'], isA<List>());
-      expect(json['type'], ExerciseType.freeWeights);
-
-      final exerciseFromJson = Exercise.fromJson(json);
-
-      expect(exerciseFromJson.id, exercise.id);
-      expect(exerciseFromJson.name, exercise.name);
-      expect(exerciseFromJson.muscleGroups.length, 2);
-      expect(exerciseFromJson.type, exercise.type);
+    test('should return correct secondaryMusclesText', () {
+      expect(exercise.secondaryMusclesText, 'Triceps');
     });
 
-    test('should convert to/from Firestore correctly', () {
-      final exerciseData = {
-        'name': 'Squat',
-        'muscleGroups': [MuscleGroup.quadriceps, MuscleGroup.glutes],
-        'type': ExerciseType.freeWeights,
-        'emoji': '🦵',
-        'description': 'Leg exercise',
-      };
-
-      final exercise = Exercise.fromFirestore(exerciseData, 'ex456');
-
-      expect(exercise.id, 'ex456');
-      expect(exercise.name, 'Squat');
-      expect(exercise.muscleGroups.length, 2);
-
-      final firestoreData = exercise.toFirestore();
-
-      expect(firestoreData['name'], 'Squat');
-      expect(firestoreData['muscleGroups'], isA<List>());
-      expect(firestoreData['type'], ExerciseType.freeWeights);
+    test('should return correct categoriesText', () {
+      expect(exercise.categoriesText, 'Barre');
     });
 
     test('should support equality comparison by id', () {
-      final ex1 = Exercise(
+      final ex1 = exercise;
+      final ex2 = ExerciseLibrary(
         id: 'ex123',
-        name: 'Bench Press',
-        muscleGroups: [MuscleGroup.chest],
-        type: ExerciseType.freeWeights,
-        emoji: '💪',
+        code: 'OTHER_CODE',
+        name: 'Autre nom',
+        description: '',
+        primaryMuscles: const [],
+        secondaryMuscles: const [],
+        types: const [],
+        categories: const [],
+        syncedAt: DateTime(2024, 1, 1),
+        source: 'workout-api',
       );
-
-      final ex2 = Exercise(
-        id: 'ex123',
-        name: 'Incline Bench Press', // Different name, same id
-        muscleGroups: [MuscleGroup.chest],
-        type: ExerciseType.freeWeights,
-        emoji: '💪',
-      );
-
-      final ex3 = Exercise(
+      final ex3 = ExerciseLibrary(
         id: 'ex456',
+        code: 'SQUAT',
         name: 'Squat',
-        muscleGroups: [MuscleGroup.quadriceps],
-        type: ExerciseType.freeWeights,
-        emoji: '🦵',
+        description: '',
+        primaryMuscles: const [],
+        secondaryMuscles: const [],
+        types: const [],
+        categories: const [],
+        syncedAt: DateTime(2024, 1, 1),
+        source: 'workout-api',
       );
 
-      expect(ex1 == ex2, true); // Same id
-      expect(ex1 == ex3, false); // Different id
+      expect(ex1 == ex2, true); // Même id
+      expect(ex1 == ex3, false); // id différent
     });
 
-    test('should handle optional description', () {
-      final exerciseWithDesc = Exercise(
-        id: 'ex123',
-        name: 'Bench Press',
-        muscleGroups: [MuscleGroup.chest],
-        type: ExerciseType.freeWeights,
-        emoji: '💪',
-        description: 'Great chest exercise',
+    test('should handle empty muscle lists', () {
+      final emptyExercise = ExerciseLibrary(
+        id: 'ex999',
+        code: 'TEST',
+        name: 'Test',
+        description: '',
+        primaryMuscles: const [],
+        secondaryMuscles: const [],
+        types: const [],
+        categories: const [],
+        syncedAt: DateTime(2024, 1, 1),
+        source: 'workout-api',
       );
 
-      final exerciseWithoutDesc = Exercise(
-        id: 'ex456',
-        name: 'Squat',
-        muscleGroups: [MuscleGroup.quadriceps],
-        type: ExerciseType.freeWeights,
-        emoji: '🦵',
+      expect(emptyExercise.primaryMusclesText, '');
+      expect(emptyExercise.secondaryMusclesText, '');
+      expect(emptyExercise.categoriesText, '');
+      expect(emptyExercise.secondaryMuscles.isEmpty, true);
+    });
+
+    test('should handle multiple primary muscles', () {
+      final multiMuscle = ExerciseLibrary(
+        id: 'ex789',
+        code: 'PULLUP',
+        name: 'Traction',
+        description: '',
+        primaryMuscles: [
+          MuscleInfo(code: 'BACK', name: 'Dorsaux'),
+          MuscleInfo(code: 'BICEPS', name: 'Biceps'),
+        ],
+        secondaryMuscles: const [],
+        types: const [],
+        categories: const [],
+        syncedAt: DateTime(2024, 1, 1),
+        source: 'workout-api',
       );
 
-      expect(exerciseWithDesc.description, 'Great chest exercise');
-      expect(exerciseWithoutDesc.description, null);
+      expect(multiMuscle.primaryMuscles.length, 2);
+      expect(multiMuscle.primaryMusclesText, 'Dorsaux, Biceps');
+    });
+
+    test('copyWith should return modified copy', () {
+      final modified = exercise.copyWith(name: 'Nouveau nom', hasImage: false);
+
+      expect(modified.id, exercise.id);
+      expect(modified.name, 'Nouveau nom');
+      expect(modified.hasImage, false);
+      expect(modified.code, exercise.code);
     });
   });
 
-  group('ExerciseType', () {
-    test('should have all type constants', () {
-      expect(ExerciseType.freeWeights, 'Poids libres');
-      expect(ExerciseType.machine, 'Machine guidée');
-      expect(ExerciseType.bodyWeight, 'Poids corporel');
-      expect(ExerciseType.cardio, 'Cardio');
-    });
-
-    test('should have complete list of types', () {
-      expect(ExerciseType.all.length, 4);
-      expect(ExerciseType.all.contains(ExerciseType.freeWeights), true);
-      expect(ExerciseType.all.contains(ExerciseType.bodyWeight), true);
+  group('MuscleInfo', () {
+    test('should create MuscleInfo with code and name', () {
+      final muscle = MuscleInfo(code: 'CHEST', name: 'Pectoraux');
+      expect(muscle.code, 'CHEST');
+      expect(muscle.name, 'Pectoraux');
     });
   });
 
-  group('MuscleGroup', () {
-    test('should have all muscle group constants', () {
-      expect(MuscleGroup.chest, 'Pectoraux');
-      expect(MuscleGroup.back, 'Dorsaux');
-      expect(MuscleGroup.shoulders, 'Épaules');
-      expect(MuscleGroup.biceps, 'Biceps');
-      expect(MuscleGroup.triceps, 'Triceps');
-      expect(MuscleGroup.abs, 'Abdominaux');
-      expect(MuscleGroup.quadriceps, 'Quadriceps');
-      expect(MuscleGroup.hamstrings, 'Ischio-jambiers');
-      expect(MuscleGroup.glutes, 'Fessiers');
-      expect(MuscleGroup.calves, 'Mollets');
+  group('TypeInfo', () {
+    test('should create TypeInfo with code and name', () {
+      final type = TypeInfo(code: 'FREE_WEIGHTS', name: 'Poids libres');
+      expect(type.code, 'FREE_WEIGHTS');
+      expect(type.name, 'Poids libres');
     });
+  });
 
-    test('should have complete list of muscle groups', () {
-      expect(MuscleGroup.all.length, 10);
-      expect(MuscleGroup.all.contains(MuscleGroup.chest), true);
-      expect(MuscleGroup.all.contains(MuscleGroup.quadriceps), true);
-    });
-
-    test('should have correct categories', () {
-      expect(MuscleGroup.categories.length, 3);
-      expect(MuscleGroup.categories.containsKey('Haut du corps'), true);
-      expect(MuscleGroup.categories.containsKey('Abdominaux'), true);
-      expect(MuscleGroup.categories.containsKey('Bas du corps'), true);
-
-      expect(MuscleGroup.categories['Haut du corps']!.length, 5);
-      expect(MuscleGroup.categories['Bas du corps']!.length, 4);
+  group('CategoryInfo', () {
+    test('should create CategoryInfo with code and name', () {
+      final category = CategoryInfo(code: 'BARBELL', name: 'Barre');
+      expect(category.code, 'BARBELL');
+      expect(category.name, 'Barre');
     });
   });
 }

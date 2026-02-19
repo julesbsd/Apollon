@@ -54,7 +54,7 @@ class AppDecorations {
   /// Ombre légère (hover, cards surélevées)
   static List<BoxShadow> get lightShadow => [
     BoxShadow(
-      color: Colors.black.withOpacity(0.05),
+      color: Colors.black.withValues(alpha: 0.05),
       blurRadius: 10,
       offset: const Offset(0, 2),
     ),
@@ -63,7 +63,7 @@ class AppDecorations {
   /// Ombre moyenne (cards, modals)
   static List<BoxShadow> get mediumShadow => [
     BoxShadow(
-      color: Colors.black.withOpacity(0.10),
+      color: Colors.black.withValues(alpha: 0.10),
       blurRadius: 20,
       offset: const Offset(0, 4),
     ),
@@ -72,7 +72,7 @@ class AppDecorations {
   /// Ombre forte (dialogs, FAB)
   static List<BoxShadow> get strongShadow => [
     BoxShadow(
-      color: Colors.black.withOpacity(0.15),
+      color: Colors.black.withValues(alpha: 0.15),
       blurRadius: 30,
       offset: const Offset(0, 8),
     ),
@@ -81,7 +81,7 @@ class AppDecorations {
   /// Ombre de glow (accent, primary actions)
   static List<BoxShadow> glowShadow(Color color) => [
     BoxShadow(
-      color: color.withOpacity(0.4),
+      color: color.withValues(alpha: 0.4),
       blurRadius: 20,
       offset: const Offset(0, 4),
     ),
@@ -119,14 +119,14 @@ class AppDecorations {
     Border? border,
   }) {
     return BoxDecoration(
-      color: (backgroundColor ?? AppColors.glassLightSurface).withOpacity(
+      color: (backgroundColor ?? AppColors.glassLightSurface).withValues(alpha: 
         AppColors.glassOpacityLight,
       ),
       borderRadius: borderRadius ?? defaultRadius,
       border:
           border ??
           Border.all(
-            color: Colors.white.withOpacity(AppColors.glassBorderOpacity),
+            color: Colors.white.withValues(alpha: AppColors.glassBorderOpacity),
             width: 1.5,
           ),
       boxShadow: mediumShadow,
@@ -140,14 +140,14 @@ class AppDecorations {
     Border? border,
   }) {
     return BoxDecoration(
-      color: (backgroundColor ?? AppColors.glassDarkSurface).withOpacity(
+      color: (backgroundColor ?? AppColors.glassDarkSurface).withValues(alpha: 
         AppColors.glassOpacityDark,
       ),
       borderRadius: borderRadius ?? defaultRadius,
       border:
           border ??
           Border.all(
-            color: Colors.white.withOpacity(AppColors.glassBorderOpacity),
+            color: Colors.white.withValues(alpha: AppColors.glassBorderOpacity),
             width: 1.5,
           ),
       boxShadow: mediumShadow,
@@ -221,19 +221,19 @@ class AppDecorations {
       suffixIcon: suffixIcon,
       filled: true,
       fillColor: isDark
-          ? AppColors.glassDarkSurface.withOpacity(0.5)
-          : AppColors.glassLightSurface.withOpacity(0.8),
+          ? AppColors.glassDarkSurface.withValues(alpha: 0.5)
+          : AppColors.glassLightSurface.withValues(alpha: 0.8),
       border: OutlineInputBorder(
         borderRadius: mediumRadius,
         borderSide: BorderSide(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1.5,
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: mediumRadius,
         borderSide: BorderSide(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1.5,
         ),
       ),
@@ -269,9 +269,9 @@ class AppDecorations {
     final buttonColor = color ?? Theme.of(context).colorScheme.primary;
 
     return BoxDecoration(
-      color: buttonColor.withOpacity(isDark ? 0.7 : 0.8),
+      color: buttonColor.withValues(alpha: isDark ? 0.7 : 0.8),
       borderRadius: borderRadius ?? mediumRadius,
-      border: Border.all(color: buttonColor.withOpacity(0.5), width: 1.5),
+      border: Border.all(color: buttonColor.withValues(alpha: 0.5), width: 1.5),
       boxShadow: glowShadow(buttonColor),
     );
   }
@@ -345,8 +345,8 @@ class AppDecorations {
           colors: [
             Colors.transparent,
             isDark
-                ? Colors.white.withOpacity(0.2)
-                : Colors.black.withOpacity(0.1),
+                ? Colors.white.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.1),
             Colors.transparent,
           ],
         ),

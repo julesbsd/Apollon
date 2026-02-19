@@ -1,0 +1,32 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // ==========================================
+    // EXERCISE IMAGES (Workout API)
+    // ==========================================
+    
+    // Dossier des images d'exercices
+    match /exercise_images/{imageId} {
+      // Lecture publique (catalogue public)
+      allow read: if true;
+      
+      // Écriture pour utilisateurs authentifiés
+      // (lazy loading depuis Workout API)
+      allow write: if request.auth != null;
+    }
+    
+    // ==========================================
+    // AUTRES DOSSIERS
+    // ==========================================
+    
+    // Uploads utilisateurs (avatars, etc.)
+    match /user_uploads/{userId}/{allPaths=**} {
+      // Lecture: propriétaire uniquement
+      allow read: if request.auth != null && request.auth.uid == userId;
+      
+      // Écriture: propriétaire uniquement
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:apollon/core/services/auth_service.dart';
 import 'package:apollon/core/services/workout_service.dart';
+import 'package:apollon/core/services/statistics_service.dart';
 import 'package:apollon/core/providers/auth_provider.dart' as app_providers;
 import 'package:apollon/core/providers/workout_provider.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,6 +18,9 @@ class MockUser extends Mock implements firebase_auth.User {}
 
 /// Mock WorkoutService
 class MockWorkoutService extends Mock implements WorkoutService {}
+
+/// Mock StatisticsService
+class MockStatisticsService extends Mock implements StatisticsService {}
 
 /// MockAuthService qui ne dépend pas de Firebase réel
 class MockAuthService extends Mock implements AuthService {
@@ -38,39 +42,21 @@ class MockAuthService extends Mock implements AuthService {
 }
 
 /// AuthProvider pour tests qui n'utilise pas Firebase
+/// Passe le MockAuthService au constructeur parent via l'injection de dépendance
 class TestAuthProvider extends app_providers.AuthProvider {
-  final MockAuthService _mockAuthService;
-
-  TestAuthProvider(this._mockAuthService);
-
-  @override
-  firebase_auth.User? get currentUser => _mockAuthService.currentUser;
-
-  @override
-  Stream<firebase_auth.User?> get authStateChanges =>
-      _mockAuthService.authStateChanges;
-
-  @override
-  Future<void> signIn() async {
-    // Simulate successful sign in
-    await Future.delayed(const Duration(milliseconds: 100));
-  }
-
-  @override
-  Future<bool> signOut() async {
-    // Simulate sign out
-    await Future.delayed(const Duration(milliseconds: 100));
-    return true;
-  }
+  TestAuthProvider(MockAuthService mockAuthService)
+      : super(authService: mockAuthService);
 }
 
 /// WorkoutProvider pour tests qui n'utilise pas Firestore
 class TestWorkoutProvider extends WorkoutProvider {
-  TestWorkoutProvider(MockWorkoutService mockWorkoutService)
-      : super(workoutService: mockWorkoutService);
-
-  // Override methods that access Firestore to prevent errors in tests
-  // Les données sont stockées en mémoire seulement pendant les tests
+  TestWorkoutProvider(
+    MockWorkoutService mockWorkoutService,
+    MockStatisticsService mockStatisticsService,
+  ) : super(
+          workoutService: mockWorkoutService,
+          statisticsService: mockStatisticsService,
+        );
 }
 
 /// Crée un MockWorkoutService configuré pour les tests
@@ -80,9 +66,12 @@ MockWorkoutService createMockWorkoutService() {
   return mockService;
 }
 
-/// Crée un WorkoutProvider configuré pour les tests
+/// Crée un WorkoutProvider configuré pour les tests (sans Firebase)
 WorkoutProvider createTestWorkoutProvider() {
-  return TestWorkoutProvider(createMockWorkoutService());
+  return TestWorkoutProvider(
+    createMockWorkoutService(),
+    MockStatisticsService(),
+  );
 }
 
 /// Widget wrapper pour tests avec tous les providers nécessaires

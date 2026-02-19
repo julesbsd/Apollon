@@ -4,8 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'core/providers/auth_provider.dart' as app_providers;
 import 'core/providers/theme_provider.dart';
 import 'core/theme/app_theme.dart';
+import 'core/widgets/floating_workout_timer.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/home/home_page.dart';
+
+/// Clé globale du Navigator pour permettre aux widgets hors Navigator
+/// (comme FloatingWorkoutTimer dans le builder) d'afficher des dialogs.
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 /// Widget principal de l'application Apollon
 /// Implémente US-1.2: Auto-login au démarrage
@@ -22,11 +27,25 @@ class ApolloApp extends StatelessWidget {
         return MaterialApp(
           title: 'Apollon',
           debugShowCheckedModeBanner: false,
+          navigatorKey: navigatorKey,
 
           // Utilise les thèmes définis dans app_theme.dart (US-3.1)
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeProvider.themeMode,
+
+          // Builder pour ajouter la barre flottante globale
+          builder: (context, child) {
+            return Stack(
+              children: [
+                // App principale
+                child ?? const SizedBox.shrink(),
+                
+                // Barre flottante avec chrono (affichée globalement)
+                const FloatingWorkoutTimer(),
+              ],
+            );
+          },
 
           // StreamBuilder pour gérer l'auto-login (US-1.2)
           home: Consumer<app_providers.AuthProvider>(
