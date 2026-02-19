@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../lib/secrets.dart' as secrets;
 
 /// Script standalone pour importer les exercices dans Firestore
 /// Sans dépendance Flutter - ne fonctionne que sur Web/Desktop via firebase-core
@@ -16,13 +17,13 @@ Future<void> main() async {
   try {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: 'FIREBASE_WEB_API_KEY',
-        appId: '1:182776342499:web:4f05b0d0779552bc5922d6',
-        messagingSenderId: '182776342499',
-        projectId: 'apollon-fitness-app',
-        authDomain: 'apollon-fitness-app.firebaseapp.com',
-        storageBucket: 'apollon-fitness-app.firebasestorage.app',
-        measurementId: 'G-38WFHCNCT9',
+        apiKey: secrets.firebaseApiKey,
+        appId: secrets.firebaseAppId,
+        messagingSenderId: secrets.firebaseMessagingSenderId,
+        projectId: secrets.firebaseProjectId,
+        authDomain: secrets.firebaseAuthDomain,
+        storageBucket: secrets.firebaseStorageBucket,
+        measurementId: secrets.firebaseMeasurementId,
       ),
     );
     print('✅ Firebase initialisé\n');
