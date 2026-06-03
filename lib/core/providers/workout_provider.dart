@@ -75,6 +75,25 @@ class WorkoutProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Restaure une séance draft interrompue après un redémarrage de l'app (RG-004 / EC-002).
+  /// Purge d'abord les drafts de plus de 24h (EC-002), puis reprend le draft le plus récent
+  /// s'il existe et qu'aucune séance n'est déjà en cours en mémoire.
+  Future<void> restoreDraftIfAny(String userId) async {
+    if (_currentWorkout != null) return;
+    try {
+      await _workoutService.cleanupOldDrafts(userId);
+      final draft = await _workoutService.getCurrentDraft(userId);
+      if (draft == null) return;
+      _currentWorkout = draft;
+      _elapsed = DateTime.now().difference(draft.createdAt);
+      _startAutoSave();
+      _startChrono();
+      notifyListeners();
+    } catch (e) {
+      debugPrint('restoreDraftIfAny: $e');
+    }
+  }
+
   /// Ajoute un exercice à la séance
   /// Appelé depuis ExerciseLibrarySelectionScreen (nouvelle architecture)
   /// 
@@ -271,16 +290,16 @@ class WorkoutProvider extends ChangeNotifier {
       );
     }
 
+    _isSaving = true;
     try {
-      _isSaving = true;
-
       // Calculer la durée (en secondes)
       final duration = DateTime.now()
           .difference(_currentWorkout!.createdAt)
           .inSeconds;
 
-      // Mettre à jour le status, la durée et les exercices filtrés
-      _currentWorkout = _currentWorkout!.copyWith(
+      // Copie finalisée LOCALE: on ne commit _currentWorkout qu'après succès de
+      // l'écriture, pour ne pas laisser un état 'completed' incohérent si elle échoue.
+      var completed = _currentWorkout!.copyWith(
         status: WorkoutStatus.completed,
         duration: duration,
         exercises: exercisesWithSets,
@@ -288,18 +307,18 @@ class WorkoutProvider extends ChangeNotifier {
       );
 
       // Sauvegarder
-      if (_currentWorkout!.id == null || _currentWorkout!.id!.isEmpty) {
+      if (completed.id == null || completed.id!.isEmpty) {
         final workoutId = await _workoutService.createWorkout(
-          _currentWorkout!.userId,
-          _currentWorkout!,
+          completed.userId,
+          completed,
         );
-        _currentWorkout = _currentWorkout!.copyWith(id: workoutId);
+        completed = completed.copyWith(id: workoutId);
       } else {
-        await _workoutService.updateWorkout(
-          _currentWorkout!.userId,
-          _currentWorkout!,
-        );
+        await _workoutService.updateWorkout(completed.userId, completed);
       }
+
+      // Écriture réussie -> on commit l'état finalisé en mémoire.
+      _currentWorkout = completed;
 
       // Détecter les nouveaux records personnels
       final newPRs = <PersonalRecord>[];
@@ -324,6 +343,7 @@ class WorkoutProvider extends ChangeNotifier {
             newPRs.add(pr);
           }
         } catch (e) {
+          debugPrint('Détection PR échouée (${exercise.exerciseName}): $e');
         }
       }
       
@@ -333,12 +353,15 @@ class WorkoutProvider extends ChangeNotifier {
       _stopChrono();
       _currentWorkout = null;
 
-      notifyListeners();
       return newPRs;
     } catch (e) {
+      // Échec d'écriture: _currentWorkout reste le draft INCHANGÉ (jamais muté en
+      // 'completed'), les timers continuent -> l'utilisateur peut réessayer sans perte.
       debugPrint('Error completing workout: $e');
-      _isSaving = false;
       rethrow;
+    } finally {
+      _isSaving = false;
+      notifyListeners();
     }
   }
 

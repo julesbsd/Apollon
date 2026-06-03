@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import '../models/workout.dart';
 import '../models/workout_set.dart';
 import '../models/statistics.dart';
@@ -267,8 +268,10 @@ class StatisticsService {
     int reps,
     String? workoutId,
   ) async {
+    // Un exercice au poids du corps (weight == 0) n'a pas de PR de charge;
+    // la règle Firestore exige weight > 0, donc on n'essaie pas de l'écrire.
+    if (weight <= 0) return null;
     try {
-      
       // Vérifier si c'est un nouveau record (sans orderBy pour éviter problème d'index)
       final existingPRs = await _recordsCollection(userId)
           .where('exerciseId', isEqualTo: exerciseId)
@@ -316,53 +319,49 @@ class StatisticsService {
 
       return null; // Pas de nouveau PR
     } catch (e) {
+      debugPrint('detectAndSaveNewPR: échec sauvegarde PR -> $e');
       return null;
     }
   }
 
-  /// Calculer streak actuel et meilleur streak
-  Map<String, int> _calculateStreaks(List<Workout> workouts) {
+  /// Exposé aux tests unitaires (logique pure, sans Firestore).
+  @visibleForTesting
+  static Map<String, int> calculateStreaksForTest(List<Workout> workouts) =>
+      _calculateStreaks(workouts);
+
+  /// Calculer streak actuel et meilleur streak (en JOURS calendaires).
+  static Map<String, int> _calculateStreaks(List<Workout> workouts) {
     if (workouts.isEmpty) return {'current': 0, 'best': 0};
 
-    // Trier par date décroissante
-    final sorted = List<Workout>.from(workouts);
-    sorted.sort((a, b) => b.date.compareTo(a.date));
+    // Normaliser à la date calendaire (sans l'heure) et dédupliquer les séances
+    // d'un même jour, puis trier du plus récent au plus ancien.
+    DateTime dayOnly(DateTime d) => DateTime(d.year, d.month, d.day);
+    final days = workouts.map((w) => dayOnly(w.date)).toSet().toList()
+      ..sort((a, b) => b.compareTo(a));
 
-    int currentStreak = 0;
-    int bestStreak = 0;
-    DateTime? lastDate;
-
-    for (final workout in sorted) {
-      if (lastDate == null) {
-        currentStreak = 1;
-        bestStreak = 1;
-        lastDate = workout.date;
-        continue;
-      }
-
-      final daysDiff = lastDate.difference(workout.date).inDays;
-
-      if (daysDiff == 1) {
-        // Jours consécutifs
-        currentStreak++;
-        if (currentStreak > bestStreak) {
-          bestStreak = currentStreak;
-        }
-      } else if (daysDiff > 1) {
-        // Streak interrompu
-        currentStreak = 1;
-      }
-
-      lastDate = workout.date;
+    // Best streak = plus longue série de jours consécutifs, n'importe où.
+    int best = 1;
+    int run = 1;
+    for (int i = 1; i < days.length; i++) {
+      run = days[i - 1].difference(days[i]).inDays == 1 ? run + 1 : 1;
+      if (run > best) best = run;
     }
 
-    // Vérifier si le streak actuel est toujours valide (dernière séance récente)
-    final daysSinceLastWorkout = DateTime.now().difference(sorted.first.date).inDays;
-    if (daysSinceLastWorkout > 1) {
-      currentStreak = 0;
+    // Current streak = série consécutive qui se TERMINE à la séance la plus récente.
+    int current = 1;
+    for (int i = 1; i < days.length; i++) {
+      if (days[i - 1].difference(days[i]).inDays == 1) {
+        current++;
+      } else {
+        break;
+      }
     }
 
-    return {'current': currentStreak, 'best': bestStreak};
+    // ... valide seulement si la dernière séance date d'aujourd'hui ou d'hier.
+    final daysSinceLast = dayOnly(DateTime.now()).difference(days.first).inDays;
+    if (daysSinceLast > 1) current = 0;
+
+    return {'current': current, 'best': best};
   }
 
   /// Trouver l'exercice le plus fréquent

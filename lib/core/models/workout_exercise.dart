@@ -19,16 +19,17 @@ class WorkoutExercise {
 
   /// Conversion depuis Firestore
   factory WorkoutExercise.fromFirestore(Map<String, dynamic> data) {
+    // Casts défensifs: un exercice partiel ne doit pas casser toute la séance.
     return WorkoutExercise(
-      exerciseId: data['exerciseId'] as String,
-      exerciseName: data['exerciseName'] as String,
-      sets: (data['sets'] as List)
+      exerciseId: data['exerciseId'] as String? ?? '',
+      exerciseName: data['exerciseName'] as String? ?? '',
+      sets: ((data['sets'] as List?) ?? const [])
           .map(
             (setData) =>
                 WorkoutSet.fromFirestore(setData as Map<String, dynamic>),
           )
           .toList(),
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
+      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 

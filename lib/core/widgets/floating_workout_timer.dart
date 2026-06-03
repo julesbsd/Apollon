@@ -24,19 +24,19 @@ class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final workoutProvider = Provider.of<WorkoutProvider>(context);
-
-    // Afficher uniquement si une séance est active
-    if (!workoutProvider.hasActiveWorkout) {
-      return const SizedBox.shrink();
-    }
-
-    return Positioned(
-      left: 60,
-      right: 60,
-      bottom: 16,
-      child: _buildTimerCard(context, colorScheme, workoutProvider),
+    // Visibilité: ne se reconstruit que quand une séance démarre/s'arrête, pas à chaque tick.
+    return Selector<WorkoutProvider, bool>(
+      selector: (_, p) => p.hasActiveWorkout,
+      builder: (context, hasActiveWorkout, _) {
+        if (!hasActiveWorkout) return const SizedBox.shrink();
+        final colorScheme = Theme.of(context).colorScheme;
+        return Positioned(
+          left: 60,
+          right: 60,
+          bottom: 16,
+          child: _buildTimerCard(context, colorScheme),
+        );
+      },
     );
   }
 
@@ -44,7 +44,6 @@ class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer> {
   Widget _buildTimerCard(
     BuildContext context,
     ColorScheme colorScheme,
-    WorkoutProvider workoutProvider,
   ) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
@@ -70,9 +69,9 @@ class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: _buildTimerText(colorScheme, workoutProvider),
+                child: _buildTimerText(colorScheme),
               ),
-              _buildStopButton(context, colorScheme, workoutProvider),
+              _buildStopButton(context, colorScheme),
             ],
           ),
         ),
@@ -81,18 +80,19 @@ class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer> {
   }
 
   /// Construit le texte du chronomètre
-  Widget _buildTimerText(
-    ColorScheme colorScheme,
-    WorkoutProvider workoutProvider,
-  ) {
-    return Text(
-      workoutProvider.elapsedTimeFormatted,
-      style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: colorScheme.primary,
-        letterSpacing: 0.5,
-        decoration: TextDecoration.none,
+  Widget _buildTimerText(ColorScheme colorScheme) {
+    // Seul le texte du chrono se reconstruit chaque seconde (pas la carte + le blur).
+    return Selector<WorkoutProvider, String>(
+      selector: (_, p) => p.elapsedTimeFormatted,
+      builder: (_, elapsed, _) => Text(
+        elapsed,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: colorScheme.primary,
+          letterSpacing: 0.5,
+          decoration: TextDecoration.none,
+        ),
       ),
     );
   }
@@ -101,12 +101,12 @@ class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer> {
   Widget _buildStopButton(
     BuildContext context,
     ColorScheme colorScheme,
-    WorkoutProvider workoutProvider,
   ) {
     return Material(
       type: MaterialType.transparency,
       child: InkWell(
-        onTap: () => _showCompleteDialog(context, workoutProvider),
+        onTap: () =>
+            _showCompleteDialog(context, context.read<WorkoutProvider>()),
         borderRadius: BorderRadius.circular(6),
         child: Container(
           width: 34,

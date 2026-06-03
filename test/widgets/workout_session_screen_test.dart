@@ -38,7 +38,12 @@ Widget buildTestWidget(WorkoutProvider workoutProvider, ExerciseLibrary exercise
       Provider<WorkoutService>.value(value: mockWorkoutService),
       Provider<ExerciseLibraryRepository>.value(value: mockRepo),
     ],
-    child: MaterialApp(home: WorkoutSessionScreen(exercise: exercise)),
+    child: MaterialApp(
+      home: WorkoutSessionScreen(
+        exercise: exercise,
+        statisticsService: MockStatisticsService(),
+      ),
+    ),
   );
 }
 

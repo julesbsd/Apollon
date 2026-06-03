@@ -28,13 +28,15 @@ class Workout {
 
   /// Conversion depuis Firestore
   factory Workout.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+    // Casts défensifs: un document partiel (ex: serverTimestamp en attente côté
+    // cache offline, ou champ absent) ne doit pas faire planter tout le stream.
+    final data = (doc.data() as Map<String, dynamic>?) ?? const {};
     return Workout(
       id: doc.id,
       userId: data['userId'] as String? ?? '',
-      date: (data['date'] as Timestamp).toDate(),
-      status: WorkoutStatus.fromString(data['status'] as String),
-      exercises: (data['exercises'] as List)
+      date: (data['date'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      status: WorkoutStatus.fromString(data['status'] as String? ?? 'draft'),
+      exercises: ((data['exercises'] as List?) ?? const [])
           .map(
             (exerciseData) => WorkoutExercise.fromFirestore(
               exerciseData as Map<String, dynamic>,
@@ -42,8 +44,8 @@ class Workout {
           )
           .toList(),
       duration: data['duration'] as int?,
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
-      updatedAt: (data['updatedAt'] as Timestamp).toDate(),
+      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 

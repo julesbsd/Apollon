@@ -23,14 +23,22 @@ import '../exercise_library/widgets/exercise_history_graph_panel.dart';
 class WorkoutSessionScreen extends StatefulWidget {
   final ExerciseLibrary exercise;
 
-  const WorkoutSessionScreen({super.key, required this.exercise});
+  /// Injectable pour les tests (évite de toucher FirebaseFirestore.instance en test).
+  final StatisticsService? statisticsService;
+
+  const WorkoutSessionScreen({
+    super.key,
+    required this.exercise,
+    this.statisticsService,
+  });
 
   @override
   State<WorkoutSessionScreen> createState() => _WorkoutSessionScreenState();
 }
 
 class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
-  final StatisticsService _statisticsService = StatisticsService();
+  late final StatisticsService _statisticsService =
+      widget.statisticsService ?? StatisticsService();
 
   @override
   void initState() {
@@ -40,10 +48,6 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final workoutProvider = Provider.of<WorkoutProvider>(context);
-
-    // Récupérer l'exercice actuel de la séance
-    final currentExercise = workoutProvider.getExercise(widget.exercise.id);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -84,18 +88,23 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
 
                   const SizedBox(height: 24),
 
-                  // Section séries actuelles
-                  _buildCurrentSetsSection(
-                    context,
-                    colorScheme,
-                    workoutProvider,
-                    currentExercise?.sets ?? [],
+                  // Section séries actuelles - Selector ciblé: ne se reconstruit que sur
+                  // changement des séries, pas à chaque tick du chrono.
+                  Selector<WorkoutProvider, List<WorkoutSet>>(
+                    selector: (_, p) =>
+                        p.getExercise(widget.exercise.id)?.sets ?? const [],
+                    builder: (context, sets, _) => _buildCurrentSetsSection(
+                      context,
+                      colorScheme,
+                      context.read<WorkoutProvider>(),
+                      sets,
+                    ),
                   ),
 
                   const SizedBox(height: 24),
 
                   // Boutons d'action
-                  _buildActionButtons(context, workoutProvider),
+                  _buildActionButtons(context, context.read<WorkoutProvider>()),
 
                   // Espace pour la barre flottante globale en bas
                   const SizedBox(height: 100),
@@ -371,18 +380,21 @@ class _InlineAddSetForm extends StatefulWidget {
 class _InlineAddSetFormState extends State<_InlineAddSetForm> {
   late final TextEditingController _repsController;
   late final TextEditingController _weightController;
+  late final FocusNode _repsFocusNode;
 
   @override
   void initState() {
     super.initState();
     _repsController = TextEditingController();
     _weightController = TextEditingController();
+    _repsFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     _repsController.dispose();
     _weightController.dispose();
+    _repsFocusNode.dispose();
     super.dispose();
   }
 
@@ -463,6 +475,7 @@ class _InlineAddSetFormState extends State<_InlineAddSetForm> {
           Expanded(
             child: TextField(
               controller: _repsController,
+              focusNode: _repsFocusNode,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
@@ -490,7 +503,8 @@ class _InlineAddSetFormState extends State<_InlineAddSetForm> {
                 decimal: true,
               ),
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                // Accepte le point ET la virgule (claviers FR)
+                FilteringTextInputFormatter.allow(RegExp(r'^\d*[.,]?\d*')),
               ],
               decoration: InputDecoration(
                 labelText: 'Poids (kg)',
@@ -516,7 +530,12 @@ class _InlineAddSetFormState extends State<_InlineAddSetForm> {
             iconSize: 32,
             onPressed: () {
               final reps = int.tryParse(_repsController.text);
-              final weight = double.tryParse(_weightController.text) ?? 0;
+              // Normalise la virgule décimale FR (12,5 -> 12.5) avant parsing
+              final weight =
+                  double.tryParse(
+                    _weightController.text.replaceAll(',', '.'),
+                  ) ??
+                  0;
 
               if (reps == null || reps <= 0) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -551,8 +570,8 @@ class _InlineAddSetFormState extends State<_InlineAddSetForm> {
                 _repsController.clear();
                 _weightController.clear();
 
-                // Optionnel: refocus sur le champ reps
-                FocusScope.of(context).requestFocus(FocusNode());
+                // Refocus sur le champ reps (FocusNode réutilisé du State, pas de fuite)
+                _repsFocusNode.requestFocus();
               } catch (e) {
                 ScaffoldMessenger.of(
                   context,

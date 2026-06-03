@@ -32,6 +32,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    // RG-004 / EC-002: reprendre une séance draft interrompue + purger les vieux drafts.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final userId = context.read<AuthProvider>().user?.uid;
+      if (userId != null) {
+        context.read<WorkoutProvider>().restoreDraftIfAny(userId);
+      }
+    });
+  }
+
   /// Messages motivants selon l'heure
   String _getGreetingMessage() {
     final hour = DateTime.now().hour;
@@ -46,7 +59,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final authProvider = Provider.of<AuthProvider>(context);
-    final workoutProvider = Provider.of<WorkoutProvider>(context);
 
     return Scaffold(
       backgroundColor: theme.brightness == Brightness.dark
@@ -62,7 +74,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             _buildHeroSection(context, authProvider),
             const SizedBox(height: AppTheme.spacingXL),
-            _buildProgressSection(context, workoutProvider),
+            // Seul l'orbe de progression dépend du chrono -> Consumer ciblé pour ne pas
+            // reconstruire l'écran entier (héros + 4 cartes) chaque seconde.
+            Consumer<WorkoutProvider>(
+              builder: (context, workoutProvider, _) =>
+                  _buildProgressSection(context, workoutProvider),
+            ),
             const SizedBox(height: AppTheme.spacingL),
             _buildPopularWorkoutsSection(context),
             const SizedBox(height: AppTheme.spacingL),

@@ -78,7 +78,10 @@ service cloud.firestore {
                     && request.resource.data.displayName is string;
       
       // Mise à jour du profil (lastLoginAt, preferences)
-      allow update: if isOwner(userId);
+      // email et createdAt sont immuables après la création
+      allow update: if isOwner(userId)
+                    && request.resource.data.email == resource.data.email
+                    && request.resource.data.createdAt == resource.data.createdAt;
       
       // Suppression compte (V2 - fonctionnalité à implémenter)
       allow delete: if isOwner(userId);
@@ -125,8 +128,12 @@ service cloud.firestore {
                       && request.resource.data.reps is int
                       && request.resource.data.reps > 0;
         
-        // Mise à jour record (si amélioration du record)
-        allow update: if isOwner(userId);
+        // Mise à jour record (si amélioration du record) - mêmes contraintes qu'à la création
+        allow update: if isOwner(userId)
+                      && request.resource.data.weight is number
+                      && request.resource.data.weight >= 0
+                      && request.resource.data.reps is int
+                      && request.resource.data.reps > 0;
         
         // Suppression record
         allow delete: if isOwner(userId);
@@ -141,9 +148,9 @@ service cloud.firestore {
       // Lecture: Catalogue public - tous les utilisateurs peuvent lire
       allow read: if true;
       
-      // Écriture: Réservé aux scripts d'import (Firebase Admin SDK)
-      // Import via Node.js script avec Service Account Key
-      allow write: if isAuthenticated();  // Ou false pour bloquer totalement
+      // Écriture: Réservé aux scripts d'import (Firebase Admin SDK, qui bypasse les rules)
+      // Aucune écriture client autorisée sur le catalogue partagé
+      allow write: if false;
     }
     
     // ==========================================
