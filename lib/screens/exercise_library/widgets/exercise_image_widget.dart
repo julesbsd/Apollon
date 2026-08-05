@@ -49,22 +49,56 @@ class _ExerciseImageWidgetState extends State<ExerciseImageWidget> {
       });
     }
   }
-  
+
+  /// ListView.builder recycle les elements par position : quand l'exercice
+  /// affiche a une position donnee change (nouvel exerciseId) sans que
+  /// Flutter ne recree le State (pas de Key stable sur la liste), le State
+  /// precedent reste en place avec son ancienne image/erreur tant qu'aucun
+  /// didUpdateWidget ne detecte explicitement ce changement et ne relance
+  /// le chargement.
+  @override
+  void didUpdateWidget(covariant ExerciseImageWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.exerciseId != widget.exerciseId) {
+      setState(() {
+        _imageSource = null;
+        _isDownloading = false;
+        _downloadError = null;
+      });
+      // Relancer le meme chargement que celui declenche depuis
+      // didChangeDependencies, avec les memes garde-fous (mounted +
+      // addPostFrameCallback pour eviter un setState pendant le build).
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _loadImageSource();
+        }
+      });
+    }
+  }
+
   /// Charger la source de l'image
+  /// Retourne null si l'exercice n'a pas d'image disponible (hasImage=false)
   Future<void> _loadImageSource() async {
     try {
       final repository = context.read<ExerciseLibraryRepository>();
       final source = await repository.getImageSource(widget.exerciseId);
-      
-      
+
       if (mounted) {
-        setState(() {
-          _imageSource = source;
-        });
-        
-        // Si remote, télécharger automatiquement
-        if (source.isRemote) {
-          await _downloadImage(repository);
+        if (source == null) {
+          // Pas d'image disponible pour cet exercice → afficher avatar de repli
+          setState(() {
+            _imageSource = null;
+            _downloadError = 'Aucune image disponible';
+          });
+        } else {
+          setState(() {
+            _imageSource = source;
+          });
+
+          // Si remote, télécharger automatiquement
+          if (source.isRemote) {
+            await _downloadImage(repository);
+          }
         }
       }
     } catch (e) {
@@ -317,18 +351,46 @@ class _ExerciseImageThumbnailState extends State<ExerciseImageThumbnail> {
       });
     }
   }
-  
+
+  /// ListView.builder recycle les elements par position : quand l'exercice
+  /// affiche a une position donnee change (nouvel exerciseId) sans que
+  /// Flutter ne recree le State (pas de Key stable sur la liste), le State
+  /// precedent reste en place avec son ancienne image tant qu'aucun
+  /// didUpdateWidget ne detecte explicitement ce changement et ne relance
+  /// la verification.
+  @override
+  void didUpdateWidget(covariant ExerciseImageThumbnail oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.exerciseId != widget.exerciseId) {
+      setState(() {
+        _imageSource = null;
+        _isLoading = true;
+      });
+      // Relancer la meme verification que celle declenchee depuis
+      // didChangeDependencies, avec les memes garde-fous (mounted +
+      // addPostFrameCallback pour eviter un setState pendant le build).
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _checkImageAvailability();
+        }
+      });
+    }
+  }
+
   /// Vérifie si une image est disponible (asset ou local uniquement)
   /// Ne télécharge PAS si l'image n'existe pas
+  /// Gère aussi le cas hasImage=false (getImageSource retourne null)
   Future<void> _checkImageAvailability() async {
     final repository = context.read<ExerciseLibraryRepository>();
     final source = await repository.getImageSource(widget.exerciseId);
-    
+
     if (mounted) {
       setState(() {
         // On garde l'image seulement si elle est asset ou local
-        // Si remote, on affichera l'emoji
-        _imageSource = (source.isAsset || source.isLocal) ? source : null;
+        // Si remote ou null, on affichera l'emoji
+        _imageSource = (source != null && (source.isAsset || source.isLocal))
+            ? source
+            : null;
         _isLoading = false;
       });
     }
