@@ -1,0 +1,570 @@
+[
+  {
+    "id": "custom_low_row",
+    "code": "CUSTOM_LOW_ROW",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      },
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Rowing bas à la machine assis (low row)",
+    "description": "Asseyez-vous face à la machine, poitrine calée contre le support si disponible, pieds posés sur les cale-pieds et genoux légèrement fléchis. Saisissez les poignées bras tendus, puis tirez-les vers votre buste en resserrant les omoplates et en gardant le dos droit. Contrôlez le retour jusqu'à l'extension complète des bras sans arrondir le dos ni utiliser d'élan.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_seated_dip",
+    "code": "CUSTOM_SEATED_DIP",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      },
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Dips assis à la machine",
+    "description": "Asseyez-vous sur le siège de la machine, dos bien calé contre le dossier, et saisissez les poignées à hauteur des épaules. Poussez les poignées vers le bas et vers l'avant jusqu'à l'extension quasi complète des coudes, sans les verrouiller. Revenez lentement à la position de départ en gardant les épaules basses et éloignées des oreilles.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_shoulder_press_machine",
+    "code": "CUSTOM_SHOULDER_PRESS_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      },
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Développé épaules à la machine (shoulder press)",
+    "description": "Asseyez-vous dos calé contre le dossier, poignées à hauteur des épaules, pieds à plat au sol. Poussez les poignées verticalement vers le haut jusqu'à l'extension quasi complète des bras, sans verrouiller les coudes. Redescendez de manière contrôlée jusqu'à la position de départ sans cambrer le bas du dos.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_seated_leg_curl",
+    "code": "CUSTOM_SEATED_LEG_CURL",
+    "primaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "959e7bec-f8a2-4274-8289-b95031e11763",
+        "code": "CALVES",
+        "name": "Mollets"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Leg curl assis à la machine (seated leg curl)",
+    "description": "Asseyez-vous sur la machine, dos calé, et placez l'arrière des chevilles sous le rouleau rembourré, jambes tendues devant vous. Fléchissez les genoux pour ramener le rouleau vers l'arrière des cuisses en contractant les ischio-jambiers. Redescendez lentement jusqu'à l'extension complète sans verrouiller les genoux ni cambrer le bas du dos.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_glute_kickback_machine",
+    "code": "CUSTOM_GLUTE_KICKBACK_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Extension de hanche à la machine (glute kickback)",
+    "description": "Placez-vous debout face à la machine, tronc légèrement incliné en avant et appuyé sur le support, un pied calé contre la plateforme arrière. Poussez la jambe vers l'arrière et vers le haut en contractant le fessier, sans cambrer excessivement le bas du dos. Revenez lentement à la position de départ sans relâcher brusquement la charge, puis répétez avec l'autre jambe.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_hip_thrust_machine",
+    "code": "CUSTOM_HIP_THRUST_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Hip thrust à la machine",
+    "description": "Installez-vous sur le siège de la machine, dos et omoplates calés contre le dossier, coussin de charge positionné au niveau du bassin, pieds à plat au sol. Poussez le bassin vers le haut en contractant les fessiers jusqu'à l'alignement du buste et des cuisses. Redescendez de façon contrôlée sans que le bassin ne retombe brutalement, et évitez de cambrer excessivement le bas du dos en haut du mouvement.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_smith_machine_squat",
+    "code": "CUSTOM_SMITH_MACHINE_SQUAT",
+    "primaryMuscles": [
+      {
+        "id": "e81a94bb-5af3-4695-b55d-10ad164a0c8c",
+        "code": "QUADRICEPS",
+        "name": "Quadriceps"
+      },
+      {
+        "id": "c007b484-ff6a-4f66-af7c-67c4a973fb46",
+        "code": "GLUTES",
+        "name": "Fessiers"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "9ec135a3-b9fa-46d7-9efc-586ad35d19e6",
+        "code": "HAMSTRINGS",
+        "name": "Ischio-jambiers"
+      },
+      {
+        "id": "e3ccfdcd-bc1e-4761-b584-8ea293140e7c",
+        "code": "ADDUCTORS",
+        "name": "Adducteurs"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Squat au smith machine (barre guidée)",
+    "description": "Positionnez-vous sous la barre guidée du smith machine, barre posée sur le haut du dos, pieds légèrement en avant de l'axe de la barre et écartés à la largeur des épaules. Déverrouillez la barre puis descendez en fléchissant hanches et genoux jusqu'à ce que les cuisses soient au moins parallèles au sol, dos gardé neutre. Remontez en poussant dans les talons jusqu'à l'extension complète des jambes, puis reverrouillez la barre en fin de série.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_assisted_pull_up_machine",
+    "code": "CUSTOM_ASSISTED_PULL_UP_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "299972b9-ad4a-4c85-a8c8-94a439b12f03",
+        "code": "BACK",
+        "name": "Dos"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      },
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Traction assistée à la machine (gravitron)",
+    "description": "Réglez le contrepoids de la machine au niveau d'assistance souhaité, puis montez sur la plateforme ou le genouillère en saisissant les poignées en pronation ou supination. Tirez le buste vers le haut jusqu'à ce que le menton dépasse les poignées, en contractant le dos. Redescendez de manière contrôlée jusqu'à l'extension complète des bras sans relâcher brusquement la tension.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_assisted_dip_machine",
+    "code": "CUSTOM_ASSISTED_DIP_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      },
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "e9cecd84-214e-4ffb-9ca8-8f896a3544b2",
+        "code": "POLYARTICULAR",
+        "name": "Polyarticulaire"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Dips assistés à la machine",
+    "description": "Réglez le contrepoids de la machine au niveau d'assistance souhaité, montez sur la plateforme ou le genouillère, puis saisissez les poignées parallèles bras tendus. Descendez en fléchissant les coudes jusqu'à ce que les bras forment un angle d'environ 90 degrés, coudes proches du corps. Repoussez ensuite vers le haut jusqu'à l'extension quasi complète des bras sans verrouiller brutalement les coudes.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_cable_crossover",
+    "code": "CUSTOM_CABLE_CROSSOVER",
+    "primaryMuscles": [
+      {
+        "id": "d708f94b-2947-455d-abdd-e8bca77b43e9",
+        "code": "CHEST",
+        "name": "Pectoraux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0e2a89e2-482b-40da-9dd0-ee9a3395d2cb",
+        "code": "SHOULDERS",
+        "name": "Épaules"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Écarté à la poulie vis-à-vis (cable crossover)",
+    "description": "Placez-vous au centre de la station à poulies vis-à-vis, une poignée haute dans chaque main, buste légèrement penché en avant et un pied avancé pour la stabilité. Ramenez les mains vers l'avant et vers le bas en un mouvement d'arc en contractant les pectoraux, coudes légèrement fléchis et fixes. Revenez lentement à la position de départ en laissant les bras s'écarter sans dépasser l'alignement des épaules, pour préserver les articulations.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_rotary_torso_machine",
+    "code": "CUSTOM_ROTARY_TORSO_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Rotation du buste à la machine (rotary torso)",
+    "description": "Asseyez-vous sur la machine, dos calé contre le dossier rotatif, bassin stabilisé et mains posées sur les appuis prévus. Faites pivoter le buste d'un côté en contractant les obliques, sans forcer sur l'amplitude ni utiliser d'à-coups. Revenez au centre de manière contrôlée puis répétez de l'autre côté, en gardant un mouvement lent et maîtrisé pour protéger le bas du dos.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_ab_crunch_machine",
+    "code": "CUSTOM_AB_CRUNCH_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "0f9db780-ef77-4a0c-bf0c-2cff76b0592d",
+        "code": "ABS",
+        "name": "Abdominaux"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "e74cd49d-d4ef-4798-8fe4-8b1ab0b7cec1",
+        "code": "OBLIQUES",
+        "name": "Obliques"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Crunch à la machine (abdos)",
+    "description": "Asseyez-vous sur la machine, dos calé contre le coussin mobile, mains posées sur les poignées ou avant-bras sur les appuis selon le modèle. Fléchissez le buste vers l'avant en contractant la sangle abdominale, sans tirer avec les bras ni les épaules. Revenez lentement à la position de départ sans relâcher complètement la tension abdominale entre les répétitions.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_preacher_curl_machine",
+    "code": "CUSTOM_PREACHER_CURL_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "b3127715-946b-4317-9db6-8a224f7fc723",
+        "code": "BICEPS",
+        "name": "Biceps"
+      }
+    ],
+    "secondaryMuscles": [
+      {
+        "id": "76ebec42-84ea-4235-8acb-28a573e7415b",
+        "code": "FOREARMS",
+        "name": "Avant-bras"
+      }
+    ],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Curl biceps au pupitre à la machine (preacher curl)",
+    "description": "Asseyez-vous à la machine, bras posés sur le pupitre incliné, aisselles calées contre le haut du support, et saisissez les poignées ou la barre en supination. Fléchissez les coudes pour remonter la charge vers les épaules en contractant les biceps, sans décoller les bras du pupitre. Redescendez lentement jusqu'à une extension quasi complète des bras, sans verrouiller brutalement les coudes.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_triceps_extension_machine",
+    "code": "CUSTOM_TRICEPS_EXTENSION_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "4585536f-a84c-46b2-8a10-059d58cc6f2f",
+        "code": "TRICEPS",
+        "name": "Triceps"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Extension triceps à la machine",
+    "description": "Asseyez-vous sur la machine, dos calé contre le dossier, coudes positionnés sur les appuis prévus au niveau des épaules et mains sur les poignées. Poussez les poignées vers le bas ou vers l'avant selon le modèle jusqu'à l'extension quasi complète des bras, sans verrouiller les coudes. Revenez lentement à la position de départ en gardant les coudes fixes tout au long du mouvement.",
+    "source": "custom",
+    "hasImage": true
+  },
+  {
+    "id": "custom_shrug_machine",
+    "code": "CUSTOM_SHRUG_MACHINE",
+    "primaryMuscles": [
+      {
+        "id": "8c22ec68-1538-40d7-8be4-2e0b4b94fb3d",
+        "code": "TRAPEZIUS",
+        "name": "Trapèzes"
+      }
+    ],
+    "secondaryMuscles": [],
+    "types": [
+      {
+        "id": "ffd48b1f-84e9-4487-9ece-2103f7ddfcd4",
+        "code": "ISOLATION",
+        "name": "Isolation"
+      }
+    ],
+    "categories": [
+      {
+        "id": "3eb8e6de-650c-44bd-b77a-5e152f38a1f3",
+        "code": "MACHINE",
+        "name": "Machine"
+      }
+    ],
+    "name": "Haussements d'épaules à la machine (shrug machine)",
+    "description": "Installez-vous à la machine, poignées ou support saisi bras tendus le long du corps, pieds stables au sol. Sans plier les coudes, élevez les épaules verticalement vers les oreilles en contractant les trapèzes. Marquez une courte pause en haut du mouvement, puis redescendez lentement les épaules de manière contrôlée sans les faire rouler.",
+    "source": "custom",
+    "hasImage": true
+  }
+]
