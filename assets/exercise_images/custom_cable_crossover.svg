@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500px" height="500px" viewBox="0 0 500 500">
+<!-- Pictogramme custom : Cable crossover (ecarte poulies) — debout entre deux colonnes a poulies, bras ecartes ramenes devant la poitrine -->
+<defs>
+<linearGradient id="steelL" gradientUnits="userSpaceOnUse" x1="55" y1="0" x2="150" y2="0">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.09" style="stop-color:#999999"/>
+	<stop offset="0.11" style="stop-color:#C8C8C8"/>
+	<stop offset="0.15" style="stop-color:#9D9D9D"/>
+	<stop offset="0.19" style="stop-color:#777777"/>
+	<stop offset="0.24" style="stop-color:#575757"/>
+	<stop offset="0.3" style="stop-color:#3B3B3B"/>
+	<stop offset="0.36" style="stop-color:#252525"/>
+	<stop offset="0.43" style="stop-color:#141414"/>
+	<stop offset="0.52" style="stop-color:#090909"/>
+	<stop offset="0.65" style="stop-color:#020202"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<linearGradient id="steelR" gradientUnits="userSpaceOnUse" x1="352" y1="0" x2="452" y2="0">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.09" style="stop-color:#999999"/>
+	<stop offset="0.11" style="stop-color:#C8C8C8"/>
+	<stop offset="0.15" style="stop-color:#9D9D9D"/>
+	<stop offset="0.19" style="stop-color:#777777"/>
+	<stop offset="0.24" style="stop-color:#575757"/>
+	<stop offset="0.3" style="stop-color:#3B3B3B"/>
+	<stop offset="0.36" style="stop-color:#252525"/>
+	<stop offset="0.43" style="stop-color:#141414"/>
+	<stop offset="0.52" style="stop-color:#090909"/>
+	<stop offset="0.65" style="stop-color:#020202"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+</defs>
+<!-- Sol -->
+<rect x="30" y="432" width="440" height="8" rx="4" fill="#1A1A1A"/>
+<!-- Colonne poulie gauche -->
+<rect x="62" y="120" width="10" height="312" rx="4" fill="url(#steelL)"/>
+<rect x="132" y="120" width="10" height="312" rx="4" fill="url(#steelL)"/>
+<rect x="52" y="108" width="100" height="14" rx="6" fill="#111111"/>
+<g fill="url(#steelL)">
+	<rect x="56" y="288" width="92" height="15" rx="4"/>
+	<rect x="56" y="306" width="92" height="15" rx="4"/>
+	<rect x="56" y="324" width="92" height="15" rx="4"/>
+	<rect x="56" y="342" width="92" height="15" rx="4"/>
+	<rect x="56" y="360" width="92" height="15" rx="4"/>
+	<rect x="56" y="378" width="92" height="15" rx="4"/>
+	<rect x="56" y="396" width="92" height="15" rx="4"/>
+	<rect x="56" y="414" width="92" height="15" rx="4"/>
+</g>
+<circle cx="137" cy="122" r="8" fill="#0D0D0D"/>
+<!-- Colonne poulie droite -->
+<rect x="356" y="120" width="10" height="312" rx="4" fill="url(#steelR)"/>
+<rect x="426" y="120" width="10" height="312" rx="4" fill="url(#steelR)"/>
+<rect x="346" y="108" width="100" height="14" rx="6" fill="#111111"/>
+<g fill="url(#steelR)">
+	<rect x="352" y="288" width="92" height="15" rx="4"/>
+	<rect x="352" y="306" width="92" height="15" rx="4"/>
+	<rect x="352" y="324" width="92" height="15" rx="4"/>
+	<rect x="352" y="342" width="92" height="15" rx="4"/>
+	<rect x="352" y="360" width="92" height="15" rx="4"/>
+	<rect x="352" y="378" width="92" height="15" rx="4"/>
+	<rect x="352" y="396" width="92" height="15" rx="4"/>
+	<rect x="352" y="414" width="92" height="15" rx="4"/>
+</g>
+<circle cx="361" cy="122" r="8" fill="#0D0D0D"/>
+<!-- Cables des poulies hautes vers les mains -->
+<path d="M137,126 L246,302" stroke="#333333" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M361,126 L254,302" stroke="#333333" stroke-width="4" fill="none" stroke-linecap="round"/>
+<!-- Personnage : jambe gauche -->
+<path d="M250,322 L242,372 L240,420" stroke="#EEEEEE" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Personnage : jambe droite -->
+<path d="M250,322 L260,372 L262,420" stroke="#EEEEEE" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Pieds -->
+<path d="M240,420 L224,414" stroke="#CCCCCC" stroke-width="13" fill="none" stroke-linecap="round"/>
+<path d="M262,420 L278,414" stroke="#CCCCCC" stroke-width="13" fill="none" stroke-linecap="round"/>
+<!-- Torse vertical -->
+<path d="M250,326 L250,236" stroke="#EEEEEE" stroke-width="34" fill="none" stroke-linecap="round"/>
+<!-- Bras gauche : epaule -> coude -> main ramenee devant -->
+<path d="M250,248 L214,272 L246,304" stroke="#EEEEEE" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Bras droit : epaule -> coude -> main ramenee devant -->
+<path d="M250,248 L286,272 L254,304" stroke="#EEEEEE" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Tete -->
+<circle cx="250" cy="208" r="23" fill="#CCCCCC"/>
+<!-- Mains jointes devant la poitrine -->
+<circle cx="245" cy="304" r="10" fill="#CCCCCC"/>
+<circle cx="255" cy="304" r="10" fill="#CCCCCC"/>
+</svg>

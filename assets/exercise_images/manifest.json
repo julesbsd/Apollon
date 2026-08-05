@@ -469,6 +469,81 @@
       "id": "c3589fc0-c93f-4d8a-9982-ff5cc1405153",
       "code": "CALF_PRESS_LEG_PRESS",
       "filename": "calf_press_leg_press.svg"
+    },
+    {
+      "id": "custom_low_row",
+      "code": "CUSTOM_LOW_ROW",
+      "filename": "custom_low_row.svg"
+    },
+    {
+      "id": "custom_seated_dip",
+      "code": "CUSTOM_SEATED_DIP",
+      "filename": "custom_seated_dip.svg"
+    },
+    {
+      "id": "custom_shoulder_press_machine",
+      "code": "CUSTOM_SHOULDER_PRESS_MACHINE",
+      "filename": "custom_shoulder_press_machine.svg"
+    },
+    {
+      "id": "custom_seated_leg_curl",
+      "code": "CUSTOM_SEATED_LEG_CURL",
+      "filename": "custom_seated_leg_curl.svg"
+    },
+    {
+      "id": "custom_glute_kickback_machine",
+      "code": "CUSTOM_GLUTE_KICKBACK_MACHINE",
+      "filename": "custom_glute_kickback_machine.svg"
+    },
+    {
+      "id": "custom_hip_thrust_machine",
+      "code": "CUSTOM_HIP_THRUST_MACHINE",
+      "filename": "custom_hip_thrust_machine.svg"
+    },
+    {
+      "id": "custom_smith_machine_squat",
+      "code": "CUSTOM_SMITH_MACHINE_SQUAT",
+      "filename": "custom_smith_machine_squat.svg"
+    },
+    {
+      "id": "custom_assisted_pull_up_machine",
+      "code": "CUSTOM_ASSISTED_PULL_UP_MACHINE",
+      "filename": "custom_assisted_pull_up_machine.svg"
+    },
+    {
+      "id": "custom_assisted_dip_machine",
+      "code": "CUSTOM_ASSISTED_DIP_MACHINE",
+      "filename": "custom_assisted_dip_machine.svg"
+    },
+    {
+      "id": "custom_cable_crossover",
+      "code": "CUSTOM_CABLE_CROSSOVER",
+      "filename": "custom_cable_crossover.svg"
+    },
+    {
+      "id": "custom_rotary_torso_machine",
+      "code": "CUSTOM_ROTARY_TORSO_MACHINE",
+      "filename": "custom_rotary_torso_machine.svg"
+    },
+    {
+      "id": "custom_ab_crunch_machine",
+      "code": "CUSTOM_AB_CRUNCH_MACHINE",
+      "filename": "custom_ab_crunch_machine.svg"
+    },
+    {
+      "id": "custom_preacher_curl_machine",
+      "code": "CUSTOM_PREACHER_CURL_MACHINE",
+      "filename": "custom_preacher_curl_machine.svg"
+    },
+    {
+      "id": "custom_triceps_extension_machine",
+      "code": "CUSTOM_TRICEPS_EXTENSION_MACHINE",
+      "filename": "custom_triceps_extension_machine.svg"
+    },
+    {
+      "id": "custom_shrug_machine",
+      "code": "CUSTOM_SHRUG_MACHINE",
+      "filename": "custom_shrug_machine.svg"
     }
   ]
 }

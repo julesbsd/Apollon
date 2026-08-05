@@ -183,18 +183,29 @@ class ExerciseLibraryRepository {
   }
 
   /// Récupérer la source de l'image d'un exercice (stratégie triple)
-  /// 
+  ///
   /// Workflow:
-  /// 1. Check si exercice est dans le top 20 (assets)
-  /// 2. Check si exercice est déjà téléchargé localement
-  /// 3. Sinon → retourner URL API (sera téléchargé au premier affichage)
-  Future<ImageSource> getImageSource(String exerciseId) async {
-    // Stratégie 1: Vérifier si image pré-téléchargée (top 20)
+  /// 1. Check si image embarquée dans les assets (manifest) → toujours servie,
+  ///    sans lecture Firestore : un asset présent localement est affichable
+  ///    quel que soit le drapeau hasImage du document distant
+  /// 2. Sinon, le drapeau hasImage de l'exercice gate les stratégies réseau
+  ///    (retourne null si exercice inconnu ou hasImage=false : évite d'appeler
+  ///    l'API pour une image qui n'existe pas)
+  /// 3. Check si image déjà téléchargée localement
+  /// 4. Sinon → retourner URL API (sera téléchargée au premier affichage)
+  Future<ImageSource?> getImageSource(String exerciseId) async {
+    // Stratégie 1: image pré-embarquée dans les assets (manifest par id)
     if (_manifest.hasPreseededImage(exerciseId)) {
       final assetPath = _manifest.getAssetPath(exerciseId)!;
       return ImageSource.asset(assetPath);
     }
-    
+
+    // Le drapeau hasImage ne gate que les stratégies réseau ci-dessous
+    final exercise = await getById(exerciseId);
+    if (exercise == null || !exercise.hasImage) {
+      return null;
+    }
+
     // Stratégie 2: Vérifier si déjà téléchargée localement
     if (await _downloader.isDownloaded(exerciseId)) {
       final localPath = await _downloader.getLocalPath(exerciseId);
@@ -202,7 +213,7 @@ class ExerciseLibraryRepository {
         return ImageSource.local(localPath);
       }
     }
-    
+
     // Stratégie 3: URL API (sera téléchargée)
     final apiUrl = 'https://api.workoutapi.com/exercises/$exerciseId/image';
     return ImageSource.remote(apiUrl);

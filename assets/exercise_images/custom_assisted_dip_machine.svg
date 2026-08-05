@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500px" height="500px" viewBox="0 0 500 500">
+<!-- Pictogramme custom : Dips assiste machine (assisted dip) — bras tendus en appui sur des barres paralleles, genoux poses sur une plateforme d'assistance -->
+<defs>
+<linearGradient id="steelV" gradientUnits="userSpaceOnUse" x1="55" y1="0" x2="150" y2="0">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.09" style="stop-color:#999999"/>
+	<stop offset="0.11" style="stop-color:#C8C8C8"/>
+	<stop offset="0.15" style="stop-color:#9D9D9D"/>
+	<stop offset="0.19" style="stop-color:#777777"/>
+	<stop offset="0.24" style="stop-color:#575757"/>
+	<stop offset="0.3" style="stop-color:#3B3B3B"/>
+	<stop offset="0.36" style="stop-color:#252525"/>
+	<stop offset="0.43" style="stop-color:#141414"/>
+	<stop offset="0.52" style="stop-color:#090909"/>
+	<stop offset="0.65" style="stop-color:#020202"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<linearGradient id="steelD" gradientUnits="userSpaceOnUse" x1="0" y1="356" x2="0" y2="414">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.12" style="stop-color:#8A8A8A"/>
+	<stop offset="0.2" style="stop-color:#C8C8C8"/>
+	<stop offset="0.35" style="stop-color:#6E6E6E"/>
+	<stop offset="0.6" style="stop-color:#2B2B2B"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+</defs>
+<!-- Sol -->
+<rect x="30" y="432" width="440" height="8" rx="4" fill="#1A1A1A"/>
+<!-- Colonne de charge (contrepoids d'assistance) : montants -->
+<rect x="62" y="120" width="10" height="312" rx="4" fill="url(#steelV)"/>
+<rect x="132" y="120" width="10" height="312" rx="4" fill="url(#steelV)"/>
+<rect x="52" y="108" width="100" height="14" rx="6" fill="#111111"/>
+<!-- Pile de plaques -->
+<g fill="url(#steelV)">
+	<rect x="56" y="252" width="92" height="15" rx="4"/>
+	<rect x="56" y="270" width="92" height="15" rx="4"/>
+	<rect x="56" y="288" width="92" height="15" rx="4"/>
+	<rect x="56" y="306" width="92" height="15" rx="4"/>
+	<rect x="56" y="324" width="92" height="15" rx="4"/>
+	<rect x="56" y="342" width="92" height="15" rx="4"/>
+	<rect x="56" y="360" width="92" height="15" rx="4"/>
+	<rect x="56" y="378" width="92" height="15" rx="4"/>
+	<rect x="56" y="396" width="92" height="15" rx="4"/>
+	<rect x="56" y="414" width="92" height="15" rx="4"/>
+</g>
+<!-- Cadre : montants -->
+<rect x="212" y="150" width="12" height="270" rx="6" fill="#0D0D0D"/>
+<rect x="330" y="150" width="12" height="270" rx="6" fill="#0D0D0D"/>
+<!-- Barre parallele d'appui -->
+<rect x="224" y="297" width="72" height="9" rx="4.5" fill="#0D0D0D"/>
+<!-- Plateforme d'assistance (genoux) + bras de levier vers la colonne -->
+<rect x="272" y="356" width="72" height="16" rx="8" fill="#0D0D0D"/>
+<path d="M300,368 L156,410" stroke="url(#steelD)" stroke-width="9" fill="none" stroke-linecap="round"/>
+<!-- Personnage : bras tendus en appui sur la barre -->
+<path d="M256,250 L252,298" stroke="#EEEEEE" stroke-width="18" fill="none" stroke-linecap="round"/>
+<!-- Torse vertical -->
+<path d="M256,244 L256,332" stroke="#EEEEEE" stroke-width="34" fill="none" stroke-linecap="round"/>
+<!-- Jambes flechies, genoux sur la plateforme -->
+<path d="M256,332 L298,356 L302,410" stroke="#EEEEEE" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Pied -->
+<path d="M302,410 L320,404" stroke="#CCCCCC" stroke-width="13" fill="none" stroke-linecap="round"/>
+<!-- Tete -->
+<circle cx="256" cy="208" r="23" fill="#CCCCCC"/>
+<!-- Main sur la barre -->
+<circle cx="251" cy="300" r="10" fill="#CCCCCC"/>
+</svg>

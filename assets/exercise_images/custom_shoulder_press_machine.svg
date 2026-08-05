@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500px" height="500px" viewBox="0 0 500 500">
+<!-- Pictogramme custom : Developpe epaules machine (shoulder press) — assis, dossier vertical, bras poussant des poignees au-dessus de la tete -->
+<defs>
+<linearGradient id="steelV" gradientUnits="userSpaceOnUse" x1="55" y1="0" x2="150" y2="0">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.09" style="stop-color:#999999"/>
+	<stop offset="0.11" style="stop-color:#C8C8C8"/>
+	<stop offset="0.15" style="stop-color:#9D9D9D"/>
+	<stop offset="0.19" style="stop-color:#777777"/>
+	<stop offset="0.24" style="stop-color:#575757"/>
+	<stop offset="0.3" style="stop-color:#3B3B3B"/>
+	<stop offset="0.36" style="stop-color:#252525"/>
+	<stop offset="0.43" style="stop-color:#141414"/>
+	<stop offset="0.52" style="stop-color:#090909"/>
+	<stop offset="0.65" style="stop-color:#020202"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<linearGradient id="steelH" gradientUnits="userSpaceOnUse" x1="0" y1="150" x2="0" y2="186">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.12" style="stop-color:#8A8A8A"/>
+	<stop offset="0.2" style="stop-color:#C8C8C8"/>
+	<stop offset="0.35" style="stop-color:#6E6E6E"/>
+	<stop offset="0.6" style="stop-color:#2B2B2B"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+</defs>
+<!-- Sol -->
+<rect x="30" y="432" width="440" height="8" rx="4" fill="#1A1A1A"/>
+<!-- Colonne de charge : montants -->
+<rect x="62" y="120" width="10" height="312" rx="4" fill="url(#steelV)"/>
+<rect x="132" y="120" width="10" height="312" rx="4" fill="url(#steelV)"/>
+<rect x="52" y="108" width="100" height="14" rx="6" fill="#111111"/>
+<!-- Pile de plaques -->
+<g fill="url(#steelV)">
+	<rect x="56" y="252" width="92" height="15" rx="4"/>
+	<rect x="56" y="270" width="92" height="15" rx="4"/>
+	<rect x="56" y="288" width="92" height="15" rx="4"/>
+	<rect x="56" y="306" width="92" height="15" rx="4"/>
+	<rect x="56" y="324" width="92" height="15" rx="4"/>
+	<rect x="56" y="342" width="92" height="15" rx="4"/>
+	<rect x="56" y="360" width="92" height="15" rx="4"/>
+	<rect x="56" y="378" width="92" height="15" rx="4"/>
+	<rect x="56" y="396" width="92" height="15" rx="4"/>
+	<rect x="56" y="414" width="92" height="15" rx="4"/>
+</g>
+<!-- Chassis : montants avant du cadre -->
+<rect x="224" y="152" width="12" height="270" rx="6" fill="#0D0D0D"/>
+<rect x="362" y="152" width="12" height="270" rx="6" fill="#0D0D0D"/>
+<!-- Poutre superieure -->
+<rect x="150" y="150" width="236" height="14" rx="7" fill="url(#steelH)"/>
+<!-- Poulie de tete -->
+<circle cx="137" cy="118" r="7" fill="#0D0D0D"/>
+<!-- Cable de traction (colonne -> poignee haute) -->
+<path d="M137,252 L137,150 L330,158" stroke="#333333" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Assise et pied de banc -->
+<rect x="252" y="346" width="86" height="16" rx="8" fill="#0D0D0D"/>
+<rect x="290" y="362" width="14" height="58" rx="5" fill="url(#steelV)"/>
+<!-- Dossier vertical -->
+<rect x="332" y="240" width="16" height="108" rx="8" fill="#0D0D0D"/>
+<!-- Personnage : jambes -->
+<path d="M300,340 L250,346 L248,414" stroke="#EEEEEE" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Pied -->
+<path d="M248,414 L230,408" stroke="#CCCCCC" stroke-width="13" fill="none" stroke-linecap="round"/>
+<!-- Torse vertical -->
+<path d="M300,340 L301,246" stroke="#EEEEEE" stroke-width="34" fill="none" stroke-linecap="round"/>
+<!-- Bras : epaule -> coude -> main au-dessus de la tete -->
+<path d="M301,252 L324,200 L332,158" stroke="#EEEEEE" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Tete -->
+<circle cx="300" cy="212" r="23" fill="#CCCCCC"/>
+<!-- Main -->
+<circle cx="332" cy="156" r="10" fill="#CCCCCC"/>
+<!-- Poignee verticale -->
+<rect x="327" y="146" width="9" height="30" rx="4.5" fill="#0D0D0D"/>
+</svg>

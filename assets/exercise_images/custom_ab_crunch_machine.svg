@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500px" height="500px" viewBox="0 0 500 500">
+<!-- Pictogramme custom : Ab crunch machine (enroulement abdominal) — assis, coudes sur des appuis hauts, buste enroule vers l'avant -->
+<defs>
+<linearGradient id="steelV" gradientUnits="userSpaceOnUse" x1="55" y1="0" x2="150" y2="0">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.09" style="stop-color:#999999"/>
+	<stop offset="0.11" style="stop-color:#C8C8C8"/>
+	<stop offset="0.15" style="stop-color:#9D9D9D"/>
+	<stop offset="0.19" style="stop-color:#777777"/>
+	<stop offset="0.24" style="stop-color:#575757"/>
+	<stop offset="0.3" style="stop-color:#3B3B3B"/>
+	<stop offset="0.36" style="stop-color:#252525"/>
+	<stop offset="0.43" style="stop-color:#141414"/>
+	<stop offset="0.52" style="stop-color:#090909"/>
+	<stop offset="0.65" style="stop-color:#020202"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<linearGradient id="steelD" gradientUnits="userSpaceOnUse" x1="0" y1="188" x2="0" y2="270">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.12" style="stop-color:#8A8A8A"/>
+	<stop offset="0.2" style="stop-color:#C8C8C8"/>
+	<stop offset="0.35" style="stop-color:#6E6E6E"/>
+	<stop offset="0.6" style="stop-color:#2B2B2B"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+</defs>
+<!-- Sol -->
+<rect x="30" y="432" width="440" height="8" rx="4" fill="#1A1A1A"/>
+<!-- Colonne de charge : montants -->
+<rect x="62" y="120" width="10" height="312" rx="4" fill="url(#steelV)"/>
+<rect x="132" y="120" width="10" height="312" rx="4" fill="url(#steelV)"/>
+<rect x="52" y="108" width="100" height="14" rx="6" fill="#111111"/>
+<!-- Pile de plaques -->
+<g fill="url(#steelV)">
+	<rect x="56" y="252" width="92" height="15" rx="4"/>
+	<rect x="56" y="270" width="92" height="15" rx="4"/>
+	<rect x="56" y="288" width="92" height="15" rx="4"/>
+	<rect x="56" y="306" width="92" height="15" rx="4"/>
+	<rect x="56" y="324" width="92" height="15" rx="4"/>
+	<rect x="56" y="342" width="92" height="15" rx="4"/>
+	<rect x="56" y="360" width="92" height="15" rx="4"/>
+	<rect x="56" y="378" width="92" height="15" rx="4"/>
+	<rect x="56" y="396" width="92" height="15" rx="4"/>
+	<rect x="56" y="414" width="92" height="15" rx="4"/>
+</g>
+<!-- Assise et pied de banc -->
+<rect x="210" y="352" width="100" height="16" rx="8" fill="#0D0D0D"/>
+<rect x="250" y="368" width="14" height="50" rx="5" fill="url(#steelV)"/>
+<!-- Appui haut + poignees d'epaule -->
+<rect x="196" y="188" width="72" height="14" rx="7" fill="url(#steelD)"/>
+<rect x="208" y="200" width="9" height="30" rx="4.5" fill="#0D0D0D"/>
+<!-- Cable vers la colonne -->
+<path d="M210,196 L137,126" stroke="#333333" stroke-width="4" fill="none" stroke-linecap="round"/>
+<!-- Rouleau de maintien des chevilles -->
+<circle cx="330" cy="388" r="14" fill="#0D0D0D"/>
+<circle cx="330" cy="388" r="6" fill="#555555"/>
+<!-- Personnage : jambes (chevilles sous le rouleau) -->
+<path d="M262,350 L316,356 L328,392" stroke="#EEEEEE" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Pied -->
+<path d="M328,392 L344,386" stroke="#CCCCCC" stroke-width="13" fill="none" stroke-linecap="round"/>
+<!-- Torse enroule vers l'avant -->
+<path d="M262,352 L232,278" stroke="#EEEEEE" stroke-width="34" fill="none" stroke-linecap="round"/>
+<!-- Bras : epaule -> coude -> mains sur les poignees hautes -->
+<path d="M232,282 L220,240 L214,212" stroke="#EEEEEE" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Tete enroulee vers l'avant -->
+<circle cx="226" cy="250" r="23" fill="#CCCCCC"/>
+<!-- Main -->
+<circle cx="213" cy="210" r="10" fill="#CCCCCC"/>
+</svg>

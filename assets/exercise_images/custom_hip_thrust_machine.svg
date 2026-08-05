@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500px" height="500px" viewBox="0 0 500 500">
+<!-- Pictogramme custom : Hip thrust machine — adosse a un banc, hanches poussant un coussin vers le haut, pieds au sol, genoux flechis -->
+<defs>
+<linearGradient id="steelV" gradientUnits="userSpaceOnUse" x1="352" y1="0" x2="452" y2="0">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.09" style="stop-color:#999999"/>
+	<stop offset="0.11" style="stop-color:#C8C8C8"/>
+	<stop offset="0.15" style="stop-color:#9D9D9D"/>
+	<stop offset="0.19" style="stop-color:#777777"/>
+	<stop offset="0.24" style="stop-color:#575757"/>
+	<stop offset="0.3" style="stop-color:#3B3B3B"/>
+	<stop offset="0.36" style="stop-color:#252525"/>
+	<stop offset="0.43" style="stop-color:#141414"/>
+	<stop offset="0.52" style="stop-color:#090909"/>
+	<stop offset="0.65" style="stop-color:#020202"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<linearGradient id="steelH" gradientUnits="userSpaceOnUse" x1="0" y1="262" x2="0" y2="292">
+	<stop offset="0.06" style="stop-color:#0D0D0D"/>
+	<stop offset="0.12" style="stop-color:#8A8A8A"/>
+	<stop offset="0.2" style="stop-color:#C8C8C8"/>
+	<stop offset="0.35" style="stop-color:#6E6E6E"/>
+	<stop offset="0.6" style="stop-color:#2B2B2B"/>
+	<stop offset="1" style="stop-color:#000000"/>
+</linearGradient>
+</defs>
+<!-- Sol -->
+<rect x="30" y="432" width="440" height="8" rx="4" fill="#1A1A1A"/>
+<!-- Colonne de charge (a l'arriere) : montants -->
+<rect x="356" y="110" width="10" height="322" rx="4" fill="url(#steelV)"/>
+<rect x="436" y="110" width="10" height="322" rx="4" fill="url(#steelV)"/>
+<rect x="346" y="98" width="110" height="14" rx="6" fill="#111111"/>
+<!-- Pile de plaques -->
+<g fill="url(#steelV)">
+	<rect x="352" y="250" width="98" height="15" rx="4"/>
+	<rect x="352" y="268" width="98" height="15" rx="4"/>
+	<rect x="352" y="286" width="98" height="15" rx="4"/>
+	<rect x="352" y="304" width="98" height="15" rx="4"/>
+	<rect x="352" y="322" width="98" height="15" rx="4"/>
+	<rect x="352" y="340" width="98" height="15" rx="4"/>
+	<rect x="352" y="358" width="98" height="15" rx="4"/>
+	<rect x="352" y="376" width="98" height="15" rx="4"/>
+	<rect x="352" y="394" width="98" height="15" rx="4"/>
+	<rect x="352" y="412" width="98" height="15" rx="4"/>
+</g>
+<!-- Banc d'appui du haut du dos -->
+<rect x="118" y="300" width="86" height="16" rx="8" fill="#0D0D0D"/>
+<rect x="128" y="316" width="12" height="106" rx="5" fill="url(#steelV)"/>
+<rect x="182" y="316" width="12" height="106" rx="5" fill="url(#steelV)"/>
+<!-- Coussin de hanche + bras de levier vers la colonne -->
+<rect x="256" y="272" width="64" height="18" rx="9" fill="url(#steelH)"/>
+<path d="M318,282 L356,300" stroke="#0D0D0D" stroke-width="10" fill="none" stroke-linecap="round"/>
+<!-- Personnage : jambes (cuisse horizontale + tibia vertical) -->
+<path d="M286,300 L330,302 L330,406" stroke="#EEEEEE" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Pied au sol -->
+<path d="M330,406 L352,402" stroke="#CCCCCC" stroke-width="13" fill="none" stroke-linecap="round"/>
+<!-- Torse en pont (epaules sur le banc -> hanches) -->
+<path d="M172,300 L288,300" stroke="#EEEEEE" stroke-width="34" fill="none" stroke-linecap="round"/>
+<!-- Bras le long du corps -> main sur le coussin -->
+<path d="M180,300 L232,308 L276,300" stroke="#EEEEEE" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Tete -->
+<circle cx="150" cy="298" r="22" fill="#CCCCCC"/>
+<!-- Main -->
+<circle cx="278" cy="300" r="10" fill="#CCCCCC"/>
+</svg>
