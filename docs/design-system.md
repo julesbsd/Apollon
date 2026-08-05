@@ -1,1359 +1,290 @@
-# Design System Apollon - Moderne Material 3
+# Design System Apollon - "Marbre & Lumière"
 
-Documentation complète du Design System moderne pour l'application Apollon.
+**Version :** 1.2.0 (2026-08-06)
+**Source de vérité :** `lib/core/theme/app_theme.dart` - ce document est un résumé de
+référence, pas une copie autonome. En cas d'écart entre ce fichier et le code, le code a
+raison ; corrigez ce document, pas l'inverse.
 
-## ✨ Design System Moderne et Clean
+Ce design remplace deux systèmes précédents, tous deux retirés du dépôt :
+1. "Liquid Glass" (`AppColors`/`AppTypography`/`AppDecorations`, seed `#1E88E5`, Cinzel/
+   Raleway/JetBrains Mono).
+2. "Design Moderne Épuré Bleu" V2 (`AppTheme` v1, Inter, seed `#4A90E2`).
 
-Le Design System Apollon utilise **Material 3** avec un style moderne et épuré, sans effets de glassmorphisme.
+Direction artistique produite par Claude Design (projet `Marbre & Lumière`, fichier
+`Apollon DA Finale.dc.html`) à partir de `docs/DIRECTION-ARTISTIQUE-BRIEF.md`.
 
-**Caractéristiques :**
-- 🎨 **Material 3 pur** : Design moderne et cohérent
-- 🌓 **Dark/Light mode** : Support complet des deux thèmes
-- ⚡ **Performance** : Pas de blur, animations fluides 60fps
-- 📱 **Responsive** : Adaptation automatique
-- 🔄 **Border radius 24px** : Arrondis consistants partout
+---
 
-### Widgets disponibles
+## Table des matières
 
-**AppCard** - 3 variants :
-- `standard` : Card avec subtle shadow (défaut)
-- `elevated` : Card avec shadow prononcée et élévation 8
-- `outlined` : Card avec bordure uniquement
-
-**AppButton** - 4 variants :
-- `primary` : Bouton principal coloré avec shadow
-- `secondary` : Bouton secondaire avec surface container
-- `outlined` : Bordure uniquement, fond transparent
-- `text` : Texte uniquement, pas de fond
-
-**CircularProgressButton** :
-- Bouton circulaire FAB avec arc de progression
-- Affiche pourcentage d'avancement de la séance (0-100%)
-- Dual shadow (primary glow + black drop)
-- Border 3px, stroke width 14px
-
-**ProfileDrawer** :
-- Side drawer élégant pour profil utilisateur
-- Gradient header avec avatar/nom/email
-- Options de navigation et déconnexion
-- ThemeSwitcher intégré
-- Context-safe logout avec gestion workout actif
-
-**Page Transitions** :
-- 5 types de transitions réutilisables
-- `fadeSlide`, `slideRight`, `slideUp`, `fade`, `scale`
-- Utilisation via `AppPageRoute.fadeSlide(builder: ...)`
-
-**AppTextField** :
-- Input Material 3 standard
-- `AppNumberField` variant pour saisie numérique
-
-**AppBackground** :
-- Gradient subtil entre background et surface
-
-**ThemeSwitcher** :
-- Widget complet pour changer Dark/Light/System
-- Intégration avec ThemeProvider
-
-**Utilisation :**
-```dart
-import 'package:apollon/core/widgets/widgets.dart';
-
-// Card
-AppCard(
-  child: Text('Contenu'),
-)
-
-// Bouton
-AppButton(
-  text: 'Action',
-  variant: AppButtonVariant.primary,
-  onPressed: () {},
-)
-
-// TextField
-AppTextField(
-  labelText: 'Label',
-  hintText: 'Hint',
-)
-
-// Background
-Scaffold(
-  body: AppBackground(
-    child: YourContent(),
-  ),
-)
-```
-
-## 📋 Table des matières
-
-1. [Vue d'ensemble](#vue-densemble)
-2. [Installation](#installation)
-3. [Palette de couleurs](#palette-de-couleurs)
+1. [Principes](#principes)
+2. [Palette de couleurs](#palette-de-couleurs)
+3. [Groupes musculaires](#groupes-musculaires-14)
 4. [Typographie](#typographie)
-5. [Widgets réutilisables](#widgets-réutilisables)
-6. [Exemples d'utilisation](#exemples-dutilisation)
-7. [Bonnes pratiques](#bonnes-pratiques)
+5. [Rayons et ombres](#rayons-et-ombres)
+6. [Composants signature](#composants-signature)
+7. [Composants standards](#composants-standards)
+8. [Bonnes pratiques](#bonnes-pratiques)
 
 ---
 
-## Vue d'ensemble
+## Principes
 
-Le Design System Apollon utilise **Material 3** avec un style moderne et épuré, privilégiant les ombres et élévations plutôt que les effets de blur pour une meilleure performance et lisibilité.
+Apollon est le dieu grec de la lumière : la direction artistique traduit ça par une
+matière plutôt qu'un décor - marbre chaud en mode clair, nuit minérale en mode sombre,
+un filet d'or réservé aux éléments qui portent un sens (série validée, record, arc de
+progression), et un geste lumineux unique répété d'écran en écran ("Le Rayon",
+`RayonSweep`).
 
-### Caractéristiques principales
+Trois règles dures, non négociables côté implémentation :
 
-- 🎨 **Material 3 pur** : Design moderne cohérent avec les guidelines Google
-- 🌓 **Support Dark/Light mode** : Gestion automatique des deux modes
-- 🔄 **Border radius 24px** : Arrondis consistants sur tous les widgets
-- ⚡ **Performance 60fps** : Sans blur, animations ultra-fluides
-- 📱 **Responsive** : Adaptation automatique aux différentes tailles d'écran
-- ♿ **Accessible** : Contraste optimisé, tailles de text adaptatives
-
-### Structure des fichiers
-
-```
-lib/core/
-├── theme/
-│   ├── app_theme.dart          # ThemeData complet Dark/Light avec Material 3
-│   ├── app_colors.dart         # ColorScheme et couleurs muscle groups
-│   ├── app_typography.dart     # TextTheme avec Raleway + JetBrains Mono
-│   └── app_decorations.dart    # Border radius, shadows, spacing
-├── providers/
-│   ├── auth_provider.dart      # Authentification Google
-│   ├── theme_provider.dart     # Gestion du thème (Dark/Light/System)
-│   └── workout_provider.dart   # Gestion workout + timer
-├── utils/
-│   └── page_transitions.dart   # 5 types de transitions réutilisables
-└── widgets/
-    ├── app_bar.dart            # AppBar et SliverAppBar modernes
-    ├── app_background.dart     # Background avec gradient subtil
-    ├── app_button.dart         # Boutons (4 variants) + animations
-    ├── app_card.dart           # Cards (3 variants) + élévations
-    ├── app_text_field.dart     # Input fields Material 3
-    ├── circular_progress_button.dart  # Bouton FAB avec progress arc
-    ├── profile_drawer.dart     # Side drawer profil utilisateur
-    ├── theme_switcher.dart     # Widget pour changer le thème
-    ├── workout_timer_app_bar.dart  # AppBar avec chrono workout
-    └── widgets.dart            # Barrel export file
-```
-
----
-
-## Installation
-
-### 1. Configuration du thème avec ThemeProvider
-
-Dans votre [main.dart](../main.dart), initialisez le ThemeProvider :
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'core/providers/theme_provider.dart';
-import 'app.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialiser Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  
-  // Initialiser le ThemeProvider
-  final themeProvider = ThemeProvider();
-  await themeProvider.init();
-  
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: themeProvider),
-        // ... autres providers
-      ],
-      child: const ApolloApp(),
-    ),
-  );
-}
-```
-
-Dans votre [app.dart](../lib/app.dart) :
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'core/providers/theme_provider.dart';
-import 'core/theme/app_theme.dart';
-
-class ApolloApp extends StatelessWidget {
-  const ApolloApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, child) {
-        return MaterialApp(
-          title: 'Apollon',
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: themeProvider.themeMode, // Géré par le provider
-          home: const HomeScreen(),
-        );
-      },
-    );
-  }
-}
-```
-
-### 2. Import des widgets
-
-Pour utiliser les widgets Apollon :
-
-```dart
-// Import global de tous les widgets
-import 'package:apollon/core/widgets/widgets.dart';
-
-// Ou imports individuels
-import 'package:apollon/core/widgets/app_button.dart';
-import 'package:apollon/core/widgets/app_card.dart';
-import 'package:apollon/core/widgets/app_text_field.dart';
-import 'package:apollon/core/widgets/app_bar.dart';
-import 'package:apollon/core/widgets/app_background.dart';
-import 'package:apollon/core/widgets/theme_switcher.dart';
-```
-
-### 3. Dépendances requises
-
-Ajoutez dans [pubspec.yaml](../pubspec.yaml) :
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  
-  # Firebase
-  firebase_core: ^2.24.0
-  firebase_auth: ^4.16.0
-  cloud_firestore: ^4.14.0
-  google_sign_in: ^6.1.6
-  
-  # State Management
-  provider: ^6.1.1
-  
-  # Persistence (pour ThemeProvider)
-  shared_preferences: ^2.2.2
-  
-  # Google Fonts pour le Design System
-  google_fonts: ^6.1.0
-```
-
-Puis exécutez :
-```bash
-flutter pub get
-```
+- **Cinzel est réservé à l'identité** (wordmark, titre d'écran, nom d'exercice, symbole de
+  marque) : plancher dur de 20px, exclu du corps de texte. Manrope couvre le reste de
+  l'interface, JetBrains Mono a le monopole des chiffres (séries, minuteur, statistiques).
+- **"Le Rayon" ne boucle pas.** `RayonSweep` joue un seul passage à l'apparition ou à la
+  validation d'une surface - `AnimationController.repeat()` n'est appelé nulle part dans
+  son implémentation actuelle.
+- **`BackdropFilter` (flou de fond) est exclu des composants signature.** `GlassOrbButton`
+  et `MarbleCard` sont des matières (dégradés + bordure + ombre), pas du glassmorphism -
+  coûteux en performance et écarté par le brief.
 
 ---
 
 ## Palette de couleurs
 
-### Couleurs principales
+### Couleurs d'action (bleu)
 
-Le Design System utilise **Material 3 ColorScheme** généré depuis deux couleurs seed :
+Constantes "bare" = valeur sombre (consommées sans branchement de luminosité par des
+écrans préexistants hors périmètre de cette DA - graphiques de statistiques, calendrier
+d'assiduité). Les variantes `light*` portent la valeur claire correcte, utilisées par le
+`ColorScheme` Material et les composants réécrits (`RayonSweep`, `PictogramPlinth`,
+`EmptyStateCard`, `CriticalCta`, `FloatingWorkoutTimer`, `PRCelebrationOverlay`, écran de
+connexion, accueil, session).
 
-```dart
-// Couleur primaire : Bleu Material Design moderne
-Primary: #1E88E5
+| Rôle | Sombre (bare) | Clair (`light*`) |
+|------|---------------|-------------------|
+| Primaire | `primaryBlue` `#4E92CF` | `lightPrimaryBlue` `#17568C` |
+| Primaire foncé | `primaryBlueDark` `#255F97` | `lightPrimaryBlueDark` `#0E3A62` |
+| Primaire clair | `primaryBlueLight` `#7FB6E8` | `lightPrimaryBlueLight` `#4E92CF` |
 
-// Couleur secondaire : Orange énergique
-Secondary: #FF6B35
-```
+### Couleurs sémantiques
 
-### Couleurs de groupe musculaire
+| Rôle | Sombre | Clair |
+|------|--------|-------|
+| Succès | `successGreen` `#35D9A6` | `lightSuccessGreen` `#0E7A5F` |
+| Erreur | `errorRed` `#FF6B5A` | `lightErrorRed` `#C0392B` |
+| Avertissement | `warningOrange` `#F2A93B` | `lightWarningOrange` `#9A6410` |
 
-14 couleurs mappées aux groupes musculaires pour visualisation :
+### Or Apollon - réservé au mérite, pas un aplat décoratif
 
-| Groupe | Couleur | Usage |
-|--------|---------|-------|
-| **Pectoraux** | `#E74C3C` Rouge | Chips, cartes d'exercices |
-| **Dorsaux** | `#3498DB` Bleu | Identification visuelle |
-| **Épaules** | `#F39C12` Orange | Chips, graphiques |
-| **Biceps** | `#9B59B6` Violet | Catégorisation |
-| **Triceps** | `#1ABC9C` Turquoise | Filtres |
-| **Avant-bras** | `#34495E` Gris bleuté | Chips secondaires |
-| **Quadriceps** | `#E67E22` Orange foncé | Jambes |
-| **Ischio-jambiers** | `#C0392B` Rouge foncé | Jambes |
-| **Mollets** | `#16A085` Vert eau | Jambes |
-| **Fessiers** | `#D35400` Orange brûlé | Jambes |
-| **Abdominaux** | `#27AE60` Vert | Core |
-| **Lombaires** | `#8E44AD` Violet foncé | Core |
-| **Trapèzes** | `#2980B9` Bleu foncé | Dos supérieur |
-| **Full body** | `#7F8C8D` Gris | Exercices complets |
+| Rôle | Sombre | Clair | Usage |
+|------|--------|-------|-------|
+| `accentGold` | `#D9B978` | `lightAccentGold` `#8A6A2F` | Texte or (compteurs de records, libellés d'accomplissement) |
+| `accentGoldLine` | `#D9B978` | `lightAccentGoldLine` `#B08D57` | Traits 1-2px (série validée, onglet actif, arête du CTA critique, arc de l'orbe) |
+| `accentGoldGlow*` | `accentGoldGlowDark` `#F0D9A2` | `accentGoldGlowLight` `#C7A96B` | "Le Rayon" et halo de célébration de record - role decoratif, pas porteur de sens |
 
-### Usage des couleurs
+### Surfaces - "Nuit minérale" (sombre) / "Marbre chaud" (clair)
 
-```dart
-import 'package:apollon/core/theme/app_colors.dart';
+| Rôle | Sombre | Clair |
+|------|--------|-------|
+| Fond | `darkBackground` `#0A0E16` | `lightBackground` `#F6F3EC` |
+| Surface | `darkSurface` `#121826` | `lightSurface` `#FDFBF7` |
+| Surface variante | `darkSurfaceVariant` `#1C2432` | `lightSurfaceVariant` `#EDE8DE` |
+| Texte principal | `darkOnBackground` `#F2EFE9` | `lightOnBackground` `#141B2B` |
+| Texte secondaire | `darkOnSurface` `#DCD8D0` | `lightOnSurface` `#2B3444` |
+| Texte atténué | `darkOnSurfaceMuted` `#98A1B0` | `lightOnSurfaceMuted` `#5C6577` |
+| Bordure de carte | `outlineSubtleDark` (blanc 8%) | `outlineSubtleLight` (`#141B2B` 9%) |
 
-// Utiliser une couleur de groupe musculaire
-final muscleColor = AppColors.muscleGroupColors['pectoraux'];
+Une seule opacité de bordure par mode - pas de dégradé de bordures.
 
-// Utiliser les couleurs du thème
-Container(
-  color: Theme.of(context).colorScheme.surface,
-  // ou
-  color: Theme.of(context).colorScheme.primary,
-)
-```
+### Socle pictogramme - dégradé ardoise
 
-### Opacités Material 3
+Les silhouettes SVG du catalogue d'exercices (`#EEEEEE`/`#CCCCCC`) sont illisibles posées
+directement sur une surface claire - `PictogramPlinth` corrige ce défaut avec un socle
+dégradé dédié, identique à un ton près dans les deux modes :
 
-```dart
-// Opacités pour états interactifs (Material 3)
-const hoverOpacity = 0.08;   // Hover
-const pressOpacity = 0.12;   // Press
-const focusOpacity = 0.12;   // Focus
-const selectedOpacity = 0.12; // Selected
-```
+| Rôle | Sombre | Clair |
+|------|--------|-------|
+| Haut du dégradé | `pictogramPlinthTopDark` `#26313F` | `pictogramPlinthTopLight` `#2A3949` |
+| Bas du dégradé | `pictogramPlinthBottomDark` `#0F151F` | `pictogramPlinthBottomLight` `#141B2B` |
+
+### Mesh gradient (fonds animés)
+
+Amplitude volontairement faible - le mesh reste en retrait derrière le contenu, il respire
+en arrière-plan (cycle de 18s, voir `MeshGradientBackground`).
+
+- `lightMeshGradient` : `#F8F5EF`, `#EDF0F4`, `#F2ECE0`, `#FBF9F5`
+- `darkMeshGradient` : `#0A0E16`, `#101A2A`, `#16202E`, `#0C1119`
+
+---
+
+## Groupes musculaires (14)
+
+Chaque groupe a une paire de couleurs clair/sombre distincte, la teinte tournant du rouge
+au magenta en suivant le corps de l'avant vers l'arrière puis du haut vers le bas. Chaque
+paire est vérifiée à un contraste minimum de 4.5:1 sur son fond de référence
+(`test/core/theme/contrast_test.dart`).
+
+| Groupe | Clair (`muscleGroupColorsLight`) | Sombre (`muscleGroupColorsDark`) |
+|--------|-----------------------------------|-------------------------------------|
+| Pectoraux | `#AC3D4D` | `#FF98A1` |
+| Épaules | `#A94608` | `#FDA075` |
+| Abdominaux | `#985800` | `#E9AE57` |
+| Lombaires | `#6F6E00` | `#BFC15C` |
+| Quadriceps | `#337C20` | `#8ECE80` |
+| Ischio-jambiers | `#008153` | `#60D4A7` |
+| Triceps | `#008274` | `#3ED4C5` |
+| Mollets | `#007E90` | `#34D1E0` |
+| Dorsaux | `#0073AF` | `#5FC7FF` |
+| Trapèzes | `#2369BA` | `#82BEFF` |
+| Avant-bras | `#535EBB` | `#A3B4FF` |
+| Biceps | `#7751AF` | `#C7A8FF` |
+| Fessiers | `#8C489C` | `#DEA0EC` |
+| Cardio | `#9D4183` | `#F09AD4` |
+
+`AppTheme.colorForMuscleCode(code)` résout la couleur de pastille par code muscle API
+(table `muscleGroupColors`, séparée des 14 groupes FR ci-dessus), avec repli sur
+`primaryBlue` pour tout code non référencé.
 
 ---
 
 ## Typographie
 
-### Polices utilisées
+Trois polices, un rôle chacune (Google Fonts, chargées à l'exécution) :
 
-- **Google Fonts Raleway** : Police principale pour l'UI (poids 100-900)
-- **JetBrains Mono** : Nombres (poids, répétitions, statistiques)
+| Police | Rôle | Restriction |
+|--------|------|-------------|
+| **Cinzel** | Identité (wordmark, titre d'écran, nom d'exercice, symbole de marque) | Réservé à l'identité : plancher dur de 20px, exclu du corps de texte |
+| **Manrope** | Interface (labels, boutons, corps de texte) | - |
+| **JetBrains Mono** | Chiffres (séries, minuteur, statistiques) | - |
 
-### Styles de texte
+### Helpers `AppTheme` (à utiliser plutôt que `GoogleFonts.*` directement)
 
-```dart
-import 'package:apollon/core/theme/app_typography.dart';
+| Helper | Police | Taille | Usage |
+|--------|--------|--------|-------|
+| `screenTitle(color)` | Cinzel | 27px / w500 | Titre d'écran, nom d'exercice |
+| `wordmark(color, {fontSize: 17, trackingEm: 0.30})` | Cinzel | 17px par défaut (paramétrable) | Marque "APOLLON" - seule exception au plancher de 20px car c'est la marque elle-même |
+| `markGlyph(color)` | Cinzel | 106px / w600 | Glyphe du symbole de marque (écran de connexion) |
+| `seriesNumber(color, {active: false})` | JetBrains Mono | 30px / 34px si actif | Chiffres de série - posés sur `surface`, pas sur un fond coloré |
+| `timerNumber(color)` | JetBrains Mono | 19px, chasse fixe | Minuteur - les chiffres ne bougent pas d'un pixel entre deux secondes |
+| `labelSecondary(color)` | Manrope | 11px / w600, capitales | Libellés secondaires ("DERNIÈRE SÉANCE", unités) |
+| `buttonLabel(color)` | Manrope | 15px / w700 | Libellé de bouton |
 
-// Titres
-Text('Grand titre', style: AppTypography.displayLarge(context))
-Text('Titre de section', style: AppTypography.headlineMedium(context))
-Text('Titre de carte', style: AppTypography.titleLarge(context))
-
-// Corps de texte
-Text('Texte principal', style: AppTypography.bodyLarge(context))
-Text('Texte secondaire', style: AppTypography.bodyMedium(context))
-Text('Légende', style: AppTypography.bodySmall(context))
-
-// Labels
-Text('Label', style: AppTypography.labelLarge(context))
-
-// Styles spéciaux
-Text('12', style: AppTypography.numberStyle(context)) // Nombres avec JetBrains Mono
-Text('💪', style: AppTypography.emojiStyle(context))  // Emojis uniformes
-```
-
-### Hiérarchie typographique
-
-| Style | Taille | Poids | Usage |
-|-------|---------|-------|-------|
-| Display Large | 57px | 400 | Splash screen, hero |
-| Headline Large | 32px | 600 | Titres de page |
-| Title Large | 22px | 600 | Titres de section |
-| Body Large | 16px | 400 | Texte principal |
-| Body Medium | 14px | 400 | Texte secondaire |
-| Label Large | 14px | 500 | Labels de champs |
+Le `TextTheme` Material générique (`displayLarge`, `bodyMedium`, etc.) est entièrement en
+Manrope - Cinzel en est absent, précisément pour empêcher un usage accidentel sous le
+plancher de 20px.
 
 ---
 
-## Widgets réutilisables
-
-### 1. AppCard
-
-Carte moderne Material 3 pour contenir du contenu.
-
-#### Propriétés
-
-| Propriété | Type | Description |
-|-----------|------|-------------|
-| `child` | `Widget` | Contenu de la carte |
-| `borderRadius` | `BorderRadius?` | Rayon de bordure (défaut: large 24px) |
-| `backgroundColor` | `Color?` | Couleur de fond personnalisée |
-| `padding` | `EdgeInsets?` | Padding interne |
-| `margin` | `EdgeInsets?` | Marge externe |
-| `onTap` | `VoidCallback?` | Callback au tap |
-| `showShadow` | `bool` | Affiche ombre portée (défaut: true) |
-
-#### Exemples
-
-```dart
-// Card simple
-AppCard(
-  padding: EdgeInsets.all(16),
-  child: Text('Contenu de la carte'),
-)
-
-// Card interactive
-AppCard(
-  padding: EdgeInsets.all(20),
-  margin: EdgeInsets.all(16),
-  onTap: () => print('Tapped!'),
-  child: Column(
-    children: [
-      Text('Développé couché', style: AppTypography.titleMedium(context)),
-      SizedBox(height: 8),
-      Text('4 séries • 12 reps', style: AppTypography.bodyMedium(context)),
-    ],
-  ),
-)
-
-// Card animée
-AppCard(
-  scaleFactor: 1.05, // Échelle au hover
-  onTap: () => navigateToExercise(),
-  child: ListTile(
-    leading: Text('💪', style: AppTypography.emojiStyle(context)),
-    title: Text('Curl biceps'),
-    subtitle: Text('Biceps'),
-  ),
-)
-```
-
-### 2. AppButton
-
-Boutons moderne Material 3 en 4 variantes.
-
-#### Variantes
-
-1. **Primary** : Bouton principal (fond coloré)
-2. **Secondary** : Bouton secondaire (fond coloré secondaire)
-3. **Outlined** : Bouton avec bordure uniquement
-4. **Text** : Bouton texte transparent
-
-#### Propriétés
-
-| Propriété | Type | Description |
-|-----------|------|-------------|
-| `label` | `String` | Texte du bouton |
-| `onPressed` | `VoidCallback?` | Callback au tap |
-| `type` | `AppButtonType` | Type de bouton |
-| `leadingIcon` | `IconData?` | Icône à gauche |
-| `trailingIcon` | `IconData?` | Icône à droite |
-| `isLoading` | `bool` | Affiche indicateur de chargement |
-| `height` | `double` | Hauteur (défaut: 56px) |
-
-#### Exemples
-
-```dart
-// Bouton primary
-AppButton.primary(
-  label: 'Confirmer',
-  leadingIcon: Icons.check,
-  onPressed: () => confirmAction(),
-)
-
-// Bouton secondary
-AppButton.secondary(
-  label: 'Annuler',
-  onPressed: () => Navigator.pop(context),
-)
-
-// Bouton outlined
-AppButton.outlined(
-  label: 'Voir détails',
-  trailingIcon: Icons.arrow_forward,
-  onPressed: () => showDetails(),
-)
-
-// Bouton avec chargement
-AppButton.primary(
-  label: 'Enregistrer',
-  isLoading: isSubmitting,
-  onPressed: isSubmitting ? null : () => submitWorkout(),
-)
-
-// Icon button
-AppButton(
-  icon: Icons.add,
-  type: AppButtonType.primary,
-  onPressed: () => addExercise(),
-)
-```
-
-### 3. AppTextField
-
-Champs de saisie moderne Material 3.
-
-#### Propriétés
-
-| Propriété | Type | Description |
-|-----------|------|-------------|
-| `controller` | `TextEditingController?` | Controller du champ |
-| `label` | `String?` | Label au-dessus du champ |
-| `hintText` | `String?` | Texte d'indication |
-| `prefixIcon` | `IconData?` | Icône de préfixe |
-| `suffixIcon` | `IconData?` | Icône de suffixe |
-| `keyboardType` | `TextInputType` | Type de clavier |
-| `obscureText` | `bool` | Masque le texte (mot de passe) |
-| `errorText` | `String?` | Message d'erreur |
-| `helperText` | `String?` | Texte d'aide |
-
-#### Constructeurs spécialisés
-
-```dart
-// Champ nombre entier (répétitions)
-AppNumberField(
-  label: 'Répétitions',
-  hintText: 'Ex: 12',
-  controller: repsController,
-)
-
-// Champ poids (décimal)
-AppNumberField(
-  label: 'Poids (kg)',
-  hintText: 'Ex: 80.5',
-  controller: weightController,
-  allowDecimal: true,
-)
-```
-
-#### Exemples
-
-```dart
-// Champ de texte simple
-AppTextField(
-  label: 'Nom de l\'exercice',
-  hintText: 'Ex: Développé couché',
-  prefixIcon: Icons.fitness_center,
-  controller: nameController,
-)
-
-// Champ de nombre avec validation
-AppNumberField(
-  label: 'Répétitions',
-  hintText: 'Entrez le nombre de répétitions',
-  controller: repsController,
-  helperText: 'Minimum 1 répétition (RG-003)',
-)
-
-// Champ de poids
-AppNumberField(
-  label: 'Poids utilisé (kg)',
-  hintText: '0',
-  controller: weightController,
-  allowDecimal: true,
-  helperText: 'Laissez vide si poids de corps',
-)
-```
-
-### 4. CircularProgressButton
-
-Bouton circulaire (FAB) avec arc de progression pour afficher l'avancement d'une séance.
-
-#### Propriétés
-
-| Propriété | Type | Description |
-|-----------|------|-------------|
-| `progress` | `double` | Progression 0.0 à 1.0 |
-| `size` | `double` | Taille du bouton (défaut: 120px) |
-| `icon` | `IconData` | Icône centrale |
-| `onPressed` | `VoidCallback?` | Callback au tap |
-| `label` | `String?` | Label sous l'icône |
-
-#### Exemples
-
-```dart
-// Bouton avec progress pour workout
-CircularProgressButton(
-  progress: elapsedMinutes / 60, // 0-100% sur 60 min
-  icon: Icons.fitness_center,
-  label: 'NOUVELLE\nSÉANCE',
-  onPressed: () => startWorkout(),
-)
-
-// Bouton sans progress (début de séance)
-CircularProgressButton(
-  progress: 0.0,
-  icon: Icons.play_arrow,
-  onPressed: () => beginWorkout(),
-)
-
-// Bouton avec progress à 75%
-CircularProgressButton(
-  progress: 0.75,
-  icon: Icons.fitness_center,
-  label: '45 min',
-  onPressed: () => continueWorkout(),
-)
-```
-
-### 5. ProfileDrawer
-
-Side drawer élégant pour le profil utilisateur avec gestion du thème et déconnexion.
-
-#### Caractéristiques
-
-- **Header gradient** : Avatar, nom, email avec dégradé primary
-- **ThemeSwitcher intégré** : Dark/Light/System mode
-- **Options navigation** : Paramètres, Historique, Statistiques, etc.
-- **Déconnexion sécurisée** : Capture des providers avant fermeture du drawer
-- **Gestion workout actif** : Annule automatiquement workout en cours avant logout
-
-#### Exemples
-
-```dart
-// Dans le Scaffold
-Scaffold(
-  appBar: AppBar(
-    title: Text('Apollon'),
-  ),
-  endDrawer: ProfileDrawer(), // Drawer à droite
-  body: YourContent(),
-)
-
-// Ouvrir le drawer programmatiquement
-Scaffold.of(context).openEndDrawer();
-
-// Le drawer gère automatiquement :
-// - Affichage info utilisateur (authProvider)
-// - Switch de thème (themeProvider)
-// - Annulation workout si actif (workoutProvider)
-// - Déconnexion sécurisée
-```
-
-### 6. Page Transitions
-
-Système de transitions réutilisables pour navigation fluide.
-
-#### Types disponibles
-
-1. **fadeSlide** : Fade + slide from bottom (défaut)
-2. **slideRight** : Slide depuis la droite
-3. **slideUp** : Slide depuis le bas
-4. **fade** : Simple fade
-5. **scale** : Scale + fade
-
-#### Propriétés
-
-| Propriété | Type | Description |
-|-----------|------|-------------|
-| `builder` | `WidgetBuilder` | Builder de la page destination |
-| `duration` | `Duration?` | Durée de l'animation (défaut: 300ms) |
-| `curve` | `Curve?` | Courbe d'animation (défaut: easeInOut) |
-
-#### Exemples
-
-```dart
-import 'package:apollon/core/utils/page_transitions.dart';
-
-// Transition fadeSlide (recommandée pour pages principales)
-Navigator.of(context).push(
-  AppPageRoute.fadeSlide(
-    builder: (context) => ExerciseSelectionScreen(),
-  ),
-);
-
-// Transition slideRight (retour arrière, drill-down)
-Navigator.of(context).push(
-  AppPageRoute.slideRight(
-    builder: (context) => WorkoutSessionScreen(exercise: exercise),
-    duration: Duration(milliseconds: 250),
-  ),
-);
-
-// Transition slideUp (modals, overlays)
-Navigator.of(context).push(
-  AppPageRoute.slideUp(
-    builder: (context) => SettingsScreen(),
-  ),
-);
-
-// Transition fade (changements subtils)
-Navigator.of(context).push(
-  AppPageRoute.fade(
-    builder: (context) => ProfileScreen(),
-  ),
-);
-
-// Transition scale (focus attention)
-Navigator.of(context).push(
-  AppPageRoute.scale(
-    builder: (context) => WorkoutCompletedScreen(),
-  ),
-);
-```
-
-### 7. WorkoutTimerAppBar
-
-AppBar spécialisée affichant le chrono de workout en cours.
-
-#### Caractéristiques
-
-- Affiche durée écoulée (HH:MM:SS)
-- Mise à jour automatique chaque seconde
-- Action "Terminer" la séance
-- Dialog de confirmation avant annulation
-
-#### Exemples
-
-```dart
-// Dans un Scaffold pendant workout
-Scaffold(
-  appBar: WorkoutTimerAppBar(
-    title: 'Séance en cours',
-  ),
-  body: WorkoutContent(),
-)
-
-// Le timer s'affiche automatiquement si workout actif
-// Format : "1:23:45" (heures:minutes:secondes)
-```
-
-### 8. AppTextField
-
-Champs de saisie moderne Material 3.
-
-#### Propriétés
-
-### 8. AppNumberField
-
-Champ spécialisé pour la saisie de nombres (répétitions, poids).
-
-#### Propriétés
-
-| Propriété | Type | Description |
-|-----------|------|-------------|
-| `controller` | `TextEditingController?` | Controller du champ |
-| `label` | `String?` | Label au-dessus du champ |
-| `hintText` | `String?` | Texte d'indication |
-| `allowDecimal` | `bool` | Autorise les décimales (défaut: false) |
-| `helperText` | `String?` | Texte d'aide |
+## Rayons et ombres
+
+### Rayons (resserrés depuis la V2, qui généralisait 24px)
+
+| Token | Valeur | Usage |
+|-------|--------|-------|
+| `radiusS` | 6px | Badges, pastilles, puces carrées |
+| `radiusM` | 10px | Champs de saisie, petits boutons |
+| `radiusL` | 12px | Boutons principaux, pods de statistiques |
+| `radiusXL` | 14px | Cartes, tuiles, minuteur, CTA critique |
+| `radiusXXL` | 20px | Bottom sheets et dialogs uniquement |
+| `radiusPill` | 999px | Puces de filtre exclusivement |
+
+### Ombres à deux niveaux (`shadowElev1`/`shadowElev2`, prennent un `Brightness`)
+
+En mode sombre, l'élévation ne passe pas seulement par l'ombre : une surface plus claire
+plus un filet de lumière haut de 1px (implémenté via une bordure, pas via `BoxShadow` qui
+ne supporte pas l'inset en Flutter).
+
+- `shadowElev1` : élévation standard (cartes au repos).
+- `shadowElev2` : élévation forte (`MarbleCard`, cartes actives).
 
 ---
 
-## Exemples d'utilisation
+## Composants signature
 
-### Écran de sélection d'exercice
+Composants réécrits pour cette direction artistique, sous `lib/core/widgets/` :
 
-```dart
-class ExerciseSelectionScreen extends StatefulWidget {
-  @override
-  _ExerciseSelectionScreenState createState() => _ExerciseSelectionScreenState();
-}
+### `RayonSweep` (`rayon_sweep.dart`)
 
-class _ExerciseSelectionScreenState extends State<ExerciseSelectionScreen> {
-  final searchController = TextEditingController();
-  String searchQuery = '';
+"Le Rayon" : fait traverser une bande lumineuse inclinée (18°) sur son enfant, un seul
+passage par activation du paramètre `trigger` (pas de répétition automatique - la
+consigne "pas de boucle par défaut" se traduit par l'absence d'appel à `repeat()` sur
+l'`AnimationController`). Respecte `MediaQuery.disableAnimations`.
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sélectionner exercice'),
-      ),
-      body: AppBackground(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              // Barre de recherche
-              AppTextField(
-                controller: searchController,
-                hintText: 'Rechercher...',
-                prefixIcon: Icons.search,
-                onChanged: (value) => setState(() => searchQuery = value),
-              ),
-              
-              SizedBox(height: 16),
-              
-              // Liste d'exercices
-              Expanded(
-                child: ListView.builder(
-                  itemCount: exercises.length,
-                  itemBuilder: (context, index) {
-                    final exercise = exercises[index];
-                    
-                    // Filtre par recherche
-                    if (searchQuery.isNotEmpty &&
-                        !exercise.name.toLowerCase().contains(searchQuery.toLowerCase())) {
-                      return SizedBox.shrink();
-                    }
-                    
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 12),
-                      child: AppCard(
-                        variant: AppCardVariant.standard,
-                        onTap: () {
-                          Navigator.of(context).push(
-                            AppPageRoute.slideRight(
-                              builder: (context) => WorkoutSessionScreen(
-                                exercise: exercise,
-                              ),
-                            ),
-                          );
-                        },
-                        padding: EdgeInsets.all(16),
-                        child: Row(
-                          children: [
-                            // Icône circulaire avec couleur du groupe musculaire
-                            Container(
-                              width: 48,
-                              height: 48,
-                              decoration: BoxDecoration(
-                                color: AppColors.muscleGroupColors[
-                                  exercise.primaryMuscleGroup.toLowerCase()
-                                ]?.withOpacity(0.2),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.fitness_center,
-                                color: AppColors.muscleGroupColors[
-                                  exercise.primaryMuscleGroup.toLowerCase()
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    exercise.name,
-                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    exercise.muscleGroups.join(', '),
-                                    style: Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 16,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-```
+Implémenté via `ShaderMask` en `BlendMode.plus` : ce mode est additif et **ignore l'alpha
+du fond en dehors de la forme visible de l'enfant**. Sur un enfant non rectangulaire
+(l'orbe circulaire de `GlassOrbButton`), le reflet déborde dans les coins du carré
+englobant si l'appelant ne pose pas lui-même un `ClipOval` (ou une forme équivalente)
+autour du `RayonSweep` - c'est un piège d'intégration réel, pas hypothétique (corrigé en
+v1.2.0 sur `GlassOrbButton`).
 
-### Page d'accueil avec CircularProgressButton
+### `MarbleCard` (`marble_card.dart`)
 
-```dart
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final workoutProvider = Provider.of<WorkoutProvider>(context);
-    
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Apollon'),
-        actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: Icon(Icons.person),
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
-            ),
-          ),
-        ],
-      ),
-      endDrawer: ProfileDrawer(),
-      body: AppBackground(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Bouton principal avec progress
-              CircularProgressButton(
-                progress: workoutProvider.hasActiveWorkout
-                    ? workoutProvider.elapsedMinutes / 60
-                    : 0.0,
-                icon: Icons.fitness_center,
-                label: workoutProvider.hasActiveWorkout
-                    ? 'CONTINUER\nSÉANCE'
-                    : 'NOUVELLE\nSÉANCE',
-                size: 140,
-                onPressed: () {
-                  if (!workoutProvider.hasActiveWorkout) {
-                    workoutProvider.startNewWorkout();
-                  }
-                  
-                  Navigator.of(context).push(
-                    AppPageRoute.fadeSlide(
-                      builder: (context) => ExerciseSelectionScreen(),
-                    ),
-                  );
-                },
-              ),
-              
-              SizedBox(height: 32),
-              
-              // Statistiques rapides
-              if (workoutProvider.hasActiveWorkout)
-                AppCard(
-                  variant: AppCardVariant.standard,
-                  padding: EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.timer, color: Theme.of(context).colorScheme.primary),
-                      SizedBox(width: 12),
-                      Text(
-                        workoutProvider.formattedElapsedTime,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontFamily: 'JetBrainsMono',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-```
+Veinage marbre par deux dégradés linéaires superposés à très basse opacité (112° et 24°),
+sans image ni texture bitmap. **Garde-fou de spec : réservée à une seule carte par écran**
+- celle qui porte le sens (progression, record, bilan de séance, accroche du login). Pour
+des listes ou tuiles répétitives, utiliser `AppCard` standard.
 
-### Écran d'enregistrement de série
+### `PictogramPlinth` (`pictogram_plinth.dart`)
 
-```dart
-class WorkoutSessionScreen extends StatefulWidget {
-  final Exercise exercise;
-  
-  const WorkoutSessionScreen({required this.exercise});
-  
-  @override
-  _WorkoutSessionScreenState createState() => _WorkoutSessionScreenState();
-}
+Socle en dégradé ardoise pour poser un pictogramme SVG d'exercice - corrige leur
+illisibilité sur `surface`/`surfaceVariant` clairs (défaut réel du catalogue).
 
-class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
-  final repsController = TextEditingController();
-  final weightController = TextEditingController();
-  bool isSubmitting = false;
-  
-  Future<void> _addSet() async {
-    final reps = int.tryParse(repsController.text);
-    final weight = double.tryParse(weightController.text) ?? 0;
-    
-    // RG-003: Validation répétitions > 0
-    if (reps == null || reps <= 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Les répétitions doivent être > 0 (RG-003)')),
-      );
-      return;
-    }
-    
-    // RG-003: Validation poids >= 0
-    if (weight < 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Le poids doit être ≥ 0 (RG-003)')),
-      );
-      return;
-    }
-    
-    // Soumission
-    setState(() => isSubmitting = true);
-    
-    final workoutProvider = Provider.of<WorkoutProvider>(context, listen: false);
-    await workoutProvider.addSet(
-      widget.exercise.id,
-      reps,
-      weight,
-      exerciseName: widget.exercise.name,
-    );
-    
-    setState(() => isSubmitting = false);
-    
-    // Reset des champs
-    repsController.clear();
-    weightController.clear();
-    
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Série ajoutée !')),
-    );
-  }
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: WorkoutTimerAppBar(
-        title: widget.exercise.name,
-      ),
-      body: AppBackground(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              // Card info exercice
-              AppCard(
-                variant: AppCardVariant.elevated,
-                padding: EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    // Icône avec couleur groupe musculaire
-                    Container(
-                      width: 56,
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color: AppColors.muscleGroupColors[
-                          widget.exercise.primaryMuscleGroup.toLowerCase()
-                        ]?.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.fitness_center,
-                        size: 28,
-                        color: AppColors.muscleGroupColors[
-                          widget.exercise.primaryMuscleGroup.toLowerCase()
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.exercise.name,
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            widget.exercise.muscleGroups.join(', '),
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              
-              SizedBox(height: 24),
-              
-              // Champs de saisie
-              AppCard(
-                variant: AppCardVariant.standard,
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Nouvelle série',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    
-                    // Champ répétitions
-                    AppNumberField(
-                      label: 'Répétitions',
-                      hintText: '12',
-                      controller: repsController,
-                      helperText: 'Minimum 1 répétition (RG-003)',
-                    ),
-                    
-                    SizedBox(height: 16),
-                    
-                    // Champ poids
-                    AppNumberField(
-                      label: 'Poids (kg)',
-                      hintText: '0',
-                      controller: weightController,
-                      allowDecimal: true,
-                      helperText: 'Laissez vide si poids de corps',
-                    ),
-                    
-                    SizedBox(height: 24),
-                    
-                    // Bouton ajouter
-                    AppButton(
-                      text: 'Ajouter série',
-                      variant: AppButtonVariant.primary,
-                      icon: Icons.add,
-                      isLoading: isSubmitting,
-                      onPressed: isSubmitting ? null : _addSet,
-                    ),
-                  ],
-                ),
-              ),
-              
-              SizedBox(height: 24),
-              
-              // Historique des séries (si disponible)
-              Expanded(
-                child: Consumer<WorkoutProvider>(
-                  builder: (context, workoutProvider, child) {
-                    final sets = workoutProvider.getCurrentExerciseSets(
-                      widget.exercise.id,
-                    );
-                    
-                    if (sets.isEmpty) {
-                      return Center(
-                        child: Text(
-                          'Aucune série enregistrée',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      );
-                    }
-                    
-                    return ListView.builder(
-                      itemCount: sets.length,
-                      itemBuilder: (context, index) {
-                        final set = sets[index];
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 8),
-                          child: AppCard(
-                            variant: AppCardVariant.outlined,
-                            padding: EdgeInsets.all(16),
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  child: Text('${index + 1}'),
-                                  backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                                ),
-                                SizedBox(width: 16),
-                                Expanded(
-                                  child: Text(
-                                    '${set.reps} reps',
-                                    style: Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                ),
-                                Text(
-                                  '${set.weight.toStringAsFixed(1)} kg',
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontFamily: 'JetBrainsMono',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-```
+### `GlassOrbButton` (`glass_orb_button.dart`)
+
+Orbe circulaire "Nouvelle séance" - malgré son nom historique, ce n'est pas du
+glassmorphism : dégradé radial à 3 arrêts (source de lumière à 30%/18%), bordure 1px,
+filet interne haut, arc de progression 3px en or, ombre portée colorée. Sans flou de fond
+(`BackdropFilter` proscrit). Diamètre 212px (168px minimum sur petit écran). Le
+`RayonSweep` de l'orbe est enveloppé dans un `ClipOval`.
+
+### `CriticalCta` (`critical_cta.dart`)
+
+CTA pleine largeur pour l'action critique d'un écran (ex. "Terminer la séance").
+
+### `EmptyStateCard` (`empty_state_card.dart`)
+
+État vide standard (ex. "Pas de séance pour l'instant").
+
+---
+
+## Composants standards
+
+| Composant | Rôle |
+|-----------|------|
+| `AppCard` | Carte générique animée (pression = surface légèrement plus claire, 120ms) - `AppCardVariant.standard`/`elevated`/`outlined` |
+| `AppButton` | Bouton standard animé |
+| `AppTextField` | Champ de saisie |
+| `AppBarWidget` | AppBar Material 3 |
+| `MeshGradientBackground` | Fond en dégradé animé (4 couleurs, cycle 18s) |
+| `FloatingWorkoutTimer` | Minuteur global flottant type Dynamic Island, lit `WorkoutProvider` |
+| `ProfileDrawer` | Tiroir de navigation (lit `AuthProvider` + `WorkoutProvider`) |
+| `ThemeSwitcher` | Bascule de thème (`Consumer<ThemeProvider>`) |
+| `PRCelebrationOverlay` (`showPrCelebration()`) | Popup de célébration animée (confetti) au nouveau record |
 
 ---
 
 ## Bonnes pratiques
 
-### 1. Performance
-
-#### ✅ Faire
-- Utiliser `const` pour les widgets statiques
-- Préférer `AppCard` avec variants appropriés
-- Limiter les rebuilds avec `Consumer` ciblé
-- Utiliser les page transitions pour navigation fluide
-
-#### ❌ Éviter
-- Reconstruire inutilement des widgets lourds
-- Animer trop d'éléments simultanément
-- Imbriquer trop de niveaux de widgets
-
-```dart
-// Bon : Consumer ciblé
-Consumer<WorkoutProvider>(
-  builder: (context, workoutProvider, child) {
-    return Text(workoutProvider.formattedElapsedTime);
-  },
-)
-
-// Éviter : Consumer trop large qui rebuild tout
-Consumer<WorkoutProvider>(
-  builder: (context, workoutProvider, child) {
-    return EntireScreen(); // Trop de rebuilds
-  },
-)
-```
-
-### 2. Accessibilité
-
-#### ✅ Faire
-- Assurer contraste de 4.5:1 minimum pour texte
-- Utiliser les couleurs du thème (Dark/Light mode compatible)
-- Supporter tailles de police dynamiques
-- Fournir feedback visuel clair sur interactions
-
-```dart
-// Bon contraste automatique avec Material 3
-Text(
-  'Label',
-  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-    color: Theme.of(context).colorScheme.onSurface,
-  ),
-)
-
-// Bon : Utiliser les couleurs du ColorScheme
-Container(
-  color: Theme.of(context).colorScheme.primaryContainer,
-  child: Text(
-    'Important',
-    style: TextStyle(
-      color: Theme.of(context).colorScheme.onPrimaryContainer,
-    ),
-  ),
-)
-```
-
-### 3. Cohérence visuelle
-
-#### ✅ Faire
-- Utiliser les widgets du Design System (AppCard, AppButton, etc.)
-- Respecter les espacements définis (8, 12, 16, 20, 24px)
-- Utiliser les border radius standard (16px ou 24px)
-- Suivre les conventions de variants (standard, elevated, outlined)
-
-```dart
-// Bon : Utiliser les widgets du système
-AppCard(
-  variant: AppCardVariant.elevated,
-  padding: EdgeInsets.all(20),
-  child: content,
-)
-
-// Éviter : Créer des composants custom non standardisés
-Container(
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(13), // Valeur non standard
-    // ...
-  ),
-)
-```
-
-### 4. États interactifs
-
-#### ✅ Faire
-- Toujours fournir feedback visuel au tap
-- Désactiver boutons pendant chargement (`isLoading: true`)
-- Afficher messages d'erreur avec SnackBar
-- Utiliser les page transitions pour navigation
-
-```dart
-// Bon feedback utilisateur
-AppButton(
-  text: 'Soumettre',
-  variant: AppButtonVariant.primary,
-  isLoading: isSubmitting,
-  onPressed: isSubmitting ? null : () => submit(),
-)
-
-// Navigation avec transition
-Navigator.of(context).push(
-  AppPageRoute.fadeSlide(
-    builder: (context) => NextScreen(),
-  ),
-)
-```
-
-### 5. Validation des formulaires
-
-#### ✅ Faire
-- Valider côté client pour feedback immédiat (RG-003)
-- Afficher messages d'erreur clairs et contextuels
-- Bloquer soumission si validation échoue
-- Utiliser AppNumberField pour saisie numérique
-
-```dart
-// Validation RG-003 - Répétitions > 0, Poids >= 0
-Future<void> _addSet() async {
-  final reps = int.tryParse(repsController.text);
-  final weight = double.tryParse(weightController.text) ?? 0;
-  
-  if (reps == null || reps <= 0) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Les répétitions doivent être > 0 (RG-003)')),
-    );
-    return;
-  }
-  
-  if (weight < 0) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Le poids doit être ≥ 0 (RG-003)')),
-    );
-    return;
-  }
-  
-  // Validation OK, soumettre
-  await workoutProvider.addSet(exerciseId, reps, weight);
-}
-```
-
-### 6. Navigation et drawer
-
-#### ✅ Faire
-- Utiliser ProfileDrawer pour menu utilisateur
-- Capturer providers avant fermeture du drawer (context-safe)
-- Utiliser AppPageRoute pour transitions cohérentes
-- Gérer workout actif lors de la déconnexion
-
-```dart
-// Bon : Ouvrir drawer depuis AppBar
-Scaffold(
-  appBar: AppBar(
-    actions: [
-      Builder(
-        builder: (context) => IconButton(
-          icon: Icon(Icons.person),
-          onPressed: () => Scaffold.of(context).openEndDrawer(),
-        ),
-      ),
-    ],
-  ),
-  endDrawer: ProfileDrawer(),
-)
-
-// ProfileDrawer gère automatiquement :
-// - Capture des providers avant fermeture
-// - Annulation workout si actif
-// - Déconnexion sécurisée
-```
+1. **Éviter d'appeler `GoogleFonts.*` directement dans un écran.** Passer par les helpers
+   `AppTheme` (`screenTitle`, `wordmark`, `seriesNumber`...) pour que le plancher de 20px
+   sur Cinzel et la cohérence des tailles restent centralisés.
+2. **Une seule `MarbleCard` par écran.** Le garde-fou de spec est documenté dans le widget
+   lui-même - respectez-le, ne le contournez pas pour un effet visuel ponctuel.
+3. **`RayonSweep` sur une forme non rectangulaire → un `Clip*` autour est nécessaire.**
+   C'est le bug réel corrigé en v1.2.0 sur `GlassOrbButton` ; il se reproduira sur tout
+   futur composant circulaire ou à coins très arrondis qui oublierait ce clip.
+4. **`PictogramPlinth`, pas `surface`/`surfaceVariant` nu, sous un pictogramme SVG.** Les
+   silhouettes du catalogue sont conçues pour un fond sombre.
+5. **Couleurs bare vs `light*` :** dans du code neuf, préférez résoudre la couleur selon
+   `Theme.of(context).brightness` (`isDark ? X : lightX`) plutôt que consommer une
+   constante bare brute - ces dernières existent pour la compatibilité d'écrans
+   préexistants hors périmètre, pas comme modèle à reproduire.
+6. **Éviter `BackdropFilter` dans les composants signature.** Si un nouvel écran a besoin
+   d'un effet de matière, partez de `MarbleCard`/`GlassOrbButton` comme référence plutôt
+   que de réintroduire du flou de fond.
 
 ---
 
-## Support
-
-Pour toute question sur le Design System :
-
-1. Consulter les exemples dans ce document
-2. Lire les commentaires dans les fichiers source
-3. Référencer les règles de gestion (RG-*) dans [README.md](../README.md)
-4. Voir la documentation Firebase : [Firebase Setup Guide](firebase-setup-guide.md)
-
----
-
-**Version** : 2.0.0  
-**Dernière mise à jour** : Février 2026  
-**Design System** : Material 3 moderne avec Raleway  
-**Couleur primaire** : #1E88E5  
-**Mainteneur** : Équipe Apollon
+**Dernière mise à jour :** 6 août 2026
+**Voir aussi :** [CHANGELOG.md](../CHANGELOG.md#120---2026-08-06-refonte-visuelle-marbre--lumière), [CLAUDE.md](../CLAUDE.md)

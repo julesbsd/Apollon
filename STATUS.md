@@ -2,13 +2,17 @@
 
 Vue d'ensemble rapide de l'état du projet Apollon.
 
-**Dernière mise à jour:** 5 août 2026  
-**Version actuelle:** 1.1.0 (MVP V1 + V2 partielle)
+**Dernière mise à jour:** 6 août 2026  
+**Version actuelle:** 1.2.0 (MVP V1 + V2 partielle + refonte visuelle "Marbre & Lumière")
 
 <!-- Jalon 1.1.0 : aligne ce document sur l'état réel du code au 2026-08-05. Le jalon 1.0.1
      du 17 février 2026 restait figé depuis 6 mois alors que plusieurs livraisons (EPIC-V2-1,
      V2.2, correctifs sécurité/robustesse/perf) avaient déjà été committées sans mise à jour
-     de ce fichier. Voir CHANGELOG.md [1.1.0] pour le détail des 7 commits consolidés. -->
+     de ce fichier. Voir CHANGELOG.md [1.1.0] pour le détail des 7 commits consolidés.
+     Jalon 1.2.0 (2026-08-06) : refonte visuelle complète "Marbre & Lumière" (voir
+     CHANGELOG.md [1.2.0]) ; métriques tests/qualité mesurées a nouveau à cette date
+     (`flutter test` et `flutter analyze` exécutés) plutôt que reconduites depuis le
+     jalon 1.0.0 du 17 février où elles avaient été figées la première fois. -->
 
 ---
 
@@ -20,8 +24,8 @@ Vue d'ensemble rapide de l'état du projet Apollon.
 
 **MVP V1:** ✅ **PRODUCTION-READY**  
 **Effort:** 31.5h / 36h (87.5%)  
-**Tests:** 39/39 (100%)  
-**Qualité:** 255 issues (info only)
+**Tests:** 203/203 (100%, mesuré le 2026-08-06 - `flutter test`)  
+**Qualité:** 0 issue (mesuré le 2026-08-06 - `flutter analyze`)
 
 ---
 
@@ -71,6 +75,19 @@ Vue d'ensemble rapide de l'état du projet Apollon.
 
 ## 🐛 CORRECTIONS RÉCENTES
 
+### Version 1.2.0 (6 août 2026) - refonte visuelle "Marbre & Lumière"
+
+Refonte complète du design system : nouveau `AppTheme` (palette marbre chaud/nuit
+minérale, typographie Cinzel/Manrope/JetBrains Mono, rayons resserrés, ombres à deux
+niveaux, 14 groupes musculaires), composants signature (`RayonSweep`, `MarbleCard`,
+`PictogramPlinth`, `CriticalCta`, `EmptyStateCard`), `GlassOrbButton` réécrit en orbe
+en matière (sans flou de fond), écran de connexion reconstruit sur la maquette Claude
+Design, accueil avec logo intégré et triptyque de statistiques, écran de session
+d'entraînement aligné sur la maquette. Corrige au passage un défaut de rendu (reflet
+débordant du cercle sur l'orbe) et un bug de recyclage de vignette d'exercice.
+
+**Détails :** [CHANGELOG.md](CHANGELOG.md#120---2026-08-06-refonte-visuelle-marbre--lumière)
+
 ### Version 1.0.1 (17 fév 2026)
 
 ✅ **Bug #1 corrigé:** Temps de séance affiché à 0  
@@ -109,13 +126,16 @@ Vue d'ensemble rapide de l'état du projet Apollon.
 ### Tests Unitaires
 
 ```
-Tests Modèles:    ███████████████████████████████████ 39/39 (100%)
-Tests Widgets:    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0/8  (V2)
-Tests Services:   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0    (V2)
-Tests Providers:  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0    (V2)
+Suite complète (flutter test, mesuré le 2026-08-06) :  203/203 (100%)
 ```
 
-**Couverture MVP V1:** Logique métier critique validée ✅
+<!-- Jalon 1.2.0 : la répartition par catégorie (modèles/widgets/services/providers)
+     n'a pas été mesurée séparément à cette date - seul le total `flutter test` a été
+     exécuté et vérifié. Ne pas reconduire les anciens chiffres 39/0/0/0 qui dataient
+     du jalon 1.0.0 et ne couvraient pas les tests widgets/services/providers ajoutés
+     depuis (voir test/core/, test/providers/, test/services/, test/widgets/). -->
+
+**Couverture MVP V1 + V2 partielle :** modèles, providers, services, widgets ✅
 
 ### Code Quality
 
@@ -123,8 +143,7 @@ Tests Providers:  ░░░░░░░░░░░░░░░░░░░░�
 |----------|--------|--------|
 | **Errors** | 0 | ✅ Aucune |
 | **Warnings** | 0 | ✅ Aucun |
-| **Info** | 255 | ⚠️ Non bloquants |
-| **Format** | 54/54 | ✅ Conforme Dart |
+| **Info** | 0 | ✅ Aucune (mesuré le 2026-08-06 - `flutter analyze`) |
 | **Memory leaks** | 0 | ✅ Aucun |
 
 ### Performance
@@ -166,9 +185,11 @@ Tests Providers:  ░░░░░░░░░░░░░░░░░░░░�
 - [x] Statistiques séance (volume, total séries)
 
 #### Design
-- [x] Design System Liquid Glass
+- [x] Design System "Marbre & Lumière" (v1.2.0, remplace les deux systèmes précédents -
+      voir CHANGELOG.md [1.2.0])
 - [x] Dark + Light mode
-- [x] 17 widgets réutilisables premium
+- [x] Composants signature : RayonSweep, MarbleCard, PictogramPlinth, GlassOrbButton,
+      CriticalCta, EmptyStateCard
 - [x] Animations fluides
 - [x] Material 3
 
@@ -324,9 +345,9 @@ APOLLON MVP V1 - DASHBOARD
 ┌─────────────────────────────────────────────────┐
 │ 🧪 TESTS & QUALITÉ                              │
 ├─────────────────────────────────────────────────┤
-│ Tests modèles              39/39        ✅ 100% │
+│ Suite de tests              203/203     ✅ 100% │
 │ Validation RG-003          Pass         ✅ OK   │
-│ Code quality               255 issues   ⚠️ Info │
+│ Code quality                0 issue     ✅ OK   │
 │ Performance 60fps          Maintenue    ✅ OK   │
 │ Memory leaks               0            ✅ OK   │
 └─────────────────────────────────────────────────┘
@@ -338,16 +359,16 @@ APOLLON MVP V1 - DASHBOARD
 │ Firebase Auth              4.16.0       ✅      │
 │ Cloud Firestore            4.14.0       ✅      │
 │ Provider                   6.1.1        ✅      │
-│ Material 3 + Liquid Glass  Custom       ✅      │
+│ Material 3 + Marbre & Lumière  Custom   ✅      │
 └─────────────────────────────────────────────────┘
 
 STATUS: PRODUCTION-READY (MVP V1 + V2 partielle)
-RELEASE: 5 août 2026
-VERSION: 1.1.0 (STATS, RECORDS, HEATMAP, IMAGES HYBRIDES)
+RELEASE: 6 août 2026
+VERSION: 1.2.0 (MARBRE & LUMIÈRE, STATS, RECORDS, HEATMAP, IMAGES HYBRIDES)
 ```
 
 ---
 
 **Généré automatiquement**  
 **Source:** apollon-project-assistant  
-**Dernière sync:** 5 août 2026
+**Dernière sync:** 6 août 2026

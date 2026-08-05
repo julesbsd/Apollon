@@ -114,11 +114,11 @@ Personne utilisant l'application (pratiquant de musculation).
 ### Frontend
 - **Framework :** Flutter/Dart
 - **State Management :** Provider (recommandé pour V1)
-- **Design System :** Material 3 moderne avec Raleway (#1E88E5)
-  - Arrondis prononcés
-  - Effets de transparence et flou
+- **Design System :** "Marbre & Lumière" (v1.2.0) - Material 3, Cinzel (identité) / Manrope
+  (interface) / JetBrains Mono (chiffres), rayons resserrés, ombres à deux niveaux
+  - Composant signature "Le Rayon" (balayage lumineux à passage unique)
   - Animations fluides 60fps minimum
-- **Thème :** Mode sombre et mode clair (obligatoires V1)
+- **Thème :** Mode sombre ("nuit minérale") et mode clair ("marbre chaud") obligatoires
 
 ### Backend
 - **Authentification :** Firebase Authentication (Google Sign-In)
@@ -373,6 +373,13 @@ La séance n'est finalisée et définitivement sauvegardée que lors du clic sur
 
 ### Version 1.0 (MVP) - 3 mois
 **Fonctionnalités principales :**
+
+<!-- Le design system decrit ci-dessous (Material 3 + Raleway + #1E88E5) est celui prevu
+     au plan initial du MVP. Il a ete remplace deux fois depuis : d'abord par "Design
+     Moderne Epure Bleu" V2 (Inter, #4A90E2), puis par la direction actuelle "Marbre &
+     Lumiere" (v1.2.0, voir CHANGELOG.md et section STACK TECHNIQUE ci-dessus). Conserve
+     ici tel quel pour l'historique du plan d'origine, pas comme etat actuel. -->
+
 - Connexion Google Authentication
 - Navigation exercices (par Groupe Musculaire + Type)
 - Saisie séries (répétitions + poids)
@@ -447,7 +454,8 @@ flutter run --release
 
 ### Tests Unitaires
 
-**Status:** ✅ **39/39 tests passent** (100% des tests modèles)
+**Status:** ✅ **203/203 tests passent** (mesuré le 2026-08-06, `flutter test`) - modèles,
+providers, services, widgets
 
 ```bash
 # Exécuter tous les tests
@@ -458,13 +466,15 @@ flutter test test/models/
 ```
 
 **Couverture:**
-- ✅ Modèles métier (WorkoutSet, Workout, Exercise, WorkoutExercise)
+- ✅ Modèles métier (WorkoutSet, Workout, ExerciseLibrary, WorkoutExercise, Statistics...)
 - ✅ Validation règles de gestion (RG-003: reps > 0, poids ≥ 0)
-- ⚠️ Tests widgets nécessitent Firebase mocks (prévu V2)
+- ✅ Providers (ExerciseLibraryProvider) et services (StatisticsService)
+- ✅ Widgets (mocks Firebase via mocktail : WorkoutSessionScreen, LoginScreen,
+  ExerciseLibrarySelectionScreen, RayonSweep...)
 
 ### Qualité du Code
 
-**Status:** ✅ **255 issues** (toutes de niveau info, aucune erreur)
+**Status:** ✅ **0 issue** (mesuré le 2026-08-06, `flutter analyze`)
 
 ```bash
 # Analyser le code
@@ -478,9 +488,8 @@ dart format .
 ```
 
 **Métriques:**
-- ✅ 54 fichiers formatés selon conventions Dart
 - ✅ Architecture propre (Models/Services/Providers/UI)
-- ✅ Performance optimisée (ListView.builder, const, dispose)
+- ✅ Performance optimisée (ListView.builder, const, dispose, Selector/Consumer ciblés)
 - ✅ Aucun memory leak détecté
 
 **Audit complet:** Voir [AUDIT-PERFORMANCE-MVP-V1.md](AUDIT-PERFORMANCE-MVP-V1.md)
@@ -556,5 +565,5 @@ Pour toute question ou suggestion concernant le projet Apollon.
 
 ---
 
-**Dernière mise à jour :** 18 février 2026  
-**Version:** MVP V1.1 - Images hybrides ✅
+**Dernière mise à jour :** 6 août 2026  
+**Version:** 1.2.0 - Marbre & Lumière ✅

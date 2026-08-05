@@ -1,9 +1,9 @@
-# 📚 Documentation Apollon MVP V1
+# 📚 Documentation Apollon
 
 Index complet de la documentation du projet Apollon.
 
-**Version:** MVP V1 Complet ✅  
-**Dernière mise à jour:** 17 février 2026  
+**Version:** 1.2.0 - MVP V1 + V2 partielle + "Marbre & Lumière" ✅  
+**Dernière mise à jour:** 6 août 2026  
 
 ---
 
@@ -194,7 +194,7 @@ Détails complets dans [README.md](README.md#glossaire-métier)
 ## 🔗 LIENS EXTERNES
 
 - **Stack Technique:** Flutter 3.x + Firebase + Provider
-- **Design:** Material 3 + Liquid Glass
+- **Design:** Material 3 + "Marbre & Lumière" (v1.2.0) - voir [docs/design-system.md](docs/design-system.md)
 - **Plateformes:** Android (prioritaire), iOS (secondaire)
 - **Repo GitHub:** (À ajouter)
 - **Démo:** (À ajouter)
@@ -218,4 +218,4 @@ Détails complets dans [README.md](README.md#glossaire-métier)
 ---
 
 **Généré par:** apollon-project-assistant  
-**Dernière révision:** 17 février 2026
+**Dernière révision:** 6 août 2026

@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Apollon est une application Flutter de suivi de musculation (strength-training). L'utilisateur enregistre ses seances de salle (exercices, series reps x poids), consulte son historique et visualise sa progression (statistiques, records personnels, heatmap). Le backend est Firebase (Authentification Google, Cloud Firestore avec persistance offline, Firebase Storage). La gestion d'etat repose sur `package:provider` + `ChangeNotifier`. L'UI suit un design system "Liquid Glass" (glassmorphism, Material 3, coins arrondis 24px, themes Dark/Light, cible 60fps). Le code shippe correspond au MVP V1 (version `pubspec.yaml` 1.1.0+2, jalon documente 1.1.0) et inclut deja des fonctionnalites V2 (statistiques, records personnels, bibliotheque d'exercices a images hybrides).
+Apollon est une application Flutter de suivi de musculation (strength-training). L'utilisateur enregistre ses seances de salle (exercices, series reps x poids), consulte son historique et visualise sa progression (statistiques, records personnels, heatmap). Le backend est Firebase (Authentification Google, Cloud Firestore avec persistance offline, Firebase Storage). La gestion d'etat repose sur `package:provider` + `ChangeNotifier`. L'UI suit le design system "Marbre & Lumiere" (`AppTheme`, `lib/core/theme/app_theme.dart`) : marbre chaud en clair / nuit minerale en sombre, typographie a trois polices (Cinzel reserve a l'identite, plancher dur de 20px et interdit en corps de texte ; Manrope pour l'interface ; JetBrains Mono pour les chiffres), rayons resserres (6 a 20px), ombres a deux niveaux, composant signature "Le Rayon" (`RayonSweep`, balayage lumineux a passage unique sans repetition automatique). Ce design remplace l'ancien systeme "Liquid Glass"/"Design Moderne Epure Bleu" V2 (decommissionne, voir section Conventions). Le code shippe correspond au MVP V1 + V2 partielle (version `pubspec.yaml` 1.2.0+3, jalon documente 1.2.0) et inclut deja des fonctionnalites V2 (statistiques, records personnels, bibliotheque d'exercices a images hybrides).
 
 ## Commandes essentielles
 
@@ -75,7 +75,7 @@ lib/
       exercise_image_downloader.dart # Telecharge SVG depuis api.workoutapi.com (http), stocke dans app docs dir, manifest shared_preferences
 
     theme/                          # Design system (barrel: theme.dart)
-      app_theme.dart                # AppTheme "Design Moderne Epure Bleu" V2 (Inter, primaryBlue 0xFF4A90E2), lightTheme/darkTheme + tokens spacing/radius, palettes mesh-gradient (lightMeshGradient/darkMeshGradient)
+      app_theme.dart                # AppTheme "Marbre & Lumiere" (Cinzel identite/Manrope interface/JetBrains Mono chiffres), lightTheme/darkTheme + tokens radius resserres (radiusS 6 a radiusXXL 20)/ombres a 2 niveaux (shadowElev1/2)/14 groupes musculaires (muscleGroupColorsLight/Dark), palettes mesh-gradient (lightMeshGradient/darkMeshGradient)
 
     utils/
       page_transitions.dart         # AppPageRoute (slideUp/slideRight/fade/scale/fadeSlide), enum AppPageTransitionType
@@ -87,17 +87,21 @@ lib/
       app_card.dart                 # AppCard (anime) + AppCardVariant
       app_text_field.dart           # AppTextField
       theme_switcher.dart           # ThemeSwitcher (Consumer<ThemeProvider>)
-      glass_orb_button.dart         # GlassOrbButton (bouton glassmorphism avec progress)
+      glass_orb_button.dart         # GlassOrbButton - orbe circulaire "Nouvelle seance" en matiere (degrade radial + arc de progression), sans flou de fond ; RayonSweep clippe en ClipOval
       profile_drawer.dart           # ProfileDrawer (lit AuthProvider + WorkoutProvider)
       mesh_gradient_background.dart # MeshGradientBackground (mesh 4 couleurs anime)
       floating_workout_timer.dart   # FloatingWorkoutTimer (timer global type Dynamic Island, lit WorkoutProvider)
-      marble_card.dart              # MarbleCard (carte texture marbre)
+      marble_card.dart              # MarbleCard (veinage marbre par degrades superposes, reservee a UNE carte par ecran)
       pr_celebration_overlay.dart   # showPrCelebration() + popup confetti (package:confetti)
+      rayon_sweep.dart              # RayonSweep - "Le Rayon", balayage lumineux a passage unique (pas de repetition automatique), respecte MediaQuery.disableAnimations
+      pictogram_plinth.dart         # PictogramPlinth - socle degrade ardoise pour les pictogrammes SVG, evite de les poser directement sur surface/surfaceVariant
+      critical_cta.dart             # CriticalCta - CTA pleine largeur pour l'action critique d'un ecran (ex. "Terminer la seance")
+      empty_state_card.dart         # EmptyStateCard - etat vide standard (ex. "Pas de seance pour l'instant")
 
   screens/
-    auth/login_screen.dart          # LoginScreen - connexion Google (US-1.1), MeshGradientBackground
-    home/home_page.dart             # HomePage - dashboard, navigue vers selection / historique / stats / records
-    workout/workout_session_screen.dart # WorkoutSessionScreen(ExerciseLibrary exercise) - saisie series + historique + auto-save (US-4.3)
+    auth/login_screen.dart          # LoginScreen - connexion Google (US-1.1), MeshGradientBackground, symbole grave + MarbleCard + RayonSweep (fidele a la maquette DA)
+    home/home_page.dart             # HomePage - accueil sur un seul ecran : bandeau (logo + wordmark), orbe "Nouvelle seance", triptyque de statistiques (seances/volume/records), 2 derniers entrainements
+    workout/workout_session_screen.dart # WorkoutSessionScreen({exercise, workoutService}) - saisie series + encart "derniere seance" (RG-005) + auto-save (US-4.3)
     exercise_library/
       exercise_library_selection_screen.dart # ExerciseLibrarySelectionScreen - recherche + TabBar muscles + FilterChips equipement
       widgets/exercise_image_widget.dart      # ExerciseImageWidget/Avatar/Container/Thumbnail (lazy loading)
@@ -188,7 +192,7 @@ Fichiers du dossier `scripts/` (scripts reels actifs) :
 - ZERO emoji dans le code, les messages de commit et les documents techniques (dont ce fichier).
 - Commentaires en francais, identifiants (classes, methodes, variables) en anglais.
 - Design "Liquid Glass" : glassmorphism, coins arrondis 24px, themes Dark et Light, cible de fluidite 60fps.
-- Le systeme de theme legacy "Liquid Glass" (`AppColors` seed `0xFF1E88E5`, `AppTypography` Cinzel/Raleway/JetBrains Mono, `AppDecorations`) a ete decommissionne : ces trois fichiers (`app_colors.dart`, `app_typography.dart`, `app_decorations.dart`) sont supprimes de `lib/core/theme/`, sans usage restant hors d'eux-memes au moment du retrait. Le seul systeme de theme desormais present est `AppTheme` (`app_theme.dart`, "Design Moderne Epure Bleu" V2, police Inter, seed `0xFF4A90E2`), qui porte aussi les palettes mesh-gradient (`lightMeshGradient`/`darkMeshGradient`, migrees depuis `AppColors`). Le barrel `theme.dart` n'exporte plus que `app_theme.dart`.
+- Le systeme de theme legacy "Liquid Glass" (`AppColors` seed `0xFF1E88E5`, `AppTypography` Cinzel/Raleway/JetBrains Mono, `AppDecorations`) a ete decommissionne : ces trois fichiers (`app_colors.dart`, `app_typography.dart`, `app_decorations.dart`) sont supprimes de `lib/core/theme/`, sans usage restant hors d'eux-memes au moment du retrait. Un second systeme "Design Moderne Epure Bleu" V2 (police Inter, seed `0xFF4A90E2`) l'a ensuite remplace avant d'etre lui-meme retire au profit de la direction actuelle. Le seul systeme de theme desormais present est `AppTheme` (`app_theme.dart`, "Marbre & Lumiere" - Cinzel/Manrope/JetBrains Mono, primaryBlue `0xFF4E92CF` sombre / `0xFF17568C` clair, accentGold `0xFFD9B978` sombre / `0xFF8A6A2F` clair), qui porte aussi les palettes mesh-gradient (`lightMeshGradient`/`darkMeshGradient`) et les 14 couleurs de groupe musculaire (`muscleGroupColorsLight`/`Dark`). Le barrel `theme.dart` n'exporte que `app_theme.dart`.
 
 ## Regles metier
 

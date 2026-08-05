@@ -7,6 +7,53 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.2.0] - 2026-08-06 Refonte visuelle "Marbre & Lumière"
+
+### Ajouté
+
+- Nouvelle direction artistique complète "Marbre & Lumière", produite via Claude Design
+  (projet `Marbre & Lumière`, fichier `Apollon DA Finale.dc.html`) et implémentée dans
+  `AppTheme` (`lib/core/theme/app_theme.dart`) : palette marbre chaud (clair) / nuit
+  minérale (sombre), typographie à trois polices (Cinzel pour l'identité ≥ 20px uniquement,
+  Manrope pour l'interface, JetBrains Mono pour les chiffres), rayons resserrés (6 à 20px),
+  ombres à deux niveaux, 14 groupes musculaires avec couleur dédiée par thème.
+- Composants signature : `RayonSweep` (balayage lumineux à passage unique, sans répétition
+  automatique - `AnimationController.repeat()` n'est pas utilisé), `MarbleCard` (veinage
+  marbre par dégradés superposés, réservée à une carte par écran), `PictogramPlinth` (socle
+  ardoise pour les pictogrammes d'exercice, corrige leur illisibilité sur fond clair),
+  `CriticalCta`, `EmptyStateCard`.
+- `GlassOrbButton` réécrit : orbe circulaire en matière (dégradé radial + arc de
+  progression), sans flou de fond - remplace l'ancienne barre glassmorphism.
+- Écran de connexion (`login_screen.dart`) entièrement reconstruit sur la maquette :
+  symbole "A" gravé barré du filet d'or, `MarbleCard` d'accroche, bouton Google sobre -
+  remplace l'ancien design "Temple Digital" (glassmorphism bleu générique).
+- Page d'accueil : logo intégré au bandeau, triptyque de statistiques chiffrées
+  (séances / volume / records) fidèle à la maquette, remplaçant les cartes de navigation
+  qui n'y figuraient pas.
+- Écran de session d'entraînement : en-tête d'exercice (badge équipement, filet d'or),
+  puces muscle/type en pastilles teintées, encart "dernière séance" en texte simple
+  (RG-005), formulaire de série avec bouton d'ajout pleine largeur.
+- Assets de marque sous `assets/branding/` (symbole, variantes monochromes par thème).
+
+### Corrigé
+
+- `RayonSweep` débordait de son cadre circulaire sur `GlassOrbButton` (le `ShaderMask` en
+  `BlendMode.plus` ignore l'alpha du fond hors de la forme visible de l'enfant) : le reflet
+  formait un carré visible aux quatre coins de l'orbe au lieu de rester dans le cercle.
+  Corrigé par un `ClipOval` autour de l'orbe uniquement (les autres usages, sur des formes
+  rectangulaires, n'étaient pas concernés).
+- Recyclage de vignette d'exercice par position (`ListView.builder` sans clé stable) :
+  `ExerciseImageWidget`/`ExerciseImageThumbnail` gardaient l'image de l'exercice précédent
+  après recyclage tant qu'aucun `didUpdateWidget` ne relançait le chargement.
+
+### Modifié
+
+- `WorkoutSessionScreen` : le paramètre optionnel `statisticsService` est remplacé par
+  `workoutService` (injection du service qui alimente désormais l'encart "dernière séance").
+- Version applicative (`pubspec.yaml`) : `1.1.0+2` → `1.2.0+3`.
+
+---
+
 ## [1.1.0] - 2026-08-05 Jalon V2 partielle officialisé
 
 <!-- Pourquoi cette entrée : entre le 17 février et le 3 juin 2026, plusieurs livraisons

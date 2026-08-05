@@ -19,7 +19,9 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # Jalon 1.1.0 (2026-08-05) : aligne le numero de version sur l'etat reel du code,
 # qui livrait deja depuis fevrier 2026 des fonctionnalites V2 (statistiques, records
 # personnels, heatmap, bibliotheque d'exercices a images hybrides) sans bump de version.
-version: 1.1.0+2
+# Jalon 1.2.0 (2026-08-06) : refonte visuelle complete "Marbre & Lumiere" (theme,
+# typographie, composants signature, ecrans accueil/connexion/session) - voir CHANGELOG.md.
+version: 1.2.0+3
 
 environment:
   sdk: ^3.11.0
