@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Apollon est une application Flutter de suivi de musculation (strength-training). L'utilisateur enregistre ses seances de salle (exercices, series reps x poids), consulte son historique et visualise sa progression (statistiques, records personnels, heatmap). Le backend est Firebase (Authentification Google, Cloud Firestore avec persistance offline, Firebase Storage). La gestion d'etat repose sur `package:provider` + `ChangeNotifier`. L'UI suit un design system "Liquid Glass" (glassmorphism, Material 3, coins arrondis 24px, themes Dark/Light, cible 60fps). Le code shippe correspond au MVP V1 (version `pubspec.yaml` 1.0.0+1, jalon documente 1.0.1) et inclut deja des fonctionnalites V2 (statistiques, records personnels, bibliotheque d'exercices a images hybrides).
+Apollon est une application Flutter de suivi de musculation (strength-training). L'utilisateur enregistre ses seances de salle (exercices, series reps x poids), consulte son historique et visualise sa progression (statistiques, records personnels, heatmap). Le backend est Firebase (Authentification Google, Cloud Firestore avec persistance offline, Firebase Storage). La gestion d'etat repose sur `package:provider` + `ChangeNotifier`. L'UI suit un design system "Liquid Glass" (glassmorphism, Material 3, coins arrondis 24px, themes Dark/Light, cible 60fps). Le code shippe correspond au MVP V1 (version `pubspec.yaml` 1.1.0+2, jalon documente 1.1.0) et inclut deja des fonctionnalites V2 (statistiques, records personnels, bibliotheque d'exercices a images hybrides).
 
 ## Commandes essentielles
 
@@ -30,7 +30,7 @@ firebase deploy --only storage            # storage.rules
 firebase deploy                           # firestore (rules+indexes) + storage
 
 # Scripts d'import du catalogue (Node.js, dossier scripts/)
-cd scripts; npm install; npm run seed          # -> seed_exercises_node.js
+cd scripts; npm install; npm run seed          # -> import_exercise_library.js
 cd scripts; npm install; npm run import-library # -> import_exercise_library.js
 ```
 
@@ -75,10 +75,7 @@ lib/
       exercise_image_downloader.dart # Telecharge SVG depuis api.workoutapi.com (http), stocke dans app docs dir, manifest shared_preferences
 
     theme/                          # Design system (barrel: theme.dart)
-      app_colors.dart               # AppColors (ColorScheme.fromSeed, seed 0xFF1E88E5, accents or, palettes mesh-gradient)
-      app_typography.dart           # AppTypography (Google Fonts: Cinzel titres, Raleway corps, JetBrains Mono nombres)
-      app_decorations.dart          # AppDecorations (BoxDecorations glassmorphism, blur ImageFilters)
-      app_theme.dart                # AppTheme "Design Moderne Epure Bleu" V2 (Inter, primaryBlue 0xFF4A90E2), lightTheme/darkTheme + tokens spacing/radius
+      app_theme.dart                # AppTheme "Design Moderne Epure Bleu" V2 (Inter, primaryBlue 0xFF4A90E2), lightTheme/darkTheme + tokens spacing/radius, palettes mesh-gradient (lightMeshGradient/darkMeshGradient)
 
     utils/
       page_transitions.dart         # AppPageRoute (slideUp/slideRight/fade/scale/fadeSlide), enum AppPageTransitionType
@@ -95,7 +92,6 @@ lib/
       mesh_gradient_background.dart # MeshGradientBackground (mesh 4 couleurs anime)
       floating_workout_timer.dart   # FloatingWorkoutTimer (timer global type Dynamic Island, lit WorkoutProvider)
       marble_card.dart              # MarbleCard (carte texture marbre)
-      modern_circular_progress.dart # CircularProgressCard
       pr_celebration_overlay.dart   # showPrCelebration() + popup confetti (package:confetti)
 
   screens/
@@ -174,9 +170,17 @@ Fichiers de configuration :
 - Index : `firestore.indexes.json` - un index composite (queryScope `COLLECTION`) sur la sous-collection `workouts` : `status` ASC + `createdAt` DESC. Il sert la requete paginee `getUserWorkouts` (`workout_service.dart`) ; le code n'utilise aucune requete `collectionGroup()`.
 - Storage (`storage.rules`) : `exercise_images/{imageId}` lecture publique / ecriture authentifiee ; `user_uploads/{userId}/{allPaths=**}` proprietaire, ecriture < 5 Mo ; deny all par defaut.
 
-Scripts d'import (dossier `scripts/`, Node.js + firebase-admin) : `npm run seed` (seed_exercises_node.js) et `npm run import-library` (import_exercise_library.js). L'auth se fait via `serviceAccountKey.json` (ne JAMAIS committer cette cle).
+Scripts d'import (dossier `scripts/`, Node.js + firebase-admin) : `npm run seed` et `npm run import-library` pointent tous deux vers `import_exercise_library.js`, qui importe le catalogue d'exercices dans `exercises_library`. Les scripts divergents (seed_exercises_node.js, seed_exercises.dart, seed_exercises_standalone.dart), qui ecrivaient a tort dans la collection `exercises`, ont ete archives dans `scripts/_archive/`. L'auth se fait via `serviceAccountKey.json` (ne JAMAIS committer cette cle).
 
-Divergence connue : le rule definit le catalogue public `exercises_library`, mais `seed_exercises_node.js` ecrit dans une collection nommee `exercises`. Le code applicatif lit `exercises_library`.
+Fichiers du dossier `scripts/` (scripts reels actifs) :
+- `download_missing_images.cjs` - Telecharge les images d'exercices manquantes depuis l'API distante en batch.
+- `download_top20_images.dart` - Script Dart pour pre-telecharger les 20 premiers exercices preseedees (assets/exercise_images/).
+- `extract_top20_ids.dart` - Extrait les IDs des 20 exercices les plus populaires depuis le catalogue.
+- `import_exercise_library.js` - (Principal) Importe le catalogue d'exercices JSON dans Firestore collection `exercises_library` via Admin SDK. Pointe par `npm run seed` et `npm run import-library`.
+- `import_workout_api_exercises.dart` - Importe des exercices depuis l'API distante vers le catalogue local.
+- `package.json` - Configuration npm ; definit les scripts `seed` et `import-library`.
+- `README-SEED.md` - Documentation des scripts d'import.
+- `manifest.live-ids.bak.json` - Backup du manifeste des IDs d'exercices en live.
 
 ## Conventions
 
@@ -184,7 +188,7 @@ Divergence connue : le rule definit le catalogue public `exercises_library`, mai
 - ZERO emoji dans le code, les messages de commit et les documents techniques (dont ce fichier).
 - Commentaires en francais, identifiants (classes, methodes, variables) en anglais.
 - Design "Liquid Glass" : glassmorphism, coins arrondis 24px, themes Dark et Light, cible de fluidite 60fps.
-- Attention : deux systemes de theme coexistent dans `lib/core/theme/`. Le systeme legacy "Liquid Glass" (`AppColors` + `AppTypography` Cinzel/Raleway/JetBrains Mono + `AppDecorations`, seed `0xFF1E88E5`) ET le plus recent `AppTheme` (`app_theme.dart`, "Design Moderne Epure Bleu" V2, police Inter, `0xFF4A90E2`). `MaterialApp` consomme `AppTheme` ; le barrel `theme.dart` exporte les deux, ce qui peut produire un styling incoherent.
+- Le systeme de theme legacy "Liquid Glass" (`AppColors` seed `0xFF1E88E5`, `AppTypography` Cinzel/Raleway/JetBrains Mono, `AppDecorations`) a ete decommissionne : ces trois fichiers (`app_colors.dart`, `app_typography.dart`, `app_decorations.dart`) sont supprimes de `lib/core/theme/`, sans usage restant hors d'eux-memes au moment du retrait. Le seul systeme de theme desormais present est `AppTheme` (`app_theme.dart`, "Design Moderne Epure Bleu" V2, police Inter, seed `0xFF4A90E2`), qui porte aussi les palettes mesh-gradient (`lightMeshGradient`/`darkMeshGradient`, migrees depuis `AppColors`). Le barrel `theme.dart` n'exporte plus que `app_theme.dart`.
 
 ## Regles metier
 

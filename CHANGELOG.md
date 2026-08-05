@@ -7,6 +7,45 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.1.0] - 2026-08-05 Jalon V2 partielle officialisé
+
+<!-- Pourquoi cette entrée : entre le 17 février et le 3 juin 2026, plusieurs livraisons
+     (EPIC-V2-1, V2.2, correctifs sécurité/robustesse/perf) ont été committées sans bump de
+     version associé (pubspec.yaml restait à 1.0.0+1, cf. commit 89fbb88 le 2026-06-03). Ce
+     jalon 1.1.0 aligne enfin le numéro de version sur l'état réel du code et consolide ces
+     livraisons jusque-là non versionnées. -->
+
+### Modifié
+
+- Version applicative (`pubspec.yaml`) alignée sur l'état réel du code livré : `1.0.0+1` → `1.1.0+2`.
+- Documentation projet (`STATUS.md`, `CLAUDE.md`) mise à jour pour refléter la V2 partiellement
+  livrée (statistiques, records personnels, heatmap, bibliothèque d'exercices à images hybrides)
+  au lieu du statut "en planification" qui ne correspondait plus au code.
+
+### Consolidé (livraisons du 2026-02-19 au 2026-06-03, sans bump de version à l'époque)
+
+- **2026-02-19 - V2.2 PR celebration** (commit `b0f82a9`) : popup de célébration lors d'un nouveau
+  record personnel (`pr_celebration_overlay.dart`, `package:confetti`), `secrets.dart` placé sous
+  gitignore, nettoyage d'architecture.
+- **2026-02-19 - Sécurité** (commit `143a827`) : retrait des clés Firebase codées en dur du script
+  de seed.
+- **2026-03-17** (commit `bf9ab5e`) : ajout du brief de direction artistique
+  (`docs/DIRECTION-ARTISTIQUE-BRIEF.md`).
+- **2026-03-29** (commit `5ce09d4`) : versions du SDK Android figées en dur, `pubspec.lock` mis à
+  jour.
+- **2026-06-03** (commit `45e09c0`) : ajout d'images d'exercices manquantes (SVG) et script de
+  téléchargement associé.
+- **2026-06-03 - Correctifs sécurité, robustesse, perf et tests** (commit `89fbb88`, suite de revue
+  de code) : écriture client bloquée sur `exercises_library`/`exercise_images` (règles
+  Firestore/Storage), validation des champs immuables (`personal_records`, `users`), parsing du
+  poids tolérant à la virgule décimale FR, casts null-safe sur `Workout`/`WorkoutExercise.
+  fromFirestore`, `completeWorkout` rendu atomique (try/finally, draft intact en cas d'échec),
+  garde-fou PR sur le poids du corps, calcul de streaks en jours calendaires dédupliqué, reprise de
+  draft > 24h purgé au démarrage (RG-004/EC-002), réduction des rebuilds par seconde
+  (Selector/Consumer ciblés), 5 tests unitaires `StatisticsService` ajoutés (suite complète 59/59).
+
+---
+
 ## [1.0.1] - 2026-02-17 🐛 Correctifs Historique
 
 ### 🐛 Corrigé
@@ -33,6 +72,24 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 - **Impact:** ✅ UX fluide, séance disparaît immédiatement
 
 **Détails complets:** Voir [BUGFIX-HISTORIQUE.md](BUGFIX-HISTORIQUE.md)
+
+### Ajouté (même jour - commit 65e1146 "V2.1 Stats & Calendar & Neumorphism")
+
+<!-- Complément ajouté le 2026-08-05 : ce commit était déjà committé le 17 février 2026, le
+     même jour que les correctifs ci-dessus, mais n'apparaissait pas dans cette entrée du
+     changelog d'origine. -->
+
+EPIC-V2-1 (Statistiques & Graphiques) livré et committé le 17 février 2026, en même temps que
+les correctifs ci-dessus :
+
+- `StatisticsScreen` - dashboard graphes (EPIC-V2-1)
+- `PersonalRecordsScreen` - liste des records personnels, tri date/poids
+- `ExerciseProgressChart` - graphe de progression par exercice (fl_chart)
+- `VolumeBarChart` - graphe en barres du volume d'entraînement
+- `WorkoutHeatmapCalendar` - calendrier heatmap des séances (flutter_heatmap_calendar)
+- `StatisticsService` - calcul des statistiques et graphes, streaks, détection et sauvegarde
+  automatique des nouveaux records (`detectAndSaveNewPR`)
+- Modèles `Statistics` (+ `ProgressDataPoint`, `VolumeDataPoint`) et `PersonalRecord`
 
 ---
 
@@ -253,4 +310,4 @@ Format: `MAJOR.MINOR.PATCH`
 ---
 
 **Maintenu par:** apollon-project-assistant  
-**Dernière mise à jour:** 17 février 2026
+**Dernière mise à jour:** 5 août 2026

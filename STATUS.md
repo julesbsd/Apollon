@@ -2,8 +2,13 @@
 
 Vue d'ensemble rapide de l'état du projet Apollon.
 
-**Dernière mise à jour:** 17 février 2026 23:45  
-**Version actuelle:** 1.0.1 (MVP V1 + Bugfixes) ✅
+**Dernière mise à jour:** 5 août 2026  
+**Version actuelle:** 1.1.0 (MVP V1 + V2 partielle)
+
+<!-- Jalon 1.1.0 : aligne ce document sur l'état réel du code au 2026-08-05. Le jalon 1.0.1
+     du 17 février 2026 restait figé depuis 6 mois alors que plusieurs livraisons (EPIC-V2-1,
+     V2.2, correctifs sécurité/robustesse/perf) avaient déjà été committées sans mise à jour
+     de ce fichier. Voir CHANGELOG.md [1.1.0] pour le détail des 7 commits consolidés. -->
 
 ---
 
@@ -77,6 +82,25 @@ Vue d'ensemble rapide de l'état du projet Apollon.
 - UX fluide, disparition immédiate
 
 **Détails:** [BUGFIX-HISTORIQUE.md](BUGFIX-HISTORIQUE.md)
+
+### Version 1.1.0 (5 août 2026) - jalon officialisant les livraisons post-1.0.1
+
+<!-- Ces 7 commits ont été committés entre le 19 février et le 3 juin 2026 sans qu'aucun ne
+     déclenche de mise à jour de version ni de ce fichier. Ils sont listés ici pour que
+     STATUS.md reflète enfin l'historique réel du dépôt (voir aussi CHANGELOG.md [1.1.0]). -->
+
+- **2026-02-19** `b0f82a9` - V2.2 : popup de célébration PR (confetti), `secrets.dart` gitignored,
+  nettoyage d'architecture.
+- **2026-02-19** `fff5045` - commit de test (1 ligne, `lib/main.dart`).
+- **2026-02-19** `143a827` - sécurité : retrait des clés Firebase codées en dur du script de seed.
+- **2026-03-17** `bf9ab5e` - ajout du brief de direction artistique (docs/DIRECTION-ARTISTIQUE-BRIEF).
+- **2026-03-29** `5ce09d4` - fix : versions du SDK Android figées en dur, `pubspec.lock` mis à jour.
+- **2026-06-03** `45e09c0` - ajout d'images d'exercices manquantes (SVG) + script de téléchargement.
+- **2026-06-03** `89fbb88` - correctifs sécurité, robustesse, perf et tests (suite de revue de
+  code) : règles Firestore/Storage durcies sur `exercises_library`/`exercise_images`, parsing
+  poids tolérant à la virgule décimale FR, casts null-safe sur `fromFirestore`, `completeWorkout`
+  atomique, reprise de draft > 24h (RG-004/EC-002), rebuilds réduits (Selector/Consumer ciblés),
+  5 tests `StatisticsService` ajoutés (suite complète 59/59).
 
 ---
 
@@ -154,40 +178,71 @@ Tests Providers:  ░░░░░░░░░░░░░░░░░░░░�
 - [x] Firestore persistence offline
 - [x] Security Rules déployées
 
+### V2 (partielle, livrée entre le 17 février et le 3 juin 2026)
+
+<!-- Corrige la contradiction constatée au checkup 2026-08-05 : ces fonctionnalités étaient
+     déjà codées, testées et committées alors que la section Roadmap ci-dessous les indiquait
+     encore "en planification". -->
+
+#### Statistiques & Records (EPIC-V2-1, commit `65e1146`)
+- [x] `StatisticsScreen` - dashboard graphes
+- [x] `PersonalRecordsScreen` - liste des records personnels, tri date/poids
+- [x] `ExerciseProgressChart` - graphe de progression par exercice (fl_chart)
+- [x] `VolumeBarChart` - graphe en barres du volume d'entraînement
+- [x] `WorkoutHeatmapCalendar` - calendrier heatmap des séances
+- [x] `StatisticsService` - calcul statistiques, streaks, détection auto des PR
+
+#### Bibliothèque d'exercices à images hybrides (livrée progressivement, hors roadmap initiale)
+- [x] `ExerciseLibraryRepository` - stratégie image triple (asset préseedé / local / distant)
+- [x] `ExerciseImageDownloader` - téléchargement SVG + manifest local
+- [x] 94/94 images du catalogue top-20 bundlées en assets
+
+#### PR Celebration (V2.2, commit `b0f82a9`)
+- [x] Popup de célébration animée (confetti) au nouveau record personnel
+
 ---
 
 ## 🔮 ROADMAP V2
 
-### En Planification (~127h, 6-9 mois)
+### État réel au 5 août 2026 (V2 partiellement livrée, pas "en planification")
 
-#### Top 5 Priorités
+<!-- Cette section affichait "En Planification (~127h, 6-9 mois)" pour l'ensemble de la V2,
+     y compris pour des éléments déjà codés, testés et committés depuis février 2026 (voir
+     section "FONCTIONNALITÉS LIVRÉES" ci-dessus et CHANGELOG.md [1.1.0]). Corrigé pour
+     distinguer ce qui est livré de ce qui reste réellement à faire. -->
 
-1. **📊 Statistiques & Graphiques** (18h) - Sprint 1-2
-   - Graphiques progression
-   - Records personnels
-   - Calendrier visuel
+#### Livré
 
-2. **🏆 Achievements & Gamification** (12h) - Sprint 2-3
+1. **Statistiques & Graphiques** (EPIC-V2-1, commit `65e1146` du 2026-02-17) - **TERMINÉ**
+   - Graphiques progression, records personnels, calendrier heatmap visuel
+2. **Bibliothèque d'exercices à images hybrides** (hors roadmap initiale) - **TERMINÉ**
+   - Stratégie image triple asset/local/distant, 94/94 images top-20 bundlées
+3. **PR Celebration** (V2.2, commit `b0f82a9` du 2026-02-19) - **TERMINÉ**
+   - Popup confetti au nouveau record personnel
+
+#### Reste en planification (non démarré, effort non révisé depuis le backlog d'origine)
+
+4. **Achievements & Gamification** (12h)
    - Badges accomplissements
    - Streak tracking
    - Challenges personnels
 
-3. **🚶 Podomètre Quotidien** (14h) - Sprint 3-4
+5. **Podomètre Quotidien** (14h)
    - Tracking pas automatique
    - Integration santé
    - Calendrier mensuel
 
-4. **⏱️ Timer Avancé & Repos** (8h) - Sprint 3
+6. **Timer Avancé & Repos** (8h)
    - Timer repos entre séries
    - Notifications
    - Historique temps repos
 
-5. **📋 Templates Séances** (10h) - Sprint 4
+7. **Templates Séances** (10h)
    - Créer templates réutilisables
    - Démarrer séance depuis template
    - Bibliothèque templates
 
-**Voir:** [Backlog V2 Roadmap](_byan-output/bmb-creations/Backlog-V2-Roadmap.md) pour détails complets
+**Voir:** [Backlog V2 Roadmap](_byan-output/bmb-creations/Backlog-V2-Roadmap.md) pour détails complets (roadmap d'origine, partiellement obsolète depuis les livraisons ci-dessus)
 
 ---
 
@@ -219,7 +274,11 @@ Tests Providers:  ░░░░░░░░░░░░░░░░░░░░�
 
 ### V2 Sprint 1 (2 semaines)
 
-- [ ] EPIC-V2-1: Statistiques & Graphiques (18h)
+<!-- EPIC-V2-1 était encore listé ici comme non démarré alors qu'il est livré depuis le
+     2026-02-17 (voir section "FONCTIONNALITÉS LIVRÉES" > V2). Coché pour lever la
+     contradiction ; seuls les tests widgets et le profiling restent réellement à faire. -->
+
+- [x] EPIC-V2-1: Statistiques & Graphiques (18h) - livré le 2026-02-17 (commit 65e1146)
 - [ ] Tests widgets avec mocks Firebase (3h)
 - [ ] Profiling performance réel (1h)
 
@@ -282,13 +341,13 @@ APOLLON MVP V1 - DASHBOARD
 │ Material 3 + Liquid Glass  Custom       ✅      │
 └─────────────────────────────────────────────────┘
 
-🚀 STATUS: PRODUCTION-READY (Bugs corrigés)
-📅 RELEASE: 17 février 2026
-🎉 VERSION: 1.0.1 MVP V1 + BUGFIXES
+STATUS: PRODUCTION-READY (MVP V1 + V2 partielle)
+RELEASE: 5 août 2026
+VERSION: 1.1.0 (STATS, RECORDS, HEATMAP, IMAGES HYBRIDES)
 ```
 
 ---
 
 **Généré automatiquement**  
 **Source:** apollon-project-assistant  
-**Dernière sync:** 17 février 2026 23:45
+**Dernière sync:** 5 août 2026

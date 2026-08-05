@@ -16,7 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+# Jalon 1.1.0 (2026-08-05) : aligne le numero de version sur l'etat reel du code,
+# qui livrait deja depuis fevrier 2026 des fonctionnalites V2 (statistiques, records
+# personnels, heatmap, bibliotheque d'exercices a images hybrides) sans bump de version.
+version: 1.1.0+2
 
 environment:
   sdk: ^3.11.0
