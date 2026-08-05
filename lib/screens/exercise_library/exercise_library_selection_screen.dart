@@ -4,6 +4,7 @@ import '../../core/models/exercise_library.dart';
 import '../../core/providers/exercise_library_provider.dart';
 import 'widgets/exercise_image_widget.dart';
 import '../../core/widgets/widgets.dart';
+import '../../core/theme/app_theme.dart';
 import '../../core/utils/page_transitions.dart';
 import '../workout/workout_session_screen.dart';
 
@@ -201,16 +202,30 @@ class _ExerciseLibrarySelectionScreenState
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final onBackground = isDark ? AppTheme.darkOnBackground : AppTheme.lightOnBackground;
 
     return Scaffold(
-      appBar: AppBar(
-        // title: const Text('Sélection d\'exercice'),
-        backgroundColor: colorScheme.surface.withValues(alpha: 0.8),
-        elevation: 0,
-      ),
+      // Pas d'AppBar Material generique : titre porte par le corps, en
+      // Cinzel (spec maquette "Ecran B - Bibliotheque d'exercices").
       body: AppBackground(
-        child: Column(
-          children: [
+        child: SafeArea(
+          child: Column(
+            children: [
+            // Fleche retour + titre Cinzel.
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 16, 0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back, color: onBackground),
+                    onPressed: () => Navigator.of(context).maybePop(),
+                  ),
+                  const SizedBox(width: 4),
+                  Text('Choisir un exercice', style: AppTheme.screenTitle(onBackground).copyWith(fontSize: 20)),
+                ],
+              ),
+            ),
             // Barre de recherche
             Padding(
               padding: const EdgeInsets.all(16),
@@ -222,14 +237,18 @@ class _ExerciseLibrarySelectionScreenState
               ),
             ),
 
-            // Tabs par groupe musculaire
+            // Tabs par groupe musculaire : filet d'or 2px sous l'onglet actif,
+            // libelle 700 + encre si actif, sinon 600 + muted (spec E6-d).
             TabBar(
               controller: _tabController,
               isScrollable: true,
               tabAlignment: TabAlignment.start,
-              labelColor: colorScheme.primary,
+              labelColor: colorScheme.onSurface,
               unselectedLabelColor: colorScheme.onSurface.withValues(alpha: 0.6),
-              indicatorColor: colorScheme.primary,
+              labelStyle: const TextStyle(fontWeight: FontWeight.w700),
+              unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
+              indicatorColor: AppTheme.accentGoldLine,
+              indicatorWeight: 2,
               tabs: _muscleGroups.map((group) => Tab(text: group)).toList(),
             ),
 
@@ -247,7 +266,8 @@ class _ExerciseLibrarySelectionScreenState
             Expanded(
               child: _buildExerciseList(),
             ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -273,13 +293,11 @@ class _ExerciseLibrarySelectionScreenState
                 final isSelected = provider.selectedCategoryCodes.isEmpty;
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    label: const Text('Tous'),
+                  child: _buildFilterChip(
+                    colorScheme,
+                    label: 'Tous',
                     selected: isSelected,
-                    onSelected: (_) => provider.filterByCategoryGroup(const []),
-                    backgroundColor: colorScheme.surface,
-                    selectedColor: colorScheme.primary.withValues(alpha: 0.2),
-                    checkmarkColor: colorScheme.primary,
+                    onSelected: () => provider.filterByCategoryGroup(const []),
                   ),
                 );
               }
@@ -290,13 +308,11 @@ class _ExerciseLibrarySelectionScreenState
 
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
-                child: FilterChip(
-                  label: Text(name),
+                child: _buildFilterChip(
+                  colorScheme,
+                  label: name,
                   selected: isSelected,
-                  onSelected: (_) => _onCategoryToggled(provider, code),
-                  backgroundColor: colorScheme.surface,
-                  selectedColor: colorScheme.primary.withValues(alpha: 0.2),
-                  checkmarkColor: colorScheme.primary,
+                  onSelected: () => _onCategoryToggled(provider, code),
                 ),
               );
             },
@@ -326,13 +342,11 @@ class _ExerciseLibrarySelectionScreenState
                 final isSelected = provider.selectedTypeCodes.isEmpty;
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    label: const Text('Tous types'),
+                  child: _buildFilterChip(
+                    colorScheme,
+                    label: 'Tous types',
                     selected: isSelected,
-                    onSelected: (_) => provider.filterByTypeGroup(const []),
-                    backgroundColor: colorScheme.surface,
-                    selectedColor: colorScheme.primary.withValues(alpha: 0.2),
-                    checkmarkColor: colorScheme.primary,
+                    onSelected: () => provider.filterByTypeGroup(const []),
                   ),
                 );
               }
@@ -343,19 +357,47 @@ class _ExerciseLibrarySelectionScreenState
 
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
-                child: FilterChip(
-                  label: Text(name),
+                child: _buildFilterChip(
+                  colorScheme,
+                  label: name,
                   selected: isSelected,
-                  onSelected: (_) => _onTypeToggled(provider, code),
-                  backgroundColor: colorScheme.surface,
-                  selectedColor: colorScheme.primary.withValues(alpha: 0.2),
-                  checkmarkColor: colorScheme.primary,
+                  onSelected: () => _onTypeToggled(provider, code),
                 ),
               );
             },
           ),
         );
       },
+    );
+  }
+
+  /// Puce de filtre selon la spec E6-d : au repos, fond transparent + bordure
+  /// encre 20% ; selectionnee, aplat primaryBlue plein SANS coche (showCheckmark
+  /// false) et libelle blanc. Factorisee pour categories et types.
+  Widget _buildFilterChip(
+    ColorScheme colorScheme, {
+    required String label,
+    required bool selected,
+    required VoidCallback onSelected,
+  }) {
+    return FilterChip(
+      label: Text(
+        label,
+        style: TextStyle(
+          color: selected ? Colors.white : colorScheme.onSurface,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      selected: selected,
+      onSelected: (_) => onSelected(),
+      showCheckmark: false,
+      backgroundColor: Colors.transparent,
+      selectedColor: AppTheme.primaryBlue,
+      side: BorderSide(
+        color: selected
+            ? Colors.transparent
+            : colorScheme.onSurface.withValues(alpha: 0.2),
+      ),
     );
   }
 
@@ -443,43 +485,22 @@ class _ExerciseLibrarySelectionScreenState
         // actif) de "aucun résultat pour ces filtres" (avec action de reset).
         if (provider.exercises.isEmpty) {
           final hasFilters = provider.hasActiveFilters;
+          // Cartouche d'etat vide (spec E6-g) : filet d'or, Cinzel/Manrope,
+          // bordure or 32%. Le lien de reinitialisation n'apparait que si un
+          // filtre est actif.
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.fitness_center,
-                  size: 64,
-                  color: colorScheme.onSurface.withValues(alpha: 0.3),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  hasFilters ? 'Aucun exercice ne correspond' : 'Aucun exercice trouvé',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  hasFilters
-                      ? 'Essayez de modifier ou de réinitialiser vos filtres'
-                      : 'Le catalogue est vide pour le moment',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: colorScheme.onSurface.withValues(alpha: 0.6),
-                  ),
-                ),
-                if (hasFilters) ...[
-                  const SizedBox(height: 16),
-                  ElevatedButton.icon(
-                    onPressed: _onResetFilters,
-                    icon: const Icon(Icons.filter_alt_off),
-                    label: const Text('Réinitialiser les filtres'),
-                  ),
-                ],
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: EmptyStateCard(
+                title: hasFilters
+                    ? 'Aucun exercice ne correspond'
+                    : 'Aucun exercice trouvé',
+                message: hasFilters
+                    ? 'Essayez de modifier ou de réinitialiser vos filtres'
+                    : 'Le catalogue est vide pour le moment',
+                linkLabel: hasFilters ? 'Réinitialiser les filtres' : null,
+                onLinkTap: hasFilters ? _onResetFilters : null,
+              ),
             ),
           );
         }
@@ -545,12 +566,26 @@ class _ExerciseLibrarySelectionScreenState
                   ),
                   const SizedBox(height: 4),
 
-                  // Muscles primaires
-                  Text(
-                    exercise.primaryMusclesText,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurface.withValues(alpha: 0.7),
+                  // Muscles primaires, precedes de la pastille du groupe
+                  // (carree 7px, radius 2, teinte du groupe) - jamais en aplat.
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      MuscleGroupDot(
+                        muscleCode: exercise.primaryMuscles.isNotEmpty
+                            ? exercise.primaryMuscles.first.code
+                            : null,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          exercise.primaryMusclesText,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurface.withValues(alpha: 0.7),
+                              ),
                         ),
+                      ),
+                    ],
                   ),
 
                   // Catégorie

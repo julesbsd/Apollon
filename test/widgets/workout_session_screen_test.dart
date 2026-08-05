@@ -41,7 +41,7 @@ Widget buildTestWidget(WorkoutProvider workoutProvider, ExerciseLibrary exercise
     child: MaterialApp(
       home: WorkoutSessionScreen(
         exercise: exercise,
-        statisticsService: MockStatisticsService(),
+        workoutService: mockWorkoutService,
       ),
     ),
   );

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
-/// Bouton moderne Material 3 avec animations
-/// Supporte Dark et Light mode
-/// Arrondis 24px selon Design System Apollon
+/// Bouton moderne Material 3 avec animations - direction "Marbre & Lumiere".
+/// Rayon [AppTheme.radiusL] (12px, resserre depuis les 24px V2), ombre a 2
+/// niveaux [AppTheme.shadowElev1]/[shadowElev2] declinee par luminosite,
+/// libelle via [AppTheme.buttonLabel] (Manrope 700/15/+0.04em).
 class AppButton extends StatefulWidget {
   final String text;
   final VoidCallback? onPressed;
@@ -85,29 +87,14 @@ class _AppButtonState extends State<AppButton>
         backgroundColor = colorScheme.primary;
         textColor = colorScheme.onPrimary;
         borderColor = null;
-        shadows = !_isPressed
-            ? [
-                BoxShadow(
-                  color: colorScheme.primary.withValues(alpha: 0.4),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                ),
-              ]
-            : [];
+        // Presse : ombre elev2 -> elev1 (spec AppButton).
+        shadows = !_isPressed ? AppTheme.shadowElev2(theme.brightness) : AppTheme.shadowElev1(theme.brightness);
         break;
       case AppButtonVariant.secondary:
         backgroundColor = colorScheme.secondaryContainer;
         textColor = colorScheme.onSecondaryContainer;
         borderColor = null;
-        shadows = !_isPressed
-            ? [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ]
-            : [];
+        shadows = !_isPressed ? AppTheme.shadowElev1(theme.brightness) : [];
         break;
       case AppButtonVariant.outlined:
         backgroundColor = Colors.transparent;
@@ -152,7 +139,7 @@ class _AppButtonState extends State<AppButton>
       duration: const Duration(milliseconds: 150),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppTheme.radiusL),
         border: borderColor != null
             ? Border.all(color: borderColor, width: 2)
             : null,
@@ -162,7 +149,7 @@ class _AppButtonState extends State<AppButton>
         color: Colors.transparent,
         child: InkWell(
           onTap: widget.isLoading ? null : widget.onPressed,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(AppTheme.radiusL),
           child: Padding(
             padding:
                 widget.padding ??
@@ -200,14 +187,7 @@ class _AppButtonState extends State<AppButton>
         children: [
           Icon(widget.icon, color: textColor, size: 24),
           const SizedBox(width: 12),
-          Text(
-            widget.text,
-            style: TextStyle(
-              color: textColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          Text(widget.text, style: AppTheme.buttonLabel(textColor)),
         ],
       );
     }
@@ -215,11 +195,7 @@ class _AppButtonState extends State<AppButton>
     return Text(
       widget.text,
       textAlign: TextAlign.center,
-      style: TextStyle(
-        color: textColor,
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-      ),
+      style: AppTheme.buttonLabel(textColor),
     );
   }
 }

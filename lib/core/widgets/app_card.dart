@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
-/// Card moderne Material 3 avec animations
-/// Supporte Dark et Light mode
-/// Arrondis 24px selon Design System Apollon
+/// Card moderne Material 3 - direction "Marbre & Lumiere".
+/// Rayon [AppTheme.radiusXL] (14px, resserre depuis 24px V2), bordure
+/// [AppTheme.outlineSubtleLight]/[outlineSubtleDark] via colorScheme.outline,
+/// ombre [AppTheme.shadowElev1].
 class AppCard extends StatefulWidget {
   final Widget child;
   final EdgeInsets? padding;
@@ -97,23 +99,23 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     }
 
     final elevation = widget.elevation ?? defaultElevation;
-    final shadows = elevation > 0 && !_isPressed
-        ? [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: elevation * 3,
-              offset: Offset(0, elevation),
-            ),
-          ]
-        : <BoxShadow>[];
+    // Ombre a 2 niveaux du theme : elev1 pour la carte au repos (elevation
+    // standard/outlined), elev2 pour la variante elevated. Presse : retour a
+    // elev1 (spec AppCard "Presse : surfaceVariant, 120ms").
+    final shadows = elevation <= 0 || _isPressed
+        ? <BoxShadow>[]
+        : (elevation >= 4
+            ? AppTheme.shadowElev2(theme.brightness)
+            : AppTheme.shadowElev1(theme.brightness));
+    final effectiveBackground = _isPressed ? colorScheme.surfaceContainerHighest : backgroundColor;
 
     final card = AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(24),
+        color: effectiveBackground,
+        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
         border: borderColor != null
             ? Border.all(color: borderColor, width: 1.5)
             : null,

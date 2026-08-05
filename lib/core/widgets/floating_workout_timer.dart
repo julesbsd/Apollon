@@ -1,16 +1,22 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/workout_provider.dart';
+import '../theme/app_theme.dart';
 import 'pr_celebration_overlay.dart';
 import '../../app.dart';
 
 /// Widget flottant affichant le chronomètre de séance et le bouton stop
-/// 
+///
 /// Fonctionnalités :
 /// - Affichage global sur toute l'application pendant une séance active
-/// - Design compact style "Dynamic Island" avec effet de flou
-/// - Chronomètre en temps réel
+/// - Design opaque (aucun flou / BackdropFilter) : fond plein
+///   `lightOnBackground` en theme clair, `darkSurfaceVariant` avec filet
+///   d'or `accentGoldLine` a 28% en theme sombre.
+/// - Chronomètre en temps réel, chiffres JetBrains Mono 800/19
+/// - Pastille d'or en respiration continue (boucle assumee, hors regle
+///   RayonSweep qui est reservee au passage unique de la celebration PR)
+/// - Libelle d'etat a droite (EN SEANCE / REPOS)
 /// - Bouton stop avec confirmation avant de terminer
 class FloatingWorkoutTimer extends StatefulWidget {
   const FloatingWorkoutTimer({super.key});
@@ -19,8 +25,32 @@ class FloatingWorkoutTimer extends StatefulWidget {
   State<FloatingWorkoutTimer> createState() => _FloatingWorkoutTimerState();
 }
 
-class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer> {
+class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer>
+    with SingleTickerProviderStateMixin {
   bool _isDialogShowing = false;
+  late final AnimationController _pulseController;
+  late final Animation<double> _pulseOpacity;
+
+  @override
+  void initState() {
+    super.initState();
+    // Pastille d'or en respiration continue : boucle assumee et
+    // explicitement hors regle RayonSweep (qui n'autorise qu'un seul
+    // passage par declenchement, cf. rayon_sweep.dart).
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat(reverse: true);
+    _pulseOpacity = Tween<double>(begin: 0.5, end: 1.0).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _pulseController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,70 +59,107 @@ class _FloatingWorkoutTimerState extends State<FloatingWorkoutTimer> {
       selector: (_, p) => p.hasActiveWorkout,
       builder: (context, hasActiveWorkout, _) {
         if (!hasActiveWorkout) return const SizedBox.shrink();
-        final colorScheme = Theme.of(context).colorScheme;
+        final isDark = Theme.of(context).brightness == Brightness.dark;
         return Positioned(
           left: 60,
           right: 60,
           bottom: 16,
-          child: _buildTimerCard(context, colorScheme),
+          child: _buildTimerCard(context, isDark),
         );
       },
     );
   }
 
-  /// Construit la carte du chronomètre avec effet de flou
-  Widget _buildTimerCard(
-    BuildContext context,
-    ColorScheme colorScheme,
-  ) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: colorScheme.surface.withValues(alpha: 0.85),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: colorScheme.outline.withValues(alpha: 0.2),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.15),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
+  /// Construit la carte du chronomètre - fond opaque, sans flou.
+  Widget _buildTimerCard(BuildContext context, bool isDark) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: isDark ? AppTheme.darkSurfaceVariant : AppTheme.lightOnBackground,
+        borderRadius: BorderRadius.circular(16),
+        border: isDark
+            ? Border.all(
+                color: AppTheme.accentGoldLine.withValues(alpha: 0.28),
+                width: 1,
+              )
+            : null,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.15),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: _buildTimerText(colorScheme),
-              ),
-              _buildStopButton(context, colorScheme),
-            ],
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildPulseDot(isDark),
+          const SizedBox(width: 10),
+          Flexible(
+            child: _buildTimerText(isDark),
           ),
+          const SizedBox(width: 10),
+          _buildStatusLabel(isDark),
+          const SizedBox(width: 10),
+          _buildStopButton(context, Theme.of(context).colorScheme),
+        ],
+      ),
+    );
+  }
+
+  /// Pastille d'or en respiration continue (opacite 0.5 <-> 1, 2s, ease-in-out).
+  Widget _buildPulseDot(bool isDark) {
+    final gold = isDark ? AppTheme.accentGold : AppTheme.lightAccentGold;
+    return AnimatedBuilder(
+      animation: _pulseOpacity,
+      builder: (_, _) => Container(
+        width: 8,
+        height: 8,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: gold.withValues(alpha: _pulseOpacity.value),
         ),
       ),
     );
   }
 
-  /// Construit le texte du chronomètre
-  Widget _buildTimerText(ColorScheme colorScheme) {
-    // Seul le texte du chrono se reconstruit chaque seconde (pas la carte + le blur).
+  /// Construit le texte du chronomètre - JetBrains Mono 800/19.
+  Widget _buildTimerText(bool isDark) {
+    final textColor = isDark ? AppTheme.darkOnBackground : Colors.white;
+    // Seul le texte du chrono se reconstruit chaque seconde (pas toute la carte).
     return Selector<WorkoutProvider, String>(
       selector: (_, p) => p.elapsedTimeFormatted,
       builder: (_, elapsed, _) => Text(
         elapsed,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: colorScheme.primary,
+        style: GoogleFonts.jetBrainsMono(
+          fontSize: 19,
+          fontWeight: FontWeight.w800,
+          color: textColor,
           letterSpacing: 0.5,
-          decoration: TextDecoration.none,
         ),
+      ),
+    );
+  }
+
+  /// Libelle d'etat a droite : EN SEANCE / REPOS.
+  ///
+  /// NB : WorkoutProvider n'expose aucune notion de pause/repos dans le
+  /// modele de domaine actuel (RG-004 ne definit qu'un draft actif ou
+  /// termine). Ce widget n'est visible que lorsque `hasActiveWorkout` est
+  /// vrai, donc le libelle affiche en permanence "EN SEANCE" ; la variante
+  /// "REPOS" est cablee mais restera inutilisee tant qu'un etat de pause
+  /// n'existera pas cote provider - il s'agit d'une impossibilite reelle
+  /// (donnee manquante), pas d'un choix de design.
+  Widget _buildStatusLabel(bool isDark) {
+    final textColor = isDark ? AppTheme.darkOnBackground : Colors.white;
+    return Text(
+      'EN SEANCE',
+      style: GoogleFonts.manrope(
+        fontSize: 11,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.14 * 11,
+        color: textColor.withValues(alpha: 0.75),
       ),
     );
   }

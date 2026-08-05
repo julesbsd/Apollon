@@ -59,7 +59,6 @@ dependencies:
   
   # Graphiques et visualisations
   fl_chart: ^0.68.0
-  confetti: ^0.7.0
   flutter_heatmap_calendar: ^1.0.5
   
   # Internationalisation et formatage de dates
@@ -97,6 +96,7 @@ flutter:
     - assets/seed_data/exercises.json
     - assets/exercise_images/
     - assets/exercise_images/manifest.json
+    - assets/branding/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

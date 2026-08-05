@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/exercise_library_repository.dart';
+import '../../../core/widgets/pictogram_plinth.dart';
 
 /// Widget pour afficher l'image d'un exercice avec la stratégie triple
 /// 
@@ -273,40 +274,18 @@ class ExerciseImageContainer extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    
-    return Container(
+    // Socle ardoise dedie (jamais surface/surfaceVariant sous un pictogramme).
+    // Vignette : radius 11 (spec E6-a). Le pictogramme est peint par-dessus le
+    // degrade ardoise via PictogramPlinth.
+    return PictogramPlinth(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        color: backgroundColor ?? colorScheme.primary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          // Neumorphism - Ombre claire en haut à gauche
-          BoxShadow(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white.withValues(alpha: 0.08)
-                : Colors.white.withValues(alpha: 0.9),
-            blurRadius: 8,
-            offset: const Offset(-4, -4),
-          ),
-          // Neumorphism - Ombre sombre en bas à droite
-          BoxShadow(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.black.withValues(alpha: 0.6)
-                : colorScheme.primary.withValues(alpha: 0.2),
-            blurRadius: 8,
-            offset: const Offset(4, 4),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ExerciseImageWidget(
-          exerciseId: exerciseId,
-          size: size - 16,
-          fit: BoxFit.contain,
-        ),
+      radius: 11,
+      padding: const EdgeInsets.all(8.0),
+      child: ExerciseImageWidget(
+        exerciseId: exerciseId,
+        size: size - 16,
+        fit: BoxFit.contain,
       ),
     );
   }
@@ -398,37 +377,16 @@ class _ExerciseImageThumbnailState extends State<ExerciseImageThumbnail> {
   
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    
-    return Container(
+    // Vignette 58x58 sur socle ardoise, radius 11 (spec E6-a) : jamais posee
+    // directement sur surface/surfaceVariant.
+    return PictogramPlinth(
       width: widget.size,
       height: widget.size,
-      decoration: BoxDecoration(
-        color: widget.backgroundColor ?? colorScheme.primary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          // Neumorphism - Ombre claire en haut à gauche
-          BoxShadow(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white.withValues(alpha: 0.08)
-                : Colors.white.withValues(alpha: 0.9),
-            blurRadius: 8,
-            offset: const Offset(-4, -4),
-          ),
-          // Neumorphism - Ombre sombre en bas à droite
-          BoxShadow(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.black.withValues(alpha: 0.6)
-                : colorScheme.primary.withValues(alpha: 0.2),
-            blurRadius: 8,
-            offset: const Offset(4, 4),
-          ),
-        ],
-      ),
+      radius: 11,
       child: _buildContent(),
     );
   }
-  
+
   Widget _buildContent() {
     if (_isLoading) {
       return _buildEmojiContent();

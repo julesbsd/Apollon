@@ -1,14 +1,19 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
-/// MarbleCard - Card premium avec texture marbre subtile + glassmorphism
+/// MarbleCard - carte "Marbre & Lumiere", veinage par degrades superposes.
 ///
-/// Design "Temple Digital" :
-/// - Fond avec texture marbre très subtile
-/// - Glassmorphism overlay
-/// - Bordure gradient délicate
-/// - Hover/tap effects
-/// - Shadow douce
+/// GARDE-FOU (spec design, section 07) : reservee a UNE seule carte par
+/// ecran - celle qui porte le sens (progression, record, bilan de seance).
+/// Ne pas l'utiliser pour des listes ou des tuiles repetitives : AppCard
+/// standard est le bon choix pour ces cas.
+///
+/// Implementation : DEUX degrades lineaires superposes (112deg et 24deg,
+/// tres basse opacite) simulent le veinage du marbre - aucune image,
+/// aucune texture bitmap, aucun bruit. Contrairement a la version
+/// glassmorphism precedente, ce widget ne pose PAS de `BackdropFilter`
+/// (flou de fond couteux et explicitement exclu par la spec pour ce
+/// composant).
 class MarbleCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
@@ -30,84 +35,71 @@ class MarbleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
+    final r = BorderRadius.circular(AppTheme.radiusXL);
+
+    final baseColor = isDark ? const Color(0xFF121826) : const Color(0xFFF8F5EF);
+    final veinLight1 = isDark
+        ? const [Color(0xE626313F), Color(0xE610162A), Color(0xE6222C3A)]
+        : const [Color(0xE6FFFFFF), Color(0x8CEDE8DE), Color(0xD9FFFFFF)];
+    final goldVein = isDark ? const Color(0xFFD9B978) : const Color(0xFFB08D57);
+    final outline = isDark ? AppTheme.outlineSubtleDark : AppTheme.outlineSubtleLight;
+    final goldBorder = (isDark ? AppTheme.accentGoldLine : AppTheme.lightAccentGoldLine).withValues(alpha: 0.30);
 
     final cardContent = Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          // Neumorphism - Ombre claire (highlight) en haut à gauche - LÉGER
-          BoxShadow(
-            color: isDark
-                ? Colors.white.withValues(alpha: 0.08)
-                : Colors.white.withValues(alpha: 0.9),
-            blurRadius: 15,
-            offset: const Offset(-8, -8),
-          ),
-          // Neumorphism - Ombre sombre en bas à droite - LÉGER
-          BoxShadow(
-            color: isDark
-                ? Colors.black.withValues(alpha: 0.6)
-                : Colors.black.withValues(alpha: 0.2),
-            blurRadius: 15,
-            offset: const Offset(8, 8),
-          ),
-          // Shadow principale pour la profondeur
-          BoxShadow(
-            color: isDark
-                ? Colors.black.withValues(alpha: 0.3)
-                : colorScheme.primary.withValues(alpha: 0.15),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-          // Shadow secondaire pour plus de profondeur en mode clair
-          if (!isDark)
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 2),
-            ),
-        ],
-      ),
+      decoration: BoxDecoration(borderRadius: r, boxShadow: AppTheme.shadowElev2(theme.brightness)),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              // Texture marbre très subtile via gradient
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: isDark
-                    ? [
-                        colorScheme.surface.withValues(alpha: 0.6),
-                        colorScheme.surface.withValues(alpha: 0.4),
-                        colorScheme.surface.withValues(alpha: 0.5),
-                      ]
-                    : [
-                        const Color(0xFFFFFFFF), // Blanc opaque
-                        const Color(0xFFF8F9FA), // Blanc cassé
-                        const Color(0xFFFDFDFD), // Blanc très léger
-                      ],
-                stops: const [0.0, 0.5, 1.0],
+        borderRadius: r,
+        child: Stack(
+          children: [
+            // Fond plein (base ardoise/marbre).
+            Positioned.fill(child: ColoredBox(color: baseColor)),
+            // Veinage 1 : degrade 112deg, tres basse opacite.
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: const Alignment(-0.7, -1),
+                    end: const Alignment(0.7, 1),
+                    colors: veinLight1,
+                    stops: const [0.0, 0.44, 1.0],
+                  ),
+                ),
               ),
-              border: showBorder
-                  ? Border.all(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.1)
-                          : colorScheme.primary.withValues(alpha: 0.12),
-                      width: 1.5,
-                    )
-                  : null,
             ),
-            padding: padding ?? const EdgeInsets.all(20),
-            child: child,
-          ),
+            // Veinage 2 : filet d'or diffus a 24deg, tres basse opacite,
+            // decoratif uniquement (jamais porteur de sens - cf. accentGoldGlow).
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: const Alignment(-1, -0.3),
+                    end: const Alignment(1, 0.3),
+                    colors: [
+                      goldVein.withValues(alpha: isDark ? 0.13 : 0.16),
+                      goldVein.withValues(alpha: 0),
+                    ],
+                    stops: const [0.0, 0.56],
+                  ),
+                ),
+              ),
+            ),
+            // Bordure : filet or tres discret + trait de separation standard.
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: showBorder ? Border.all(color: goldBorder, width: 1.5) : Border.all(color: outline, width: 1),
+                  borderRadius: r,
+                ),
+              ),
+            ),
+            Padding(
+              padding: padding ?? const EdgeInsets.all(20),
+              child: child,
+            ),
+          ],
         ),
       ),
     );
@@ -115,11 +107,7 @@ class MarbleCard extends StatelessWidget {
     if (onTap != null) {
       return Material(
         color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(24),
-          child: cardContent,
-        ),
+        child: InkWell(onTap: onTap, borderRadius: r, child: cardContent),
       );
     }
 
