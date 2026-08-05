@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import '../theme/app_colors.dart';
+import '../theme/app_theme.dart';
 
 /// MeshGradientBackground - Background premium avec gradient mesh animé
 ///
 /// Caractéristiques :
 /// - Gradient mesh avec 4 couleurs organiques
 /// - Animation breathing subtile (20s loop)
-/// - Mode clair : Bleu Égée + Violet + Blanc marbre + Cyan
-/// - Mode sombre : Bleu nuit + Violet + Marbre sombre + Bleu profond
+/// - Mode clair : Bleu (seed primaryBlue) + Blanc marbre + Vert menthe
+/// - Mode sombre : Bleu nuit + Bleu-gris sombre + Marbre sombre + Bleu profond
 /// - Performance optimisée avec ImplicitlyAnimatedWidget
+/// - Palettes alignees sur AppTheme (seed 0xFF4A90E2), voir
+///   AppTheme.lightMeshGradient / AppTheme.darkMeshGradient
 class MeshGradientBackground extends StatefulWidget {
   final Widget child;
   final Duration animationDuration;
@@ -56,8 +58,8 @@ class _MeshGradientBackgroundState extends State<MeshGradientBackground>
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final colors = isDark
-        ? AppColors.darkMeshGradient
-        : AppColors.lightMeshGradient;
+        ? AppTheme.darkMeshGradient
+        : AppTheme.lightMeshGradient;
 
     return AnimatedBuilder(
       animation: _animation,
@@ -101,8 +103,8 @@ class MeshGradientBackgroundStatic extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final colors = isDark
-        ? AppColors.darkMeshGradient
-        : AppColors.lightMeshGradient;
+        ? AppTheme.darkMeshGradient
+        : AppTheme.lightMeshGradient;
 
     return Container(
       decoration: BoxDecoration(

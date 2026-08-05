@@ -75,6 +75,40 @@ class AppTheme {
   static const Color lightOnSurface = neutralGray800;
 
   // ============================================
+  // GRADIENT MESH - ARRIERE-PLANS ANIMES
+  // ============================================
+  // Remplace AppColors.lightMeshGradient / darkMeshGradient (design legacy
+  // "Liquid Glass", seed 0xFF1E88E5) : ces tokens derivent du seed AppTheme
+  // V2 (primaryBlue 0xFF4A90E2) pour que le mesh-gradient anime de
+  // MeshGradientBackground reste coherent avec le reste du design "Moderne
+  // Epure Bleu" reellement consomme par MaterialApp. La structure a 4
+  // couleurs des palettes legacy est conservee telle quelle : l'algorithme
+  // d'animation (_buildMeshGradient) suppose exactement 4 stops.
+
+  /// Mesh gradient mode clair - degrades de bleu tres clair (tintes du seed
+  /// primaryBlue/primaryBlueLight) + un neutre blanc marbre partage avec le
+  /// fond du theme clair + une touche vert menthe (successGreen) pour la
+  /// profondeur, a la place de la teinte violette du theme legacy.
+  static const List<Color> lightMeshGradient = [
+    Color(0xFFF2F8FE), // Bleu tres clair (tinte de primaryBlueLight)
+    Color(0xFFE4EEFB), // Bleu clair (tinte de primaryBlue)
+    neutralGray50, // Blanc marbre (identique au fond du theme clair)
+    Color(0xFFE0FAF4), // Vert menthe tres clair (tinte de successGreen)
+  ];
+
+  /// Mesh gradient mode sombre - reutilise les tons neutres/sombres deja
+  /// definis pour le dark theme (coherence garantie : ce sont les memes
+  /// constantes que darkSurfaceVariant/darkBackground) et ajoute une touche
+  /// de bleu profond sature en accent, a la place de la teinte violette du
+  /// theme legacy.
+  static const List<Color> darkMeshGradient = [
+    Color(0xFF15293E), // Bleu nuit profond (assombri depuis primaryBlueDark)
+    darkSurfaceVariant, // Bleu-gris sombre (deja utilise pour cards/inputs)
+    neutralGray900, // Marbre sombre (identique au fond du theme sombre)
+    primaryBlueDark, // Bleu profond sature en accent (touche de couleur)
+  ];
+
+  // ============================================
   // TYPOGRAPHIE (Google Fonts - Inter)
   // ============================================
 

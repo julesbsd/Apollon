@@ -1,12 +1,16 @@
-/// Système de thème complet Apollon avec effet Liquid Glass
+/// Système de thème Apollon
 ///
-/// Ce fichier exporte tous les éléments du Design System.
+/// Ce fichier exporte le Design System.
 ///
-/// Composants exportés :
-/// - AppColors : Palette de couleurs et ColorScheme Material 3
-/// - AppTypography : Styles de texte avec Google Fonts
-/// - AppDecorations : Décorations glassmorphisme et effets
-/// - AppTheme : ThemeData complet (light/dark)
+/// Composant exporté :
+/// - AppTheme : ThemeData complet (light/dark), palette de couleurs,
+///   typographie (Inter) et tokens spacing/radius du design "Moderne
+///   Épuré Bleu" V2 (seed 0xFF4A90E2), seul système de thème consommé
+///   par MaterialApp.
+///
+/// Le systeme legacy "Liquid Glass" (AppColors, AppTypography,
+/// AppDecorations) a ete decommissionne : plus aucun usage ne subsistait
+/// hors de ces fichiers eux-memes (voir CLAUDE.md, section Conventions).
 ///
 /// Usage dans main.dart :
 /// ```dart
@@ -18,25 +22,7 @@
 ///   themeMode: ThemeMode.system,
 /// )
 /// ```
-///
-/// Usage dans widgets :
-/// ```dart
-/// import 'package:apollon/core/theme/app_colors.dart';
-/// import 'package:apollon/core/theme/app_typography.dart';
-/// import 'package:apollon/core/theme/app_decorations.dart';
-///
-/// Container(
-///   decoration: AppDecorations.glass(context),
-///   child: Text(
-///     'Hello',
-///     style: AppTypography.titleLarge(context),
-///   ),
-/// )
-/// ```
 
 library;
 
-export 'app_colors.dart';
-export 'app_typography.dart';
-export 'app_decorations.dart';
 export 'app_theme.dart';
