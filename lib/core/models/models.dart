@@ -10,3 +10,5 @@ export 'category_info.dart';
 export 'muscle_info.dart';
 export 'type_info.dart';
 export 'exercise_image_manifest.dart';
+export 'personal_record.dart';
+export 'statistics.dart';

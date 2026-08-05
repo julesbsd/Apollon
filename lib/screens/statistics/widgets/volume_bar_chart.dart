@@ -112,7 +112,7 @@ class _VolumeBarChartState extends State<VolumeBarChart> {
         vertical: 4,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(AppTheme.radiusS),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche

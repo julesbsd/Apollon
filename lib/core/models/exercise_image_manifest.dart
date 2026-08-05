@@ -30,6 +30,9 @@ class ExerciseImageManifest {
       }
       
     } catch (e) {
+      // Manifest absent ou corrompu : on continue avec une map vide.
+      // Le chargement lazy depuis l'API prend le relais pour les images
+      // non pré-seedées (comportement degrade mais non bloquant).
     }
     
     return manifest;

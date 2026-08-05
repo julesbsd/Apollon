@@ -176,8 +176,8 @@ class _SliderTabBar extends StatelessWidget {
       height: 48,
       decoration: BoxDecoration(
         color: theme.brightness == Brightness.dark
-            ? colorScheme.surfaceVariant.withValues(alpha: 0.35)
-            : colorScheme.surfaceVariant.withValues(alpha: 0.55),
+            ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.35)
+            : colorScheme.surfaceContainerHighest.withValues(alpha: 0.55),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           // Neumorphism creux : ombre interne simulée avec ombre externe inversée
@@ -377,11 +377,11 @@ class _HistoryPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: colorScheme.surfaceVariant.withValues(alpha: 0.6),
+                    color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    '${w} kg',
+                    '$w kg',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: colorScheme.onSurface,

@@ -20,7 +20,6 @@ import '../statistics/personal_records_screen.dart';
 /// Features:
 /// - Background uniforme (pas de gradient animé)
 /// - AppBar standard épurée
-/// - Section progression avec CircularProgressCard
 /// - Catégories avec ModernCategoryIcon
 /// - Workouts populaires avec ModernImageCard
 /// - Layout spacieux et aéré
@@ -371,7 +370,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceVariant,
+                  color: theme.colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(

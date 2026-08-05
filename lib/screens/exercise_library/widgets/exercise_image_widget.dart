@@ -15,14 +15,13 @@ class ExerciseImageWidget extends StatefulWidget {
   final BoxFit fit;
   final BorderRadius? borderRadius;
   
-  ExerciseImageWidget({
-    Key? key,
+  const ExerciseImageWidget({
+    super.key,
     required this.exerciseId,
     this.size = 50,
     this.fit = BoxFit.cover,
     this.borderRadius,
-  }) : super(key: key) {
-  }
+  });
 
   @override
   State<ExerciseImageWidget> createState() {
@@ -209,10 +208,10 @@ class ExerciseImageAvatar extends StatelessWidget {
   final double radius;
   
   const ExerciseImageAvatar({
-    Key? key,
+    super.key,
     required this.exerciseId,
     this.radius = 25,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -232,11 +231,11 @@ class ExerciseImageContainer extends StatelessWidget {
   final Color? backgroundColor;
   
   const ExerciseImageContainer({
-    Key? key,
+    super.key,
     required this.exerciseId,
     this.size = 56,
     this.backgroundColor,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -289,12 +288,12 @@ class ExerciseImageThumbnail extends StatefulWidget {
   final Color? backgroundColor;
   
   const ExerciseImageThumbnail({
-    Key? key,
+    super.key,
     required this.exerciseId,
     this.fallbackEmoji = '💪',
     this.size = 56,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   @override
   State<ExerciseImageThumbnail> createState() => _ExerciseImageThumbnailState();

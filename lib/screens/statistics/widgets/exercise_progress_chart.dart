@@ -137,7 +137,7 @@ class _ExerciseProgressChartState extends State<ExerciseProgressChart> {
         vertical: AppTheme.spacingS,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         boxShadow: [
           // Neumorphism - Ombre claire en haut à gauche

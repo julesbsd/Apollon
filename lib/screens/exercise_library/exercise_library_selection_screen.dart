@@ -406,13 +406,21 @@ class _ExerciseLibrarySelectionScreenState
     if (muscleName.contains('dorsa') || muscleName.contains('back')) return '🦾';
     if (muscleName.contains('jambe') || muscleName.contains('leg') ||
         muscleName.contains('quadri') || muscleName.contains('fessier') ||
-        muscleName.contains('mollet')) return '🦵';
+        muscleName.contains('mollet')) {
+      return '🦵';
+    }
     if (muscleName.contains('épaule') || muscleName.contains('shoulder') ||
-        muscleName.contains('trapèze')) return '💪';
+        muscleName.contains('trapèze')) {
+      return '💪';
+    }
     if (muscleName.contains('bras') || muscleName.contains('bicep') ||
-        muscleName.contains('tricep')) return '💪';
+        muscleName.contains('tricep')) {
+      return '💪';
+    }
     if (muscleName.contains('abdomi') || muscleName.contains('abs') ||
-        muscleName.contains('oblique')) return '🏋️';
+        muscleName.contains('oblique')) {
+      return '🏋️';
+    }
     
     return '💪';
   }
